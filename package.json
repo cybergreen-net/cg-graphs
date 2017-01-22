@@ -1,0 +1,25 @@
+{
+  "name": "cg-graphs",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "enzyme": "^2.7.0",
+    "jsdom": "^9.9.1",
+    "react-addons-test-utils": "^15.4.2",
+    "react-scripts": "0.8.5",
+    "sinon": "^1.17.7"
+  },
+  "dependencies": {
+    "axios": "^0.15.3",
+    "plotly.js": "^1.8.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}

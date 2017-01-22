@@ -1,0 +1,9 @@
+{
+  "total":"4",
+  "results":[
+    {"risk":5,"country":"T","date":"2016-08-22","count":"5916949","count_amplified":182242029},
+    {"risk":5,"country":"T","date":"2016-08-15","count":"5954220","count_amplified":183389976},
+    {"risk":5,"country":"T","date":"2016-08-08","count":"5944644","count_amplified":183095035},
+    {"risk":5,"country":"T","date":"2016-08-01","count":"5989007","count_amplified":184461416}
+  ]
+}
