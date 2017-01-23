@@ -10,6 +10,7 @@ class Plot extends React.Component {
       height: 600,
       barmode: 'stack',
       xaxis: {
+        title: '*This chart assumes an average 1 mbit/sec Internet connection for every IP address.',
         gridcolor: 'transparent',
       },
       yaxis: {
