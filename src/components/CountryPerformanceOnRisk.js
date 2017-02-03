@@ -7,7 +7,9 @@ class CountryPerformanceOnRisk extends Component {
     super(props)
     this.state = {
       data: [],
-      graphOptions: {}
+      graphOptions: {},
+      countries: [],
+      matchedCountry: {}
     }
   }
 
@@ -40,10 +42,28 @@ class CountryPerformanceOnRisk extends Component {
         yaxis: {
           title: 'GBit/sec'
         }
-      }
+      },
+      countries: [
+        {id: 'uk', name: 'United Kingdom'},
+        {id: 'us', name: 'United States'}
+      ],
+      matchedCountry: {}
     }
     return state
   }
+
+
+  handleSearch(event) {
+    let searchedCountry = this.state.countries.filter( country => {
+      return country.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
+    })
+    if(searchedCountry) {
+      this.setState({
+        matchedCountry: searchedCountry
+      })
+    }
+  }
+
 
   componentDidMount() {
     this.setState(this.computeState())
@@ -53,7 +73,11 @@ class CountryPerformanceOnRisk extends Component {
   render() {
     return (
       <div>
-        <PlotlyGraph data={this.state.data} graphOptions={this.state.graphOptions} />
+        < PlotlyGraph data={this.state.data} graphOptions={this.state.graphOptions} />
+        < input type="text"
+          placeholder="Search.."
+          value={this.state.search}
+          onChange={this.handleSearch.bind(this)} />
       </div>
     );
   }
