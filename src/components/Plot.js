@@ -1,32 +1,19 @@
 /* global Plotly */
 import React from 'react';
-import Plotly from "plotly.js"
+import Plotly from 'plotly.js'
 
-class Plot extends React.Component {
-  
-  drawPlot = (data) => {
-    Plotly.newPlot('plot', data, {
-      title : 'Global DDOS potential',
-      height: 600,
-      barmode: 'stack',
-      xaxis: {
-        title: '*This chart assumes an average 1 mbit/sec Internet connection for every IP address.',
-        gridcolor: 'transparent',
-      },
-      yaxis: {
-        title: 'GBit/sec'
-      }
-    }, {
-      displayModeBar: false
-    });
+class PlotlyGraph extends React.Component {
+
+  drawPlot = (data, options) => {
+    Plotly.newPlot('plot', data, options);
   }
 
   componentDidMount() {
-    this.drawPlot(this.props.data);
+    this.drawPlot(this.props.data, this.props.graphOptions);
   }
-  
+
   componentDidUpdate() {
-    this.drawPlot(this.props.data);
+    this.drawPlot(this.props.data, this.props.graphOptions);
   }
 
   render() {
@@ -36,4 +23,4 @@ class Plot extends React.Component {
   }
 }
 
-export default Plot;
+export default PlotlyGraph;

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import setDataFromUrl from './../utils/Points.js'
-import Plot from './Plot.js'
+import PlotlyGraph from './Plot.js'
 
 
 class CountryPerformanceOnRisk extends Component {
@@ -32,9 +31,21 @@ class CountryPerformanceOnRisk extends Component {
         type: 'scatter'
       }
     ];
+    let graphOptions = {
+      title : 'Global DDOS potential',
+      height: 600,
+      barmode: 'stack',
+      xaxis: {
+        title: '*This chart assumes an average 1 mbit/sec Internet connection for every IP address.',
+        gridcolor: 'transparent',
+      },
+      yaxis: {
+        title: 'GBit/sec'
+      }
+    }
     return (
       <div>
-        <Plot data={trace} />
+        <PlotlyGraph data={trace} graphOptions={graphOptions} />
       </div>
     );
   }
