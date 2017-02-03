@@ -1,11 +1,11 @@
 /* global graphData */
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './components/App';
+import CountryPerformanceOnRisk from './components/CountryPerformanceOnRisk';
 
 
 // graphData (List of urls to API endpoints) should be passed from server
 ReactDOM.render(
-  <App urls={graphData || []}/>,
+  <CountryPerformanceOnRisk urls={graphData || []}/>,
   document.getElementById('root')
 );
