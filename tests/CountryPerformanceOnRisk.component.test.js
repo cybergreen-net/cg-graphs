@@ -4,15 +4,6 @@ import {shallow} from 'enzyme'
 
 
 describe('Components are working fine', () => {
-  it('Div with id plot is there', () => {
-    const wrapper = shallow(< CountryPerformanceOnRisk />)
-    expect(wrapper.html()).toContain('<div id="plot"></div>')
-  })
-
-  it('Input tag for search is there', () => {
-    const wrapper = shallow(< CountryPerformanceOnRisk />)
-    expect(wrapper.html()).toContain('<input type="text" placeholder="Search.."/>')
-  })
 
   it('computeState works', () => {
     const wrapper = shallow(< CountryPerformanceOnRisk />)
@@ -21,6 +12,18 @@ describe('Components are working fine', () => {
     expect(out.hasOwnProperty('graphOptions')).toBeTruthy()
     expect(out.hasOwnProperty('matchedCountry')).toBeTruthy()
     expect(out.hasOwnProperty('countries')).toBeTruthy()
+  })
+
+  it('Div with id plot is there', () => {
+    const wrapper = shallow(< CountryPerformanceOnRisk />)
+    wrapper.setState(wrapper.instance().computeState())
+    expect(wrapper.html()).toContain('<div id="DDOS-graph"></div>')
+  })
+
+  it('Input tag for search is there', () => {
+    const wrapper = shallow(< CountryPerformanceOnRisk />)
+    wrapper.setState(wrapper.instance().computeState())
+    expect(wrapper.html()).toContain('<input type="text" placeholder="Search.."/>')
   })
 
   it('handleSearch works', () => {
