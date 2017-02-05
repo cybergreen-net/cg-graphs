@@ -1,0 +1,83 @@
+exports[`Components are working fine Div with id DDOS-graph is there 1`] = `
+<div>
+  <PlotlyGraph
+    data={Array []}
+    graphID="DDOS-graph"
+    graphOptions={Object {}} />
+  <CountrySelect
+    selectOptions={
+      Array [
+        Object {},
+      ]
+    } />
+  <CountrySelect
+    selectOptions={
+      Array [
+        Object {
+          "label": "Total",
+          "value": "t",
+        },
+      ]
+    } />
+  <CountrySelect
+    selectOptions={Array []} />
+  <CountrySelect
+    selectOptions={Array []} />
+  <CountrySelect
+    selectOptions={Array []} />
+</div>
+`;
+
+exports[`Country Select Dropdown is there 1`] = `
+<div
+  style={
+    Object {
+      "display": "inline",
+      "float": "left",
+      "width": "20%",
+    }
+  }>
+  <Select
+    addLabelText="Add \"{label}\"?"
+    arrowRenderer={[Function]}
+    autosize={true}
+    backspaceRemoves={true}
+    backspaceToRemoveMessage="Press backspace to remove {label}"
+    clearAllText="Clear all"
+    clearRenderer={[Function]}
+    clearValueText="Clear value"
+    clearable={true}
+    deleteRemoves={true}
+    delimiter=","
+    disabled={false}
+    escapeClearsValue={true}
+    filterOptions={[Function]}
+    ignoreAccents={true}
+    ignoreCase={true}
+    inputProps={Object {}}
+    isLoading={false}
+    joinValues={false}
+    labelKey="label"
+    matchPos="any"
+    matchProp="any"
+    menuBuffer={0}
+    menuRenderer={[Function]}
+    multi={false}
+    name="countries"
+    noResultsText="No results found"
+    onBlurResetsInput={true}
+    onCloseResetsInput={true}
+    openAfterFocus={false}
+    optionComponent={[Function]}
+    options={Array []}
+    pageSize={5}
+    placeholder="Select..."
+    required={false}
+    scrollMenuIntoView={true}
+    searchable={true}
+    simpleValue={false}
+    tabSelectsValue={true}
+    valueComponent={[Function]}
+    valueKey="value" />
+</div>
+`;
