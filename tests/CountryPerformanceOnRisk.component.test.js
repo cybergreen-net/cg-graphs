@@ -7,10 +7,9 @@ import toJson from 'enzyme-to-json';
 describe('Components are working fine', () => {
 
   it('computeState works', () => {
-    const wrapper = shallow(< CountryPerformanceOnRisk />)
+    const wrapper = shallow(< CountryPerformanceOnRisk data={['Is Working']}/>)
     let out = wrapper.instance().computeState()
-    expect(out.hasOwnProperty('data')).toBeTruthy()
-    expect(out.hasOwnProperty('graphOptions')).toBeTruthy()
+    expect(out.data).toEqual(['Is Working'])
   })
 
   it('Div with id DDOS-graph is there', () => {
