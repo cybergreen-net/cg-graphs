@@ -5,12 +5,14 @@ exports[`Components are working fine Div with id DDOS-graph is there 1`] = `
     graphID="DDOS-graph"
     graphOptions={Object {}} />
   <CountrySelect
+    disabled={true}
     selectOptions={
       Array [
         Object {},
       ]
     } />
   <CountrySelect
+    disabled={true}
     selectOptions={
       Array [
         Object {
@@ -20,10 +22,13 @@ exports[`Components are working fine Div with id DDOS-graph is there 1`] = `
       ]
     } />
   <CountrySelect
+    onchange={[Function]}
     selectOptions={Array []} />
   <CountrySelect
+    onchange={[Function]}
     selectOptions={Array []} />
   <CountrySelect
+    onchange={[Function]}
     selectOptions={Array []} />
 </div>
 `;
