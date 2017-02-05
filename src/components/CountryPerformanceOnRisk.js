@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+
 
 export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
@@ -22,58 +24,12 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   computeState() {
-    let xValues = ['2017-01-01','2017-01-08','2017-01-15'];
-    let reduxStore = {
-      graphs: {
-        1: {
-          title: 'DDOS-graph',
-          dataToshow: ['t1','t2'],
-          graphLayout: ['l1']
-        }
-      },
-      entities: {
-        data: [
-          {
-            x: xValues,
-            y: [2,4,6],
-            name: 'example N1',
-            type: 'scatter'
-          },
-          {
-            x: xValues,
-            y: [1,4,7],
-            name: 'example N2',
-            type: 'scatter'
-          }
-        ],
-        layouts: {
-          l1: {
-            title : 'Global DDOS potential',
-            height: 600,
-            xaxis: {
-              title: '*This chart assumes an average 1 mbit/sec Internet connection for every IP address.',
-              gridcolor: 'transparent',
-            },
-            yaxis: {
-              title: 'GBit/sec'
-            }
-          }
-        },
-        countries: [
-          {value: '', label: 'Select a country'},
-          {value: 'uk', label: 'United Kingdom' },
-          {value: 'us', label: 'United States' },
-          {value: 'ge', label: 'Georgia' },
-        ]
-      },
-      defaultCountry: {value: 'uk', label: 'United Kingdom' }
-    }
 
     let state = {
-      data : reduxStore.entities.data,
-      graphOptions: reduxStore.entities.layouts,
-      countries: reduxStore.entities.countries,
-      defaultCountry: reduxStore.defaultCountry
+      data: this.props.data,
+      graphOptions: this.props.graphOptions,
+      countries: this.props.countries,
+      defaultCountry: this.props.defaultCountry,
     }
     return state
   }
@@ -165,4 +121,13 @@ export class CountrySelect extends Component {
   }
 }
 
-export default CountryPerformanceOnRisk;
+const mapStateToProps = (state) => {
+  return {
+    data : state.entities.data,
+    graphOptions: state.entities.layouts,
+    countries: state.entities.countries,
+    defaultCountry: state.defaultCountry
+  }
+}
+
+export default connect(mapStateToProps)(CountryPerformanceOnRisk)
