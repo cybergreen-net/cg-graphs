@@ -23,37 +23,55 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
-  computeState() {
+  computeState(props=this.props) {
 
     let state = {
-      data: this.props.data,
-      graphOptions: this.props.graphOptions,
-      countries: this.props.countries,
-      defaultCountry: this.props.defaultCountry,
+      data: props.data,
+      graphOptions: props.graphOptions,
+      countries: props.countries,
+      defaultCountry: props.defaultCountry,
     }
     return state
   }
 
 
   componentDidMount() {
-    this.setState(this.computeState())
+    this.setState(this.computeState(this.props))
   };
 
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.computeState(nextProps))
+  }
 
   updateValue1(newCountry) {
-
+    if (newCountry) {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry.value + '1', idx: 2})
+    } else {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry, idx: 2})
+    }
     this.setState({
       selected1: newCountry
+
     })
   }
 
   updateValue2(newCountry) {
+    if (newCountry) {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry.value + '1', idx: 3})
+    } else {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry, idx: 3})
+    }
     this.setState({
       selected2: newCountry
     })
   }
 
   updateValue3(newCountry) {
+    if (newCountry) {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry.value + '1', idx: 4})
+    } else {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry, idx: 4})
+    }
     this.setState({
       selected3: newCountry
     })
@@ -123,7 +141,9 @@ export class CountrySelect extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data : state.entities.data,
+    data: state.entities.data.filter(data => {
+      return state.graphs[1].dataToshow.indexOf(data.id) !== -1
+    }),
     graphOptions: state.entities.layouts,
     countries: state.entities.countries,
     defaultCountry: state.defaultCountry
