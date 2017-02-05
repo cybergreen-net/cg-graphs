@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
-import PlotlyGraph from './Plot.js'
+import PlotlyGraph from './Plot.js';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
-
-class CountryPerformanceOnRisk extends Component {
+export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
     this.state = {
       data: [],
       graphOptions: {},
       countries: [],
-      matchedCountry: {},
-      graphsToShow: [],
-      graphs: {}
+      defaultCountry: {}
     }
   }
 
@@ -55,31 +54,21 @@ class CountryPerformanceOnRisk extends Component {
           }
         },
         countries: [
-          {id: 'uk', name: 'United Kingdom'},
-          {id: 'us', name: 'United States'}
+          {value: 'uk', label: 'United Kingdom' },
+          {value: 'us', label: 'United States' },
+          {value: 'ge', label: 'Georgia' },
         ]
-      }
+      },
+      defaultCountry: {value: 'uk', label: 'United Kingdom' }
     }
 
     let state = {
       data : reduxStore.entities.data,
       graphOptions: reduxStore.entities.layouts,
       countries: reduxStore.entities.countries,
-      matchedCountry: {}
+      defaultCountry: reduxStore.defaultCountry
     }
     return state
-  }
-
-
-  handleSearch(event) {
-    let searchedCountry = this.state.countries.filter( country => {
-      return country.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
-    })
-    if(searchedCountry) {
-      this.setState({
-        matchedCountry: searchedCountry
-      })
-    }
   }
 
 
@@ -89,19 +78,40 @@ class CountryPerformanceOnRisk extends Component {
 
 
   render() {
-    let graphOptions = this.state.graphOptions
     return (
       <div>
         <PlotlyGraph
           data={this.state.data}
           graphOptions={this.state.graphOptions}
           graphID='DDOS-graph' />
-        <input type="text"
-          placeholder="Search.."
-          onChange={this.handleSearch.bind(this)} />
+        < CountrySelect selectOptions={[this.state.defaultCountry]} />
+        < CountrySelect selectOptions={[{value: 't', label: 'Total'}]} />
+        < CountrySelect selectOptions={this.state.countries}/>
+        < CountrySelect selectOptions={this.state.countries}/>
+        < CountrySelect selectOptions={this.state.countries}/>
       </div>
     );
   }
 }
 
-export default CountryPerformanceOnRisk;
+
+export class CountrySelect extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    let options = this.props.selectOptions
+    const style = { width: "20%", display: "inline", float: "left" }
+    return (
+      <div style={style}>
+        <Select
+          name="countries"
+          options={options}
+        />
+      </div>
+    );
+  }
+}
+
+// export default CountryPerformanceOnRisk;
