@@ -22,18 +22,18 @@ exports[`Components are working fine Div with id DDOS-graph is there 1`] = `
       ]
     } />
   <CountrySelect
-    onchange={[Function]}
+    onChange={[Function]}
     selectOptions={Array []} />
   <CountrySelect
-    onchange={[Function]}
+    onChange={[Function]}
     selectOptions={Array []} />
   <CountrySelect
-    onchange={[Function]}
+    onChange={[Function]}
     selectOptions={Array []} />
 </div>
 `;
 
-exports[`Country Select Dropdown is there 1`] = `
+exports[`Country Select component Dropdown is there 1`] = `
 <div
   style={
     Object {

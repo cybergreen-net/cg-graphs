@@ -95,17 +95,17 @@ export class CountryPerformanceOnRisk extends Component {
         />
         < CountrySelect
           selectOptions={this.state.countries}
-          onchange={this.updateValue1}
+          onChange={this.updateValue1}
           selectedCountries={this.state.selected1}
         />
         < CountrySelect
           selectOptions={this.state.countries}
-          onchange={this.updateValue2}
+          onChange={this.updateValue2}
           selectedCountries={this.state.selected2}
         />
         < CountrySelect
           selectOptions={this.state.countries}
-          onchange={this.updateValue3}
+          onChange={this.updateValue3}
           selectedCountries={this.state.selected3}
         />
       </div>
@@ -121,7 +121,7 @@ export class CountrySelect extends Component {
 
   render() {
     let options = this.props.selectOptions
-    let update = this.props.onchange
+    let update = this.props.onChange
     let selectedCountries = this.props.selectedCountries
     let disabled = this.props.disabled
     const style = { width: "20%", display: "inline", float: "left" }
