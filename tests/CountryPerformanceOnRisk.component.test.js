@@ -1,7 +1,6 @@
 import { CountryPerformanceOnRisk, CountrySelect }
 from '../src/components/CountryPerformanceOnRisk.js';
 import React from 'react';
-import { Provider } from 'react-redux';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 
@@ -23,10 +22,10 @@ describe('Components are working fine', () => {
     function stub() {return ''}
     const wrapper = shallow(< CountryPerformanceOnRisk dispatch={stub} />)
     let newCountry = {value: 'us', label: 'United States'}
-    expect(wrapper.find('CountrySelect').at(2).props().selectedCountries)
+    expect(wrapper.find('CountrySelect').at(2).props().selectedCountry)
       .toEqual(undefined)
     wrapper.find('CountrySelect').at(2).simulate('change', newCountry)
-    expect(wrapper.find('CountrySelect').at(2).props().selectedCountries)
+    expect(wrapper.find('CountrySelect').at(2).props().selectedCountry)
       .toEqual(newCountry)
   })
 
@@ -40,7 +39,7 @@ describe('Country Select component', () => {
         {value: 'uk', label: 'United Kingdom' }
       ],
       onChange: jest.fn(),
-      selectedCountries: undefined
+      selectedCountry: undefined
     }
 
     const enzymeWrapper = shallow(< CountrySelect {...props} />)
@@ -52,8 +51,8 @@ describe('Country Select component', () => {
   }
 
   it('Dropdown is there', () => {
-    const wrapper = shallow(< CountrySelect selectOptions={[]}/>)
-    expect(toJson(wrapper)).toMatchSnapshot();
+    const { enzymeWrapper } = setup()
+    expect(toJson(enzymeWrapper)).toMatchSnapshot();
   })
 
   it('Selecting a country triggers event on parent component', () => {

@@ -76,7 +76,8 @@ let reduxStore = {
   },
   defaultCountry: {value: 'uk', label: 'United Kingdom' }
 }
-const reducer = function(state, action) {
+
+const reducer = (state, action) => {
   // makes new copy of list, for not to mutate previous state
   let newDataToShow = state.graphs[1].dataToshow
   newDataToShow[action.idx] = action.id
@@ -100,6 +101,7 @@ const reducer = function(state, action) {
       return state
   }
 }
+
 let store = createStore(reducer, reduxStore)
 
 ReactDOM.render(

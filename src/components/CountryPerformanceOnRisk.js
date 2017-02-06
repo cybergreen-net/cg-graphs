@@ -90,23 +90,23 @@ export class CountryPerformanceOnRisk extends Component {
           disabled={true}
         />
         < CountrySelect
-          selectOptions={[{value: 't', label: 'Total'}]}
+          selectOptions={[{value: 't', label: 'Global'}]}
           disabled={true}
         />
         < CountrySelect
           selectOptions={this.state.countries}
           onChange={this.updateValue1}
-          selectedCountries={this.state.selected1}
+          selectedCountry={this.state.selected1}
         />
         < CountrySelect
           selectOptions={this.state.countries}
           onChange={this.updateValue2}
-          selectedCountries={this.state.selected2}
+          selectedCountry={this.state.selected2}
         />
         < CountrySelect
           selectOptions={this.state.countries}
           onChange={this.updateValue3}
-          selectedCountries={this.state.selected3}
+          selectedCountry={this.state.selected3}
         />
       </div>
     );
@@ -122,14 +122,14 @@ export class CountrySelect extends Component {
   render() {
     let options = this.props.selectOptions
     let update = this.props.onChange
-    let selectedCountries = this.props.selectedCountries
+    let selectedCountry = this.props.selectedCountry
     let disabled = this.props.disabled
     const style = { width: "20%", display: "inline", float: "left" }
     return (
       <div style={style}>
         <Select
           name="countries"
-          value={selectedCountries || options[0]}
+          value={selectedCountry || options[0]}
           options={options}
           onChange={update}
           disabled={disabled}

@@ -16,7 +16,7 @@ exports[`Components are working fine Div with id DDOS-graph is there 1`] = `
     selectOptions={
       Array [
         Object {
-          "label": "Total",
+          "label": "Global",
           "value": "t",
         },
       ]
@@ -71,10 +71,22 @@ exports[`Country Select component Dropdown is there 1`] = `
     name="countries"
     noResultsText="No results found"
     onBlurResetsInput={true}
+    onChange={[Function]}
     onCloseResetsInput={true}
     openAfterFocus={false}
     optionComponent={[Function]}
-    options={Array []}
+    options={
+      Array [
+        Object {
+          "label": "Select a country",
+          "value": "",
+        },
+        Object {
+          "label": "United Kingdom",
+          "value": "uk",
+        },
+      ]
+    }
     pageSize={5}
     placeholder="Select..."
     required={false}
@@ -82,6 +94,12 @@ exports[`Country Select component Dropdown is there 1`] = `
     searchable={true}
     simpleValue={false}
     tabSelectsValue={true}
+    value={
+      Object {
+        "label": "Select a country",
+        "value": "",
+      }
+    }
     valueComponent={[Function]}
     valueKey="value" />
 </div>
