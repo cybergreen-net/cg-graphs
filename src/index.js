@@ -17,6 +17,22 @@ let reduxStore = {
     }
   },
   entities: {
+    countries: {
+      '': {title: 'Select a country'},
+      'T': {title: 'Global'},
+      'GE': {title: 'Georgia'},
+      'KZ': {title: 'Kazakhstan'},
+      'UK': {title: 'United Kingdom'},
+      'US': {title: 'United States'}
+    },
+    risks: {
+      1: {title: 'Open DNS'},
+      2: {title: 'Open NTP'},
+      4: {title: 'Open SNMP'},
+      5: {title: 'Open SSDP'},
+      6: {title: 'Open Mirai'},
+      100: {title: 'DDOS'}
+    },
     data: [
       {
         id: 'uk1',
@@ -65,14 +81,7 @@ let reduxStore = {
           title: 'GBit/sec'
         }
       }
-    },
-    countries: [
-      {value: '', label: 'Select a country'},
-      {value: 'uk', label: 'United Kingdom' },
-      {value: 'us', label: 'United States' },
-      {value: 'ge', label: 'Georgia' },
-      {value: 'kz', label: 'Kazakhstan' }
-    ]
+    }
   },
   defaultCountry: {value: 'uk', label: 'United Kingdom' }
 }

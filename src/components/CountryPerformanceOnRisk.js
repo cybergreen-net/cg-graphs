@@ -114,7 +114,12 @@ const mapStateToProps = (state) => {
       return state.graphs[1].dataToshow.indexOf(data.id) !== -1
     }),
     graphOptions: state.entities.layouts,
-    countries: state.entities.countries,
+    countries: Object.keys(state.entities.countries).map(countryID => {
+      return {
+        value: countryID.toLowerCase(),
+        label: state.entities.countries[countryID].title
+      }
+    }),
     defaultCountry: state.defaultCountry
   }
 }
