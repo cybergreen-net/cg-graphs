@@ -1,45 +1,69 @@
-import CountryPerformanceOnRisk from '../src/components/CountryPerformanceOnRisk.js'
-import React from 'react'
-import {shallow} from 'enzyme'
+import { CountryPerformanceOnRisk, CountrySelect }
+from '../src/components/CountryPerformanceOnRisk.js';
+import React from 'react';
+import {shallow} from 'enzyme';
+import toJson from 'enzyme-to-json';
 
 
 describe('Components are working fine', () => {
 
   it('computeState works', () => {
-    const wrapper = shallow(< CountryPerformanceOnRisk />)
+    const wrapper = shallow(< CountryPerformanceOnRisk data={['Is Working']}/>)
     let out = wrapper.instance().computeState()
-    expect(out.hasOwnProperty('data')).toBeTruthy()
-    expect(out.hasOwnProperty('graphOptions')).toBeTruthy()
-    expect(out.hasOwnProperty('matchedCountry')).toBeTruthy()
-    expect(out.hasOwnProperty('countries')).toBeTruthy()
+    expect(out.data).toEqual(['Is Working'])
   })
 
-  it('Div with id plot is there', () => {
+  it('Div with id DDOS-graph is there', () => {
     const wrapper = shallow(< CountryPerformanceOnRisk />)
-    wrapper.setState(wrapper.instance().computeState())
-    expect(wrapper.html()).toContain('<div id="DDOS-graph"></div>')
+    expect(toJson(wrapper)).toMatchSnapshot();
   })
 
-  it('Input tag for search is there', () => {
-    const wrapper = shallow(< CountryPerformanceOnRisk />)
-    wrapper.setState(wrapper.instance().computeState())
-    expect(wrapper.html()).toContain('<input type="text" placeholder="Search.."/>')
+  it('When a country is selected, it updates state of the container', () => {
+    function stub() {return ''}
+    const wrapper = shallow(< CountryPerformanceOnRisk dispatch={stub} />)
+    let newCountry = {value: 'us', label: 'United States'}
+    expect(wrapper.find('CountrySelect').at(2).props().selectedCountry)
+      .toEqual(undefined)
+    wrapper.find('CountrySelect').at(2).simulate('change', newCountry)
+    expect(wrapper.find('CountrySelect').at(2).props().selectedCountry)
+      .toEqual(newCountry)
   })
 
-  it('handleSearch works', () => {
-    const wrapper = shallow(< CountryPerformanceOnRisk />)
-    wrapper.setState({ countries: [
-      {id: 'uk', name: 'United Kingdom'},
-      {id: 'us', name: 'United States'}
-    ]})
-    let event = {target: {value: 'u'}}
-    let out = wrapper.instance().handleSearch(event)
-    expect(wrapper.state().matchedCountry.length).toEqual(2)
-    expect(wrapper.state().matchedCountry[0].id).toEqual('uk')
-    expect(wrapper.state().matchedCountry[1].id).toEqual('us')
-    event = {target: {value: 'k'}}
-    out = wrapper.instance().handleSearch(event)
-    expect(wrapper.state().matchedCountry[0].id).toEqual('uk')
-    expect(wrapper.state().matchedCountry.length).toEqual(1)
+})
+
+describe('Country Select component', () => {
+  function setup() {
+    let props = {
+      selectOptions: [
+        {value: '', label: 'Select a country'},
+        {value: 'uk', label: 'United Kingdom' }
+      ],
+      onChange: jest.fn(),
+      selectedCountry: undefined
+    }
+
+    const enzymeWrapper = shallow(< CountrySelect {...props} />)
+
+    return {
+      props,
+      enzymeWrapper
+    }
+  }
+
+  it('Dropdown is there', () => {
+    const { enzymeWrapper } = setup()
+    expect(toJson(enzymeWrapper)).toMatchSnapshot();
+  })
+
+  it('Selecting a country triggers event on parent component', () => {
+    const { enzymeWrapper, props } = setup()
+    const selector = enzymeWrapper.find('Select')
+    expect(selector.props().value).toEqual({
+      "label": "Select a country", "value": ""
+    })
+    let selectedOption = {value: 'uk', label: 'United Kingdom' }
+    selector.props().onChange(selectedOption)
+    expect(props.onChange.mock.calls.length).toEqual(1)
+    expect(props.onChange.mock.calls[0][0]).toEqual(selectedOption)
   })
 })

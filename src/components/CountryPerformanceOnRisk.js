@@ -1,126 +1,153 @@
 import React, { Component } from 'react';
-import PlotlyGraph from './Plot.js'
+import { connect } from 'react-redux'
+import PlotlyGraph from './Plot.js';
+import Select from 'react-select';
+import 'react-select/dist/react-select.css';
 
 
-class CountryPerformanceOnRisk extends Component {
+export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
     this.state = {
       data: [],
       graphOptions: {},
       countries: [],
-      matchedCountry: {},
-      graphsToShow: [],
-      graphs: {}
+      defaultCountry: {},
+      selected1: undefined,
+      selected2: undefined,
+      selected3: undefined
     }
+    this.updateValue1 = this.updateValue1.bind(this)
+    this.updateValue2 = this.updateValue2.bind(this)
+    this.updateValue3 = this.updateValue3.bind(this)
   }
 
 
-  computeState() {
-    let xValues = ['2017-01-01','2017-01-08','2017-01-15'];
-    let reduxStore = {
-      entities: {
-        graphs: {
-            1: {
-            title: 'DDOS-graph',
-            dataToshow: ['t1','t2'],
-            graphLayout: ['l1']
-          }
-         },
-        data: {
-          t1: {
-            x: xValues,
-            y: [2,4,6],
-            name: 'example N1',
-            type: 'scatter'
-          },
-          t2: {
-            x: xValues,
-            y: [1,4,7],
-            name: 'example N2',
-            type: 'scatter'
-          }
-        },
-        layouts: {
-          l1: {
-            title : 'Global DDOS potential',
-            height: 600,
-            barmode: 'stack',
-            xaxis: {
-              title: '*This chart assumes an average 1 mbit/sec Internet connection for every IP address.',
-              gridcolor: 'transparent',
-            },
-            yaxis: {
-              title: 'GBit/sec'
-            }
-          }
-        },
-        countries: [
-          {id: 'uk', name: 'United Kingdom'},
-          {id: 'us', name: 'United States'}
-        ]
-      },
-      graphsToShow: [1]
-    }
+  computeState(props=this.props) {
 
     let state = {
-      graphsToShow: reduxStore.graphsToShow,
-      graphs: reduxStore.entities.graphs,
-      data : reduxStore.entities.data,
-      graphOptions: reduxStore.entities.layouts,
-      countries: reduxStore.entities.countries,
-      matchedCountry: {}
+      data: props.data,
+      graphOptions: props.graphOptions,
+      countries: props.countries,
+      defaultCountry: props.defaultCountry,
     }
     return state
   }
 
 
-  handleSearch(event) {
-    let searchedCountry = this.state.countries.filter( country => {
-      return country.name.toLowerCase().indexOf(event.target.value.toLowerCase()) !== -1;
-    })
-    if(searchedCountry) {
-      this.setState({
-        matchedCountry: searchedCountry
-      })
+  componentDidMount() {
+    this.setState(this.computeState(this.props))
+  };
+
+  componentWillReceiveProps(nextProps) {
+    this.setState(this.computeState(nextProps))
+  }
+
+  updateValue1(newCountry) {
+    if (newCountry) {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry.value + '1', idx: 2})
+    } else {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry, idx: 2})
     }
+    this.setState({
+      selected1: newCountry
+
+    })
+  }
+
+  updateValue2(newCountry) {
+    if (newCountry) {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry.value + '1', idx: 3})
+    } else {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry, idx: 3})
+    }
+    this.setState({
+      selected2: newCountry
+    })
+  }
+
+  updateValue3(newCountry) {
+    if (newCountry) {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry.value + '1', idx: 4})
+    } else {
+      this.props.dispatch({type: "addRemoveLine", id: newCountry, idx: 4})
+    }
+    this.setState({
+      selected3: newCountry
+    })
   }
 
 
-  componentDidMount() {
-    this.setState(this.computeState())
-  };
-
-
   render() {
-    let graphsToShow = this.state.graphsToShow
-    let graphs = this.state.graphs
-    let data = this.state.data
-    let graphOptions = this.state.graphOptions
     return (
       <div>
-        {graphsToShow.map(id => {
-          let dataForGraph = graphs[id].dataToshow.map(line => {
-            return data[line]
-          })
-          let layoutForGraph = graphs[id].graphLayout.map(layout => {
-            return graphOptions[layout]
-          })
-          return <div key={graphs[id].title}>
-            < PlotlyGraph
-            data={dataForGraph}
-            graphOptions={layoutForGraph}
-            graphID={graphs[id].title}/>
-
-            < input type="text"
-              placeholder="Search.."
-              value={this.state.search}
-              onChange={this.handleSearch.bind(this)} />
-          </div>
-        })}
+        <PlotlyGraph
+          data={this.state.data}
+          graphOptions={this.state.graphOptions}
+          graphID='DDOS-graph' />
+        < CountrySelect
+          selectOptions={[this.state.defaultCountry]}
+          disabled={true}
+        />
+        < CountrySelect
+          selectOptions={[{value: 't', label: 'Global'}]}
+          disabled={true}
+        />
+        < CountrySelect
+          selectOptions={this.state.countries}
+          onChange={this.updateValue1}
+          selectedCountry={this.state.selected1}
+        />
+        < CountrySelect
+          selectOptions={this.state.countries}
+          onChange={this.updateValue2}
+          selectedCountry={this.state.selected2}
+        />
+        < CountrySelect
+          selectOptions={this.state.countries}
+          onChange={this.updateValue3}
+          selectedCountry={this.state.selected3}
+        />
       </div>
     );
   }
 }
 
-export default CountryPerformanceOnRisk;
+
+export class CountrySelect extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  render() {
+    let options = this.props.selectOptions
+    let update = this.props.onChange
+    let selectedCountry = this.props.selectedCountry
+    let disabled = this.props.disabled
+    const style = { width: "20%", display: "inline", float: "left" }
+    return (
+      <div style={style}>
+        <Select
+          name="countries"
+          value={selectedCountry || options[0]}
+          options={options}
+          onChange={update}
+          disabled={disabled}
+        />
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    data: state.entities.data.filter(data => {
+      return state.graphs[1].dataToshow.indexOf(data.id) !== -1
+    }),
+    graphOptions: state.entities.layouts,
+    countries: state.entities.countries,
+    defaultCountry: state.defaultCountry
+  }
+}
+
+export default connect(mapStateToProps)(CountryPerformanceOnRisk)
