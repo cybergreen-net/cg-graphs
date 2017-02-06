@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/cybergreen-net/cg-graphs.svg?branch=master)](https://travis-ci.org/cybergreen-net/cg-graphs)
+
 # Cg-Graphs
 
 This repository is responsible for graphs and charts for Cybergreen Project
