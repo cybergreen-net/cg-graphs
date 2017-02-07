@@ -42,7 +42,7 @@ describe('buildCube reducer', () => {
   it('On failure - no data is fetched and error message is returned', () => {
     let newStore = buildCube(initialState, {
       type: 'FETCH_DATA_FAILURE',
-      errorMessage: 'test error',
+      error: 'test error',
       country: 'gb',
       risk: 1
     });
