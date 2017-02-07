@@ -13,7 +13,8 @@ export class CountryPerformanceOnRisk extends Component {
       graphOptions: {},
       defaultCountry: '',
       countries: {},
-      selectorConfig: []
+      selectorConfig: [],
+      plotlyData: []
     }
   }
 

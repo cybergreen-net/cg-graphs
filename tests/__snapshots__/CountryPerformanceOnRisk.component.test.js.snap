@@ -1,6 +1,7 @@
 exports[`Components are working fine Renders expected DOM 1`] = `
 <div>
   <PlotlyGraph
+    data={Array []}
     graphID="DDOS-graph"
     graphOptions={Object {}} />
 </div>
