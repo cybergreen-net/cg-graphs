@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import { countryIsSelected, fetchData } from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -20,6 +21,10 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   computeState(props=this.props) {
+    if (props.views[1].errorMessage) {
+      console.log('Error: '+props.views[1].errorMessage)
+      console.log('Try to comment out line 47 in cubeActions.js')
+    }
     let countries = []
     if (props.countries) {
       countries = Object.keys(props.countries).map(countryID => {
@@ -31,7 +36,7 @@ export class CountryPerformanceOnRisk extends Component {
     }
 
     let plotlyData = []
-    if (props.cubeByRiskByCountry) {
+    if (props.views[1].isFetched) {
       plotlyData = props.views[1].selectorConfig.map(config => {
         if (config.country){
           return this.convertToPlotlySeries(config.country, 1, props.cubeByRiskByCountry)
@@ -46,8 +51,7 @@ export class CountryPerformanceOnRisk extends Component {
       plotlyData: plotlyData,
       defaultCountry: props.views[1].country,
       selectorConfig: props.views[1].selectorConfig
-     }
-
+    }
     return state
   }
 
@@ -64,6 +68,14 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   componentDidMount() {
+    this.props.dispatch(fetchData(
+      this.props.views[1].country,
+      this.props.views[1].risk
+    ))
+    this.props.dispatch(fetchData(
+      't',
+      this.props.views[1].risk
+    ))
     this.setState(this.computeState(this.props))
   };
 
@@ -75,16 +87,8 @@ export class CountryPerformanceOnRisk extends Component {
 
   updateValue(idxOfSelector, selectedCountry) {
     selectedCountry = selectedCountry || { value: "" }
-    this.props.dispatch(this.countryIsSelected(idxOfSelector, selectedCountry.value))
-  }
-
-
-  countryIsSelected(idxOfSelector, selectedCountry) {
-    return {
-      type: 'SELECT',
-      idxOfSelector,
-      selectedCountry
-    }
+    this.props.dispatch(countryIsSelected(idxOfSelector, selectedCountry.value))
+    this.props.dispatch(fetchData(selectedCountry.value,this.props.views[1].risk))
   }
 
 
