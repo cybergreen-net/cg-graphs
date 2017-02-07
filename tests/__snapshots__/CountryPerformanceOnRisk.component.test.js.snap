@@ -6,25 +6,26 @@ exports[`Components are working fine Div with id DDOS-graph is there 1`] = `
     graphOptions={Object {}} />
   <CountrySelect
     disabled={true}
-    onChange={[Function]} />
+    onChange={[Function]}
+    selectOptions={Array []}
+    selectedCountry="gb" />
   <CountrySelect
     disabled={true}
     onChange={[Function]}
-    selectedCountry={
-      Object {
-        "label": "Global",
-        "value": "t",
-      }
-    } />
+    selectOptions={Array []}
+    selectedCountry="t" />
   <CountrySelect
     disabled={false}
-    onChange={[Function]} />
+    onChange={[Function]}
+    selectOptions={Array []} />
   <CountrySelect
     disabled={false}
-    onChange={[Function]} />
+    onChange={[Function]}
+    selectOptions={Array []} />
   <CountrySelect
     disabled={false}
-    onChange={[Function]} />
+    onChange={[Function]}
+    selectOptions={Array []} />
 </div>
 `;
 
