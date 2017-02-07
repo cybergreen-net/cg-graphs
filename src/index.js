@@ -7,7 +7,6 @@ import { Provider } from 'react-redux'
 import CountryPerformanceOnRisk from './components/CountryPerformanceOnRisk';
 
 
-let xValues = ['2017-01-01','2017-01-08','2017-01-15'];
 let reduxStore = {
   entities: {
     countries: {
@@ -113,11 +112,39 @@ let reduxStore = {
       }
     }
   },
-  defaultCountry: {value: 'gb', label: 'United Kingdom' }
+  views: {
+    1: {
+      type: "country/performance",
+      country: "gb",
+      risk: 1,
+      selectorConfig: [
+        {disabled: true, country: "gb"},
+        {disabled: true, country: "t"},
+        {disabled: false, country: undefined},
+        {disabled: false, country: undefined},
+        {disabled: false, country: undefined}
+      ]
+    }
+  }
 }
 
+
 const reducer = (state, action) => {
-  return state
+  switch(action.type) {
+    case 'SELECT':
+      let newSelectorConfig = state.views["1"].selectorConfig.slice()
+      newSelectorConfig[action.idxOfSelector].country = action.selectedCountry
+      return {
+        ...state,
+        views: {
+          1: {
+            selectorConfig: newSelectorConfig
+          }
+        }
+      }
+    default:
+      return state
+  }
 }
 
 let store = createStore(reducer, reduxStore)
