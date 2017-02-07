@@ -46,7 +46,7 @@ describe('async actions', () => {
     await store.dispatch(actions.fetchData('error'))
     let actionCreators = store.getActions()
     expect(actionCreators[1].type).toEqual('FETCH_DATA_FAILURE')
-    expect(actionCreators[1].error).toContain('No match for request get')
+    expect(actionCreators[1].error).toContain('No match for request')
   })
 
 })
