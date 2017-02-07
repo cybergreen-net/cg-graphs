@@ -1,31 +1,8 @@
-exports[`Components are working fine Div with id DDOS-graph is there 1`] = `
+exports[`Components are working fine Renders expected DOM 1`] = `
 <div>
   <PlotlyGraph
-    data={Array []}
     graphID="DDOS-graph"
     graphOptions={Object {}} />
-  <CountrySelect
-    disabled={true}
-    onChange={[Function]}
-    selectOptions={Array []}
-    selectedCountry="gb" />
-  <CountrySelect
-    disabled={true}
-    onChange={[Function]}
-    selectOptions={Array []}
-    selectedCountry="t" />
-  <CountrySelect
-    disabled={false}
-    onChange={[Function]}
-    selectOptions={Array []} />
-  <CountrySelect
-    disabled={false}
-    onChange={[Function]}
-    selectOptions={Array []} />
-  <CountrySelect
-    disabled={false}
-    onChange={[Function]}
-    selectOptions={Array []} />
 </div>
 `;
 
