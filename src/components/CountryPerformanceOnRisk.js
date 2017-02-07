@@ -9,27 +9,56 @@ export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectorConfig: [
-        {disabled: true, country: 'gb'},
-        {disabled: true, country: 't'},
-        {disabled: false, country: undefined},
-        {disabled: false, country: undefined},
-        {disabled: false, country: undefined}
-      ],
+      cubeByRiskByCountry: {},
       graphOptions: {},
-      defaultCountry: {}
+      defaultCountry: '',
+      countries: {},
+      selectorConfig: []
     }
   }
 
 
   computeState(props=this.props) {
+    let countries = []
+    if (props.countries) {
+      countries = Object.keys(props.countries).map(countryID => {
+        return {
+          value: countryID.toLowerCase(),
+          label: props.countries[countryID].title
+        }
+      })
+    }
+
+    let plotlyData = []
+    if (props.cubeByRiskByCountry) {
+      plotlyData = props.views[1].selectorConfig.map(config => {
+        if (config.country){
+          return this.convertToPlotlySeries(config.country, 1, props.cubeByRiskByCountry)
+        }
+      }).filter(value => {return value !== undefined})
+    }
+
     let state = {
       cubeByRiskByCountry: props.cubeByRiskByCountry,
       graphOptions: props.graphOptions,
-      defaultCountry: props.defaultCountry,
-      countries: props.countries
+      countries: countries,
+      plotlyData: plotlyData,
+      defaultCountry: props.views[1].country,
+      selectorConfig: props.views[1].selectorConfig
      }
+
     return state
+  }
+
+
+  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry) {
+    var dataTable = cubeByRiskByCountry[riskID][countryID];
+    return {
+      x: dataTable.map(row => row.date),
+      y: dataTable.map(row => row.count),
+      name: this.props.countries[countryID].title,
+      type: 'scatter',
+    }
   }
 
 
@@ -44,63 +73,31 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   updateValue(idxOfSelector, selectedCountry) {
-
-    let cloneSelectorConfig = this.state.selectorConfig.slice()
-    cloneSelectorConfig[idxOfSelector].country = undefined
-    if (selectedCountry) {
-      cloneSelectorConfig[idxOfSelector].country = selectedCountry.value
-    }
-
-    this.setState({
-      selectorConfig: Object.assign(
-        [],
-        this.state.selectorConfig,
-        cloneSelectorConfig
-      )
-    })
+    selectedCountry = selectedCountry || { value: "" }
+    this.props.dispatch(this.countryIsSelected(idxOfSelector, selectedCountry.value))
   }
 
 
-  makePlotlyData(countryID, riskID, cubeByRiskByCountry) {
-    var dataTable = cubeByRiskByCountry[riskID][countryID];
+  countryIsSelected(idxOfSelector, selectedCountry) {
     return {
-      x: dataTable.map(row => row.date),
-      y: dataTable.map(row => row.count),
-      name: this.state.countries[countryID].title,
-      type: 'scatter',
+      type: 'SELECT',
+      idxOfSelector,
+      selectedCountry
     }
   }
 
 
   render() {
     let self = this
-    let plotlyData = []
-    let countries = []
-    if (this.state.cubeByRiskByCountry) {
-      plotlyData = this.state.selectorConfig.map(config => {
-        if (config.country){
-          return this.makePlotlyData(config.country, 1, self.state.cubeByRiskByCountry)
-        }
-      }).filter(value => {return value !== undefined})
-    }
-    if (this.state.countries) {
-      countries = Object.keys(this.state.countries).map(countryID => {
-        return {
-          value: countryID.toLowerCase(),
-          label: this.state.countries[countryID].title
-        }
-      })
-    }
-
     return (
       <div>
         <PlotlyGraph
-          data={plotlyData}
+          data={this.state.plotlyData}
           graphOptions={this.state.graphOptions}
           graphID='DDOS-graph' />
         {this.state.selectorConfig.map((selectInfo, idx) => {
           return <CountrySelect
-                    selectOptions={countries}
+                    selectOptions={this.state.countries}
                     disabled={selectInfo.disabled}
                     onChange={self.updateValue.bind(self, idx)}
                     selectedCountry={selectInfo.country}
@@ -141,7 +138,7 @@ const mapStateToProps = (state) => {
     cubeByRiskByCountry: state.entities.cubeByRiskByCountry,
     countries: state.entities.countries,
     graphOptions: state.entities.layouts,
-    defaultCountry: state.defaultCountry
+    views: state.views
   }
 }
 
