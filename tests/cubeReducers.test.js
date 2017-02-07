@@ -55,4 +55,24 @@ describe('buildCube reducer', () => {
     expect(newStore.views[1]).toEqual(expected)
     expect(newStore.entities).toEqual(initialState.entities)
   })
+
+  it('On selector change it updates selectorConfig in views of store', () => {
+    let newState = Object.assign({}, initialState, {
+      views: {
+        1: {
+          selectorConfig: [
+            {disabled: true, country: "gb"},
+            {disabled: true, country: "t"},
+            {disabled: false, country: undefined}
+          ]
+        }
+      }
+    })
+    let newStore = buildCube(newState, {
+      type: 'SELECT',
+      idxOfSelector: 2,
+      selectedCountry: 'gb'
+    });
+    expect(newStore.views[1].selectorConfig[2].country).toEqual('gb')
+  })
 })

@@ -144,7 +144,7 @@ describe('Components are working fine', () => {
     expect(enzymeWrapper.find('CountrySelect').at(2).props().selectedCountry)
       .toEqual(undefined)
     enzymeWrapper.find('CountrySelect').at(2).simulate('change', newCountry)
-    expect(props.dispatch.mock.calls.length).toEqual(1)
+    expect(props.dispatch.mock.calls.length).toEqual(2)
     expect(props.dispatch.mock.calls[0][0]).toEqual({
       "idxOfSelector": 2,
       "selectedCountry": "us",
