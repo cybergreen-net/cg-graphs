@@ -38,13 +38,13 @@ export function countryIsSelected(idxOfSelector, selectedCountry) {
   }
 }
 
-export function fetchData(country, risk) {
+export function fetchData(country, risk, test=false) {
   return function(dispatch) {
     dispatch(requestData(country, risk))
-    let url = `/api/count_by_country?limit=500&country=${country}&risk=${risk}`
-    // uncomment below to load live data for developent
-    // you might need to enable cross-origin resource sharing
-    // url = `https://cybergreen-staging.herokuapp.com/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
+    let url = `https://cybergreen-staging.herokuapp.com/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
+    if (test){
+      url = `/api/count_by_country?limit=500&country=${country}&risk=${risk}`
+    }
     return axios.get(url)
       .then(res => dispatch(receivetData(res.data.results, country, risk)))
       .catch(err => dispatch(receivetDataFailure(err.message, country, risk)))
