@@ -56,8 +56,12 @@ exports[`Country Select component Dropdown is there 1`] = `
           "value": "",
         },
         Object {
-          "label": "United Kingdom",
-          "value": "uk",
+          "label": "Global",
+          "value": "t",
+        },
+        Object {
+          "label": "Georgia",
+          "value": "ge",
         },
       ]
     }

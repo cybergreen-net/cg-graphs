@@ -12,12 +12,11 @@ import CountryPerformanceOnRisk from './components/CountryPerformanceOnRisk';
 let reduxStore = {
   entities: {
     countries: {
-      '': {title: 'Select a country'},
-      't': {title: 'Global'},
-      'ge': {title: 'Georgia'},
-      'kz': {title: 'Kazakhstan'},
-      'gb': {title: 'United Kingdom'},
-      'us': {title: 'United States'}
+      't': {id: 't', name: 'Global'},
+      'ge': {id: 'ge', name: 'Georgia'},
+      'kz': {id: 'kz', name: 'Kazakhstan'},
+      'gb': {id: 'gb', name: 'United Kingdom'},
+      'us': {id: 'us', name: 'United States'}
     },
     risks: {
       1: {title: 'Open DNS'},

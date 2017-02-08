@@ -21,20 +21,6 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   computeState(props=this.props) {
-    if (props.views[1].errorMessage) {
-      console.log('Error: '+props.views[1].errorMessage)
-      console.log('Try to comment out line 47 in cubeActions.js')
-    }
-    let countries = []
-    if (props.countries) {
-      countries = Object.keys(props.countries).map(countryID => {
-        return {
-          value: countryID.toLowerCase(),
-          label: props.countries[countryID].title
-        }
-      })
-    }
-
     let plotlyData = []
     if (props.views[1].isFetched) {
       plotlyData = props.views[1].selectorConfig.map(config => {
@@ -47,7 +33,6 @@ export class CountryPerformanceOnRisk extends Component {
     let state = {
       cubeByRiskByCountry: props.cubeByRiskByCountry,
       graphOptions: props.graphOptions,
-      countries: countries,
       plotlyData: plotlyData,
       defaultCountry: props.views[1].country,
       selectorConfig: props.views[1].selectorConfig
@@ -61,7 +46,7 @@ export class CountryPerformanceOnRisk extends Component {
     return {
       x: dataTable.map(row => row.date),
       y: dataTable.map(row => row.count),
-      name: this.props.countries[countryID].title,
+      name: this.props.countries[countryID].name,
       type: 'scatter',
     }
   }
@@ -102,7 +87,7 @@ export class CountryPerformanceOnRisk extends Component {
           graphID='DDOS-graph' />
         {this.state.selectorConfig.map((selectInfo, idx) => {
           return <CountrySelect
-                    selectOptions={this.state.countries}
+                    countries={Object.values(this.props.countries)}
                     disabled={selectInfo.disabled}
                     onChange={self.updateValue.bind(self, idx)}
                     selectedCountry={selectInfo.country}
@@ -123,12 +108,19 @@ export class CountrySelect extends Component {
 
   render() {
     const style = { width: "20%", display: "inline", float: "left" }
+    const selectOptions = this.props.countries.map(country => {
+      return {
+        value: country.id,
+        label: country.name
+      }
+    })
+    selectOptions.unshift({value: '', label: 'Select a country'})
     return (
       <div style={style}>
         <Select
           name="countries"
-          value={this.props.selectedCountry || this.props.selectOptions[0]}
-          options={this.props.selectOptions}
+          value={this.props.selectedCountry || selectOptions[0]}
+          options={selectOptions}
           onChange={this.props.onChange}
           disabled={this.props.disabled}
         />
