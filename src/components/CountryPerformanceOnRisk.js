@@ -3,39 +3,79 @@ import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import { countryIsSelected, fetchData } from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      countrySelectors: [
-        {selectOptions: props.countries, disabled: true, selected: props.defaultCountry},
-        {selectOptions: props.countries, disabled: true, selected: {value: 't', label: 'Global'}},
-        {selectOptions: props.countries, disabled: false, selected: undefined},
-        {selectOptions: props.countries, disabled: false, selected: undefined},
-        {selectOptions: props.countries, disabled: false, selected: undefined}
-      ],
-      data: [],
+      cubeByRiskByCountry: {},
       graphOptions: {},
-      countries: [],
-      defaultCountry: {}
+      defaultCountry: '',
+      countries: {},
+      selectorConfig: [],
+      plotlyData: []
     }
   }
 
 
   computeState(props=this.props) {
+    if (props.views[1].errorMessage) {
+      console.log('Error: '+props.views[1].errorMessage)
+      console.log('Try to comment out line 47 in cubeActions.js')
+    }
+    let countries = []
+    if (props.countries) {
+      countries = Object.keys(props.countries).map(countryID => {
+        return {
+          value: countryID.toLowerCase(),
+          label: props.countries[countryID].title
+        }
+      })
+    }
+
+    let plotlyData = []
+    if (props.views[1].isFetched) {
+      plotlyData = props.views[1].selectorConfig.map(config => {
+        if (config.country){
+          return this.convertToPlotlySeries(config.country, 1, props.cubeByRiskByCountry)
+        }
+      }).filter(value => {return value !== undefined})
+    }
+
     let state = {
-      data: props.data,
+      cubeByRiskByCountry: props.cubeByRiskByCountry,
       graphOptions: props.graphOptions,
-      countries: props.countries,
-      defaultCountry: props.defaultCountry
-     }
+      countries: countries,
+      plotlyData: plotlyData,
+      defaultCountry: props.views[1].country,
+      selectorConfig: props.views[1].selectorConfig
+    }
     return state
   }
 
 
+  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry) {
+    var dataTable = cubeByRiskByCountry[riskID][countryID];
+    return {
+      x: dataTable.map(row => row.date),
+      y: dataTable.map(row => row.count),
+      name: this.props.countries[countryID].title,
+      type: 'scatter',
+    }
+  }
+
+
   componentDidMount() {
+    this.props.dispatch(fetchData(
+      this.props.views[1].country,
+      this.props.views[1].risk
+    ))
+    this.props.dispatch(fetchData(
+      't',
+      this.props.views[1].risk
+    ))
     this.setState(this.computeState(this.props))
   };
 
@@ -46,19 +86,9 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   updateValue(idxOfSelector, selectedCountry) {
-    if (selectedCountry) {
-      this.props.dispatch({type: "addRemoveLine", id: selectedCountry.value + '1', idx: idxOfSelector})
-    } else {
-      this.props.dispatch({type: "addRemoveLine", id: selectedCountry, idx: idxOfSelector})
-    }
-
-    this.setState({
-      countrySelectors: Object.assign(
-        [],
-        this.state.countrySelectors,
-        this.state.countrySelectors.slice()[idxOfSelector].selected  = selectedCountry
-      )
-    })
+    selectedCountry = selectedCountry || { value: "" }
+    this.props.dispatch(countryIsSelected(idxOfSelector, selectedCountry.value))
+    this.props.dispatch(fetchData(selectedCountry.value,this.props.views[1].risk))
   }
 
 
@@ -67,15 +97,15 @@ export class CountryPerformanceOnRisk extends Component {
     return (
       <div>
         <PlotlyGraph
-          data={this.state.data}
+          data={this.state.plotlyData}
           graphOptions={this.state.graphOptions}
           graphID='DDOS-graph' />
-        {this.state.countrySelectors.map((selectInfo, idx) => {
+        {this.state.selectorConfig.map((selectInfo, idx) => {
           return <CountrySelect
-                    selectOptions={selectInfo.selectOptions}
+                    selectOptions={this.state.countries}
                     disabled={selectInfo.disabled}
                     onChange={self.updateValue.bind(self, idx)}
-                    selectedCountry={selectInfo.selected}
+                    selectedCountry={selectInfo.country}
                     key={idx}
                     />
         })}
@@ -110,12 +140,10 @@ export class CountrySelect extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    data: state.entities.data.filter(data => {
-      return state.graphs[1].dataToshow.indexOf(data.id) !== -1
-    }),
-    graphOptions: state.entities.layouts,
+    cubeByRiskByCountry: state.entities.cubeByRiskByCountry,
     countries: state.entities.countries,
-    defaultCountry: state.defaultCountry
+    graphOptions: state.entities.layouts,
+    views: state.views
   }
 }
 
