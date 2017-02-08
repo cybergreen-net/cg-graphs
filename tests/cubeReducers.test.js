@@ -1,15 +1,21 @@
 import { buildCube } from '../src/reducers/cubeReducers';
 
 describe('buildCube reducer', () => {
-  const initialState = {
+  const preInitialState = {
     entities: {
       countries: {},
       risks: {},
       cubeByRiskByCountry: {}
     },
-    // Fetching data assumes that there is at least one view inside store
-    views: { 1: {} }
+    views: {}
   }
+  // We are setting initial views here to check later on
+  const initialState = buildCube(preInitialState, {
+    type: 'SET_VIEWS',
+    viewOptions: {country: 'gb', risk: [1], type: 'testing'},
+    risk: 1
+  });
+
   const stateClone = Object.assign({}, initialState)
 
   it('While requesting sets isFetching=true, shold not modify cube', () => {
@@ -48,13 +54,10 @@ describe('buildCube reducer', () => {
       country: 'gb',
       risk: 1
     });
-    let expected = {
-      type: 'country/performance',
-      risk: 1,country: 'gb',
-      isFetched: false,isFetching: false,didFailed: true,
-      errorMessage: 'test error'
-    }
-    expect(newStore.views[1]).toEqual(expected)
+    expect(newStore.views[1].isFetching).toBeFalsy()
+    expect(newStore.views[1].isFetched).toBeFalsy()
+    expect(newStore.views[1].didFailed).toBeTruthy()
+    expect(newStore.views[1].errorMessage).toEqual('test error')
     expect(newStore.entities).toEqual(initialState.entities)
   })
 
