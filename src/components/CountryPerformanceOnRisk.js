@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import { countryIsSelected, fetchData } from '../actions/cubeActions';
+import { countryIsSelected, fetchData, setViews } from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -30,6 +30,7 @@ export class CountryPerformanceOnRisk extends Component {
       }).filter(value => {return value !== undefined})
     }
 
+
     let state = {
       cubeByRiskByCountry: props.cubeByRiskByCountry,
       graphOptions: props.graphOptions,
@@ -52,7 +53,8 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
-  componentDidMount() {
+  async componentDidMount() {
+    await this.props.dispatch(setViews(this.props.serverProps))
     this.props.dispatch(fetchData(
       this.props.views[1].country,
       this.props.views[1].risk

@@ -1,6 +1,7 @@
 import update from 'react/lib/update'
 import {
-  FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE, SELECT
+  FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE,
+  SELECT, SET_VIEWS
 } from '../actions/cubeActions';
 
 const initialState = {
@@ -9,7 +10,7 @@ const initialState = {
     risks: {},
     cubeByRiskByCountry: {}
   },
-  views: { 1: {} }
+  views: {}
 }
 
 export function buildCube(state=initialState, action) {
@@ -75,6 +76,28 @@ export function buildCube(state=initialState, action) {
               }]]}
           }
         }
+      })
+    case SET_VIEWS:
+      let views = {}
+      action.viewOptions.risk.forEach(risk => {
+        views[risk] = {
+          type: action.viewOptions.type,
+          country: action.viewOptions.country,
+          risk: risk,
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          selectorConfig: [
+            {disabled: true, country: action.viewOptions.country},
+            {disabled: true, country: "t"},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined}
+          ]
+        }
+      })
+      return update(state, {
+        views: {$set: views}
       })
     default:
       return state

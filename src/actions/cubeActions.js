@@ -50,3 +50,11 @@ export function fetchData(country, risk, test=false) {
       .catch(err => dispatch(receivetDataFailure(err.message, country, risk)))
   }
 }
+
+export const SET_VIEWS = 'SET_VIEWS'
+export function setViews(viewOptions) {
+  return {
+    type: SET_VIEWS,
+    viewOptions
+  }
+}

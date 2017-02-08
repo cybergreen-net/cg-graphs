@@ -40,23 +40,7 @@ let reduxStore = {
       }
     }
   },
-  views: {
-    1: {
-      type: "country/performance",
-      country: "gb",
-      risk: 1,
-      isFetched: false,
-      isFetching: false,
-      didFailed: false,
-      selectorConfig: [
-        {disabled: true, country: "gb"},
-        {disabled: true, country: "t"},
-        {disabled: false, country: undefined},
-        {disabled: false, country: undefined},
-        {disabled: false, country: undefined}
-      ]
-    }
-  }
+  views: {}
 }
 
 
@@ -66,9 +50,11 @@ let store = createStore(
   applyMiddleware(thunk)
 )
 
+const serverProps = {country: 'gb', risk: [1], type: 'country/performance'}
+
 ReactDOM.render(
   <Provider store={store}>
-    <CountryPerformanceOnRisk/>
+    <CountryPerformanceOnRisk serverProps={serverProps}/>
   </Provider>,
   document.getElementById('root')
 );
