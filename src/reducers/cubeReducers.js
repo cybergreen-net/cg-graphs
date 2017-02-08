@@ -19,8 +19,6 @@ export function buildCube(state=initialState, action) {
       return update(state, {
         views: {
           1 :{
-            type: {$set: 'country/performance'},
-            risk: {$set: action.risk}, country: {$set: action.country},
             isFetched: {$set: false},
             isFetching: {$set: false},
             didFailed: {$set: true},
@@ -32,8 +30,6 @@ export function buildCube(state=initialState, action) {
       return update(state, {
         views: {
           1 :{
-            type: {$set: 'country/performance'},
-            risk: {$set: action.risk}, country: {$set: action.country},
             isFetched: {$set: false},
             isFetching: {$set: true},
             didFailed: {$set: false}
@@ -44,8 +40,6 @@ export function buildCube(state=initialState, action) {
       let newState = update(state, {
         views: {
           1 :{
-            type: {$set: 'country/performance'},
-            risk: {$set: action.risk}, country: {$set: action.country},
             isFetched: {$set: true},
             isFetching: {$set: false},
             didFailed: {$set: false}
