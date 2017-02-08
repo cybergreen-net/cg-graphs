@@ -12,12 +12,11 @@ import CountryPerformanceOnRisk from './components/CountryPerformanceOnRisk';
 let reduxStore = {
   entities: {
     countries: {
-      '': {title: 'Select a country'},
-      't': {title: 'Global'},
-      'ge': {title: 'Georgia'},
-      'kz': {title: 'Kazakhstan'},
-      'gb': {title: 'United Kingdom'},
-      'us': {title: 'United States'}
+      't': {id: 't', name: 'Global'},
+      'ge': {id: 'ge', name: 'Georgia'},
+      'kz': {id: 'kz', name: 'Kazakhstan'},
+      'gb': {id: 'gb', name: 'United Kingdom'},
+      'us': {id: 'us', name: 'United States'}
     },
     risks: {
       1: {title: 'Open DNS'},
@@ -41,23 +40,7 @@ let reduxStore = {
       }
     }
   },
-  views: {
-    1: {
-      type: "country/performance",
-      country: "gb",
-      risk: 1,
-      isFetched: false,
-      isFetching: false,
-      didFailed: false,
-      selectorConfig: [
-        {disabled: true, country: "gb"},
-        {disabled: true, country: "t"},
-        {disabled: false, country: undefined},
-        {disabled: false, country: undefined},
-        {disabled: false, country: undefined}
-      ]
-    }
-  }
+  views: {}
 }
 
 
@@ -67,9 +50,11 @@ let store = createStore(
   applyMiddleware(thunk)
 )
 
+const serverProps = {country: 'gb', risk: [1], type: 'country/performance'}
+
 ReactDOM.render(
   <Provider store={store}>
-    <CountryPerformanceOnRisk/>
+    <CountryPerformanceOnRisk serverProps={serverProps}/>
   </Provider>,
   document.getElementById('root')
 );

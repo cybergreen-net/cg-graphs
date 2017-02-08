@@ -84,12 +84,12 @@ describe('Components are working fine', () => {
         }
       },
       countries: {
-        '': {title: 'Select a country'},
-        't': {title: 'Global'},
-        'ge': {title: 'Georgia'},
-        'kz': {title: 'Kazakhstan'},
-        'gb': {title: 'United Kingdom'},
-        'us': {title: 'United States'}
+        '': {id: '', name: 'Select a country'},
+        't': {id: 't', name: 'Global'},
+        'ge': {id: 'ge', name: 'Georgia'},
+        'kz': {id: 'kz', name: 'Kazakhstan'},
+        'gb': {id: 'gb', name: 'United Kingdom'},
+        'us': {id: 'us', name: 'United States'}
       },
       graphOptions: {},
       views: {
@@ -119,8 +119,7 @@ describe('Components are working fine', () => {
   it('computeState works', () => {
     const { enzymeWrapper } = setup()
     let out = enzymeWrapper.instance().computeState()
-    expect(out.countries[1].label).toEqual('Global')
-    expect(out.countries[1].value).toEqual('t')
+    expect(out.defaultCountry).toEqual('gb')
   })
 
   it('Renders expected DOM', () => {
@@ -157,9 +156,9 @@ describe('Components are working fine', () => {
 describe('Country Select component', () => {
   function setup() {
     let props = {
-      selectOptions: [
-        {value: '', label: 'Select a country'},
-        {value: 'uk', label: 'United Kingdom' }
+      countries: [
+        {id: 't', name: 'Global'},
+        {id: 'ge', name: 'Georgia'},
       ],
       onChange: jest.fn(),
       selectedCountry: undefined

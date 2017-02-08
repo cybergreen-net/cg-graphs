@@ -7,8 +7,10 @@ describe('buildCube reducer', () => {
       risks: {},
       cubeByRiskByCountry: {}
     },
+    // Fetching data assumes that there is at least one view inside store
     views: { 1: {} }
   }
+  const stateClone = Object.assign({}, initialState)
 
   it('While requesting sets isFetching=true, shold not modify cube', () => {
     let newStore = buildCube(initialState, {
@@ -75,4 +77,51 @@ describe('buildCube reducer', () => {
     });
     expect(newStore.views[1].selectorConfig[2].country).toEqual('gb')
   })
+
+  it('Checks store is not mutated', () => {
+    expect(initialState).toEqual(stateClone)
+  })
+})
+
+describe('Set Views', () => {
+  const initialState = {
+    entities: {
+      countries: {},
+      risks: {},
+      cubeByRiskByCountry: {}
+    },
+    views: {}
+  }
+  const stateClone = Object.assign({}, initialState)
+  let newStore = buildCube(initialState, {
+    type: 'SET_VIEWS',
+    viewOptions: {country: 'gb', risk: [1, 2, 'test'], type: 'testing'},
+    risk: 1
+  });
+
+  it('Checks store is not mutated', () => {
+    expect(initialState).toEqual(stateClone)
+  })
+
+  it('Checks if IDs of views set correctly', () => {
+    expect(Object.keys(newStore.views)).toEqual(['1','2','test'])
+  })
+
+  it('Checks country adn risk are set correctly for each view', () => {
+    expect(newStore.views.test.country).toEqual('gb')
+    expect(newStore.views[1].country).toEqual('gb')
+    expect(newStore.views.test.risk).toEqual('test')
+    expect(newStore.views[1].risk).toEqual(1)
+  })
+
+  it('Checks if fetched infos are false by default', () => {
+    expect(newStore.views.test.isFetching).toBeFalsy()
+    expect(newStore.views.test.isFetched).toBeFalsy()
+    expect(newStore.views.test.didFailed).toBeFalsy()
+  })
+
+  it('Checks if type of view is set properly', () => {
+    expect(newStore.views.test.type).toEqual('testing')
+  })
+
 })
