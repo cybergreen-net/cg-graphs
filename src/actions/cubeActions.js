@@ -51,6 +51,25 @@ export function fetchData(country, risk, test=false) {
   }
 }
 
+export function shouldFetchData(state, country, risk) {
+  const data = state.entities.cubeByRiskByCountry[risk]
+  if (!data || !data[country]) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function fetchDataIfNeeded(country, risk) {
+  return (dispatch, getState) => {
+    if (shouldFetchData(getState(), country, risk)) {
+      return dispatch(fetchData(country, risk))
+    } else {
+      return Promise.resolve()
+    }
+  }
+}
+
 export const SET_VIEWS = 'SET_VIEWS'
 export function setViews(viewOptions) {
   return {

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import { countryIsSelected, fetchData, setViews } from '../actions/cubeActions';
+import { countryIsSelected, fetchData, setViews, fetchDataIfNeeded } from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -55,11 +55,11 @@ export class CountryPerformanceOnRisk extends Component {
 
   async componentDidMount() {
     await this.props.dispatch(setViews(this.props.serverProps))
-    this.props.dispatch(fetchData(
+    this.props.dispatch(fetchDataIfNeeded(
       this.props.views[1].country,
       this.props.views[1].risk
     ))
-    this.props.dispatch(fetchData(
+    this.props.dispatch(fetchDataIfNeeded(
       't',
       this.props.views[1].risk
     ))
@@ -73,9 +73,13 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   updateValue(idxOfSelector, selectedCountry) {
-    selectedCountry = selectedCountry || { value: "" }
-    this.props.dispatch(countryIsSelected(idxOfSelector, selectedCountry.value))
-    this.props.dispatch(fetchData(selectedCountry.value,this.props.views[1].risk))
+    if(!selectedCountry || selectedCountry.value === "") {
+      this.props.dispatch(countryIsSelected(idxOfSelector, ""))
+    } else {
+      this.props.dispatch(countryIsSelected(idxOfSelector, selectedCountry.value))
+      this.props.dispatch(fetchDataIfNeeded(selectedCountry.value,this.props.views[1].risk))
+    }
+
   }
 
 
