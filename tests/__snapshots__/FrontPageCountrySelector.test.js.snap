@@ -1,0 +1,85 @@
+exports[`FrontPageCountrySelector component is working fine Renders expected DOM 1`] = `
+<div>
+  <Select
+    addLabelText="Add \"{label}\"?"
+    arrowRenderer={[Function]}
+    autosize={true}
+    backspaceRemoves={true}
+    backspaceToRemoveMessage="Press backspace to remove {label}"
+    clearAllText="Clear all"
+    clearRenderer={[Function]}
+    clearValueText="Clear value"
+    clearable={true}
+    deleteRemoves={true}
+    delimiter=","
+    disabled={false}
+    escapeClearsValue={true}
+    filterOptions={[Function]}
+    ignoreAccents={true}
+    ignoreCase={true}
+    inputProps={Object {}}
+    isLoading={false}
+    joinValues={false}
+    labelKey="label"
+    matchPos="any"
+    matchProp="any"
+    menuBuffer={0}
+    menuRenderer={[Function]}
+    multi={false}
+    name="country-selector"
+    noResultsText="No results found"
+    onBlurResetsInput={true}
+    onChange={[Function]}
+    onCloseResetsInput={true}
+    openAfterFocus={false}
+    optionComponent={[Function]}
+    options={
+      Array [
+        Object {
+          "label": "Select a country",
+          "value": "",
+        },
+        Object {
+          "label": "Global",
+          "slug": "",
+          "value": "t",
+        },
+        Object {
+          "label": "Georgia",
+          "slug": "georgia",
+          "value": "ge",
+        },
+        Object {
+          "label": "Kazakhstan",
+          "slug": "Kazakhstan",
+          "value": "kz",
+        },
+        Object {
+          "label": "United Kingdom",
+          "slug": "united-kingdom",
+          "value": "gb",
+        },
+        Object {
+          "label": "United States",
+          "slug": "united-states",
+          "value": "us",
+        },
+      ]
+    }
+    pageSize={5}
+    placeholder="Select..."
+    required={false}
+    scrollMenuIntoView={true}
+    searchable={true}
+    simpleValue={false}
+    tabSelectsValue={true}
+    value={
+      Object {
+        "label": "Select a country",
+        "value": "",
+      }
+    }
+    valueComponent={[Function]}
+    valueKey="value" />
+</div>
+`;
