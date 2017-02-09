@@ -26,8 +26,35 @@
         }
       ];
     </script>
-    <div id="root"></div>
-    <div id="dropdown"></div>
     <div id="ddos"></div>
+    <script>
+      var countries = {
+        't': {id: 't', name: 'Global', slug: ''},
+        'ge': {id: 'ge', name: 'Georgia', slug: 'georgia'},
+        'kz': {id: 'kz', name: 'Kazakhstan', slug: 'Kazakhstan'},
+        'gb': {id: 'gb', name: 'United Kingdom', slug: 'united-kingdom'},
+        'us': {id: 'us', name: 'United States', slug: 'united-states'}
+      }
+      var countryPerformanceOnRiskViews = {
+        'gb/1': {
+          id: 'gb/1',
+          country: 'gb',
+          risk: 1,
+          type: 'country/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          selectorConfig: [
+            {disabled: true, country: 'gb'},
+            {disabled: true, country: 't'},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined}
+          ]
+        }
+      }
+    </script>
+    <div id="dropdown"></div>
+    <div id="root"></div>
   </body>
 </html>
