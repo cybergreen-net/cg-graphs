@@ -14,11 +14,11 @@ class App extends Component {
       setDataFromUrl(this, this.props.urls[i].url, this.props.urls[i].name);
     }
   };
-  
+
   render() {
     return (
-      <div>        
-        <Plot data={this.state.data} />
+      <div>
+        <Plot data={this.state.data} graphOptions={{barmode: 'stack'}} graphID={'ddos'}/>
       </div>
     );
   }

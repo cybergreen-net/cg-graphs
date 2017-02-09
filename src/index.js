@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { buildCube } from './reducers/cubeReducers';
 
 import CountryPerformanceOnRisk from './components/CountryPerformanceOnRisk';
+import App from './components/App';
 
 
 let reduxStore = {
@@ -49,6 +50,11 @@ let store = createStore(
   reduxStore,
   composeEnhancers(applyMiddleware(thunk))
 )
+
+ReactDOM.render(
+  <App urls={graphData || []}/>,
+  document.getElementById('ddos')
+);
 
 const serverProps = {country: 'gb', risk: [1], type: 'country/performance'}
 
