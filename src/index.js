@@ -7,17 +7,18 @@ import { Provider } from 'react-redux';
 import { buildCube } from './reducers/cubeReducers';
 
 import CountryPerformanceOnRisk from './components/CountryPerformanceOnRisk';
+import Dropdown from './components/Dropdown';
 import App from './components/App';
 
 
 let reduxStore = {
   entities: {
     countries: {
-      't': {id: 't', name: 'Global'},
-      'ge': {id: 'ge', name: 'Georgia'},
-      'kz': {id: 'kz', name: 'Kazakhstan'},
-      'gb': {id: 'gb', name: 'United Kingdom'},
-      'us': {id: 'us', name: 'United States'}
+      't': {id: 't', name: 'Global', slug: ''},
+      'ge': {id: 'ge', name: 'Georgia', slug: 'georgia'},
+      'kz': {id: 'kz', name: 'Kazakhstan', slug: 'Kazakhstan'},
+      'gb': {id: 'gb', name: 'United Kingdom', slug: 'united-kingdom'},
+      'us': {id: 'us', name: 'United States', slug: 'united-states'}
     },
     risks: {
       1: {title: 'Open DNS'},
@@ -50,6 +51,12 @@ let store = createStore(
   reduxStore,
   composeEnhancers(applyMiddleware(thunk))
 )
+
+ReactDOM.render(
+  <Dropdown countries={reduxStore.entities.countries}/>,
+  document.getElementById('dropdown')
+);
+
 
 ReactDOM.render(
   <App urls={graphData || []}/>,
