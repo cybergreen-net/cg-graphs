@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import { countryIsSelected, fetchData, setViews, fetchDataIfNeeded } from '../actions/cubeActions';
+import { countryIsSelected, setViews, fetchDataIfNeeded } from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -12,7 +12,6 @@ export class CountryPerformanceOnRisk extends Component {
     this.state = {
       cubeByRiskByCountry: {},
       graphOptions: {},
-      defaultCountry: '',
       countries: {},
       selectorConfig: [],
       plotlyData: []
@@ -22,21 +21,18 @@ export class CountryPerformanceOnRisk extends Component {
 
   computeState(props=this.props) {
     let plotlyData = []
-    if (props.views[1].isFetched) {
-      plotlyData = props.views[1].selectorConfig.map(config => {
+    if (props.view.isFetched) {
+      plotlyData = props.view.selectorConfig.map(config => {
         if (config.country){
           return this.convertToPlotlySeries(config.country, 1, props.cubeByRiskByCountry)
         }
       }).filter(value => {return value !== undefined})
     }
-
-
     let state = {
       cubeByRiskByCountry: props.cubeByRiskByCountry,
       graphOptions: props.graphOptions,
       plotlyData: plotlyData,
-      defaultCountry: props.views[1].country,
-      selectorConfig: props.views[1].selectorConfig
+      selectorConfig: props.view.selectorConfig
     }
     return state
   }
@@ -53,17 +49,15 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
-  async componentDidMount() {
-    await this.props.dispatch(setViews(this.props.serverProps))
+  componentDidMount() {
     this.props.dispatch(fetchDataIfNeeded(
-      this.props.views[1].country,
-      this.props.views[1].risk
+      this.props.view.country,
+      this.props.view.risk
     ))
     this.props.dispatch(fetchDataIfNeeded(
       't',
-      this.props.views[1].risk
+      this.props.view.risk
     ))
-    this.setState(this.computeState(this.props))
   };
 
 
@@ -77,9 +71,8 @@ export class CountryPerformanceOnRisk extends Component {
       this.props.dispatch(countryIsSelected(idxOfSelector, ""))
     } else {
       this.props.dispatch(countryIsSelected(idxOfSelector, selectedCountry.value))
-      this.props.dispatch(fetchDataIfNeeded(selectedCountry.value,this.props.views[1].risk))
+      this.props.dispatch(fetchDataIfNeeded(selectedCountry.value, this.props.view.risk))
     }
-
   }
 
 
@@ -136,12 +129,12 @@ export class CountrySelect extends Component {
 }
 
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     cubeByRiskByCountry: state.entities.cubeByRiskByCountry,
     countries: state.entities.countries,
     graphOptions: state.entities.layouts,
-    views: state.views
+    view: state.countryPerformanceOnRiskViews[ownProps.view.id]
   }
 }
 

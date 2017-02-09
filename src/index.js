@@ -1,4 +1,4 @@
-/* global graphData */
+/* global graphData countries countryPerformanceOnRiskViews*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -7,19 +7,14 @@ import { Provider } from 'react-redux';
 import { buildCube } from './reducers/cubeReducers';
 
 import CountryPerformanceOnRisk from './components/CountryPerformanceOnRisk';
-import Dropdown from './components/Dropdown';
-import App from './components/App';
+
+import FrontPageCountrySelector from './components/FrontPageCountrySelector';
+import DdosPerformance from './components/DdosPerformance';
 
 
 let reduxStore = {
   entities: {
-    countries: {
-      't': {id: 't', name: 'Global', slug: ''},
-      'ge': {id: 'ge', name: 'Georgia', slug: 'georgia'},
-      'kz': {id: 'kz', name: 'Kazakhstan', slug: 'Kazakhstan'},
-      'gb': {id: 'gb', name: 'United Kingdom', slug: 'united-kingdom'},
-      'us': {id: 'us', name: 'United States', slug: 'united-states'}
-    },
+    countries: countries,
     risks: {
       1: {title: 'Open DNS'},
       2: {title: 'Open NTP'},
@@ -42,7 +37,7 @@ let reduxStore = {
       }
     }
   },
-  views: {}
+  countryPerformanceOnRiskViews: countryPerformanceOnRiskViews
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -53,21 +48,19 @@ let store = createStore(
 )
 
 ReactDOM.render(
-  <Dropdown countries={reduxStore.entities.countries}/>,
+  <FrontPageCountrySelector countries={reduxStore.entities.countries}/>,
   document.getElementById('dropdown')
 );
 
 
 ReactDOM.render(
-  <App urls={graphData || []}/>,
+  <DdosPerformance urls={graphData || []}/>,
   document.getElementById('ddos')
 );
 
-const serverProps = {country: 'gb', risk: [1], type: 'country/performance'}
-
 ReactDOM.render(
   <Provider store={store}>
-    <CountryPerformanceOnRisk serverProps={serverProps}/>
+    <CountryPerformanceOnRisk view={reduxStore.countryPerformanceOnRiskViews['gb/1']} />
   </Provider>,
   document.getElementById('root')
 );
