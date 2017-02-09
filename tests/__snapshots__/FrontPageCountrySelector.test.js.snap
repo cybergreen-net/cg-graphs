@@ -1,11 +1,5 @@
-exports[`Dropdown component is working fine Renders expected DOM 1`] = `
-<div
-  style={
-    Object {
-      "margin": "auto",
-      "width": "50%",
-    }
-  }>
+exports[`FrontPageCountrySelector component is working fine Renders expected DOM 1`] = `
+<div>
   <Select
     addLabelText="Add \"{label}\"?"
     arrowRenderer={[Function]}
@@ -32,7 +26,7 @@ exports[`Dropdown component is working fine Renders expected DOM 1`] = `
     menuBuffer={0}
     menuRenderer={[Function]}
     multi={false}
-    name="jump to a country page"
+    name="country-selector"
     noResultsText="No results found"
     onBlurResetsInput={true}
     onChange={[Function]}

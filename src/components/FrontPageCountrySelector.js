@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import axios from 'axios'
 
-export default class Dropdown extends Component {
+export default class FrontPageCountrySelector extends Component {
   constructor(props) {
     super(props)
-    this.state = { selectedCountry: undefined }
+    this.state = {
+      selectedCountry: undefined
+    }
   }
 
   onChange(country) {
+    // purely for testing atm - we don't use state internally
     this.setState({
       selectedCountry: country
     });
     if (country.slug) {
-      window.location = `https://cybergreen-staging.herokuapp.com/country/${country.slug}`
+      window.location = `/country/${country.slug}`
     }
   }
 
   render() {
-    const style = { width: "50%", margin: "auto" }
     const selectOptions = Object.values(this.props.countries).map(country => {
       return {
         value: country.id,
@@ -30,9 +31,9 @@ export default class Dropdown extends Component {
 
     selectOptions.unshift({value: '', label: 'Select a country'})
     return (
-      <div style={style}>
+      <div>
         <Select
-          name="jump to a country page"
+          name="country-selector"
           value={this.state.selectedCountry || selectOptions[0]}
           options={selectOptions}
           onChange={this.onChange.bind(this)}

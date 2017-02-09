@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import setDataFromUrl from './../utils/Points.js'
 import Plot from './Plot.js'
 
-class App extends Component {
+class DdosPerformance extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,4 +24,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default DdosPerformance;

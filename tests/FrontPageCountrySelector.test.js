@@ -1,9 +1,9 @@
-import Dropdown from '../src/components/Dropdown';
+import FrontPageCountrySelector from '../src/components/FrontPageCountrySelector';
 import React from 'react';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 
-describe('Dropdown component is working fine', () => {
+describe('FrontPageCountrySelector component is working fine', () => {
   function setup() {
     let props = {
       countries: {
@@ -14,7 +14,7 @@ describe('Dropdown component is working fine', () => {
         'us': {id: 'us', name: 'United States', slug: 'united-states'}
       }
     }
-    const enzymeWrapper = shallow(< Dropdown {...props} />)
+    const enzymeWrapper = shallow(< FrontPageCountrySelector {...props} />)
 
     return {
       props,
