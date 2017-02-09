@@ -92,23 +92,22 @@ describe('Components are working fine', () => {
         'us': {id: 'us', name: 'United States'}
       },
       graphOptions: {},
-      views: {
-        1: {
-          type: "country/performance",
-          country: "gb",
-          risk: 1,
-          selectorConfig: [
-            {disabled: true, country: "gb"},
-            {disabled: true, country: "t"},
-            {disabled: false, country: undefined},
-            {disabled: false, country: undefined},
-            {disabled: false, country: undefined}
-          ]
-        }
+      view: {
+        id: 1,
+        type: "country/performance",
+        country: "gb",
+        risk: 1,
+        selectorConfig: [
+          {disabled: true, country: "gb"},
+          {disabled: true, country: "t"},
+          {disabled: false, country: undefined},
+          {disabled: false, country: undefined},
+          {disabled: false, country: undefined}
+        ]
       }
     }
 
-    const enzymeWrapper = shallow(< CountryPerformanceOnRisk {...props} />)
+    const enzymeWrapper = shallow(<CountryPerformanceOnRisk {...props} />)
 
     return {
       props,
@@ -117,9 +116,9 @@ describe('Components are working fine', () => {
   }
 
   it('computeState works', () => {
-    const { enzymeWrapper } = setup()
-    let out = enzymeWrapper.instance().computeState()
-    expect(out.defaultCountry).toEqual('gb')
+    const { enzymeWrapper, props } = setup()
+    let out = enzymeWrapper.instance().computeState(props)
+    expect(out.selectorConfig).toEqual(props.view.selectorConfig)
   })
 
   it('Renders expected DOM', () => {
