@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
+import Highlighter from 'react-highlight-words'
 import 'react-select/dist/react-select.css';
-import { countryIsSelected, setViews, fetchDataIfNeeded } from '../actions/cubeActions';
+import { countryIsSelected, fetchDataIfNeeded } from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -22,7 +23,7 @@ export class CountryPerformanceOnRisk extends Component {
   computeState(props=this.props) {
     let plotlyData = []
     if (props.view.isFetched) {
-      plotlyData = props.view.selectorConfig.map(config => {
+        plotlyData = props.view.selectorConfig.map(config => {
         if (config.country){
           return this.convertToPlotlySeries(config.country, 1, props.cubeByRiskByCountry)
         }
@@ -102,8 +103,27 @@ export class CountryPerformanceOnRisk extends Component {
 export class CountrySelect extends Component {
   constructor(props) {
     super(props)
+    this.state= {
+      inputValue: ''
+    }
   }
 
+  optionRenderer(option) {
+    if(!option.label){ return }
+    return (
+      <Highlighter
+        searchWords={[this.state.inputValue]}
+        textToHighlight={option.label}
+      />
+    );
+  }
+
+
+  setInputValue(value) {
+    this.setState({
+      inputValue: value
+    })
+  }
 
   render() {
     const style = { width: "20%", display: "inline", float: "left" }
@@ -121,6 +141,8 @@ export class CountrySelect extends Component {
           value={this.props.selectedCountry || selectOptions[0]}
           options={selectOptions}
           onChange={this.props.onChange}
+          onInputChange={this.setInputValue.bind(this)}
+          optionRenderer={this.optionRenderer.bind(this)}
           disabled={this.props.disabled}
         />
       </div>

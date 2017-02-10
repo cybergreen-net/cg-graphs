@@ -31,8 +31,10 @@ exports[`FrontPageCountrySelector component is working fine Renders expected DOM
     onBlurResetsInput={true}
     onChange={[Function]}
     onCloseResetsInput={true}
+    onInputChange={[Function]}
     openAfterFocus={false}
     optionComponent={[Function]}
+    optionRenderer={[Function]}
     options={
       Array [
         Object {
@@ -81,5 +83,9 @@ exports[`FrontPageCountrySelector component is working fine Renders expected DOM
     }
     valueComponent={[Function]}
     valueKey="value" />
+  <Loader
+    color="#ffffff"
+    loading={true}
+    size="0px" />
 </div>
 `;

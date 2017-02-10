@@ -47,8 +47,10 @@ exports[`Country Select component Dropdown is there 1`] = `
     onBlurResetsInput={true}
     onChange={[Function]}
     onCloseResetsInput={true}
+    onInputChange={[Function]}
     openAfterFocus={false}
     optionComponent={[Function]}
+    optionRenderer={[Function]}
     options={
       Array [
         Object {

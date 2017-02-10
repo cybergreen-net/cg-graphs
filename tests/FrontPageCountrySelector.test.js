@@ -27,6 +27,13 @@ describe('FrontPageCountrySelector component is working fine', () => {
     expect(toJson(enzymeWrapper)).toMatchSnapshot();
   })
 
+  it('As user types characters inputValue of state is updated', () => {
+    const { enzymeWrapper, props } = setup()
+    expect(enzymeWrapper.state().inputValue).toEqual('')
+    enzymeWrapper.find('Select').props().onInputChange('test')
+    expect(enzymeWrapper.state().inputValue).toEqual('test')
+  })
+
   it('When a country is selected, it updates state of the component', () => {
     const { enzymeWrapper, props } = setup()
     let newCountry = {value: 'us', label: 'United States', slug: 'united-states'}

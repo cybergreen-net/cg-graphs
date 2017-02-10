@@ -16,9 +16,11 @@
   "dependencies": {
     "axios": "^0.15.3",
     "gl": "^4.0.3",
+    "halogen": "^0.2.0",
     "plotly.js": "^1.8.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-highlight-words": "^0.6.0",
     "react-redux": "^5.0.2",
     "react-select": "^1.0.0-rc.3",
     "redux": "^3.6.0"
