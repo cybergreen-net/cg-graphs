@@ -53,11 +53,13 @@ export class CountryPerformanceOnRisk extends Component {
   componentDidMount() {
     this.props.dispatch(fetchDataIfNeeded(
       this.props.view.country,
-      this.props.view.risk
+      this.props.view.risk,
+      this.props.id
     ))
     this.props.dispatch(fetchDataIfNeeded(
       't',
-      this.props.view.risk
+      this.props.view.risk,
+      this.props.id
     ))
   };
 
@@ -69,22 +71,31 @@ export class CountryPerformanceOnRisk extends Component {
 
   updateValue(idxOfSelector, selectedCountry) {
     if(!selectedCountry || selectedCountry.value === "") {
-      this.props.dispatch(countryIsSelected(idxOfSelector, ""))
+      this.props.dispatch(countryIsSelected(idxOfSelector, "", this.props.id))
     } else {
-      this.props.dispatch(countryIsSelected(idxOfSelector, selectedCountry.value))
-      this.props.dispatch(fetchDataIfNeeded(selectedCountry.value, this.props.view.risk))
+      this.props.dispatch(countryIsSelected(
+        idxOfSelector,
+        selectedCountry.value,
+        this.props.id
+      ))
+      this.props.dispatch(fetchDataIfNeeded(
+        selectedCountry.value,
+        this.props.view.risk,
+        this.props.id
+      ))
     }
   }
 
 
   render() {
     let self = this
+    let style = {margin:"40px"}
     return (
-      <div>
+      <div style={style}>
         <PlotlyGraph
           data={this.state.plotlyData}
           graphOptions={this.state.graphOptions}
-          graphID='DDOS-graph' />
+          graphID={this.props.id} />
         {this.state.selectorConfig.map((selectInfo, idx) => {
           return <CountrySelect
                     countries={Object.values(this.props.countries)}
@@ -151,12 +162,11 @@ export class CountrySelect extends Component {
 }
 
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
     cubeByRiskByCountry: state.entities.cubeByRiskByCountry,
     countries: state.entities.countries,
-    graphOptions: state.entities.layouts,
-    view: state.countryPerformanceOnRiskViews[ownProps.view.id]
+    graphOptions: state.entities.layouts
   }
 }
 
