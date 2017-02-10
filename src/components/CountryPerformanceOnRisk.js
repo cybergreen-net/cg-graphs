@@ -54,12 +54,12 @@ export class CountryPerformanceOnRisk extends Component {
     this.props.dispatch(fetchDataIfNeeded(
       this.props.view.country,
       this.props.view.risk,
-      this.props.id
+      this.props.viewId
     ))
     this.props.dispatch(fetchDataIfNeeded(
       't',
       this.props.view.risk,
-      this.props.id
+      this.props.viewId
     ))
   };
 
@@ -71,17 +71,17 @@ export class CountryPerformanceOnRisk extends Component {
 
   updateValue(idxOfSelector, selectedCountry) {
     if(!selectedCountry || selectedCountry.value === "") {
-      this.props.dispatch(countryIsSelected(idxOfSelector, "", this.props.id))
+      this.props.dispatch(countryIsSelected(idxOfSelector, "", this.props.viewId))
     } else {
       this.props.dispatch(countryIsSelected(
         idxOfSelector,
         selectedCountry.value,
-        this.props.id
+        this.props.viewId
       ))
       this.props.dispatch(fetchDataIfNeeded(
         selectedCountry.value,
         this.props.view.risk,
-        this.props.id
+        this.props.viewId
       ))
     }
   }
@@ -95,7 +95,7 @@ export class CountryPerformanceOnRisk extends Component {
         <PlotlyGraph
           data={this.state.plotlyData}
           graphOptions={this.state.graphOptions}
-          graphID={this.props.id} />
+          graphID={this.props.viewId} />
         {this.state.selectorConfig.map((selectInfo, idx) => {
           return <CountrySelect
                     countries={Object.values(this.props.countries)}

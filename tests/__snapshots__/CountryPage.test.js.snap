@@ -1,10 +1,10 @@
 exports[`CountryPage components test 1`] = `
 <div>
   <Connect(CountryPerformanceOnRisk)
-    id="gb/1"
-    view={Object {}} />
+    view={Object {}}
+    viewId="gb/1" />
   <Connect(CountryPerformanceOnRisk)
-    id="us/1"
-    view={Object {}} />
+    view={Object {}}
+    viewId="us/1" />
 </div>
 `;

@@ -12,7 +12,7 @@ export class CountryPage extends Component {
     return (
       <div>
         {Object.keys(this.props.views).map((key) => {
-          return <CountryPerformanceOnRisk view={this.props.views[key]} key={key} id={key}/>
+          return <CountryPerformanceOnRisk view={this.props.views[key]} key={key} viewId={key}/>
         })}
       </div>
     );

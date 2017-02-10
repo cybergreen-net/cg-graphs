@@ -77,6 +77,20 @@ describe('buildCube reducer', () => {
             {disabled: true, country: "t"},
             {disabled: false, country: undefined}
           ]
+        },
+        'gb/2': {
+          id: 'gb/1',
+          country: 'gb',
+          risk: 1,
+          type: 'country/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          selectorConfig: [
+            {disabled: true, country: "gb"},
+            {disabled: true, country: "t"},
+            {disabled: false, country: undefined}
+          ]
         }
       }
     })
@@ -87,6 +101,8 @@ describe('buildCube reducer', () => {
       graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].selectorConfig[2].country).toEqual('gb')
+    expect(newStore.countryPerformanceOnRiskViews['gb/2'])
+      .toEqual(newState.countryPerformanceOnRiskViews['gb/2'])
   })
 
   it('Checks store is not mutated', () => {
