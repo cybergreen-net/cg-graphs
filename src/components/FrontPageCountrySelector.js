@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import Highlighter from 'react-highlight-words'
+import Select from 'react-select';
+import Loader from 'halogen/BounceLoader'
 import 'react-select/dist/react-select.css';
 
 export default class FrontPageCountrySelector extends Component {
@@ -8,7 +9,8 @@ export default class FrontPageCountrySelector extends Component {
     super(props)
     this.state = {
       selectedCountry: undefined,
-      inputValue: ''
+      inputValue: '',
+      spinner: '0px'
     }
   }
 
@@ -16,7 +18,8 @@ export default class FrontPageCountrySelector extends Component {
   onChange(country) {
     // purely for testing atm - we don't use state internally
     this.setState({
-      selectedCountry: country
+      selectedCountry: country,
+      spinner: '40px'
     });
     if (country.slug) {
       window.location = `/country/${country.slug}`
@@ -61,6 +64,7 @@ export default class FrontPageCountrySelector extends Component {
           onInputChange={this.setInputValue.bind(this)}
           optionRenderer={this.optionRenderer.bind(this)}
         />
+        <Loader size={this.state.spinner} />
       </div>
     );
   }
