@@ -26,7 +26,8 @@ describe('buildCube reducer', () => {
     let newStore = buildCube(initialState, {
       type: 'FETCH_DATA_REQUEST',
       country: 'gb',
-      risk: 1
+      risk: 1,
+      graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeTruthy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeFalsy()
@@ -43,7 +44,8 @@ describe('buildCube reducer', () => {
       type: 'FETCH_DATA_SUCCESS',
       data: data,
       country: 'gb',
-      risk: 1
+      risk: 1,
+      graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeFalsy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeTruthy()
@@ -56,7 +58,8 @@ describe('buildCube reducer', () => {
       type: 'FETCH_DATA_FAILURE',
       error: 'test error',
       country: 'gb',
-      risk: 1
+      risk: 1,
+      graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeFalsy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeFalsy()
@@ -74,15 +77,32 @@ describe('buildCube reducer', () => {
             {disabled: true, country: "t"},
             {disabled: false, country: undefined}
           ]
+        },
+        'gb/2': {
+          id: 'gb/1',
+          country: 'gb',
+          risk: 1,
+          type: 'country/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          selectorConfig: [
+            {disabled: true, country: "gb"},
+            {disabled: true, country: "t"},
+            {disabled: false, country: undefined}
+          ]
         }
       }
     })
     let newStore = buildCube(newState, {
       type: 'SELECT',
       idxOfSelector: 2,
-      selectedCountry: 'gb'
+      selectedCountry: 'gb',
+      graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].selectorConfig[2].country).toEqual('gb')
+    expect(newStore.countryPerformanceOnRiskViews['gb/2'])
+      .toEqual(newState.countryPerformanceOnRiskViews['gb/2'])
   })
 
   it('Checks store is not mutated', () => {

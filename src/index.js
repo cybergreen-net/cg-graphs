@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { buildCube } from './reducers/cubeReducers';
 
-import CountryPerformanceOnRisk from './components/CountryPerformanceOnRisk';
+import CountryPage from './components/CountryPage';
 
 import FrontPageCountrySelector from './components/FrontPageCountrySelector';
 import DdosPerformance from './components/DdosPerformance';
@@ -60,7 +60,7 @@ ReactDOM.render(
 
 ReactDOM.render(
   <Provider store={store}>
-    <CountryPerformanceOnRisk view={reduxStore.countryPerformanceOnRiskViews['gb/1']} />
+    <CountryPage />
   </Provider>,
   document.getElementById('root')
 );

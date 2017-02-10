@@ -18,7 +18,7 @@ export function buildCube(state=initialState, action) {
     case FETCH_DATA_FAILURE:
       return update(state, {
         countryPerformanceOnRiskViews: {
-          'gb/1' :{
+          [action.graphId] :{
             isFetched: {$set: false},
             isFetching: {$set: false},
             didFailed: {$set: true},
@@ -29,7 +29,7 @@ export function buildCube(state=initialState, action) {
     case FETCH_DATA_REQUEST:
       return update(state, {
         countryPerformanceOnRiskViews: {
-          'gb/1' :{
+          [action.graphId] :{
             isFetched: {$set: false},
             isFetching: {$set: true},
             didFailed: {$set: false}
@@ -39,7 +39,7 @@ export function buildCube(state=initialState, action) {
     case FETCH_DATA_SUCCESS:
       let newState = update(state, {
         countryPerformanceOnRiskViews: {
-          'gb/1' :{
+          [action.graphId] :{
             isFetched: {$set: true},
             isFetching: {$set: false},
             didFailed: {$set: false}
@@ -63,7 +63,7 @@ export function buildCube(state=initialState, action) {
     case SELECT:
       return update(state, {
         countryPerformanceOnRiskViews: {
-          'gb/1': {
+          [action.graphId]: {
             selectorConfig: {
               $splice: [[action.idxOfSelector, 1,{
                 disabled: false, country: action.selectedCountry
