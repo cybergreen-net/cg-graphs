@@ -26,7 +26,8 @@ describe('buildCube reducer', () => {
     let newStore = buildCube(initialState, {
       type: 'FETCH_DATA_REQUEST',
       country: 'gb',
-      risk: 1
+      risk: 1,
+      graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeTruthy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeFalsy()
@@ -43,7 +44,8 @@ describe('buildCube reducer', () => {
       type: 'FETCH_DATA_SUCCESS',
       data: data,
       country: 'gb',
-      risk: 1
+      risk: 1,
+      graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeFalsy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeTruthy()
@@ -56,7 +58,8 @@ describe('buildCube reducer', () => {
       type: 'FETCH_DATA_FAILURE',
       error: 'test error',
       country: 'gb',
-      risk: 1
+      risk: 1,
+      graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeFalsy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeFalsy()
@@ -80,7 +83,8 @@ describe('buildCube reducer', () => {
     let newStore = buildCube(newState, {
       type: 'SELECT',
       idxOfSelector: 2,
-      selectedCountry: 'gb'
+      selectedCountry: 'gb',
+      graphId: 'gb/1'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].selectorConfig[2].country).toEqual('gb')
   })
