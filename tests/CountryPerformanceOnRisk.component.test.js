@@ -91,6 +91,14 @@ describe('Components are working fine', () => {
         'gb': {id: 'gb', name: 'United Kingdom'},
         'us': {id: 'us', name: 'United States'}
       },
+      risks: {
+        1: {title: 'Open DNS'},
+        2: {title: 'Open NTP'},
+        4: {title: 'Open SNMP'},
+        5: {title: 'Open SSDP'},
+        6: {title: 'Open Mirai'},
+        100: {title: 'DDOS'}
+      },
       graphOptions: {},
       view: {
         id: 1,

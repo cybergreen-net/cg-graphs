@@ -5,6 +5,11 @@ exports[`Components are working fine Renders expected DOM 1`] = `
       "margin": "40px",
     }
   }>
+  <h2>
+    OPEN DNS
+       |  
+    UNITED KINGDOM
+  </h2>
   <PlotlyGraph
     data={Array []}
     graphOptions={Object {}} />
