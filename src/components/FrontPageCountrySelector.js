@@ -52,7 +52,7 @@ export default class FrontPageCountrySelector extends Component {
         slug: country.slug
       }
     })
-
+    let spinnerStyle = { padding:'20px', margin: 'auto', width:'10%'}
     selectOptions.unshift({value: '', label: 'Select a country'})
     return (
       <div>
@@ -64,7 +64,9 @@ export default class FrontPageCountrySelector extends Component {
           onInputChange={this.setInputValue.bind(this)}
           optionRenderer={this.optionRenderer.bind(this)}
         />
-        <Loader size={this.state.spinner} />
+        <div style={spinnerStyle}>
+          <Loader size={this.state.spinner} color='#00D49A'/>
+        </div>
       </div>
     );
   }

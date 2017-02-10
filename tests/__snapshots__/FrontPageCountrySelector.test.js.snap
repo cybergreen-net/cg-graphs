@@ -83,9 +83,18 @@ exports[`FrontPageCountrySelector component is working fine Renders expected DOM
     }
     valueComponent={[Function]}
     valueKey="value" />
-  <Loader
-    color="#ffffff"
-    loading={true}
-    size="0px" />
+  <div
+    style={
+      Object {
+        "margin": "auto",
+        "padding": "20px",
+        "width": "10%",
+      }
+    }>
+    <Loader
+      color="#00D49A"
+      loading={true}
+      size="0px" />
+  </div>
 </div>
 `;
