@@ -25,7 +25,12 @@ export class CountryPerformanceOnRisk extends Component {
     if (props.view.isFetched) {
         plotlyData = props.view.selectorConfig.map(config => {
         if (config.country){
-          return this.convertToPlotlySeries(config.country, 1, props.cubeByRiskByCountry)
+          return this.convertToPlotlySeries(
+            config.country,
+            props.view.risk,
+            props.cubeByRiskByCountry,
+            props.view.measure
+          )
         }
       }).filter(value => {return value !== undefined})
     }
@@ -39,11 +44,11 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
-  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry) {
+  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure) {
     var dataTable = cubeByRiskByCountry[riskID][countryID];
     return {
       x: dataTable.map(row => row.date),
-      y: dataTable.map(row => row.count),
+      y: dataTable.map(row => row[measure] || row.count),
       name: this.props.countries[countryID].name,
       type: 'scatter',
     }
