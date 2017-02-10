@@ -97,6 +97,10 @@ export class CountryPerformanceOnRisk extends Component {
     let style = {margin:"40px"}
     return (
       <div style={style}>
+        <h2>
+          {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
+          {this.props.countries[this.props.view.country].name.toUpperCase()}
+        </h2>
         <PlotlyGraph
           data={this.state.plotlyData}
           graphOptions={this.state.graphOptions}
@@ -171,6 +175,7 @@ const mapStateToProps = (state) => {
   return {
     cubeByRiskByCountry: state.entities.cubeByRiskByCountry,
     countries: state.entities.countries,
+    risks: state.entities.risks,
     graphOptions: state.entities.layouts
   }
 }
