@@ -83,5 +83,9 @@ exports[`FrontPageCountrySelector component is working fine Renders expected DOM
     }
     valueComponent={[Function]}
     valueKey="value" />
+  <Loader
+    color="#ffffff"
+    loading={true}
+    size="0px" />
 </div>
 `;
