@@ -1,0 +1,10 @@
+exports[`CountryPage components test 1`] = `
+<div>
+  <Connect(CountryPerformanceOnRisk)
+    id="gb/1"
+    view={Object {}} />
+  <Connect(CountryPerformanceOnRisk)
+    id="us/1"
+    view={Object {}} />
+</div>
+`;
