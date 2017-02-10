@@ -16,9 +16,20 @@ class DdosPerformance extends Component {
   };
 
   render() {
+    const graphOptions = {
+      height: 600,
+      xaxis: {
+       title: '*This chart assumes an average 1 mbit/sec Internet connection for every IP address.',
+       gridcolor: 'transparent',
+      },
+      yaxis: {
+       title: 'GBit/sec'
+      },
+      barmode: 'stack'
+    }
     return (
       <div>
-        <Plot data={this.state.data} graphOptions={{barmode: 'stack'}} graphID={'ddos'}/>
+        <Plot data={this.state.data} graphOptions={graphOptions} graphID={'ddos'}/>
       </div>
     );
   }
