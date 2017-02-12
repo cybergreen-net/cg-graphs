@@ -2,14 +2,14 @@ exports[`Components are working fine Renders expected DOM 1`] = `
 <div
   style={
     Object {
-      "margin": "40px",
+      "marginBottom": "80px",
     }
   }>
-  <h2>
+  <h3>
     OPEN DNS
        |  
     UNITED KINGDOM
-  </h2>
+  </h3>
   <PlotlyGraph
     data={Array []}
     graphOptions={Object {}} />

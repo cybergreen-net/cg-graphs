@@ -94,16 +94,16 @@ export class CountryPerformanceOnRisk extends Component {
 
   render() {
     let self = this
-    let style = {margin:"40px"}
+    let style = {marginBottom:"80px"}
     return (
       <div style={style}>
-        <h2>
+        <h3>
           {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
           {this.props.countries[this.props.view.country].name.toUpperCase()}
-        </h2>
+        </h3>
         <PlotlyGraph
           data={this.state.plotlyData}
-          graphOptions={this.state.graphOptions}
+          graphOptions={this.props.graphOptions}
           graphID={this.props.viewId} />
         {this.state.selectorConfig.map((selectInfo, idx) => {
           return <CountrySelect
