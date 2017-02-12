@@ -25,15 +25,14 @@ let reduxStore = {
     },
     cubeByRiskByCountry: {},
     layouts: {
-      l1: {
-        title : 'Open DNS',
-        height: 600,
-        xaxis: {
-          gridcolor: 'transparent',
-        },
-        yaxis: {
-          title: 'GBit/sec'
-        }
+      legend: {x:0, y:1},
+      height: 200,
+      margin: {
+        l: 0,r: 5,
+        b: 30,t: 0,
+      },
+      xaxis: {
+        gridcolor: 'transparent',
       }
     }
   },
@@ -47,20 +46,25 @@ let store = createStore(
   composeEnhancers(applyMiddleware(thunk))
 )
 
-ReactDOM.render(
-  <FrontPageCountrySelector countries={reduxStore.entities.countries}/>,
-  document.getElementById('dropdown')
-);
+if (document.getElementById('dropdown')) {
+  ReactDOM.render(
+    <FrontPageCountrySelector countries={reduxStore.entities.countries}/>,
+    document.getElementById('dropdown')
+  );
+}
 
+if (document.getElementById('ddos')){
+  ReactDOM.render(
+    <DdosPerformance urls={graphData || []}/>,
+    document.getElementById('ddos')
+  );
+}
 
-ReactDOM.render(
-  <DdosPerformance urls={graphData || []}/>,
-  document.getElementById('ddos')
-);
-
-ReactDOM.render(
-  <Provider store={store}>
-    <CountryPage />
-  </Provider>,
-  document.getElementById('root')
-);
+if (document.getElementById('root')) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <CountryPage />
+    </Provider>,
+    document.getElementById('root')
+  );
+}

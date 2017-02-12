@@ -5,7 +5,7 @@ import Plotly from 'plotly.js'
 class PlotlyGraph extends React.Component {
 
   drawPlot = (data, options) => {
-    Plotly.newPlot(this.props.graphID, data, options);
+    Plotly.newPlot(this.props.graphID, data, options, {displayModeBar: false});
   }
 
   componentDidMount() {
