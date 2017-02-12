@@ -62,7 +62,7 @@ export class CountryPerformanceOnRisk extends Component {
       this.props.viewId
     ))
     this.props.dispatch(fetchDataIfNeeded(
-      't',
+      'T',
       this.props.view.risk,
       this.props.viewId
     ))
