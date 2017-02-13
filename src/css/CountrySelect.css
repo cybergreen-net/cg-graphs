@@ -1,0 +1,10 @@
+#root .Select-div {
+  font-size: small;
+  width: 20%;
+  display: inline;
+  float: left;
+}
+
+#root .Select-clear {
+  display: none;
+}

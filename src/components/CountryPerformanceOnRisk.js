@@ -5,6 +5,7 @@ import Select from 'react-select';
 import Highlighter from 'react-highlight-words'
 import 'react-select/dist/react-select.css';
 import { countryIsSelected, fetchDataIfNeeded } from '../actions/cubeActions';
+import '../css/CountrySelect.css'
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -146,7 +147,6 @@ export class CountrySelect extends Component {
   }
 
   render() {
-    const style = { width: "20%", display: "inline", float: "left" }
     const selectOptions = this.props.countries.map(country => {
       return {
         value: country.id,
@@ -155,7 +155,7 @@ export class CountrySelect extends Component {
     })
     selectOptions.unshift({value: '', label: 'Select a country'})
     return (
-      <div style={style}>
+      <div className="Select-div">
         <Select
           name="countries"
           value={this.props.selectedCountry || selectOptions[0]}
