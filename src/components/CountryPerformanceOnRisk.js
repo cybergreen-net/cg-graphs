@@ -29,6 +29,10 @@ export class CountryPerformanceOnRisk extends Component {
     }
 
     let plotlyData = []
+    let lineColors = [
+      'rgb(214, 39, 40)', 'rgb(31, 119, 180)', 'rgb(44, 160, 44)',
+      'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
+    ]
     if (props.view.isFetched) {
         plotlyData = props.view.selectorConfig.map(config => {
         if (config.country){
@@ -40,6 +44,9 @@ export class CountryPerformanceOnRisk extends Component {
           )
         }
       }).filter(value => {return value !== undefined})
+      plotlyData.forEach((trace, idx) => {
+        trace['line'] = {color: lineColors[idx]}
+      })
       state['plotlyData'] = plotlyData
     }
 
