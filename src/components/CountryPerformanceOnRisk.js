@@ -22,6 +22,12 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   computeState(props=this.props) {
+    let state = {
+      cubeByRiskByCountry: props.cubeByRiskByCountry,
+      graphOptions: props.graphOptions,
+      selectorConfig: props.view.selectorConfig
+    }
+
     let plotlyData = []
     if (props.view.isFetched) {
         plotlyData = props.view.selectorConfig.map(config => {
@@ -34,13 +40,9 @@ export class CountryPerformanceOnRisk extends Component {
           )
         }
       }).filter(value => {return value !== undefined})
+      state['plotlyData'] = plotlyData
     }
-    let state = {
-      cubeByRiskByCountry: props.cubeByRiskByCountry,
-      graphOptions: props.graphOptions,
-      plotlyData: plotlyData,
-      selectorConfig: props.view.selectorConfig
-    }
+
     return state
   }
 
