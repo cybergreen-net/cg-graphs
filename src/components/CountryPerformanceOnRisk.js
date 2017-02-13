@@ -164,6 +164,7 @@ export class CountrySelect extends Component {
           onInputChange={this.setInputValue.bind(this)}
           optionRenderer={this.optionRenderer.bind(this)}
           disabled={this.props.disabled}
+          clearable={false}
         />
       </div>
     );
