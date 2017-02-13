@@ -17,7 +17,7 @@ describe('async actions', () => {
   beforeEach(() =>{
     nock(host)
       .persist()
-      .get('/api/count_by_country?limit=500&country=t&risk=1')
+      .get('/api/v1/count_by_country?limit=500&country=t&risk=1')
       .replyWithFile(200, './public/fixtures/country/global/dns.json')
   });
 

@@ -18,13 +18,7 @@ exports[`Components are working fine Renders expected DOM 1`] = `
 
 exports[`Country Select component Dropdown is there 1`] = `
 <div
-  style={
-    Object {
-      "display": "inline",
-      "float": "left",
-      "width": "20%",
-    }
-  }>
+  className="Select-div">
   <Select
     addLabelText="Add \"{label}\"?"
     arrowRenderer={[Function]}
@@ -34,7 +28,7 @@ exports[`Country Select component Dropdown is there 1`] = `
     clearAllText="Clear all"
     clearRenderer={[Function]}
     clearValueText="Clear value"
-    clearable={true}
+    clearable={false}
     deleteRemoves={true}
     delimiter=","
     disabled={false}

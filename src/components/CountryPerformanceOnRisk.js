@@ -21,7 +21,17 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   computeState(props=this.props) {
+    let state = {
+      cubeByRiskByCountry: props.cubeByRiskByCountry,
+      graphOptions: props.graphOptions,
+      selectorConfig: props.view.selectorConfig
+    }
+
     let plotlyData = []
+    let lineColors = [
+      'rgb(214, 39, 40)', 'rgb(31, 119, 180)', 'rgb(44, 160, 44)',
+      'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
+    ]
     if (props.view.isFetched) {
         plotlyData = props.view.selectorConfig.map(config => {
         if (config.country){
@@ -33,13 +43,12 @@ export class CountryPerformanceOnRisk extends Component {
           )
         }
       }).filter(value => {return value !== undefined})
+      plotlyData.forEach((trace, idx) => {
+        trace['line'] = {color: lineColors[idx]}
+      })
+      state['plotlyData'] = plotlyData
     }
-    let state = {
-      cubeByRiskByCountry: props.cubeByRiskByCountry,
-      graphOptions: props.graphOptions,
-      plotlyData: plotlyData,
-      selectorConfig: props.view.selectorConfig
-    }
+
     return state
   }
 
@@ -146,7 +155,6 @@ export class CountrySelect extends Component {
   }
 
   render() {
-    const style = { width: "20%", display: "inline", float: "left" }
     const selectOptions = this.props.countries.map(country => {
       return {
         value: country.id,
@@ -155,7 +163,7 @@ export class CountrySelect extends Component {
     })
     selectOptions.unshift({value: '', label: 'Select a country'})
     return (
-      <div style={style}>
+      <div className="Select-div">
         <Select
           name="countries"
           value={this.props.selectedCountry || selectOptions[0]}
@@ -164,6 +172,7 @@ export class CountrySelect extends Component {
           onInputChange={this.setInputValue.bind(this)}
           optionRenderer={this.optionRenderer.bind(this)}
           disabled={this.props.disabled}
+          clearable={false}
         />
       </div>
     );
