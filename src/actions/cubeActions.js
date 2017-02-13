@@ -47,7 +47,7 @@ export function fetchData(country, risk, graphId, test=true) {
     dispatch(requestData(country, risk, graphId))
     let url = `https://cybergreen-staging.herokuapp.com/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
     if (test){
-      url = `/api/count_by_country?limit=500&country=${country}&risk=${risk}`
+      url = `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
     }
     return axios.get(url)
       .then(res => dispatch(receivetData(res.data.results, country, risk, graphId)))
