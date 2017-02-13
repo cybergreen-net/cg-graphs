@@ -28,11 +28,18 @@ let reduxStore = {
       legend: {x:0, y:1},
       height: 200,
       margin: {
-        l: 0,r: 5,
-        b: 30,t: 0,
+        l: 40,r: 30,
+        b: 30,t: 0
       },
       xaxis: {
         gridcolor: 'transparent',
+      },
+      yaxis: {
+        title: 'Normalized counts'
+      },
+      font: {
+        size: 9,
+        color: '#7f7f7f'
       }
     }
   },
