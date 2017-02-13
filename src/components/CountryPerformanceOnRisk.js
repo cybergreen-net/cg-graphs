@@ -5,7 +5,6 @@ import Select from 'react-select';
 import Highlighter from 'react-highlight-words'
 import 'react-select/dist/react-select.css';
 import { countryIsSelected, fetchDataIfNeeded } from '../actions/cubeActions';
-import '../css/CountrySelect.css'
 
 
 export class CountryPerformanceOnRisk extends Component {
