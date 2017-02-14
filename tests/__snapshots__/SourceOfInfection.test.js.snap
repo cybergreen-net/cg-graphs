@@ -1,0 +1,11 @@
+exports[`Component is working Renders expected DOM 1`] = `
+<div>
+  <PlotlyGraph
+    data={Array []}
+    graphOptions={
+      Object {
+        "barmode": "stack",
+      }
+    } />
+</div>
+`;
