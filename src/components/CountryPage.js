@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CountryPerformanceOnRisk from './CountryPerformanceOnRisk';
 import { SourceOfInfection } from './SourceOfInfection';
+import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
 
 export class CountryPage extends Component {
@@ -14,9 +15,13 @@ export class CountryPage extends Component {
       <div>
         {Object.keys(this.props.views).map((key, idx) => {
           return (
-            <div key={key}>
-              <CountryPerformanceOnRisk view={this.props.views[key]} viewId={key}/>
-              <SourceOfInfection view={this.props.views[key]} viewId={key+idx} data={this.props.data}/>
+            <div key={key} className="row">
+              <div className="col-md-6">
+                <CountryPerformanceOnRisk view={this.props.views[key]} viewId={key}/>
+              </div>
+              <div className="col-md-6">
+                <SourceOfInfection view={this.props.views[key]} viewId={key+idx} data={this.props.data}/>
+              </div>
             </div>
           )
         })}

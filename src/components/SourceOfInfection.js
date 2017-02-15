@@ -11,7 +11,22 @@ export class SourceOfInfection extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      graphOptions: { barmode: 'stack' },
+      graphOptions: {
+        barmode: 'stack',
+        height: 200,
+        margin: {
+          l: 30,r: 30,
+          b: 30,t: 0
+        },
+        xaxis: {
+          gridcolor: 'transparent',
+          tickformat: '%Y'
+        },
+        font: {
+          size: 9,
+          color: '#7f7f7f'
+        }
+      },
       plotlyData: []
     }
   }
@@ -72,6 +87,7 @@ export class SourceOfInfection extends Component {
   render() {
     return (
       <div>
+        <h3>OPEN NTP &nbsp; | &nbsp; ASN SOURCE</h3>
         <PlotlyGraph
           data={this.state.plotlyData}
           graphOptions={this.state.graphOptions}
