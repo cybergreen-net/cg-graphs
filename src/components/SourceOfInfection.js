@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-//import { connect } from 'react-redux'
+import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 // import Select from 'react-select';
 // import Highlighter from 'react-highlight-words'
@@ -13,7 +13,8 @@ export class SourceOfInfection extends Component {
     this.state = {
       graphOptions: {
         barmode: 'stack',
-        height: 200,
+        hovermode:'closest',
+        height: 234,
         margin: {
           l: 30,r: 30,
           b: 30,t: 0
@@ -35,10 +36,17 @@ export class SourceOfInfection extends Component {
   computeState(props=this.props) {
     let plotlyData = []
     props.view.AS.id.forEach(AsId => {
-      let trace = this.convertToPlotlySeries(props.data, AsId)
+      let trace = this.convertToPlotlySeries(
+        props.data[props.view.risk][props.view.country],
+        AsId
+      )
       plotlyData.push(trace)
     })
-    plotlyData.push(this.convertToPlotlySeries(props.data, undefined, true))
+    plotlyData.push(this.convertToPlotlySeries(
+      props.data[props.view.risk][props.view.country],
+      undefined,
+      true
+    ))
 
     return {plotlyData: plotlyData}
   }
@@ -87,12 +95,26 @@ export class SourceOfInfection extends Component {
   render() {
     return (
       <div>
-        <h3>OPEN NTP &nbsp; | &nbsp; ASN SOURCE</h3>
+        <h3>
+          {this.props.risks[this.props.view.risk].title.toUpperCase()}
+          &nbsp; | &nbsp; ASN SOURCE
+        </h3>
         <PlotlyGraph
           data={this.state.plotlyData}
           graphOptions={this.state.graphOptions}
-          graphID={this.props.viewId} />
+          graphID={this.props.viewId}
+          clickable={true} />
       </div>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    //when API is done we'll need to replace 'cubeByRiskByAS' with 'cubeByRiskByCountry'
+    data: state.entities.cubeByRiskByAS,
+    risks: state.entities.risks
+  }
+}
+
+export default connect(mapStateToProps)(SourceOfInfection)
