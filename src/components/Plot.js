@@ -14,6 +14,13 @@ class PlotlyGraph extends React.Component {
 
   componentDidUpdate() {
     this.drawPlot(this.props.data, this.props.graphOptions);
+    if(this.props.clickable) {
+      document.getElementById(this.props.graphID).on('plotly_click', function(data){
+        if(data.points[0].data.name !== 'All the rest') {
+          window.location = `/asn/${data.points[0].data.name}`
+        }
+      });
+    }
   }
 
   render() {
