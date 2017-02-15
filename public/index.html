@@ -35,6 +35,14 @@
         'GB': {id: 'GB', name: 'United Kingdom', slug: 'united-kingdom'},
         'US': {id: 'US', name: 'United States', slug: 'united-states'}
       }
+      var risks = {
+        1: {title: 'Open DNS'},
+        2: {title: 'Open NTP'},
+        4: {title: 'Open SNMP'},
+        5: {title: 'Open SSDP'},
+        6: {title: 'Open Mirai'},
+        100: {title: 'DDOS'}
+      }
       var asn = {
         192: {id: 192, name: 'ASN 1'},
         254: {id: 254, name: 'ASN 2'},
@@ -63,6 +71,113 @@
             isFetching: false,
             didFailed: false
           }
+        }
+      }
+
+      var tempData = {
+        1: {
+          GB: [
+            {
+              country: "GB",
+              risk: 1,
+              date: "2017-01-01",
+              granularity: "",
+              count: 2000,
+              count_normalized: 123,
+              count_amplified: "321",
+              as: [
+                {
+                  id: 000,
+                  count: 1430
+                },
+                {
+                  id: 192,
+                  count: 500
+                },
+                {
+                  id: 254,
+                  count: 478
+                },
+                {
+                  id: 214,
+                  count: 456
+                },
+                {
+                  id: 111,
+                  count: 431
+                },
+                {
+                  id: 421,
+                  count: 398
+                },
+                {
+                  id: 291,
+                  count: 315
+                },{
+                  id: 187,
+                  count: 301
+                },
+                {
+                  id: 651,
+                  count: 211
+                },
+                {
+                  id: 413,
+                  count: 179
+                }
+              ]
+            },
+            {
+              country: "GB",
+              risk: 1,
+              date: "2017-02-01",
+              granularity: "",
+              count: 2000,
+              count_normalized: 123,
+              count_amplified: "321",
+              as: [
+                {
+                  id: 000,
+                  count: 1430
+                },
+                {
+                  id: 192,
+                  count: 500
+                },
+                {
+                  id: 254,
+                  count: 478
+                },
+                {
+                  id: 214,
+                  count: 456
+                },
+                {
+                  id: 111,
+                  count: 431
+                },
+                {
+                  id: 421,
+                  count: 398
+                },
+                {
+                  id: 291,
+                  count: 315
+                },{
+                  id: 187,
+                  count: 301
+                },
+                {
+                  id: 651,
+                  count: 211
+                },
+                {
+                  id: 413,
+                  count: 179
+                }
+              ]
+            }
+          ]
         }
       }
     </script>
