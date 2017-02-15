@@ -1,4 +1,4 @@
-/* global graphData countries countryPerformanceOnRiskViews*/
+/* global graphData countries countryPerformanceOnRiskViews asn*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -23,61 +23,66 @@ let reduxStore = {
       6: {title: 'Open Mirai'},
       100: {title: 'DDOS'}
     },
+    asn: asn,
     cubeByRiskByCountry: {},
-    cubeByRiskByAS: [
-      {
-        country: "GB",
-        risk: 1,
-        date: "2017-01-01",
-        granularity: "",
-        count: 2000,
-        count_normalized: 123,
-        count_amplified: "321",
-        as: [
+    cubeByRiskByAS: {
+      1: {
+        GB: [
           {
-            id: 192,
-            count: 500,
-            count_amplified: ""
+            country: "GB",
+            risk: 1,
+            date: "2017-01-01",
+            granularity: "",
+            count: 2000,
+            count_normalized: 123,
+            count_amplified: "321",
+            as: [
+              {
+                id: 192,
+                count: 500,
+                count_amplified: ""
+              },
+              {
+                id: 254,
+                count: 550,
+                count_amplified: ""
+              },
+              {
+                id: 214,
+                count: 780,
+                count_amplified: ""
+              }
+            ]
           },
           {
-            id: 254,
-            count: 550,
-            count_amplified: ""
-          },
-          {
-            id: 214,
-            count: 780,
-            count_amplified: ""
-          }
-        ]
-      },
-      {
-        country: "GB",
-        risk: 1,
-        date: "2017-02-01",
-        granularity: "",
-        count: 2000,
-        count_normalized: 123,
-        count_amplified: "321",
-        as: [
-          {
-            id: 192,
-            count: 440,
-            count_amplified: ""
-          },
-          {
-            id: 254,
-            count: 620,
-            count_amplified: ""
-          },
-          {
-            id: 214,
-            count: 710,
-            count_amplified: ""
+            country: "GB",
+            risk: 1,
+            date: "2017-02-01",
+            granularity: "",
+            count: 2000,
+            count_normalized: 123,
+            count_amplified: "321",
+            as: [
+              {
+                id: 192,
+                count: 440,
+                count_amplified: ""
+              },
+              {
+                id: 254,
+                count: 620,
+                count_amplified: ""
+              },
+              {
+                id: 214,
+                count: 710,
+                count_amplified: ""
+              }
+            ]
           }
         ]
       }
-    ],
+    },
     layouts: {
       legend: {x:0, y:1},
       height: 200,

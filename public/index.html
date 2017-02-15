@@ -35,6 +35,11 @@
         'GB': {id: 'GB', name: 'United Kingdom', slug: 'united-kingdom'},
         'US': {id: 'US', name: 'United States', slug: 'united-states'}
       }
+      var asn = {
+        192: {id: 192, name: 'ASN 1'},
+        254: {id: 254, name: 'ASN 2'},
+        214: {id: 214, name: 'ASN 3'}
+      }
       var countryPerformanceOnRiskViews = {
         'GB/1': {
           id: 'GB/1',
@@ -53,30 +58,7 @@
             {disabled: false, country: undefined}
           ],
           AS: {
-            id: [192, 254, 214],
-            isFetched: false,
-            isFetching: false,
-            didFailed: false
-          }
-        },
-        'GB/2': {
-          id: 'GB/2',
-          country: 'GB',
-          risk: 2,
-          type: 'country/performance',
-          isFetched: false,
-          isFetching: false,
-          didFailed: false,
-          measure: "count_normalized",
-          selectorConfig: [
-            {disabled: true, country: 'GB'},
-            {disabled: true, country: 'T'},
-            {disabled: false, country: undefined},
-            {disabled: false, country: undefined},
-            {disabled: false, country: undefined}
-          ],
-          AS: {
-            id: [192, 254, 214],
+            id: [214, 254, 192],
             isFetched: false,
             isFetching: false,
             didFailed: false
