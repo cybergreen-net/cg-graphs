@@ -94,10 +94,9 @@ describe('Component is working', () => {
   it('computeState works', () => {
     const { enzymeWrapper, props } = setup()
     let out = enzymeWrapper.instance().computeState(props)
-    expect(out.plotlyData.length).toEqual(3)
+    expect(out.plotlyData.length).toEqual(6)
     expect(out.plotlyData[0].name).toEqual(props.view.AS.id[0])
     expect(out.plotlyData[1].name).toEqual(props.view.AS.id[1])
-    expect(out.plotlyData[2].name).toEqual('All the rest')
   })
 
   it('convertToPlotlySeries works', () => {

@@ -14,6 +14,7 @@ export class SourceOfInfection extends Component {
       graphOptions: {
         barmode: 'stack',
         hovermode:'closest',
+        showlegend: false,
         height: 234,
         margin: {
           l: 30,r: 30,
@@ -35,22 +36,46 @@ export class SourceOfInfection extends Component {
 
   computeState(props=this.props) {
     let plotlyData = []
-    props.view.AS.id.forEach(AsId => {
-      let trace = this.convertToPlotlySeries(
-        props.data[props.view.risk][props.view.country],
-        AsId
-      )
-      plotlyData.push(trace)
+    // props.view.AS.id.forEach(AsId => {
+    //   let trace = this.convertToPlotlySeries(
+    //     props.data[props.view.risk][props.view.country],
+    //     AsId
+    //   )
+    //   plotlyData.push(trace)
+    // })
+    // plotlyData.push(this.convertToPlotlySeries(
+    //   props.data[props.view.risk][props.view.country],
+    //   undefined,
+    //   true
+    // ))
+    props.data[props.view.risk][props.view.country].forEach(dataEntry => {
+      let colorPallet = [
+        'rgb(122,71,239)',
+        'rgb(167,133,243)', 'rgb(199,179,249)', 'rgb(173,246,250)',
+        'rgb(124,244,251)', 'rgb(41,232,251)', 'rgb(212,229,250)',
+        'rgb(169,205,250)', 'rgb(140,181,253)', 'rgb(20,105,234)'
+      ]
+      dataEntry.as.forEach((asn, idx) => {
+        let trace = this.plotlySeries(dataEntry, asn)
+        trace['marker'] = {
+          color: colorPallet[idx]
+        }
+        plotlyData.push(trace)
+      })
+
     })
-    plotlyData.push(this.convertToPlotlySeries(
-      props.data[props.view.risk][props.view.country],
-      undefined,
-      true
-    ))
 
     return {plotlyData: plotlyData}
   }
 
+  plotlySeries(data, asn){
+    return {
+      x: [data.date],
+      y: [asn.count],
+      type: 'bar',
+      name: asn.id
+    }
+  }
 
   convertToPlotlySeries(dataTable, AsId, allTheRest=false) {
     if(allTheRest) {

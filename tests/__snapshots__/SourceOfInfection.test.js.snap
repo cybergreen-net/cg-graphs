@@ -22,6 +22,7 @@ exports[`Component is working Renders expected DOM 1`] = `
           "r": 30,
           "t": 0,
         },
+        "showlegend": false,
         "xaxis": Object {
           "gridcolor": "transparent",
           "tickformat": "%Y",
