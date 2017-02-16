@@ -99,23 +99,4 @@ describe('Component is working', () => {
     expect(out.plotlyData[1].name).toEqual(props.view.AS.id[1])
   })
 
-  it('convertToPlotlySeries works', () => {
-    const { enzymeWrapper, props } = setup()
-    let out = enzymeWrapper.instance().convertToPlotlySeries(
-      props.data[props.view.risk][props.view.country],
-      props.view.AS.id[0]
-    )
-    expect(out.type).toEqual('bar')
-    expect(out.x).toEqual(['2017-01-01', '2017-02-01'])
-    expect(out.y).toEqual([500, 440])
-    expect(out.name).toEqual(props.view.AS.id[0])
-    out = enzymeWrapper.instance().convertToPlotlySeries(
-      props.data[props.view.risk][props.view.country],
-      undefined,
-      true
-    )
-    expect(out.y).toEqual([170, 230])
-    expect(out.name).toEqual('All the rest')
-  })
-
 })
