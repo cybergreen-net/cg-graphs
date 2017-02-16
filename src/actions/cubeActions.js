@@ -1,3 +1,4 @@
+/* global CG_API_ENDPOINT*/
 import axios from 'axios'
 
 export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST'
@@ -42,14 +43,14 @@ export function countryIsSelected(idxOfSelector, selectedCountry, graphId) {
   }
 }
 
-export function fetchData(country, risk, graphId, test=true) {
+export function fetchData(country, risk, graphId, test=false) {
   return function(dispatch) {
     dispatch(requestData(country, risk, graphId))
-    let url = `https://cybergreen-staging.herokuapp.com/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
-    if (test){
-      url = `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
+    let ENDPOINT = `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
+    if(!test) {
+      ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }
-    return axios.get(url)
+    return axios.get(ENDPOINT)
       .then(res => dispatch(receivetData(res.data.results, country, risk, graphId)))
       .catch(err => dispatch(receivetDataFailure(err.message, country, risk, graphId)))
   }
@@ -64,10 +65,10 @@ export function shouldFetchData(state, country, risk) {
   }
 }
 
-export function fetchDataIfNeeded(country, risk, graphId) {
+export function fetchDataIfNeeded(country, risk, graphId, test=false) {
   return (dispatch, getState) => {
     if (shouldFetchData(getState(), country, risk)) {
-      return dispatch(fetchData(country, risk, graphId))
+      return dispatch(fetchData(country, risk, graphId, test))
     } else {
       return Promise.resolve()
     }
