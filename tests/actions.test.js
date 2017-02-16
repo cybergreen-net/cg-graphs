@@ -1,3 +1,4 @@
+/* global CG_API_ENDPOINT*/
 import axios from 'axios'
 import httpAdapter from 'axios/lib/adapters/http'
 import nock from 'nock'
@@ -80,7 +81,7 @@ describe('how cached data is used', () => {
     let actionCreators = store.getActions()
     expect(actionCreators.length).toEqual(0)
     // if fata is not there FETCH_DATA_REQUEST is triggered
-    store.dispatch(actions.fetchDataIfNeeded('newTest', 1, 'newTest/1'))
+    store.dispatch(actions.fetchDataIfNeeded('newTest', 1, 'newTest/1', true))
     actionCreators = store.getActions()
     expect(actionCreators.length).toEqual(1)
     expect(actionCreators[0].type).toEqual('FETCH_DATA_REQUEST')
