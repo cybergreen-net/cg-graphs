@@ -46,12 +46,9 @@ export function countryIsSelected(idxOfSelector, selectedCountry, graphId) {
 export function fetchData(country, risk, graphId, test=false) {
   return function(dispatch) {
     dispatch(requestData(country, risk, graphId))
-    let ENDPOINT
+    let ENDPOINT = `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
     if(!test) {
-      ENDPOINT = CG_API_ENDPOINT || '/'
-      ENDPOINT += `api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
-    } else {
-      ENDPOINT = `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}`
+      ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }
     return axios.get(ENDPOINT)
       .then(res => dispatch(receivetData(res.data.results, country, risk, graphId)))
