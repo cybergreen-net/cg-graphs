@@ -1,4 +1,4 @@
-/* global graphData countries countryPerformanceOnRiskViews*/
+/* global graphData countries countryPerformanceOnRiskViews asn tempData risks*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -15,15 +15,10 @@ import DdosPerformance from './components/DdosPerformance';
 let reduxStore = {
   entities: {
     countries: countries,
-    risks: {
-      1: {title: 'Open DNS'},
-      2: {title: 'Open NTP'},
-      4: {title: 'Open SNMP'},
-      5: {title: 'Open SSDP'},
-      6: {title: 'Open Mirai'},
-      100: {title: 'DDOS'}
-    },
+    risks: risks,
+    asn: asn,
     cubeByRiskByCountry: {},
+    cubeByRiskByAS: tempData,
     layouts: {
       legend: {x:0, y:1},
       height: 200,

@@ -1,0 +1,33 @@
+exports[`Component is working Renders expected DOM 1`] = `
+<div>
+  <h3>
+    OPEN DNS
+      |   ASN SOURCE
+  </h3>
+  <PlotlyGraph
+    clickable={true}
+    data={Array []}
+    graphOptions={
+      Object {
+        "barmode": "stack",
+        "font": Object {
+          "color": "#7f7f7f",
+          "size": 9,
+        },
+        "height": 234,
+        "hovermode": "closest",
+        "margin": Object {
+          "b": 30,
+          "l": 30,
+          "r": 30,
+          "t": 0,
+        },
+        "showlegend": false,
+        "xaxis": Object {
+          "gridcolor": "transparent",
+          "tickformat": "%Y",
+        },
+      }
+    } />
+</div>
+`;
