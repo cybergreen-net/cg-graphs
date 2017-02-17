@@ -12,6 +12,8 @@ describe('ASPerformance component is working as expected', () => {
           name: 'ASN 174'
         }
       },
+      risks: {1: {title: 'Open DNS'}},
+      countries: {'GB': {id: 'GB', name: 'United Kingdom'}},
       view: {
         id: 'GB/1/174',
         as: 174,
