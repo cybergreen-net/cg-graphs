@@ -52,3 +52,39 @@ describe('AS async actions', () => {
   })
 
 })
+
+describe('how cached data is used for AS data', () => {
+  it('checks if given country, risk and AsId data is cached', () => {
+    const testState = {
+      entities: {
+        cubeByRiskByASN: {
+          'GB/1/174': {}
+        }
+      }
+    }
+    const dataIsCached = actions.shouldFetchAsData(testState, 'GB', 1, 174)
+    const dataIsNotCached = actions.shouldFetchAsData(testState, 'GB', 1, 123)
+    //if data cached it returns false so we don't make a server request
+    expect(dataIsCached).toBeFalsy()
+    expect(dataIsNotCached).toBeTruthy()
+  })
+
+  it('Checks if no fetching started if AS data is in cubeByRiskByASN and fetching started if oposite', () => {
+    const store = mockStore({
+      entities: {
+        cubeByRiskByASN:{
+          'GB/1/174': {}
+        }
+      }
+    })
+    // if data is there no actions called
+    store.dispatch(actions.fetchAsDataIfNeeded('GB', 1, 174, 'GB/1/174'))
+    let actionCreators = store.getActions()
+    expect(actionCreators.length).toEqual(0)
+    // if fata is not there FETCH_DATA_REQUEST is triggered
+    store.dispatch(actions.fetchAsDataIfNeeded('test', 1, 123, 'test/1/123', true))
+    actionCreators = store.getActions()
+    expect(actionCreators.length).toEqual(1)
+    expect(actionCreators[0].type).toEqual('FETCH_AS_DATA_REQUEST')
+  })
+})
