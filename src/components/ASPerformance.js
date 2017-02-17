@@ -6,7 +6,7 @@ import Highlighter from 'react-highlight-words';
 import 'react-select/dist/react-select.css';
 import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
-import { fetchAsData, AsIsSelected } from '../actions/ASactions';
+import { fetchAsDataIfNeeded, AsIsSelected } from '../actions/ASactions';
 
 export class ASPerformance extends Component {
   constructor(props) {
@@ -58,7 +58,7 @@ export class ASPerformance extends Component {
 
 
   componentDidMount() {
-    this.props.dispatch(fetchAsData(
+    this.props.dispatch(fetchAsDataIfNeeded(
       this.props.view.country,
       this.props.view.risk,
       this.props.view.as,
@@ -81,7 +81,7 @@ export class ASPerformance extends Component {
         selectedAS.value,
         this.props.viewId
       ))
-      this.props.dispatch(fetchAsData(
+      this.props.dispatch(fetchAsDataIfNeeded(
         this.props.view.country,
         this.props.view.risk,
         selectedAS.value,

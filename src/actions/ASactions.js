@@ -58,3 +58,22 @@ export function fetchAsData(country, risk, AsId, graphId, test=false) {
       .catch(err => dispatch(receiveAsDataFailure(err.message, country, risk, AsId, graphId)))
   }
 }
+
+export function shouldFetchAsData(state, country, risk, AsId) {
+  const data = state.entities.cubeByRiskByASN[country+'/'+risk+'/'+AsId]
+  if (!data) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function fetchAsDataIfNeeded(country, risk, AsId, graphId, test=false) {
+  return (dispatch, getState) => {
+    if (shouldFetchAsData(getState(), country, risk, AsId)) {
+      return dispatch(fetchAsData(country, risk, AsId, graphId, test))
+    } else {
+      return Promise.resolve()
+    }
+  }
+}
