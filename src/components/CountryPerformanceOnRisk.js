@@ -102,10 +102,8 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   render() {
-    let self = this
-    let style = {marginBottom:"80px"}
     return (
-      <div style={style}>
+      <div className="graph-div">
         <h3>
           {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
           {this.props.countries[this.props.view.country].name.toUpperCase()}
@@ -118,7 +116,7 @@ export class CountryPerformanceOnRisk extends Component {
           return <CountrySelect
                     countries={Object.values(this.props.countries)}
                     disabled={selectInfo.disabled}
-                    onChange={self.updateValue.bind(self, idx)}
+                    onChange={this.updateValue.bind(this, idx)}
                     selectedCountry={selectInfo.country}
                     key={idx}
                     />

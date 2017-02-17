@@ -17,3 +17,14 @@
   display: inline;
   float: left;
 }
+
+.Select-input, .Select-control {
+  height: 20px;
+}
+.Select-value {
+  line-height: 20px !important;
+}
+
+.graph-div {
+  margin-bottom: 40px;
+}
