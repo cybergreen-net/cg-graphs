@@ -1,0 +1,16 @@
+exports[`ASPage component renders expected DOM 1`] = `
+<div>
+  <div
+    className="row">
+    <Connect(ASPerformance)
+      view={Object {}}
+      viewId="gb/1/174" />
+  </div>
+  <div
+    className="row">
+    <Connect(ASPerformance)
+      view={Object {}}
+      viewId="gb/2/174" />
+  </div>
+</div>
+`;
