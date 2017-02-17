@@ -166,7 +166,6 @@ export class ASSelect extends Component {
 const mapStateToProps = (state) => {
   return {
     data: state.entities.cubeByRiskByASN,
-    view: state.ASPerformanceViews['GB/1/174'],
     asn: state.entities.asn
   }
 }

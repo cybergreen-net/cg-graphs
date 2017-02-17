@@ -7,7 +7,7 @@ import { Provider } from 'react-redux';
 import { buildCube } from './reducers/cubeReducers';
 
 import CountryPage from './components/CountryPage';
-import ASPerformance from './components/ASPerformance';
+import ASPage from './components/ASPage';
 
 import FrontPageCountrySelector from './components/FrontPageCountrySelector';
 import DdosPerformance from './components/DdosPerformance';
@@ -77,7 +77,7 @@ if (document.getElementById('root')) {
 if (document.getElementById('as')) {
   ReactDOM.render(
     <Provider store={store}>
-      <ASPerformance viewId="GB/1/174"/>
+      <ASPage />
     </Provider>,
     document.getElementById('as')
   );
