@@ -1,0 +1,69 @@
+exports[`ASPerformance component is working as expected renders expected DOM 1`] = `
+<div
+  style={
+    Object {
+      "marginBottom": "80px",
+    }
+  }>
+  <PlotlyGraph
+    data={Array []}
+    graphOptions={Object {}} />
+  <ASSelect
+    asn={
+      Array [
+        Object {
+          "id": 174,
+          "name": "ASN 174",
+        },
+      ]
+    }
+    disabled={true}
+    onChange={[Function]}
+    selectedAS={174} />
+  <ASSelect
+    asn={
+      Array [
+        Object {
+          "id": 174,
+          "name": "ASN 174",
+        },
+      ]
+    }
+    disabled={true}
+    onChange={[Function]}
+    selectedAS={0} />
+  <ASSelect
+    asn={
+      Array [
+        Object {
+          "id": 174,
+          "name": "ASN 174",
+        },
+      ]
+    }
+    disabled={false}
+    onChange={[Function]} />
+  <ASSelect
+    asn={
+      Array [
+        Object {
+          "id": 174,
+          "name": "ASN 174",
+        },
+      ]
+    }
+    disabled={false}
+    onChange={[Function]} />
+  <ASSelect
+    asn={
+      Array [
+        Object {
+          "id": 174,
+          "name": "ASN 174",
+        },
+      ]
+    }
+    disabled={false}
+    onChange={[Function]} />
+</div>
+`;
