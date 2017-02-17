@@ -45,9 +45,10 @@
         100: {title: 'DDOS'}
       }
       var asn = {
-        192: {id: 192, name: 'ASN 1'},
-        254: {id: 254, name: 'ASN 2'},
-        214: {id: 214, name: 'ASN 3'}
+        174: {id: 174, name: 'ASN 174'},
+        5413: {id: 5413, name: 'ASN 5413'},
+        42973: {id: 42973, name: 'ASN 42973'},
+        31655: {id: 31655, name: 'ASN 31655'}
       }
       var countryPerformanceOnRiskViews = {
         'GB/1': {
@@ -65,6 +66,26 @@
             {disabled: false, country: undefined},
             {disabled: false, country: undefined},
             {disabled: false, country: undefined}
+          ]
+        }
+      }
+      var ASPerformanceViews = {
+        'GB/1/174': {
+          id: 'GB/1/174',
+          as: 174,
+          risk: 1,
+          country: 'GB',
+          type: 'as/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          measure: "count_normalized",
+          selectorConfig: [
+            {disabled: true, as: 174},
+            {disabled: true, as: 0},
+            {disabled: false, as: undefined},
+            {disabled: false, as: undefined},
+            {disabled: false, as: undefined}
           ]
         }
       }
@@ -177,7 +198,8 @@
       }
     </script>
 
-    <div id="root" class="container"></div>
+    <!-- <div id="root" class="container"></div> -->
+    <div id="as" class="container"></div>
     <!-- <div id="dropdown"></div>
     <div id="ddos"></div> -->
   </body>

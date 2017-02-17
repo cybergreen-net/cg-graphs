@@ -1,4 +1,4 @@
-/* global graphData countries countryPerformanceOnRiskViews asn tempData risks*/
+/* global graphData countries countryPerformanceOnRiskViews asn tempData risks ASPerformanceViews tempDataForASPerformance*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -7,6 +7,7 @@ import { Provider } from 'react-redux';
 import { buildCube } from './reducers/cubeReducers';
 
 import CountryPage from './components/CountryPage';
+import ASPerformance from './components/ASPerformance';
 
 import FrontPageCountrySelector from './components/FrontPageCountrySelector';
 import DdosPerformance from './components/DdosPerformance';
@@ -18,6 +19,7 @@ let reduxStore = {
     risks: risks,
     asn: asn,
     cubeByRiskByCountry: {},
+    cubeByRiskByASN: {},
     cubeByRiskByAS: tempData,
     layouts: {
       legend: {x:0, y:1},
@@ -38,7 +40,8 @@ let reduxStore = {
       }
     }
   },
-  countryPerformanceOnRiskViews: countryPerformanceOnRiskViews
+  countryPerformanceOnRiskViews: countryPerformanceOnRiskViews,
+  ASPerformanceViews: ASPerformanceViews
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -68,5 +71,14 @@ if (document.getElementById('root')) {
       <CountryPage />
     </Provider>,
     document.getElementById('root')
+  );
+}
+
+if (document.getElementById('as')) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <ASPerformance viewId="GB/1/174"/>
+    </Provider>,
+    document.getElementById('as')
   );
 }

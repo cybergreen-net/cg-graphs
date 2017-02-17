@@ -7,3 +7,13 @@
   display: inline;
   float: left;
 }
+
+#as h3 {
+  color: #00D49A;
+}
+#as .Select-div {
+  font-size: 10px;
+  width: 20%;
+  display: inline;
+  float: left;
+}
