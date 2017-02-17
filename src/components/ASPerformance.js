@@ -13,7 +13,18 @@ export class ASPerformance extends Component {
     super(props)
     this.state = {
       plotlyData: [],
-      graphOptions: {}
+      graphOptions: {
+        legend: {x:0, y:1},
+        height: 200,
+        margin: {
+          l: 30,r: 30,
+          b: 30,t: 0
+        },
+        font: {
+          size: 9,
+          color: '#7f7f7f'
+        }
+      }
     }
   }
 
@@ -92,9 +103,12 @@ export class ASPerformance extends Component {
 
 
   render() {
-    let style = {marginBottom:"80px"}
     return (
-      <div style={style}>
+      <div className="graph-div">
+        <h3>
+          {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
+          {this.props.countries[this.props.view.country].name.toUpperCase()}
+        </h3>
         <PlotlyGraph
           data={this.state.plotlyData}
           graphOptions={this.state.graphOptions}
@@ -166,7 +180,9 @@ export class ASSelect extends Component {
 const mapStateToProps = (state) => {
   return {
     data: state.entities.cubeByRiskByASN,
-    asn: state.entities.asn
+    asn: state.entities.asn,
+    risks: state.entities.risks,
+    countries: state.entities.countries
   }
 }
 
