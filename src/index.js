@@ -1,4 +1,4 @@
-/* global graphData countries countryPerformanceOnRiskViews asn tempData risks ASPerformanceViews tempDataForASPerformance*/
+/* global graphData countries countryPerformanceOnRiskViews asn tempData risks ASPerformanceViews*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -65,20 +65,20 @@ if (document.getElementById('ddos')){
   );
 }
 
-if (document.getElementById('root')) {
+if (document.getElementById('countryPerformance')) {
   ReactDOM.render(
     <Provider store={store}>
       <CountryPage />
     </Provider>,
-    document.getElementById('root')
+    document.getElementById('countryPerformance')
   );
 }
 
-if (document.getElementById('as')) {
+if (document.getElementById('ASPerformance')) {
   ReactDOM.render(
     <Provider store={store}>
       <ASPage />
     </Provider>,
-    document.getElementById('as')
+    document.getElementById('ASPerformance')
   );
 }

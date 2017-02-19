@@ -5,8 +5,7 @@ exports[`ASPage component renders expected DOM 1`] = `
     <div
       className="col-md-6 panel panel-default">
       <Connect(ASPerformance)
-        view={Object {}}
-        viewId="gb/1/174" />
+        view={Object {}} />
     </div>
   </div>
   <div
@@ -14,8 +13,7 @@ exports[`ASPage component renders expected DOM 1`] = `
     <div
       className="col-md-6 panel panel-default">
       <Connect(ASPerformance)
-        view={Object {}}
-        viewId="gb/2/174" />
+        view={Object {}} />
     </div>
   </div>
 </div>

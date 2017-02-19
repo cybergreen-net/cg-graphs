@@ -47,7 +47,7 @@ export class ASPerformance extends Component {
         }
       }).filter(value => {return value !== undefined})
       plotlyData.forEach((trace, idx) => {
-        trace['line'] = {color: lineColors[idx]}
+        trace.line = {color: lineColors[idx]}
       })
     }
 
@@ -57,8 +57,8 @@ export class ASPerformance extends Component {
   }
 
 
-  convertToPlotlySeries(asID, countryID, riskID, data) {
-    var dataTable = data[countryID+'/'+riskID+'/'+asID];
+  convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
+    var dataTable = dataFromCube[countryID+'/'+riskID+'/'+asID];
     return {
       x: dataTable.map(row => row.date),
       y: dataTable.map(row => row.count),

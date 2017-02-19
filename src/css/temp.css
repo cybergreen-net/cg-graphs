@@ -1,17 +1,17 @@
-#root h3 {
+#countryPerformance h3 {
   color: #00D49A;
 }
-#root .Select-div {
+#countryPerformance .Select-div {
   font-size: 10px;
   width: 20%;
   display: inline;
   float: left;
 }
 
-#as h3 {
+#ASPerformance h3 {
   color: #00D49A;
 }
-#as .Select-div {
+#ASPerformance .Select-div {
   font-size: 10px;
   width: 20%;
   display: inline;

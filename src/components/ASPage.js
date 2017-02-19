@@ -11,11 +11,11 @@ export class ASPage extends Component {
   render() {
     return (
       <div>
-        {Object.keys(this.props.views).map(key => {
+        {Object.values(this.props.views).map(view => {
           return (
-            <div key={key} className="row">
+            <div key={view.id} className="row">
               <div className="col-md-6 panel panel-default">
-                <ASPerformance view={this.props.views[key]} viewId={key}/>
+                <ASPerformance view={view} viewId={view.id}/>
               </div>
             </div>
           )
