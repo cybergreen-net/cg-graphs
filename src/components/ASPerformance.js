@@ -62,7 +62,7 @@ export class ASPerformance extends Component {
     return {
       x: dataTable.map(row => row.date),
       y: dataTable.map(row => row.count),
-      name: this.props.asn[asID].name,
+      name: this.props.asn[asID].title,
       type: 'scatter',
     }
   }
@@ -155,8 +155,8 @@ export class ASSelect extends Component {
   render() {
     const selectOptions = this.props.asn.map(asn => {
       return {
-        value: asn.id,
-        label: asn.name
+        value: asn.number,
+        label: asn.title
       }
     })
     selectOptions.unshift({value: '', label: 'Select an ASN'})

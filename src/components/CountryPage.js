@@ -16,7 +16,7 @@ export class CountryPage extends Component {
         {Object.keys(this.props.views).map((key, idx) => {
           return (
             <div key={key} className="row">
-              <div className="col-md-6">
+              <div className="col-md-6 panel panel-default">
                 <CountryPerformanceOnRisk view={this.props.views[key]} viewId={key}/>
               </div>
             </div>
