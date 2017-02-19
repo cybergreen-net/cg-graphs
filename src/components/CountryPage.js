@@ -19,9 +19,6 @@ export class CountryPage extends Component {
               <div className="col-md-6">
                 <CountryPerformanceOnRisk view={this.props.views[key]} viewId={key}/>
               </div>
-              <div className="col-md-6">
-                <SourceOfInfection view={this.props.views[key]} viewId={key+idx}/>
-              </div>
             </div>
           )
         })}

@@ -20,7 +20,7 @@ let reduxStore = {
     asn: asn,
     cubeByRiskByCountry: {},
     cubeByRiskByASN: {},
-    cubeByRiskByAS: tempData,
+    //cubeByRiskByAS: tempData,
     layouts: {
       legend: {x:0, y:1},
       height: 200,
