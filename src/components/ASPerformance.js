@@ -1,78 +1,78 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
-import Highlighter from 'react-highlight-words'
+import Highlighter from 'react-highlight-words';
 import 'react-select/dist/react-select.css';
-import { countryIsSelected, fetchDataIfNeeded } from '../actions/cubeActions';
+import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
+import { fetchAsDataIfNeeded, AsIsSelected } from '../actions/ASactions';
 
-export class CountryPerformanceOnRisk extends Component {
+export class ASPerformance extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cubeByRiskByCountry: {},
-      graphOptions: {},
-      countries: {},
-      selectorConfig: [],
-      plotlyData: []
+      plotlyData: [],
+      graphOptions: {
+        legend: {x:0, y:1},
+        height: 200,
+        margin: {
+          l: 30,r: 30,
+          b: 30,t: 0
+        },
+        font: {
+          size: 9,
+          color: '#7f7f7f'
+        }
+      }
     }
   }
 
 
   computeState(props=this.props) {
-    let state = {
-      cubeByRiskByCountry: props.cubeByRiskByCountry,
-      graphOptions: props.graphOptions,
-      selectorConfig: props.view.selectorConfig
-    }
-
-    let plotlyData = []
     let lineColors = [
       'rgb(214, 39, 40)', 'rgb(31, 119, 180)', 'rgb(44, 160, 44)',
       'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
     ]
-    if (props.view.isFetched) {
-        plotlyData = props.view.selectorConfig.map(config => {
-        if (config.country){
+    let plotlyData
+    if(props.view.isFetched) {
+      plotlyData = props.view.selectorConfig.map(config => {
+        if (config.as){
           return this.convertToPlotlySeries(
-            config.country,
+            config.as,
+            props.view.country,
             props.view.risk,
-            props.cubeByRiskByCountry,
-            props.view.measure
+            props.data
           )
         }
       }).filter(value => {return value !== undefined})
       plotlyData.forEach((trace, idx) => {
-        trace['line'] = {color: lineColors[idx]}
+        trace.line = {color: lineColors[idx]}
       })
-      state['plotlyData'] = plotlyData
     }
 
-    return state
+    return {
+      plotlyData: plotlyData
+    }
   }
 
 
-  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure) {
-    var dataTable = cubeByRiskByCountry[riskID][countryID];
+  convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
+    var dataTable = dataFromCube[countryID+'/'+riskID+'/'+asID];
     return {
       x: dataTable.map(row => row.date),
-      y: dataTable.map(row => row[measure] || row.count),
-      name: this.props.countries[countryID].name,
+      y: dataTable.map(row => row.count),
+      name: this.props.asn[asID].title,
       type: 'scatter',
     }
   }
 
 
   componentDidMount() {
-    this.props.dispatch(fetchDataIfNeeded(
+    this.props.dispatch(fetchAsDataIfNeeded(
       this.props.view.country,
       this.props.view.risk,
-      this.props.viewId
-    ))
-    this.props.dispatch(fetchDataIfNeeded(
-      'T',
-      this.props.view.risk,
+      this.props.view.as,
       this.props.viewId
     ))
   };
@@ -83,18 +83,19 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
-  updateValue(idxOfSelector, selectedCountry) {
-    if(!selectedCountry || selectedCountry.value === "") {
-      this.props.dispatch(countryIsSelected(idxOfSelector, "", this.props.viewId))
+  updateValue(idxOfSelector, selectedAS) {
+    if(!selectedAS || selectedAS.value === "") {
+      this.props.dispatch(AsIsSelected(idxOfSelector, "", this.props.viewId))
     } else {
-      this.props.dispatch(countryIsSelected(
+      this.props.dispatch(AsIsSelected(
         idxOfSelector,
-        selectedCountry.value,
+        selectedAS.value,
         this.props.viewId
       ))
-      this.props.dispatch(fetchDataIfNeeded(
-        selectedCountry.value,
+      this.props.dispatch(fetchAsDataIfNeeded(
+        this.props.view.country,
         this.props.view.risk,
+        selectedAS.value,
         this.props.viewId
       ))
     }
@@ -110,14 +111,14 @@ export class CountryPerformanceOnRisk extends Component {
         </h3>
         <PlotlyGraph
           data={this.state.plotlyData}
-          graphOptions={this.props.graphOptions}
+          graphOptions={this.state.graphOptions}
           graphID={this.props.viewId} />
-        {this.state.selectorConfig.map((selectInfo, idx) => {
-          return <CountrySelect
-                    countries={Object.values(this.props.countries)}
+        {this.props.view.selectorConfig.map((selectInfo, idx) => {
+          return <ASSelect
+                    asn={Object.values(this.props.asn)}
                     disabled={selectInfo.disabled}
                     onChange={this.updateValue.bind(this, idx)}
-                    selectedCountry={selectInfo.country}
+                    selectedAS={selectInfo.as}
                     key={idx}
                     />
         })}
@@ -126,8 +127,7 @@ export class CountryPerformanceOnRisk extends Component {
   }
 }
 
-
-export class CountrySelect extends Component {
+export class ASSelect extends Component {
   constructor(props) {
     super(props)
     this.state= {
@@ -153,18 +153,18 @@ export class CountrySelect extends Component {
   }
 
   render() {
-    const selectOptions = this.props.countries.map(country => {
+    const selectOptions = this.props.asn.map(asn => {
       return {
-        value: country.id,
-        label: country.name
+        value: asn.number,
+        label: asn.title
       }
     })
-    selectOptions.unshift({value: '', label: 'Select a country'})
+    selectOptions.unshift({value: '', label: 'Select an ASN'})
     return (
       <div className="Select-div">
         <Select
-          name="countries"
-          value={this.props.selectedCountry || selectOptions[0]}
+          name="asn"
+          value={this.props.selectedAS || selectOptions[0]}
           options={selectOptions}
           onChange={this.props.onChange}
           onInputChange={this.setInputValue.bind(this)}
@@ -177,15 +177,13 @@ export class CountrySelect extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => {
   return {
-    cubeByRiskByCountry: state.entities.cubeByRiskByCountry,
-    countries: state.entities.countries,
+    data: state.entities.cubeByRiskByASN,
+    asn: state.entities.asn,
     risks: state.entities.risks,
-    graphOptions: state.entities.layouts
+    countries: state.entities.countries
   }
 }
 
-
-export default connect(mapStateToProps)(CountryPerformanceOnRisk)
+export default connect(mapStateToProps)(ASPerformance)

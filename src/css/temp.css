@@ -1,9 +1,30 @@
-#root h3 {
+#countryPerformance h3 {
   color: #00D49A;
 }
-#root .Select-div {
+#countryPerformance .Select-div {
   font-size: 10px;
   width: 20%;
   display: inline;
   float: left;
+}
+
+#ASPerformance h3 {
+  color: #00D49A;
+}
+#ASPerformance .Select-div {
+  font-size: 10px;
+  width: 20%;
+  display: inline;
+  float: left;
+}
+
+.Select-input, .Select-control {
+  height: 20px;
+}
+.Select-value {
+  line-height: 20px !important;
+}
+
+.graph-div {
+  margin-bottom: 40px;
 }

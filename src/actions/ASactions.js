@@ -1,47 +1,79 @@
+/* global CG_API_ENDPOINT*/
 import axios from 'axios'
 
 export const FETCH_AS_DATA_REQUEST = 'FETCH_AS_DATA_REQUEST'
-function requestAsData(country, risk, AsId) {
+function requestAsData(country, risk, AsId, graphId) {
   return {
     type: FETCH_AS_DATA_REQUEST,
     country,
     risk,
-    AsId
+    AsId,
+    graphId
   }
 }
 
 export const FETCH_AS_DATA_SUCCESS = 'FETCH_AS_DATA_SUCCESS'
-function receiveAsData(data, country, risk, AsId) {
+function receiveAsData(data, country, risk, AsId, graphId) {
   return {
     type: FETCH_AS_DATA_SUCCESS,
     data,
     country,
     risk,
-    AsId
+    AsId,
+    graphId
   }
 }
 
 export const FETCH_AS_DATA_FAILURE = 'FETCH_AS_DATA_FAILURE'
-function receiveAsDataFailure(message, country, risk, AsId) {
+function receiveAsDataFailure(message, country, risk, AsId, graphId) {
   return {
     type: FETCH_AS_DATA_FAILURE,
     error: message,
     country,
     risk,
-    AsId
+    AsId,
+    graphId
   }
 }
 
-export function fetchAsData(country, risk, AsId, test=false) {
+export const SELECT_AS = 'SELECT_AS'
+export function AsIsSelected(idxOfSelector, selectedAS, graphId) {
+  return {
+    type: SELECT_AS,
+    idxOfSelector,
+    selectedAS,
+    graphId
+  }
+}
+
+export function fetchAsData(country, risk, AsId, graphId, test=false) {
   return function(dispatch) {
-    dispatch(requestAsData(country, risk, AsId))
-    // I am not sure how full URL should look like here:
-    let url = `https://cybergreen-staging.herokuapp.com/api/v1/count?limit=500&country=${country}&risk=${risk}&as=${AsId}`
-    if (test){
-      url = `/api/v1/count?limit=500&country=${country}&risk=${risk}&as=${AsId}`
+    dispatch(requestAsData(country, risk, AsId, graphId))
+    let ENDPOINT = `/api/v1/count?limit=500&country=${country}&risk=${risk}&asn=${AsId}`
+    if(!test) {
+      ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }
-    return axios.get(url)
-      .then(res => dispatch(receiveAsData(res.data.results, country, risk, AsId)))
-      .catch(err => dispatch(receiveAsDataFailure(err.message, country, risk, AsId)))
+    return axios.get(ENDPOINT)
+      .then(res => dispatch(receiveAsData(res.data.results, country, risk, AsId, graphId)))
+      .catch(err => dispatch(receiveAsDataFailure(err.message, country, risk, AsId, graphId)))
+  }
+}
+
+export function shouldFetchAsData(state, country, risk, AsId) {
+  const data = state.entities.cubeByRiskByASN[country+'/'+risk+'/'+AsId]
+  if (!data) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function fetchAsDataIfNeeded(country, risk, AsId, graphId, test=false) {
+  return (dispatch, getState) => {
+    if (shouldFetchAsData(getState(), country, risk, AsId)) {
+      return dispatch(fetchAsData(country, risk, AsId, graphId, test))
+    } else {
+      return Promise.resolve()
+    }
   }
 }

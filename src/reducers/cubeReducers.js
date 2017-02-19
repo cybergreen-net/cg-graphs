@@ -3,14 +3,20 @@ import {
   FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE,
   SELECT, SET_VIEWS
 } from '../actions/cubeActions';
+import {
+  FETCH_AS_DATA_REQUEST,FETCH_AS_DATA_SUCCESS,FETCH_AS_DATA_FAILURE,SELECT_AS
+} from '../actions/ASactions';
 
 const initialState = {
   entities: {
     countries: {},
     risks: {},
-    cubeByRiskByCountry: {}
+    asn: {},
+    cubeByRiskByCountry: {},
+    cubeByRiskByASN: {}
   },
-  views: {}
+  countryPerformanceOnRiskViews: {},
+  ASPerformanceViews: {}
 }
 
 export function buildCube(state=initialState, action) {
@@ -71,27 +77,59 @@ export function buildCube(state=initialState, action) {
           }
         }
       })
-    case SET_VIEWS:
-      let views = {}
-      action.viewOptions.risk.forEach(risk => {
-        views[risk] = {
-          type: action.viewOptions.type,
-          country: action.viewOptions.country,
-          risk: risk,
-          isFetched: false,
-          isFetching: false,
-          didFailed: false,
-          selectorConfig: [
-            {disabled: true, country: action.viewOptions.country},
-            {disabled: true, country: "t"},
-            {disabled: false, country: undefined},
-            {disabled: false, country: undefined},
-            {disabled: false, country: undefined}
-          ]
+    case FETCH_AS_DATA_FAILURE:
+      return update(state, {
+        ASPerformanceViews: {
+          [action.graphId] :{
+            isFetched: {$set: false},
+            isFetching: {$set: false},
+            didFailed: {$set: true},
+            errorMessage: {$set: action.error}
+          }
         }
       })
+    case FETCH_AS_DATA_REQUEST:
       return update(state, {
-        views: {$set: views}
+        ASPerformanceViews: {
+          [action.graphId] :{
+            isFetched: {$set: false},
+            isFetching: {$set: true},
+            didFailed: {$set: false}
+          }
+        }
+      })
+    case FETCH_AS_DATA_SUCCESS:
+      let updateState = update(state, {
+        ASPerformanceViews: {
+          [action.graphId] :{
+            isFetched: {$set: true},
+            isFetching: {$set: false},
+            didFailed: {$set: false}
+          }
+        }
+      })
+      return Object.assign({}, updateState, {
+          entities: Object.assign(
+              {}, state.entities, {
+                cubeByRiskByASN: Object.assign(
+                  {}, state.entities.cubeByRiskByASN, {
+                    [action.country+'/'+action.risk+'/'+action.AsId]: action.data
+                  }
+              )
+            }
+          )
+        }
+      )
+    case SELECT_AS:
+      return update(state, {
+        ASPerformanceViews: {
+          [action.graphId]: {
+            selectorConfig: {
+              $splice: [[action.idxOfSelector, 1,{
+                disabled: false, as: action.selectedAS
+              }]]}
+          }
+        }
       })
     default:
       return state
