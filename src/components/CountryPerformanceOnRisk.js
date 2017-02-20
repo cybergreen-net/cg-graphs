@@ -55,12 +55,14 @@ export class CountryPerformanceOnRisk extends Component {
 
   convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure) {
     var dataTable = cubeByRiskByCountry[riskID][countryID];
-    return {
-      x: dataTable.map(row => row.date),
-      y: dataTable.map(row => row[measure] || row.count),
-      name: this.props.countries[countryID].name,
-      type: 'scatter',
-    }
+    if(dataTable) {
+      return {
+        x: dataTable.map(row => row.date),
+        y: dataTable.map(row => row[measure] || row.count),
+        name: this.props.countries[countryID].name,
+        type: 'scatter',
+      }
+    }  
   }
 
 
