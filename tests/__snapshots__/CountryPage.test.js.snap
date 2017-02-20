@@ -1,5 +1,88 @@
-exports[`CountryPage components test 1`] = `
+exports[`CountryPage components tests if rendered output is expected 1`] = `
 <div>
+  <div
+    className="row">
+    <div
+      className="col-md-6" />
+    <div
+      className="col-md-6">
+      <Select
+        addLabelText="Add \"{label}\"?"
+        arrowRenderer={[Function]}
+        autosize={true}
+        backspaceRemoves={true}
+        backspaceToRemoveMessage="Press backspace to remove {label}"
+        clearAllText="Clear all"
+        clearRenderer={[Function]}
+        clearValueText="Clear value"
+        clearable={true}
+        deleteRemoves={true}
+        delimiter=","
+        disabled={false}
+        escapeClearsValue={true}
+        filterOptions={[Function]}
+        ignoreAccents={true}
+        ignoreCase={true}
+        inputProps={Object {}}
+        isLoading={false}
+        joinValues={false}
+        labelKey="label"
+        matchPos="any"
+        matchProp="any"
+        menuBuffer={0}
+        menuRenderer={[Function]}
+        multi={false}
+        name="asn-selector"
+        noResultsText="No results found"
+        onBlurResetsInput={true}
+        onChange={[Function]}
+        onCloseResetsInput={true}
+        onInputChange={[Function]}
+        openAfterFocus={false}
+        optionComponent={[Function]}
+        optionRenderer={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Select an AS",
+              "value": "",
+            },
+            Object {
+              "label": "ASN 174",
+              "value": 174,
+            },
+          ]
+        }
+        pageSize={5}
+        placeholder="Select..."
+        required={false}
+        scrollMenuIntoView={true}
+        searchable={true}
+        simpleValue={false}
+        tabSelectsValue={true}
+        value={
+          Object {
+            "label": "Select an AS",
+            "value": "",
+          }
+        }
+        valueComponent={[Function]}
+        valueKey="value" />
+      <div
+        style={
+          Object {
+            "margin": "auto",
+            "padding": "20px",
+            "width": "10%",
+          }
+        }>
+        <Loader
+          color="#00D49A"
+          loading={true}
+          size="0px" />
+      </div>
+    </div>
+  </div>
   <div
     className="row">
     <div
