@@ -11,14 +11,14 @@ export class SourceOfInfection extends Component {
         barmode: 'stack',
         hovermode:'closest',
         showlegend: false,
-        height: 234,
+        height: 240,
         margin: {
           l: 30,r: 30,
           b: 30,t: 0
         },
         xaxis: {
           gridcolor: 'transparent',
-          tickformat: '%Y'
+          tickformat: '%Y-%m-%d'
         },
         font: {
           size: 9,

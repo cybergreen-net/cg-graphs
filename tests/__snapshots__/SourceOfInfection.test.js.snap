@@ -14,7 +14,7 @@ exports[`Component is working Renders expected DOM 1`] = `
           "color": "#7f7f7f",
           "size": 9,
         },
-        "height": 234,
+        "height": 240,
         "hovermode": "closest",
         "margin": Object {
           "b": 30,
@@ -25,7 +25,7 @@ exports[`Component is working Renders expected DOM 1`] = `
         "showlegend": false,
         "xaxis": Object {
           "gridcolor": "transparent",
-          "tickformat": "%Y",
+          "tickformat": "%Y-%m-%d",
         },
       }
     } />
