@@ -3,7 +3,7 @@ exports[`ASPage component renders expected DOM 1`] = `
   <div
     className="row">
     <div
-      className="col-md-6 panel panel-default">
+      className="panel panel-default container">
       <Connect(ASPerformance)
         view={Object {}} />
     </div>
@@ -11,7 +11,7 @@ exports[`ASPage component renders expected DOM 1`] = `
   <div
     className="row">
     <div
-      className="col-md-6 panel panel-default">
+      className="panel panel-default container">
       <Connect(ASPerformance)
         view={Object {}} />
     </div>
