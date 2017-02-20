@@ -32,26 +32,36 @@ export class SourceOfInfection extends Component {
 
   computeState(props=this.props) {
     let plotlyData = []
+
     props.data[props.view.risk][props.view.country].forEach(dataEntry => {
       let colorPallet = [
-        'rgb(122,71,239)',
         'rgb(167,133,243)', 'rgb(199,179,249)', 'rgb(173,246,250)',
         'rgb(124,244,251)', 'rgb(41,232,251)', 'rgb(212,229,250)',
         'rgb(169,205,250)', 'rgb(140,181,253)', 'rgb(20,105,234)'
       ]
+      let countAllRest = parseInt(dataEntry.count)
       dataEntry.as.forEach((asn, idx) => {
+        countAllRest -= parseInt(asn.count)
         let trace = this.plotlySeries(dataEntry, asn)
         trace['marker'] = {
           color: colorPallet[idx]
         }
         plotlyData.push(trace)
       })
-
+      let traceAllRest = {
+        x: [dataEntry.date],
+        y: [countAllRest],
+        type: 'bar',
+        name: 'Rest',
+        marker: {color: 'rgb(122,71,239)'}
+      }
+      plotlyData.unshift(traceAllRest)
     })
+
 
     return {plotlyData: plotlyData}
   }
-  
+
 
   plotlySeries(data, asn){
     return {
@@ -64,15 +74,18 @@ export class SourceOfInfection extends Component {
 
 
   componentDidMount() {
-    // this.props.view.as.id.forEach(AsId => {
-    //   this.props.dispatch(fetchAsData(this.props.view.country, this.props.view.risk, AsId))
-    // })
-    this.setState(this.computeState(this.props))
+    if(this.props.data[this.props.view.risk] && this.props.data[this.props.view.risk][this.props.view.country]) {
+      this.setState(this.computeState(this.props))
+    }
   };
 
 
   componentWillReceiveProps(nextProps) {
-    this.setState(this.computeState(nextProps))
+    if(this.props.data[this.props.view.risk]) {
+      if(this.props.data[this.props.view.risk][this.props.view.country] != nextProps.data[this.props.view.risk][this.props.view.country]) {
+        this.setState(this.computeState(nextProps))
+      }
+    }
   }
 
 
@@ -95,8 +108,7 @@ export class SourceOfInfection extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    //when API is done we'll need to replace 'cubeByRiskByAS' with 'cubeByRiskByCountry'
-    data: state.entities.cubeByRiskByAS,
+    data: state.entities.cubeByRiskByCountry,
     risks: state.entities.risks
   }
 }
