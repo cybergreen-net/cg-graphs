@@ -10,13 +10,7 @@ describe('Component is working', () => {
       view: {
         id: 'GB/1',
         country: 'GB',
-        risk: 1,
-        AS: {
-          id: [192, 254],
-          isFetched: false,
-          isFetching: false,
-          didFailed: false
-        }
+        risk: 1
       },
       data: {
         1: {
@@ -94,9 +88,8 @@ describe('Component is working', () => {
   it('computeState works', () => {
     const { enzymeWrapper, props } = setup()
     let out = enzymeWrapper.instance().computeState(props)
-    expect(out.plotlyData.length).toEqual(6)
-    expect(out.plotlyData[0].name).toEqual(props.view.AS.id[0])
-    expect(out.plotlyData[1].name).toEqual(props.view.AS.id[1])
+    expect(out.plotlyData.length).toEqual(8)
+    expect(out.plotlyData[0].name).toEqual('Rest')
   })
 
 })

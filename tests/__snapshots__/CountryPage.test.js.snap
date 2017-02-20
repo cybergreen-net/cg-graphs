@@ -91,6 +91,12 @@ exports[`CountryPage components tests if rendered output is expected 1`] = `
         view={Object {}}
         viewId="gb/1" />
     </div>
+    <div
+      className="col-md-6 panel panel-default">
+      <Connect(SourceOfInfection)
+        view={Object {}}
+        viewId="gb/10" />
+    </div>
   </div>
   <div
     className="row">
@@ -99,6 +105,12 @@ exports[`CountryPage components tests if rendered output is expected 1`] = `
       <Connect(CountryPerformanceOnRisk)
         view={Object {}}
         viewId="us/1" />
+    </div>
+    <div
+      className="col-md-6 panel panel-default">
+      <Connect(SourceOfInfection)
+        view={Object {}}
+        viewId="us/11" />
     </div>
   </div>
 </div>
