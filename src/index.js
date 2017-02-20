@@ -1,4 +1,4 @@
-/* global graphData countries countryPerformanceOnRiskViews asn tempData risks ASPerformanceViews*/
+/* global graphData countries countryPerformanceOnRiskViews asn risks ASPerformanceViews*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -20,7 +20,6 @@ let reduxStore = {
     asn: asn,
     cubeByRiskByCountry: {},
     cubeByRiskByASN: {},
-    //cubeByRiskByAS: tempData,
     layouts: {
       legend: {x:0, y:1},
       height: 200,
