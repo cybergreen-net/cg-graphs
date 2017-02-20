@@ -14,7 +14,7 @@ export class ASPage extends Component {
         {Object.values(this.props.views).map(view => {
           return (
             <div key={view.id} className="row">
-              <div className="col-md-6 panel panel-default">
+              <div className="panel panel-default container">
                 <ASPerformance view={view} viewId={view.id}/>
               </div>
             </div>
