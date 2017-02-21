@@ -33,3 +33,9 @@
   width: 49%;
   margin: 0.5%;
 }
+
+.graphSpinner {
+  position: absolute;
+  bottom: 43%;
+  left: 46.5%;
+}
