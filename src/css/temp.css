@@ -28,3 +28,8 @@
 .graph-div {
   margin-bottom: 40px;
 }
+
+#countryPerformance .panel {
+  width: 49%;
+  margin: 0.5%;
+}

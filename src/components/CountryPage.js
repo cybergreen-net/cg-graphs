@@ -77,11 +77,14 @@ export class CountryPage extends Component {
             </div>
           </div>
         </div>
-        {Object.keys(this.props.views).map((key, idx) => {
+        {Object.values(this.props.views).map(view => {
           return (
-            <div key={key} className="row">
+            <div key={view.id} className="row">
               <div className="col-md-6 panel panel-default">
-                <CountryPerformanceOnRisk view={this.props.views[key]} viewId={key}/>
+                <CountryPerformanceOnRisk view={view} viewId={view.id}/>
+              </div>
+              <div className="col-md-6 panel panel-default">
+                <SourceOfInfection view={view} viewId={'SOI/'+view.id}/>
               </div>
             </div>
           )
