@@ -35,9 +35,9 @@ export class SourceOfInfection extends Component {
 
     props.data[props.view.risk][props.view.country].forEach(dataEntry => {
       let colorPallet = [
-        'rgb(167,133,243)', 'rgb(199,179,249)', 'rgb(173,246,250)',
-        'rgb(124,244,251)', 'rgb(41,232,251)', 'rgb(212,229,250)',
-        'rgb(169,205,250)', 'rgb(140,181,253)', 'rgb(20,105,234)'
+        'rgb(78, 31, 190)', 'rgb(122,71,239)', 'rgb(167,133,243)',
+        'rgb(199,179,249)', 'rgb(100,200,250)', 'rgb(124,244,251)',
+        'rgb(41,232,251)', 'rgb(140,181,253)', 'rgb(20,105,234)'
       ]
       let countAllRest = parseInt(dataEntry.count)
       dataEntry.as.forEach((asn, idx) => {
@@ -53,11 +53,12 @@ export class SourceOfInfection extends Component {
         y: [countAllRest],
         type: 'bar',
         name: 'Rest',
-        marker: {color: 'rgb(122,71,239)'}
+        marker: {color: 'rgb(61, 24, 148)'},
+        text: ['Rest'],
+        hoverinfo: 'x+y+text'
       }
       plotlyData.unshift(traceAllRest)
     })
-
 
     return {plotlyData: plotlyData}
   }
@@ -68,7 +69,9 @@ export class SourceOfInfection extends Component {
       x: [data.date],
       y: [asn.count],
       type: 'bar',
-      name: asn.id
+      name: asn.id,
+      text: [asn.id],
+      hoverinfo: 'x+y+text'
     }
   }
 
