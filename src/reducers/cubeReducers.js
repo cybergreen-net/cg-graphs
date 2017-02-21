@@ -26,7 +26,7 @@ export function buildCube(state=initialState, action) {
         countryPerformanceOnRiskViews: {
           [action.graphId] :{
             isFetched: {$set: false},
-            isFetching: {$set: false},
+            isFetching: {$set: state.countryPerformanceOnRiskViews[action.graphId].isFetching + 1},
             didFailed: {$set: true},
             errorMessage: {$set: action.error}
           }
@@ -37,7 +37,7 @@ export function buildCube(state=initialState, action) {
         countryPerformanceOnRiskViews: {
           [action.graphId] :{
             isFetched: {$set: false},
-            isFetching: {$set: true},
+            isFetching: {$set: state.countryPerformanceOnRiskViews[action.graphId].isFetching - 1},
             didFailed: {$set: false}
           }
         }
@@ -47,7 +47,7 @@ export function buildCube(state=initialState, action) {
         countryPerformanceOnRiskViews: {
           [action.graphId] :{
             isFetched: {$set: true},
-            isFetching: {$set: false},
+            isFetching: {$set: state.countryPerformanceOnRiskViews[action.graphId].isFetching + 1},
             didFailed: {$set: false}
           }
         }
@@ -82,7 +82,7 @@ export function buildCube(state=initialState, action) {
         ASPerformanceViews: {
           [action.graphId] :{
             isFetched: {$set: false},
-            isFetching: {$set: false},
+            isFetching: {$set: state.ASPerformanceViews[action.graphId].isFetching + 1},
             didFailed: {$set: true},
             errorMessage: {$set: action.error}
           }
@@ -93,7 +93,7 @@ export function buildCube(state=initialState, action) {
         ASPerformanceViews: {
           [action.graphId] :{
             isFetched: {$set: false},
-            isFetching: {$set: true},
+            isFetching: {$set: state.ASPerformanceViews[action.graphId].isFetching - 1},
             didFailed: {$set: false}
           }
         }
@@ -103,7 +103,7 @@ export function buildCube(state=initialState, action) {
         ASPerformanceViews: {
           [action.graphId] :{
             isFetched: {$set: true},
-            isFetching: {$set: false},
+            isFetching: {$set: state.ASPerformanceViews[action.graphId].isFetching + 1},
             didFailed: {$set: false}
           }
         }

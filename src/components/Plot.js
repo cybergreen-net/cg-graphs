@@ -26,7 +26,7 @@ class PlotlyGraph extends React.Component {
   render() {
     return (
       <div id={this.props.graphID}></div>
-    );
+    )
   }
 }
 

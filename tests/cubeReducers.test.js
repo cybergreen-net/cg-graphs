@@ -42,7 +42,7 @@ describe('buildCube reducer', () => {
       risk: 1,
       graphId: 'gb/1'
     });
-    expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeTruthy()
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toEqual(-1)
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeFalsy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].didFailed).toBeFalsy()
     expect(newStore.entities).toEqual(initialState.entities)
@@ -60,7 +60,7 @@ describe('buildCube reducer', () => {
       risk: 1,
       graphId: 'gb/1'
     });
-    expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeFalsy()
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toEqual(1)
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeTruthy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].didFailed).toBeFalsy()
     expect(newStore.entities.cubeByRiskByCountry[1]['gb']).toEqual(data)
@@ -74,7 +74,7 @@ describe('buildCube reducer', () => {
       risk: 1,
       graphId: 'gb/1'
     });
-    expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toBeFalsy()
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toEqual(1)
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeFalsy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].didFailed).toBeTruthy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].errorMessage).toEqual('test error')
@@ -126,7 +126,7 @@ describe('buildCube reducer', () => {
       AsId: 174,
       graphId: 'gb/1/174'
     });
-    expect(newStore.ASPerformanceViews['gb/1/174'].isFetching).toBeTruthy()
+    expect(newStore.ASPerformanceViews['gb/1/174'].isFetching).toEqual(-1)
     expect(newStore.ASPerformanceViews['gb/1/174'].isFetched).toBeFalsy()
     expect(newStore.ASPerformanceViews['gb/1/174'].didFailed).toBeFalsy()
     expect(newStore.entities).toEqual(initialState.entities)
@@ -144,7 +144,7 @@ describe('buildCube reducer', () => {
       AsId: 174,
       graphId: 'gb/1/174'
     });
-    expect(newStore.ASPerformanceViews['gb/1/174'].isFetching).toBeFalsy()
+    expect(newStore.ASPerformanceViews['gb/1/174'].isFetching).toEqual(1)
     expect(newStore.ASPerformanceViews['gb/1/174'].isFetched).toBeTruthy()
     expect(newStore.ASPerformanceViews['gb/1/174'].didFailed).toBeFalsy()
     expect(newStore.entities.cubeByRiskByASN['gb/1/174']).toEqual(data)
@@ -159,7 +159,7 @@ describe('buildCube reducer', () => {
       AsId: 174,
       graphId: 'gb/1/174'
     });
-    expect(newStore.ASPerformanceViews['gb/1/174'].isFetching).toBeFalsy()
+    expect(newStore.ASPerformanceViews['gb/1/174'].isFetching).toEqual(1)
     expect(newStore.ASPerformanceViews['gb/1/174'].isFetched).toBeFalsy()
     expect(newStore.ASPerformanceViews['gb/1/174'].didFailed).toBeTruthy()
     expect(newStore.ASPerformanceViews['gb/1/174'].errorMessage).toEqual('test error')

@@ -24,7 +24,7 @@ export class CountryPage extends Component {
   onChange(asn) {
     this.setState({
       selectedASN: asn,
-      spinner: '20px'
+      spinner: '100px'
     });
     if (asn.value) {
       window.location = `/asn/${asn.value}`
@@ -59,8 +59,13 @@ export class CountryPage extends Component {
     })
     let spinnerStyle = { padding:'20px', margin: 'auto', width:'10%'}
     selectOptions.unshift({value: '', label: 'Select an AS'})
+    let spinner = Object.values(this.props.views).find(view => {
+      return view.isFetching
+    })
     return (
       <div>
+        { spinner ? <Loader size='100px' color='#00D49A' className='spinner'/> : '' }
+        <Loader size={this.state.spinner} color='#00D49A' className='spinner'/>
         <div className="row">
           <div className="col-md-6"></div>
           <div className="col-md-6">
@@ -72,9 +77,6 @@ export class CountryPage extends Component {
               onInputChange={this.setInputValue.bind(this)}
               optionRenderer={this.optionRenderer.bind(this)}
             />
-            <div style={spinnerStyle}>
-              <Loader size={this.state.spinner} color='#00D49A'/>
-            </div>
           </div>
         </div>
         {Object.values(this.props.views).map(view => {

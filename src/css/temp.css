@@ -1,16 +1,9 @@
-#countryPerformance h3 {
-  color: #00D49A;
-}
-#countryPerformance .Select-div {
-  font-size: 10px;
-  width: 20%;
-  display: inline;
-  float: left;
-}
-
+#countryPerformance h3,
 #ASPerformance h3 {
   color: #00D49A;
 }
+
+#countryPerformance .Select-div,
 #ASPerformance .Select-div {
   font-size: 10px;
   width: 20%;
@@ -19,7 +12,7 @@
 }
 
 .Select-input, .Select-control {
-  height: 20px;
+  height: 20px !important;
 }
 .Select-value {
   line-height: 20px !important;
@@ -32,4 +25,11 @@
 #countryPerformance .panel {
   width: 49%;
   margin: 0.5%;
+}
+
+.spinner {
+  position: absolute;
+  bottom: calc(50vh - 50px);
+  left: calc(50vw - 50px);
+  z-index: 10;
 }
