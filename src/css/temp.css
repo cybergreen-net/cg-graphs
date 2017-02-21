@@ -27,12 +27,9 @@
   margin: 0.5%;
 }
 
-.graphSpinner {
+.spinner {
   position: absolute;
-  bottom: 43%;
-  left: 46.5%;
-}
-
-.plot-div {
-  position: relative;
+  bottom: calc(50vh - 50px);
+  left: calc(50vw - 50px);
+  z-index: 10;
 }

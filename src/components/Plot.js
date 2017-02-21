@@ -26,18 +26,9 @@ class PlotlyGraph extends React.Component {
   }
 
   render() {
-    if(this.props.data.length === 0) {
-      return (
-        <div id={this.props.graphID} className='plot-div'>
-          <div className='graphSpinner'>
-            <Loader size='40px' color='#00D49A'/>
-          </div>
-        </div>
-      )
-    }
     return (
       <div id={this.props.graphID}></div>
-    );
+    )
   }
 }
 
