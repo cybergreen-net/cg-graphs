@@ -1,8 +1,6 @@
 /* global Plotly */
 import React from 'react';
 import Plotly from 'plotly.js'
-import Loader from 'halogen/BounceLoader';
-import '../css/temp.css';
 
 class PlotlyGraph extends React.Component {
 
