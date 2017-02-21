@@ -5,6 +5,7 @@ exports[`PlotlyGraph component does not render a spinner when data is fetched 1`
 
 exports[`PlotlyGraph component renders a spinner when data is not yet fetched 1`] = `
 <div
+  className="plot-div"
   id="gb/1">
   <div
     className="graphSpinner">
