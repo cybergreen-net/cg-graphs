@@ -1,20 +1,24 @@
+#countryPerformance h1,
+#ASPerformance h1 {
+  color: #1eb9b4;
+}
+
 #countryPerformance h3,
 #ASPerformance h3 {
   color: #00D49A;
 }
 
-#countryPerformance .Select-div,
-#ASPerformance .Select-div {
+.graph-div .Select-div {
   font-size: 10px;
   width: 20%;
   display: inline;
   float: left;
 }
 
-.Select-input, .Select-control {
+.graph-div .Select-input, .Select-control {
   height: 20px !important;
 }
-.Select-value {
+.graph-div .Select-value {
   line-height: 20px !important;
 }
 
