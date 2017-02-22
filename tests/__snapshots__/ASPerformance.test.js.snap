@@ -3,8 +3,6 @@ exports[`ASPerformance component is working as expected renders expected DOM 1`]
   className="graph-div">
   <h3>
     OPEN DNS
-       |  
-    UNITED KINGDOM
   </h3>
   <PlotlyGraph
     data={Array []}
