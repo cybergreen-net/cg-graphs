@@ -84,10 +84,8 @@ export class SourceOfInfection extends Component {
 
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.data[this.props.view.risk]) {
-      if(this.props.data[this.props.view.risk][this.props.view.country] != nextProps.data[this.props.view.risk][this.props.view.country]) {
-        this.setState(this.computeState(nextProps))
-      }
+    if(nextProps.data[this.props.view.risk] && nextProps.data[this.props.view.risk][this.props.view.country]) {
+      this.setState(this.computeState(nextProps))
     }
   }
 

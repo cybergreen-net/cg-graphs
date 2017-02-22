@@ -106,8 +106,7 @@ export class ASPerformance extends Component {
     return (
       <div className="graph-div">
         <h3>
-          {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
-          {this.props.countries[this.props.view.country].name.toUpperCase()}
+          {this.props.risks[this.props.view.risk].title.toUpperCase()}
         </h3>
         <PlotlyGraph
           data={this.state.plotlyData}

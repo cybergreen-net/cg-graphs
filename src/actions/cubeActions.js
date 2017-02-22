@@ -46,7 +46,7 @@ export function countryIsSelected(idxOfSelector, selectedCountry, graphId) {
 export function fetchData(country, risk, graphId, test=false) {
   return function(dispatch) {
     dispatch(requestData(country, risk, graphId))
-    let ENDPOINT = `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}&drilldown=as`
+    let ENDPOINT = `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}&drilldown=as&drilldown_limit=5`
     if(!test) {
       ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }
