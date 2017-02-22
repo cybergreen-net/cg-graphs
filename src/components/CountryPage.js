@@ -27,7 +27,7 @@ export class CountryPage extends Component {
       spinner: '100px'
     });
     if (asn.value) {
-      window.location = `/asn/${asn.value}`
+      window.location = `asn/${asn.value}`
     }
   }
 
@@ -81,7 +81,7 @@ export class CountryPage extends Component {
         </div>
         {Object.values(this.props.views).map(view => {
           return (
-            <div key={view.id} className="row">
+            <div key={view.id+1} className="row">
               <div className="col-md-6 panel panel-default">
                 <CountryPerformanceOnRisk view={view} viewId={view.id}/>
               </div>

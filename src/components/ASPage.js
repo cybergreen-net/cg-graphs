@@ -18,7 +18,7 @@ export class ASPage extends Component {
         { spinner ? <Loader size='100px' color='#00D49A' className='spinner'/> : '' }
         {Object.values(this.props.views).map(view => {
           return (
-            <div key={view.id} className="row">
+            <div key={view.id+1} className="row">
               <div className="panel panel-default container">
                 <ASPerformance view={view} viewId={view.id}/>
               </div>
