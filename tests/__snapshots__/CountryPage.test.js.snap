@@ -53,7 +53,7 @@ exports[`CountryPage components tests if rendered output is expected 1`] = `
               "value": "",
             },
             Object {
-              "label": "ASN 174",
+              "label": "174 | ASN 174",
               "value": 174,
             },
           ]
