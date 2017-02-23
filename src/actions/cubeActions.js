@@ -2,34 +2,37 @@
 import axios from 'axios'
 
 export const FETCH_DATA_REQUEST = 'FETCH_DATA_REQUEST'
-function requestData(country, risk, graphId) {
+function requestData(country, risk, graphId, viewType='countryPerformanceOnRiskViews') {
   return {
     type: FETCH_DATA_REQUEST,
     country,
     risk,
-    graphId
+    graphId,
+    viewType
   }
 }
 
 export const FETCH_DATA_SUCCESS = 'FETCH_DATA_SUCCESS'
-function receivetData(data, country, risk, graphId) {
+function receivetData(data, country, risk, graphId, viewType='countryPerformanceOnRiskViews') {
   return {
     type: FETCH_DATA_SUCCESS,
     data,
     country,
     risk,
-    graphId
+    graphId,
+    viewType
   }
 }
 
 export const FETCH_DATA_FAILURE = 'FETCH_DATA_FAILURE'
-function receivetDataFailure(message, country, risk, graphId) {
+function receivetDataFailure(message, country, risk, graphId, viewType='countryPerformanceOnRiskViews') {
   return {
     type: FETCH_DATA_FAILURE,
     error: message,
     country,
     risk,
-    graphId
+    graphId,
+    viewType
   }
 }
 
@@ -43,16 +46,16 @@ export function countryIsSelected(idxOfSelector, selectedCountry, graphId) {
   }
 }
 
-export function fetchData(country, risk, graphId, test=false) {
+export function fetchData(country, risk, graphId, viewType, test=false) {
   return function(dispatch) {
-    dispatch(requestData(country, risk, graphId))
+    dispatch(requestData(country, risk, graphId, viewType))
     let ENDPOINT = `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}&drilldown=as&drilldown_limit=5`
     if(!test) {
       ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }
     return axios.get(ENDPOINT)
-      .then(res => dispatch(receivetData(res.data.results, country, risk, graphId)))
-      .catch(err => dispatch(receivetDataFailure(err.message, country, risk, graphId)))
+      .then(res => dispatch(receivetData(res.data.results, country, risk, graphId, viewType)))
+      .catch(err => dispatch(receivetDataFailure(err.message, country, risk, graphId, viewType)))
   }
 }
 
@@ -65,10 +68,10 @@ export function shouldFetchData(state, country, risk) {
   }
 }
 
-export function fetchDataIfNeeded(country, risk, graphId, test=false) {
+export function fetchDataIfNeeded(country, risk, graphId, viewType, test=false) {
   return (dispatch, getState) => {
     if (shouldFetchData(getState(), country, risk)) {
-      return dispatch(fetchData(country, risk, graphId, test))
+      return dispatch(fetchData(country, risk, graphId, viewType, test))
     } else {
       return Promise.resolve()
     }
