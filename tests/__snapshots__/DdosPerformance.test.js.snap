@@ -1,0 +1,20 @@
+exports[`Component is working Renders expected DOM 1`] = `
+<div>
+  <PlotlyGraph
+    data={Array []}
+    graphID="global/ddos"
+    graphOptions={
+      Object {
+        "barmode": "stack",
+        "height": 600,
+        "xaxis": Object {
+          "gridcolor": "transparent",
+          "title": "*This chart assumes an average 1 mbit/sec Internet connection for every IP address.",
+        },
+        "yaxis": Object {
+          "title": "GBit/sec",
+        },
+      }
+    } />
+</div>
+`;
