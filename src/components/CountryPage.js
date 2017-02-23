@@ -22,12 +22,14 @@ export class CountryPage extends Component {
 
 
   onChange(asn) {
-    this.setState({
-      selectedASN: asn
-    });
-    if (asn !== null && asn.value !== '') {
-      this.setState({spinner: '100px'})
-      window.location = `asn/${asn.value}`
+    if(asn.constructor !== Array) {
+      this.setState({
+        selectedASN: asn
+      });
+      if (asn !== null && asn.value !== '') {
+        this.setState({spinner: '100px'})
+        window.location = `asn/${asn.value}`
+      }
     }
   }
 
