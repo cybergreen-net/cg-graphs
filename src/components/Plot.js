@@ -5,7 +5,16 @@ import Plotly from 'plotly.js/lib/index-basic'
 class PlotlyGraph extends React.Component {
 
   drawPlot = (data, options) => {
-    Plotly.newPlot(this.props.graphID, data, options, {displayModeBar: false});
+    Plotly.newPlot(this.props.graphID, data, options, {
+       modeBarButtonsToRemove: [
+         'hoverCompareCartesian',
+         'hoverClosestCartesian',
+         'sendDataToCloud',
+         'autoScale2d',
+         'pan2d',
+         'zoom2d'
+       ]
+    });
   }
 
   componentDidMount() {
