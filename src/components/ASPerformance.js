@@ -44,6 +44,7 @@ export class ASPerformance extends Component {
             props.data
           )
         }
+        return {}
       }).filter(value => {return value !== undefined})
       plotlyData.forEach((trace, idx) => {
         trace.line = {color: lineColors[idx]}

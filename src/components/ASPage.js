@@ -5,10 +5,6 @@ import Loader from 'halogen/BounceLoader';
 
 
 export class ASPage extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     let spinner = Object.values(this.props.views).find(view => {
       return view.isFetching

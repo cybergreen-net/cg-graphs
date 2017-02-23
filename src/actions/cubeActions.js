@@ -74,11 +74,3 @@ export function fetchDataIfNeeded(country, risk, graphId, test=false) {
     }
   }
 }
-
-export const SET_VIEWS = 'SET_VIEWS'
-export function setViews(viewOptions) {
-  return {
-    type: SET_VIEWS,
-    viewOptions
-  }
-}
