@@ -1,4 +1,4 @@
-/* global graphData countries countryPerformanceOnRiskViews asn risks ASPerformanceViews*/
+/* global graphData countries countryPerformanceOnRiskViews asn risks ASPerformanceViews DdosPerformanceViews*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -40,7 +40,8 @@ let reduxStore = {
     }
   },
   countryPerformanceOnRiskViews: countryPerformanceOnRiskViews,
-  ASPerformanceViews: ASPerformanceViews
+  ASPerformanceViews: ASPerformanceViews,
+  DdosPerformanceViews: DdosPerformanceViews
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -59,7 +60,9 @@ if (document.getElementById('dropdown')) {
 
 if (document.getElementById('ddos')){
   ReactDOM.render(
-    <DdosPerformance urls={graphData || []}/>,
+    <Provider store={store}>
+      <DdosPerformance />
+    </Provider>,
     document.getElementById('ddos')
   );
 }
