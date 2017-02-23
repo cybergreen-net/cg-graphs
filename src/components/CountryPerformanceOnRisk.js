@@ -87,19 +87,21 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   updateValue(idxOfSelector, selectedCountry) {
-    if(!selectedCountry || selectedCountry.value === "") {
-      this.props.dispatch(countryIsSelected(idxOfSelector, "", this.props.viewId))
-    } else {
-      this.props.dispatch(countryIsSelected(
-        idxOfSelector,
-        selectedCountry.value,
-        this.props.viewId
-      ))
-      this.props.dispatch(fetchDataIfNeeded(
-        selectedCountry.value,
-        this.props.view.risk,
-        this.props.viewId
-      ))
+    if(selectedCountry.constructor !== Array) {
+      if(!selectedCountry || selectedCountry.value === "") {
+        this.props.dispatch(countryIsSelected(idxOfSelector, "", this.props.viewId))
+      } else {
+        this.props.dispatch(countryIsSelected(
+          idxOfSelector,
+          selectedCountry.value,
+          this.props.viewId
+        ))
+        this.props.dispatch(fetchDataIfNeeded(
+          selectedCountry.value,
+          this.props.view.risk,
+          this.props.viewId
+        ))
+      }  
     }
   }
 
