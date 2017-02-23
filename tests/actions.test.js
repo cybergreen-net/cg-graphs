@@ -28,14 +28,14 @@ describe('async actions', () => {
 
   it('Creates FETCH_DATA_REQUEST action when fetching the API begins', () => {
     const store = mockStore({})
-    store.dispatch(actions.fetchData('t', 1, 'gb/1', true))
+    store.dispatch(actions.fetchData('t', 1, 'gb/1', null, true))
     let actionCreators = store.getActions()
     expect(actionCreators[0].type).toEqual('FETCH_DATA_REQUEST')
   })
 
   it('Creates FETCH_DATA_SUCCESS actions when fetching the API succeed', async () => {
     const store = mockStore({})
-    await store.dispatch(actions.fetchData('t', 1, 'gb/1', true))
+    await store.dispatch(actions.fetchData('t', 1, 'gb/1', null, true))
     let actionCreators = store.getActions()
     expect(actionCreators[1].type).toEqual('FETCH_DATA_SUCCESS')
     expect(actionCreators[1].data[0].risk).toEqual(1)
@@ -44,7 +44,7 @@ describe('async actions', () => {
 
   it('Creates FETCH_DATA_FAILURE actions when fetching the API failed', async () => {
     const store = mockStore({})
-    await store.dispatch(actions.fetchData('error', 'error', 'error', true))
+    await store.dispatch(actions.fetchData('error', 'error', 'error', null, true))
     let actionCreators = store.getActions()
     expect(actionCreators[1].type).toEqual('FETCH_DATA_FAILURE')
     expect(actionCreators[1].error).toContain('No match for request')
@@ -80,8 +80,8 @@ describe('how cached data is used', () => {
     store.dispatch(actions.fetchDataIfNeeded('test', 1, 'test/1'))
     let actionCreators = store.getActions()
     expect(actionCreators.length).toEqual(0)
-    // if fata is not there FETCH_DATA_REQUEST is triggered
-    store.dispatch(actions.fetchDataIfNeeded('newTest', 1, 'newTest/1', true))
+    // if data is not there FETCH_DATA_REQUEST is triggered
+    store.dispatch(actions.fetchDataIfNeeded('newTest', 1, 'newTest/1', null, true))
     actionCreators = store.getActions()
     expect(actionCreators.length).toEqual(1)
     expect(actionCreators[0].type).toEqual('FETCH_DATA_REQUEST')

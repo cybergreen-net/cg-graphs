@@ -9,24 +9,6 @@
   <body>
     <script>
       var CG_API_ENDPOINT = 'https://cybergreen-staging.herokuapp.com';
-      var graphData = [
-        {
-          url: './fixtures/country/global/dns.json',
-          name: 'Open Recursive DNS'
-        },
-        {
-          url: './fixtures/country/global/ntp.json',
-          name: 'Open NTP'
-        },
-        {
-          url: './fixtures/country/global/snmp.json',
-          name: 'Open SNMP'
-        },
-        {
-          url: './fixtures/country/global/ssdp.json',
-          name: 'Open SSDP'
-        }
-      ];
     </script>
     <script>
       var countries = {
@@ -107,118 +89,28 @@
           ]
         }
       }
-
-      var tempData = {
-        1: {
-          GB: [
-            {
-              country: "GB",
-              risk: 1,
-              date: "2017-01-01",
-              granularity: "",
-              count: 2000,
-              count_normalized: 123,
-              count_amplified: "321",
-              as: [
-                {
-                  id: 000,
-                  count: 1430
-                },
-                {
-                  id: 192,
-                  count: 500
-                },
-                {
-                  id: 254,
-                  count: 478
-                },
-                {
-                  id: 214,
-                  count: 456
-                },
-                {
-                  id: 111,
-                  count: 431
-                },
-                {
-                  id: 421,
-                  count: 398
-                },
-                {
-                  id: 291,
-                  count: 315
-                },{
-                  id: 187,
-                  count: 301
-                },
-                {
-                  id: 651,
-                  count: 211
-                },
-                {
-                  id: 413,
-                  count: 179
-                }
-              ]
-            },
-            {
-              country: "GB",
-              risk: 1,
-              date: "2017-02-01",
-              granularity: "",
-              count: 2000,
-              count_normalized: 123,
-              count_amplified: "321",
-              as: [
-                {
-                  id: 000,
-                  count: 1430
-                },
-                {
-                  id: 192,
-                  count: 500
-                },
-                {
-                  id: 254,
-                  count: 478
-                },
-                {
-                  id: 214,
-                  count: 456
-                },
-                {
-                  id: 111,
-                  count: 431
-                },
-                {
-                  id: 421,
-                  count: 398
-                },
-                {
-                  id: 291,
-                  count: 315
-                },{
-                  id: 187,
-                  count: 301
-                },
-                {
-                  id: 651,
-                  count: 211
-                },
-                {
-                  id: 413,
-                  count: 179
-                }
-              ]
-            }
+      var DdosPerformanceViews = {
+        'global/ddos': {
+          id: 'global/ddos',
+          country: 'T',
+          type: 'ddos/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          measure: "count_amplified",
+          risksToView: [
+            {id: 4, slug: 'opensnmp', title: 'Open SNMP'},
+            {id: 5, slug: 'openssdp', title: 'Open SSDP'},
+            {id: 1, slug: 'opendns', title: 'Open Recursive DNS'},
+            {id: 2, slug: 'openntp', title: 'Open NTP'}
           ]
         }
-      }
+    }
     </script>
 
-    <div id="countryPerformance" class="container"></div>
+    <!-- <div id="countryPerformance" class="container"></div> -->
     <!-- <div id="ASPerformance" class="container"></div> -->
-    <!-- <div id="dropdown"></div>
-    <div id="ddos"></div> -->
+    <div id="dropdown"></div>
+    <div id="ddos"></div>
   </body>
 </html>
