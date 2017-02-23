@@ -40,7 +40,8 @@ describe('buildCube reducer', () => {
       type: 'FETCH_DATA_REQUEST',
       country: 'gb',
       risk: 1,
-      graphId: 'gb/1'
+      graphId: 'gb/1',
+      viewType: 'countryPerformanceOnRiskViews'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toEqual(-1)
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeFalsy()
@@ -58,7 +59,8 @@ describe('buildCube reducer', () => {
       data: data,
       country: 'gb',
       risk: 1,
-      graphId: 'gb/1'
+      graphId: 'gb/1',
+      viewType: 'countryPerformanceOnRiskViews'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toEqual(1)
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeTruthy()
@@ -72,7 +74,8 @@ describe('buildCube reducer', () => {
       error: 'test error',
       country: 'gb',
       risk: 1,
-      graphId: 'gb/1'
+      graphId: 'gb/1',
+      viewType: 'countryPerformanceOnRiskViews'
     });
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toEqual(1)
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeFalsy()

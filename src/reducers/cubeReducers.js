@@ -15,17 +15,18 @@ const initialState = {
     cubeByRiskByASN: {}
   },
   countryPerformanceOnRiskViews: {},
-  ASPerformanceViews: {}
+  ASPerformanceViews: {},
+  DdosPerformanceViews: {}
 }
 
 export function buildCube(state=initialState, action) {
   switch (action.type) {
     case FETCH_DATA_FAILURE:
       return update(state, {
-        countryPerformanceOnRiskViews: {
+        [action.viewType]: {
           [action.graphId] :{
             isFetched: {$set: false},
-            isFetching: {$set: state.countryPerformanceOnRiskViews[action.graphId].isFetching + 1},
+            isFetching: {$set: state[action.viewType][action.graphId].isFetching + 1},
             didFailed: {$set: true},
             errorMessage: {$set: action.error}
           }
@@ -33,20 +34,20 @@ export function buildCube(state=initialState, action) {
       })
     case FETCH_DATA_REQUEST:
       return update(state, {
-        countryPerformanceOnRiskViews: {
+        [action.viewType]: {
           [action.graphId] :{
             isFetched: {$set: false},
-            isFetching: {$set: state.countryPerformanceOnRiskViews[action.graphId].isFetching - 1},
+            isFetching: {$set: state[action.viewType][action.graphId].isFetching - 1},
             didFailed: {$set: false}
           }
         }
       })
     case FETCH_DATA_SUCCESS:
       let newState = update(state, {
-        countryPerformanceOnRiskViews: {
+        [action.viewType]: {
           [action.graphId] :{
             isFetched: {$set: true},
-            isFetching: {$set: state.countryPerformanceOnRiskViews[action.graphId].isFetching + 1},
+            isFetching: {$set: state[action.viewType][action.graphId].isFetching + 1},
             didFailed: {$set: false}
           }
         }
