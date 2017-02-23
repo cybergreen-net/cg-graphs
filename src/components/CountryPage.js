@@ -23,10 +23,10 @@ export class CountryPage extends Component {
 
   onChange(asn) {
     this.setState({
-      selectedASN: asn,
-      spinner: '100px'
+      selectedASN: asn
     });
-    if (asn.value) {
+    if (asn !== null && asn.value !== '') {
+      this.setState({spinner: '100px'})
       window.location = `asn/${asn.value}`
     }
   }
@@ -54,7 +54,7 @@ export class CountryPage extends Component {
     const selectOptions = Object.values(this.props.asn).map(asn => {
       return {
         value: asn.number,
-        label: asn.title
+        label: asn.number + ' | ' + asn.title
       }
     })
     selectOptions.unshift({value: '', label: 'Select an AS'})
