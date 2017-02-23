@@ -57,7 +57,6 @@ export class CountryPage extends Component {
         label: asn.title
       }
     })
-    let spinnerStyle = { padding:'20px', margin: 'auto', width:'10%'}
     selectOptions.unshift({value: '', label: 'Select an AS'})
     let spinner = Object.values(this.props.views).find(view => {
       return view.isFetching

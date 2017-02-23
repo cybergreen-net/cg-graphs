@@ -42,6 +42,7 @@ export class CountryPerformanceOnRisk extends Component {
             props.view.measure
           )
         }
+        return {}
       }).filter(value => {return value !== undefined})
       plotlyData.forEach((trace, idx) => {
         trace['line'] = {color: lineColors[idx]}
@@ -62,7 +63,7 @@ export class CountryPerformanceOnRisk extends Component {
         name: this.props.countries[countryID].name,
         type: 'scatter',
       }
-    }  
+    }
   }
 
 
