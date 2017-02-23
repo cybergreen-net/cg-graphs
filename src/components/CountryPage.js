@@ -23,10 +23,10 @@ export class CountryPage extends Component {
 
   onChange(asn) {
     this.setState({
-      selectedASN: asn,
-      spinner: '100px'
+      selectedASN: asn
     });
-    if (asn.value) {
+    if (asn !== null && asn.value !== '') {
+      this.setState({spinner: '100px'})
       window.location = `asn/${asn.value}`
     }
   }
