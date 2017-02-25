@@ -16,5 +16,11 @@ exports[`ASPage component renders expected DOM 1`] = `
         view={Object {}} />
     </div>
   </div>
+  <button
+    className="btn btn-primary-black btn-lg"
+    onClick={[Function]}
+    type="button">
+    Download
+  </button>
 </div>
 `;

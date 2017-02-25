@@ -5,6 +5,12 @@ import Loader from 'halogen/BounceLoader';
 
 
 export class ASPage extends Component {
+  download() {
+    let country = Object.values(this.props.views)[0].country
+    let asn = Object.values(this.props.views)[0].as
+    window.location = `/api/v1/count_by_country?limit=500&country=${country}&asn=${asn}&format=csv`
+  }
+
   render() {
     let spinner = Object.values(this.props.views).find(view => {
       return view.isFetching
@@ -21,6 +27,9 @@ export class ASPage extends Component {
             </div>
           )
         })}
+        <button type='button' className='btn btn-primary-black btn-lg' onClick={this.download.bind(this)}>
+          Download
+        </button>
       </div>
     );
   }

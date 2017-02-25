@@ -52,6 +52,12 @@ export class CountryPage extends Component {
   }
 
 
+  download() {
+    let country = Object.values(this.props.views)[0].country
+    window.location = `/api/v1/count_by_country?limit=500&country=${country}&format=csv`
+  }
+
+
   render() {
     const selectOptions = Object.values(this.props.asn).map(asn => {
       return {
@@ -92,6 +98,10 @@ export class CountryPage extends Component {
             </div>
           )
         })}
+        <button type='button' className='btn btn-primary-black btn-lg' onClick={this.download.bind(this)}>
+          Download
+        </button>
+        <a href='/download'  style={{float:'right'}}>Get AS data on the Download page</a>
       </div>
     );
   }
