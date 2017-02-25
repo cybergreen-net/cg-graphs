@@ -103,5 +103,20 @@ exports[`CountryPage components tests if rendered output is expected 1`] = `
         viewId="SOI/undefined" />
     </div>
   </div>
+  <button
+    className="btn btn-primary-black btn-lg"
+    onClick={[Function]}
+    type="button">
+    Download
+  </button>
+  <a
+    href="/download"
+    style={
+      Object {
+        "float": "right",
+      }
+    }>
+    Get AS data on the Download page
+  </a>
 </div>
 `;
