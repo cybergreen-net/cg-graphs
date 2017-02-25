@@ -8,7 +8,7 @@ export class ASPage extends Component {
   download() {
     let country = Object.values(this.props.views)[0].country
     let asn = Object.values(this.props.views)[0].as
-    window.location = `/api/v1/count_by_country?limit=500&country=${country}&asn=${asn}&format=csv`
+    window.location = `/api/v1/count?limit=500&country=${country}&asn=${asn}&format=csv`
   }
 
   render() {
