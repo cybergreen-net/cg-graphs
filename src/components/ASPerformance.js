@@ -31,8 +31,8 @@ export class ASPerformance extends Component {
 
   computeState(props=this.props) {
     let lineColors = [
-      'rgb(214, 39, 40)', 'rgb(31, 119, 180)', 'rgb(44, 160, 44)',
-      'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
+      'rgb(126, 255, 240)', 'rgb(0, 212, 154)', 'rgb(0, 186, 181)',
+      'rgb(84, 114, 222)', 'rgb(96, 3, 212)'
     ]
     if(props.view.isFetched) {
       let plotlyData = props.view.selectorConfig.map(config => {
