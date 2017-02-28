@@ -35,8 +35,8 @@ export class SourceOfInfection extends Component {
 
     props.data[props.view.risk][props.view.country].forEach(dataEntry => {
       let colorPallet = [
-        'rgb(96, 3, 212)', 'rgb(84, 114, 222)', 'rgb(0, 186, 181)',
-        'rgb(0, 212, 154)', 'rgb(126, 255, 240)'
+        'rgb(96, 3, 212)', 'rgb(84, 114, 222)', 'rgb(169, 244, 252)',
+        'rgb(7, 101, 240)', 'rgb(0, 212, 154)'
       ]
       let countAllRest = parseInt(dataEntry.count)
       dataEntry.as.forEach((asn, idx) => {
