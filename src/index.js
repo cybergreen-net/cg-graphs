@@ -8,6 +8,7 @@ import { buildCube } from './reducers/cubeReducers';
 
 import CountryPage from './components/CountryPage';
 import ASPage from './components/ASPage';
+import RiskPage from './components/RiskPage';
 
 import FrontPageCountrySelector from './components/FrontPageCountrySelector';
 import DdosPerformance from './components/DdosPerformance';
@@ -82,5 +83,14 @@ if (document.getElementById('ASPerformance')) {
       <ASPage />
     </Provider>,
     document.getElementById('ASPerformance')
+  );
+}
+
+if (document.getElementById('riskPerformance')) {
+  ReactDOM.render(
+    <Provider store={store}>
+      <RiskPage />
+    </Provider>,
+    document.getElementById('riskPerformance')
   );
 }
