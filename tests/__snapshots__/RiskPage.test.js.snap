@@ -1,0 +1,25 @@
+exports[`CountryPage components tests if rendered output is expected 1`] = `
+<div>
+  <Loader
+    className="spinner"
+    color="#00D49A"
+    loading={true}
+    size="0px" />
+  <div
+    className="row">
+    <div
+      className="col-md-12 panel panel-default">
+      <Connect(CountryPerformanceOnRisk)
+        view={Object {}} />
+    </div>
+  </div>
+  <div
+    className="row">
+    <div
+      className="col-md-12 panel panel-default">
+      <Connect(CountryPerformanceOnRisk)
+        view={Object {}} />
+    </div>
+  </div>
+</div>
+`;
