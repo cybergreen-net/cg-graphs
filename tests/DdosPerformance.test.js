@@ -74,7 +74,7 @@ describe('Component is working', () => {
       'rgb(0,0,0)'
     )
     expect(out.x).toEqual(["2017-01-01", "2017-02-01"])
-    expect(out.y).toEqual(["2131", "2331"])
+    expect(out.y).toEqual([0.002131, 0.002331])
     expect(out.name).toEqual(props.view.risksToView[0].title)
     expect(out.type).toEqual('bar')
     expect(out.marker).toEqual({color:'rgb(0,0,0)'})

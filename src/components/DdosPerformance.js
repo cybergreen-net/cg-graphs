@@ -30,7 +30,7 @@ export class DdosPerformance extends Component {
       'rgb(175, 12, 22)', 'rgb(255, 106, 0)',
       'rgb(34, 148, 26)', 'rgb(22, 96, 167)'
     ]
-    
+
     if (props.view.isFetched) {
       plotlyData = props.view.risksToView.map((risk, idx) => {
         return this.convertToPlotlySeries(
@@ -54,7 +54,7 @@ export class DdosPerformance extends Component {
     if(dataTable) {
       return {
         x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row[measure] || row.count),
+        y: dataTable.map(row => (row[measure] || row.count )/ 1000000),
         name: risk.title,
         type: 'bar',
         marker: {color: color}
