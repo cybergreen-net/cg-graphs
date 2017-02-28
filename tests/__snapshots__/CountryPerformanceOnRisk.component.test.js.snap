@@ -1,6 +1,24 @@
 exports[`Components are working fine Renders expected DOM 1`] = `
 <div
   className="graph-div">
+  <form>
+    <label>
+      <input
+        checked={true}
+        onChange={[Function]}
+        type="radio"
+        value="count_normalized" />
+      Normilized count
+    </label>
+    <label>
+      <input
+        checked={false}
+        onChange={[Function]}
+        type="radio"
+        value="count" />
+      Raw count
+    </label>
+  </form>
   <h3>
     OPEN DNS
        |  

@@ -15,7 +15,7 @@ export class ASPerformance extends Component {
       plotlyData: [],
       graphOptions: {
         legend: {x:0, y:1},
-        height: 300,
+        height: 327,
         margin: {
           l: 30,r: 30,
           b: 30,t: 0
