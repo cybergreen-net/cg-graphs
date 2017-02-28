@@ -3,7 +3,7 @@ exports[`Components are working fine Renders expected DOM 1`] = `
   className="graph-div">
   <form>
     <label
-      class="radio-inline">
+      className="radio-inline">
       <input
         checked={true}
         onChange={[Function]}
@@ -12,7 +12,7 @@ exports[`Components are working fine Renders expected DOM 1`] = `
       Normilized count
     </label>
     <label
-      class="radio-inline">
+      className="radio-inline">
       <input
         checked={false}
         onChange={[Function]}

@@ -118,14 +118,14 @@ export class CountryPerformanceOnRisk extends Component {
     return (
       <div className="graph-div">
         <form>
-          <label class="radio-inline">
+          <label className="radio-inline">
             <input type="radio" value="count_normalized"
               checked={this.props.view.measure === 'count_normalized'}
               onChange={this.buttonChange.bind(this)}
             />
             Normilized count
           </label>
-          <label class="radio-inline">
+          <label className="radio-inline">
             <input type="radio" value="count"
               checked={this.props.view.measure === 'count'}
               onChange={this.buttonChange.bind(this)}
