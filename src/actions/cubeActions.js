@@ -77,3 +77,14 @@ export function fetchDataIfNeeded(country, risk, graphId, viewType, test=false) 
     }
   }
 }
+
+
+export const CHANGE_MEASURE = 'CHANGE_MEASURE'
+export function changeMeasure(measure, graphId, viewType='countryPerformanceOnRiskViews') {
+  return {
+    type: CHANGE_MEASURE,
+    measure,
+    graphId,
+    viewType
+  }
+}
