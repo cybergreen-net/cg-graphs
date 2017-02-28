@@ -35,9 +35,8 @@ export class SourceOfInfection extends Component {
 
     props.data[props.view.risk][props.view.country].forEach(dataEntry => {
       let colorPallet = [
-        'rgb(78, 31, 190)', 'rgb(122,71,239)', 'rgb(167,133,243)',
-        'rgb(199,179,249)', 'rgb(100,200,250)', 'rgb(124,244,251)',
-        'rgb(41,232,251)', 'rgb(140,181,253)', 'rgb(20,105,234)'
+        'rgb(96, 3, 212)', 'rgb(84, 114, 222)', 'rgb(0, 186, 181)',
+        'rgb(0, 212, 154)', 'rgb(126, 255, 240)'
       ]
       let countAllRest = parseInt(dataEntry.count)
       dataEntry.as.forEach((asn, idx) => {
@@ -53,7 +52,7 @@ export class SourceOfInfection extends Component {
         y: [countAllRest],
         type: 'bar',
         name: 'Rest',
-        marker: {color: 'rgb(61, 24, 148)'},
+        marker: {color: 'rgb(200, 2, 16)'},
         text: ['Rest'],
         hoverinfo: 'x+y+text'
       }
