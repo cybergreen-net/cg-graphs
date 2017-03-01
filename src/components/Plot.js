@@ -5,6 +5,20 @@ import Plotly from 'plotly.js/lib/index-basic'
 class PlotlyGraph extends React.Component {
 
   drawPlot = (data, options) => {
+    options.images = [
+      {
+        "source": '/static/images/cybergreen-logo-square.png',
+        "xref": "paper",
+        "yref": "paper",
+        "x": 0.57,
+        "y": 0.37,
+        "sizex": 0.3,
+        "sizey": 0.3,
+        "opacity": 0.2,
+        "xanchor": "right",
+        "yanchor": "bottom"
+      }
+    ]
     Plotly.newPlot(this.props.graphID, data, options, {
        modeBarButtonsToRemove: [
          'hoverCompareCartesian',
