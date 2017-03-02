@@ -1,6 +1,7 @@
 import update from 'react/lib/update'
 import {
-  FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE, SELECT
+  FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE,
+  GET_RANK_SUCCESS, SELECT
 } from '../actions/cubeActions';
 import {
   FETCH_AS_DATA_REQUEST,FETCH_AS_DATA_SUCCESS,FETCH_AS_DATA_FAILURE,SELECT_AS
@@ -66,6 +67,17 @@ export function buildCube(state=initialState, action) {
           )
         }
       )
+    case GET_RANK_SUCCESS:
+      return update(state, {
+        [action.viewType]: {
+          [action.graphId]: {
+            rank: {$set: action.data[0].rank},
+            isFetched: {$set: true},
+            isFetching: {$set: state[action.viewType][action.graphId].isFetching + 1},
+            didFailed: {$set: false}
+          }
+        }
+      })
     case SELECT:
       return update(state, {
         countryPerformanceOnRiskViews: {
