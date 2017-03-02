@@ -1,6 +1,6 @@
 import update from 'react/lib/update'
 import {
-  FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE, SELECT
+  FETCH_DATA_REQUEST, FETCH_DATA_SUCCESS, FETCH_DATA_FAILURE, SELECT, CHANGE_MEASURE
 } from '../actions/cubeActions';
 import {
   FETCH_AS_DATA_REQUEST,FETCH_AS_DATA_SUCCESS,FETCH_AS_DATA_FAILURE,SELECT_AS
@@ -128,6 +128,14 @@ export function buildCube(state=initialState, action) {
               $splice: [[action.idxOfSelector, 1,{
                 disabled: false, as: action.selectedAS
               }]]}
+          }
+        }
+      })
+    case CHANGE_MEASURE:
+      return update(state, {
+        [action.viewType]: {
+          [action.graphId] :{
+            measure: {$set: action.measure}
           }
         }
       })

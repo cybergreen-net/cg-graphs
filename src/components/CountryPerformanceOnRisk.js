@@ -4,7 +4,7 @@ import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import Highlighter from 'react-highlight-words'
 import 'react-select/dist/react-select.css';
-import { countryIsSelected, fetchDataIfNeeded } from '../actions/cubeActions';
+import { countryIsSelected, fetchDataIfNeeded, changeMeasure } from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -101,9 +101,33 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
+  buttonChange(changeEvent) {
+    console.log(changeEvent)
+    this.props.dispatch(changeMeasure(
+      changeEvent.target.value,
+      this.props.viewId
+    ))
+  }
+
   render() {
     return (
       <div className="graph-div">
+        <form>
+          <label className="radio-inline">
+            <input type="radio" value="count_normalized"
+              checked={this.props.view.measure === 'count_normalized'}
+              onChange={this.buttonChange.bind(this)}
+            />
+            Normilized count
+          </label>
+          <label className="radio-inline">
+            <input type="radio" value="count"
+              checked={this.props.view.measure === 'count'}
+              onChange={this.buttonChange.bind(this)}
+            />
+            Raw count
+          </label>
+      </form>
         <h3>
           {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
           {this.props.countries[this.props.view.country].name.toUpperCase()}
