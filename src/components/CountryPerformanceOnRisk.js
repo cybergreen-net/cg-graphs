@@ -32,7 +32,7 @@ export class CountryPerformanceOnRisk extends Component {
       'rgb(214, 39, 40)', 'rgb(31, 119, 180)', 'rgb(44, 160, 44)',
       'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
     ]
-    if (props.view.isFetched) {
+    if (props.view.isFetching === 0) {
         plotlyData = props.view.selectorConfig.map(config => {
         if (config.country){
           return this.convertToPlotlySeries(
@@ -117,7 +117,7 @@ export class CountryPerformanceOnRisk extends Component {
             </h3>
           </div>
           <div className="col-sm-1">
-            { this.props.view.rank ? <h3 className="pull-right">#this.props.view.rank</h3> : '' }
+            { this.props.view.rank ? <h3 className="pull-right">#{this.props.view.rank}</h3> : '' }
           </div>
         </div>
         <PlotlyGraph

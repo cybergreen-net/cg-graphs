@@ -93,7 +93,7 @@ function receiveRank(data, country, risk, graphId, viewType='countryPerformanceO
 export function getCountryRanking(country, risk, graphId, test=false) {
   return function(dispatch) {
     dispatch(requestData(country, risk, graphId))
-    let ENDPOINT = `/api/rankings?risk=${risk}&country=${country}`
+    let ENDPOINT = `/api/v1/rankings?risk=${risk}&country=${country}&granularity=month`
     if(!test) {
       ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }

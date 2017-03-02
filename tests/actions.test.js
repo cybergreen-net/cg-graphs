@@ -92,7 +92,7 @@ describe('async action for ranking data', () => {
   beforeEach(() =>{
     nock(host)
       .persist()
-      .get('/api/rankings?risk=1&country=GB')
+      .get('/api/v1/rankings?risk=1&country=GB&granularity=month')
       .reply(200, {
         "total": 1,
         "results": [
