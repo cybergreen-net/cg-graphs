@@ -77,3 +77,28 @@ export function fetchDataIfNeeded(country, risk, graphId, viewType, test=false) 
     }
   }
 }
+
+export const GET_RANK_SUCCESS = 'GET_RANK_SUCCESS'
+function receiveRank(data, country, risk, graphId, viewType='countryPerformanceOnRiskViews') {
+  return {
+    type: GET_RANK_SUCCESS,
+    data,
+    country,
+    risk,
+    graphId,
+    viewType
+  }
+}
+
+export function getCountryRanking(country, risk, graphId, test=false) {
+  return function(dispatch) {
+    dispatch(requestData(country, risk, graphId))
+    let ENDPOINT = `/api/rankings?risk=${risk}&country=${country}`
+    if(!test) {
+      ENDPOINT = CG_API_ENDPOINT + ENDPOINT
+    }
+    return axios.get(ENDPOINT)
+      .then(res => dispatch(receiveRank(res.data.results, country, risk, graphId)))
+      .catch(err => dispatch(receivetDataFailure(err.message, country, risk, graphId)))
+  }
+}

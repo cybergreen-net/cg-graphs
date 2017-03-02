@@ -87,3 +87,48 @@ describe('how cached data is used', () => {
     expect(actionCreators[0].type).toEqual('FETCH_DATA_REQUEST')
   })
 })
+
+describe('async action for ranking data', () => {
+  beforeEach(() =>{
+    nock(host)
+      .persist()
+      .get('/api/rankings?risk=1&country=GB')
+      .reply(200, {
+        "total": 1,
+        "results": [
+          {
+           "country": "GB",
+           "rank": 23
+          }
+        ]
+      })
+  });
+
+  afterEach(() => {
+   nock.cleanAll();
+  });
+
+  it('Creates FETCH_DATA_REQUEST action when rank API is called', () => {
+    const store = mockStore({})
+    store.dispatch(actions.getCountryRanking('GB', 1, 'GB/1', true))
+    let actionCreators = store.getActions()
+    expect(actionCreators[0].type).toEqual('FETCH_DATA_REQUEST')
+  })
+
+  it('Creates GET_RANK_SUCCESS action when fetching the API succeed', async () => {
+    const store = mockStore({})
+    await store.dispatch(actions.getCountryRanking('GB', 1, 'GB/1', true))
+    let actionCreators = store.getActions()
+    expect(actionCreators[1].type).toEqual('GET_RANK_SUCCESS')
+    expect(actionCreators[1].data[0].rank).toEqual(23)
+    expect(actionCreators[1].data[0].country).toEqual('GB')
+  })
+
+  it('Creates FETCH_DATA_FAILURE actions when calling rank API is failed', async () => {
+    const store = mockStore({})
+    await store.dispatch(actions.getCountryRanking('error', 'error', 'error', true))
+    let actionCreators = store.getActions()
+    expect(actionCreators[1].type).toEqual('FETCH_DATA_FAILURE')
+    expect(actionCreators[1].error).toContain('No match for request')
+  })
+})
