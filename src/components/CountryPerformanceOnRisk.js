@@ -117,7 +117,7 @@ export class CountryPerformanceOnRisk extends Component {
             </h3>
           </div>
           <div className="col-sm-1">
-            { this.props.view.rank ? <h3 className="pull-right">#{this.props.view.rank}</h3> : '' }
+            { this.props.view.rank ? <a href="/countries"><h3 className="pull-right">#{this.props.view.rank}</h3></a> : '' }
           </div>
         </div>
         <PlotlyGraph
