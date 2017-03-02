@@ -4,7 +4,7 @@ import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import Highlighter from 'react-highlight-words'
 import 'react-select/dist/react-select.css';
-import { countryIsSelected, fetchDataIfNeeded } from '../actions/cubeActions';
+import { countryIsSelected, fetchDataIfNeeded, getCountryRanking } from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -32,7 +32,7 @@ export class CountryPerformanceOnRisk extends Component {
       'rgb(214, 39, 40)', 'rgb(31, 119, 180)', 'rgb(44, 160, 44)',
       'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
     ]
-    if (props.view.isFetched) {
+    if (props.view.isFetching === 0) {
         plotlyData = props.view.selectorConfig.map(config => {
         if (config.country){
           return this.convertToPlotlySeries(
@@ -73,6 +73,11 @@ export class CountryPerformanceOnRisk extends Component {
       this.props.view.risk,
       this.props.viewId
     ))
+    this.props.dispatch(getCountryRanking(
+      this.props.view.country,
+      this.props.view.risk,
+      this.props.viewId
+    ))
   };
 
 
@@ -104,10 +109,17 @@ export class CountryPerformanceOnRisk extends Component {
   render() {
     return (
       <div className="graph-div">
-        <h3>
-          {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
-          {this.props.countries[this.props.view.country].name.toUpperCase()}
-        </h3>
+        <div className="row">
+          <div className="col-sm-11">
+            <h3>
+              {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
+              {this.props.countries[this.props.view.country].name.toUpperCase()}
+            </h3>
+          </div>
+          <div className="col-sm-1">
+            { this.props.view.rank ? <a href="/country"><h3 className="pull-right">#{this.props.view.rank}</h3></a> : '' }
+          </div>
+        </div>
         <PlotlyGraph
           data={this.state.plotlyData}
           graphOptions={this.props.graphOptions}

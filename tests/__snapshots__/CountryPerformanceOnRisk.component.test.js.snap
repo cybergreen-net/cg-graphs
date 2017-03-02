@@ -1,11 +1,19 @@
 exports[`Components are working fine Renders expected DOM 1`] = `
 <div
   className="graph-div">
-  <h3>
-    OPEN DNS
-       |  
-    UNITED KINGDOM
-  </h3>
+  <div
+    className="row">
+    <div
+      className="col-sm-11">
+      <h3>
+        OPEN DNS
+           |  
+        UNITED KINGDOM
+      </h3>
+    </div>
+    <div
+      className="col-sm-1" />
+  </div>
   <PlotlyGraph
     data={Array []}
     graphOptions={Object {}} />

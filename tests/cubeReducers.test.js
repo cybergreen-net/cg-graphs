@@ -84,6 +84,25 @@ describe('buildCube reducer', () => {
     expect(newStore.entities).toEqual(initialState.entities)
   })
 
+  it('When rank is received - it creates "rank" attribute in the view and sets isFetched=true', () => {
+    let data = [{
+       "country": "gb",
+       "rank": "23"
+    }]
+    let newStore = buildCube(initialState, {
+      type: 'GET_RANK_SUCCESS',
+      data: data,
+      country: 'gb',
+      risk: 1,
+      graphId: 'gb/1',
+      viewType: 'countryPerformanceOnRiskViews'
+    });
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].rank).toEqual("23")
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toEqual(1)
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeTruthy()
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].didFailed).toBeFalsy()
+  })
+
   it('On selector change it updates selectorConfig in views of store', () => {
     let newState = Object.assign({}, initialState, {
       countryPerformanceOnRiskViews: {
