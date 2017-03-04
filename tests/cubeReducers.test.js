@@ -280,6 +280,16 @@ describe('buildCube reducer', () => {
     expect(newStore.entities.cubeByRiskByDate[data[0].risk][data[0].date]).toEqual(data)
   })
 
+  it('selected risk and date in ChoroplethMapViews is updated after a user selects new parameters', () => {
+    let newStore = buildCube(initialState, {
+      type: 'SELECT_RISK_AND_DATE',
+      selectedRisk: 1,
+      selectedDate: '2017-02-01'
+    });
+    expect(newStore.ChoroplethMapViews.risk).toEqual(1)
+    expect(newStore.ChoroplethMapViews.date).toEqual('2017-02-01')
+  })
+
   it('Checks store is not mutated', () => {
     expect(initialState).toEqual(stateClone)
   })
