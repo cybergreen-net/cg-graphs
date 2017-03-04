@@ -7,7 +7,8 @@ import {
   FETCH_AS_DATA_REQUEST,FETCH_AS_DATA_SUCCESS,FETCH_AS_DATA_FAILURE,SELECT_AS
 } from '../actions/ASactions';
 import {
-  FETCH_MAP_DATA_REQUEST, FETCH_MAP_DATA_SUCCESS, FETCH_MAP_DATA_FAILURE
+  FETCH_MAP_DATA_REQUEST, FETCH_MAP_DATA_SUCCESS,
+  FETCH_MAP_DATA_FAILURE, SELECT_RISK_AND_DATE
 } from '../actions/ChoroplethMapActions';
 
 const initialState = {
@@ -187,6 +188,13 @@ export function buildCube(state=initialState, action) {
           )
         }
       )
+    case SELECT_RISK_AND_DATE:
+      return update(state, {
+        ChoroplethMapViews: {
+          risk: {$set: action.selectedRisk},
+          date: {$set: action.selectedDate}
+        }
+      })
     default:
       return state
   }
