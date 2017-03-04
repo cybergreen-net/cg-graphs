@@ -42,3 +42,22 @@ export function fetchData(risk, date, test=false) {
       .catch(err => dispatch(receiveDataFailure(err.message, risk, date)))
   }
 }
+
+export function shouldFetchData(state, risk, date) {
+  const data = state.entities.cubeByRiskByDate[risk]
+  if (!data || !data[date]) {
+    return true
+  } else {
+    return false
+  }
+}
+
+export function fetchDataIfNeeded(risk, date, test=false) {
+  return (dispatch, getState) => {
+    if (shouldFetchData(getState(), risk, date)) {
+      return dispatch(fetchData(risk, date, test))
+    } else {
+      return Promise.resolve()
+    }
+  }
+}
