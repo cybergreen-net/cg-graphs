@@ -30,6 +30,15 @@ function receiveDataFailure(message, risk, date) {
   }
 }
 
+export const SELECT_RISK_AND_DATE = 'SELECT_RISK_AND_DATE'
+export function riskAndDateAreSelected(selectedRisk, selectedDate) {
+  return {
+    type: SELECT_RISK_AND_DATE,
+    selectedRisk,
+    selectedDate
+  }
+}
+
 export function fetchData(risk, date, test=false) {
   return function(dispatch) {
     dispatch(requestData(risk, date))
