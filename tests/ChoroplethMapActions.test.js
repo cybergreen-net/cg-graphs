@@ -89,3 +89,15 @@ describe('how cached data for choropleth map works', () => {
   })
 
 })
+
+
+describe('how SELECT_RISK_AND_DATE action behaves', () => {
+  it('creates SELECT_RISK_AND_DATE action and passes selected risk and date', () => {
+    const store = mockStore({})
+    store.dispatch(actions.riskAndDateAreSelected(100, '2017-01-01'))
+    let actionCreators = store.getActions()
+    expect(actionCreators[0].type).toEqual('SELECT_RISK_AND_DATE')
+    expect(actionCreators[0].selectedRisk).toEqual(100)
+    expect(actionCreators[0].selectedDate).toEqual('2017-01-01')
+  })
+})
