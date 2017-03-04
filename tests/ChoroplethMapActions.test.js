@@ -51,3 +51,41 @@ describe('Choropleth Map async actions', () => {
   })
 
 })
+
+
+describe('how cached data for choropleth map works', () => {
+  it('checks if data for given risk and date is cached', () => {
+    const testState = {
+      entities: {
+        cubeByRiskByDate: {
+          100: {
+            '2017-01-01': 'data'
+          }
+        }
+      }
+    }
+    const dataIsCached = actions.shouldFetchData(testState, 100, '2017-01-01')
+    const dataIsNotCached = actions.shouldFetchData(testState, 1, '2017-01-01')
+    //if data cached it returns false so we don't make a server request
+    expect(dataIsCached).toBeFalsy()
+    expect(dataIsNotCached).toBeTruthy()
+  })
+
+  it('Checks if no fetching started if data is in cubeByRiskByDate and fetching started if oposite', () => {
+    const store = mockStore({
+      entities: {
+        cubeByRiskByDate:{ 100: {'2017-01-01': []}}
+      }
+    })
+    // if data is there no actions called
+    store.dispatch(actions.fetchDataIfNeeded(100, '2017-01-01'))
+    let actionCreators = store.getActions()
+    expect(actionCreators.length).toEqual(0)
+    // if data is not there FETCH_DATA_REQUEST is triggered
+    store.dispatch(actions.fetchDataIfNeeded(1, '2017-01-01', true))
+    actionCreators = store.getActions()
+    expect(actionCreators.length).toEqual(1)
+    expect(actionCreators[0].type).toEqual('FETCH_MAP_DATA_REQUEST')
+  })
+
+})
