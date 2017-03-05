@@ -6,6 +6,10 @@ import {
 import {
   FETCH_AS_DATA_REQUEST,FETCH_AS_DATA_SUCCESS,FETCH_AS_DATA_FAILURE,SELECT_AS
 } from '../actions/ASactions';
+import {
+  FETCH_MAP_DATA_REQUEST, FETCH_MAP_DATA_SUCCESS,
+  FETCH_MAP_DATA_FAILURE, SELECT_RISK_AND_DATE
+} from '../actions/ChoroplethMapActions';
 
 const initialState = {
   entities: {
@@ -13,11 +17,13 @@ const initialState = {
     risks: {},
     asn: {},
     cubeByRiskByCountry: {},
-    cubeByRiskByASN: {}
+    cubeByRiskByASN: {},
+    cubeByRiskByDate: {}
   },
   countryPerformanceOnRiskViews: {},
   ASPerformanceViews: {},
-  DdosPerformanceViews: {}
+  DdosPerformanceViews: {},
+  ChoroplethMapViews: {}
 }
 
 export function buildCube(state=initialState, action) {
@@ -141,6 +147,52 @@ export function buildCube(state=initialState, action) {
                 disabled: false, as: action.selectedAS
               }]]}
           }
+        }
+      })
+    case FETCH_MAP_DATA_REQUEST:
+      return update(state, {
+        ChoroplethMapViews: {
+          isFetched: {$set: false},
+          isFetching: {$set: state.ChoroplethMapViews.isFetching - 1},
+          didFailed: {$set: false}
+        }
+      })
+    case FETCH_MAP_DATA_FAILURE:
+      return update(state, {
+        ChoroplethMapViews: {
+          isFetched: {$set: false},
+          isFetching: {$set: state.ChoroplethMapViews.isFetching + 1},
+          didFailed: {$set: true},
+          errorMessage: {$set: action.error}
+        }
+      })
+    case FETCH_MAP_DATA_SUCCESS:
+      let updateViews = update(state, {
+        ChoroplethMapViews: {
+          isFetched: {$set: true},
+          isFetching: {$set: state.ChoroplethMapViews.isFetching + 1},
+          didFailed: {$set: false}
+        }
+      })
+      return Object.assign({}, updateViews, {
+          entities: Object.assign(
+              {}, state.entities, {
+                cubeByRiskByDate: Object.assign(
+                  {}, state.entities.cubeByRiskByDate,{[action.risk]: Object.assign(
+                    {}, state.entities.cubeByRiskByDate[action.risk], {
+                      [action.date]: action.data}
+                  )
+                }
+              )
+            }
+          )
+        }
+      )
+    case SELECT_RISK_AND_DATE:
+      return update(state, {
+        ChoroplethMapViews: {
+          risk: {$set: action.selectedRisk},
+          date: {$set: action.selectedDate}
         }
       })
     default:

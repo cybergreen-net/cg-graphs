@@ -6,7 +6,8 @@ describe('buildCube reducer', () => {
       countries: {},
       risks: {},
       cubeByRiskByCountry: {},
-      cubeByRiskByASN: {}
+      cubeByRiskByASN: {},
+      cubeByRiskByDate: {}
     },
     countryPerformanceOnRiskViews: {
       'gb/1': {
@@ -30,6 +31,13 @@ describe('buildCube reducer', () => {
         isFetching: false,
         didFailed: false,
       }
+    },
+    ChoroplethMapViews: {
+      isFetched: false,
+      isFetching: false,
+      didFailed: false,
+      risk: 100,
+      date: '2017-01-01'
     }
   }
 
@@ -224,6 +232,62 @@ describe('buildCube reducer', () => {
     expect(newStore.ASPerformanceViews['gb/1/174'].selectorConfig[2].as).toEqual(1111)
     expect(newStore.ASPerformanceViews['gb/2/174'])
       .toEqual(newState.ASPerformanceViews['gb/2/174'])
+  })
+
+  it('While requesting ChoroplethMap data it sets isFetching=true', () => {
+    let newStore = buildCube(initialState, {
+      type: 'FETCH_MAP_DATA_REQUEST',
+      risk: 100,
+      date: '2017-01-01'
+    });
+    expect(newStore.ChoroplethMapViews.isFetching).toEqual(-1)
+    expect(newStore.ChoroplethMapViews.isFetched).toBeFalsy()
+    expect(newStore.ChoroplethMapViews.didFailed).toBeFalsy()
+    expect(newStore.entities).toEqual(initialState.entities)
+  })
+
+  it('When ChoroplethMap data fetching failed - no data is fetched and error message is returned', () => {
+    let newStore = buildCube(initialState, {
+      type: 'FETCH_MAP_DATA_FAILURE',
+      error: 'test error',
+      risk: 100,
+      date: '2017-01-01'
+    });
+    expect(newStore.ChoroplethMapViews.isFetching).toEqual(1)
+    expect(newStore.ChoroplethMapViews.isFetched).toBeFalsy()
+    expect(newStore.ChoroplethMapViews.didFailed).toBeTruthy()
+    expect(newStore.ChoroplethMapViews.errorMessage).toEqual('test error')
+    expect(newStore.entities).toEqual(initialState.entities)
+  })
+
+  it('When ChoroplethMap data is fetched, it puts data in cubeByRiskByDate and sets isFetched=true', () => {
+    let data = [{
+      "risk": 100,
+      "country": "AD",
+      "date": "2017-01-01",
+      "count": 2203,
+      "count_amplified": 151589
+    }]
+    let newStore = buildCube(initialState, {
+      type: 'FETCH_MAP_DATA_SUCCESS',
+      data: data,
+      risk: 100,
+      date: '2017-01-01'
+    });
+    expect(newStore.ChoroplethMapViews.isFetching).toEqual(1)
+    expect(newStore.ChoroplethMapViews.isFetched).toBeTruthy()
+    expect(newStore.ChoroplethMapViews.didFailed).toBeFalsy()
+    expect(newStore.entities.cubeByRiskByDate[data[0].risk][data[0].date]).toEqual(data)
+  })
+
+  it('selected risk and date in ChoroplethMapViews is updated after a user selects new parameters', () => {
+    let newStore = buildCube(initialState, {
+      type: 'SELECT_RISK_AND_DATE',
+      selectedRisk: 1,
+      selectedDate: '2017-02-01'
+    });
+    expect(newStore.ChoroplethMapViews.risk).toEqual(1)
+    expect(newStore.ChoroplethMapViews.date).toEqual('2017-02-01')
   })
 
   it('Checks store is not mutated', () => {
