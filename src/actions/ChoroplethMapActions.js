@@ -42,7 +42,7 @@ export function riskAndDateAreSelected(selectedRisk, selectedDate) {
 export function fetchData(risk, date, test=false) {
   return function(dispatch) {
     dispatch(requestData(risk, date))
-    let ENDPOINT = `/api/v1/count_by_country?limit=500&risk=${risk}&start=${date}&granularity=month`
+    let ENDPOINT = `/api/v1/count_by_country?limit=500&risk=${risk}&start=${date}&end=${date}&granularity=month`
     if(!test) {
       ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }

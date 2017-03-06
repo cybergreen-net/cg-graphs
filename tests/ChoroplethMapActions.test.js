@@ -18,7 +18,7 @@ describe('Choropleth Map async actions', () => {
   beforeEach(() =>{
     nock(host)
       .persist()
-      .get('/api/v1/count_by_country?limit=500&risk=1&start=2017-01-01&granularity=month')
+      .get('/api/v1/count_by_country?limit=500&risk=1&start=2017-01-01&end=2017-01-01&granularity=month')
       .replyWithFile(200, './public/fixtures/choroplethmap/sample.json')
   });
 
