@@ -12,6 +12,7 @@ import RiskPage from './components/RiskPage';
 
 import FrontPageCountrySelector from './components/FrontPageCountrySelector';
 import DdosPerformance from './components/DdosPerformance';
+import {ChoroplethMap} from './components/ChoroplethMap';
 
 
 let reduxStore = {
@@ -56,6 +57,13 @@ if (document.getElementById('dropdown')) {
   ReactDOM.render(
     <FrontPageCountrySelector countries={reduxStore.entities.countries}/>,
     document.getElementById('dropdown')
+  );
+}
+
+if (document.getElementById('ChoroplethMap')) {
+  ReactDOM.render(
+    <ChoroplethMap />,
+    document.getElementById('ChoroplethMap')
   );
 }
 
