@@ -1,4 +1,4 @@
-/* global graphData countries countryPerformanceOnRiskViews asn risks ASPerformanceViews DdosPerformanceViews*/
+/* global graphData countries countryPerformanceOnRiskViews asn risks ASPerformanceViews DdosPerformanceViews ChoroplethMapViews*/
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -12,7 +12,7 @@ import RiskPage from './components/RiskPage';
 
 import FrontPageCountrySelector from './components/FrontPageCountrySelector';
 import DdosPerformance from './components/DdosPerformance';
-import {ChoroplethMap} from './components/ChoroplethMap';
+import ChoroplethMap from './components/ChoroplethMap';
 
 
 let reduxStore = {
@@ -22,6 +22,7 @@ let reduxStore = {
     asn: asn,
     cubeByRiskByCountry: {},
     cubeByRiskByASN: {},
+    cubeByRiskByDate: {},
     layouts: {
       legend: {x:0, y:1},
       height: 200,
@@ -43,7 +44,8 @@ let reduxStore = {
   },
   countryPerformanceOnRiskViews: countryPerformanceOnRiskViews,
   ASPerformanceViews: ASPerformanceViews,
-  DdosPerformanceViews: DdosPerformanceViews
+  DdosPerformanceViews: DdosPerformanceViews,
+  ChoroplethMapViews: ChoroplethMapViews
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -62,7 +64,9 @@ if (document.getElementById('dropdown')) {
 
 if (document.getElementById('ChoroplethMap')) {
   ReactDOM.render(
-    <ChoroplethMap />,
+    <Provider store={store}>
+      <ChoroplethMap />
+    </Provider>,
     document.getElementById('ChoroplethMap')
   );
 }
