@@ -1,0 +1,28 @@
+exports[`ChoroplethMap component render PlotlyGraph component with expected props 1`] = `
+<div>
+  <PlotlyGraph
+    data={
+      Array [
+        Object {
+          "autocolorscale": true,
+          "locationmode": "country names",
+          "locations": Array [],
+          "text": Array [],
+          "type": "choropleth",
+          "z": Array [],
+        },
+      ]
+    }
+    graphID="ChoroplethMap"
+    graphOptions={
+      Object {
+        "geo": Object {
+          "projection": Object {
+            "type": "robinson",
+          },
+        },
+        "title": "Choropleth Map",
+      }
+    } />
+</div>
+`;
