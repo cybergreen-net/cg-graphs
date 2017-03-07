@@ -17,6 +17,8 @@ export class ChoroplethMap extends Component {
         locationmode: 'country names',
         locations: [],
         z: [],
+        text: [],
+        hoverinfo: 'location+text',
         autocolorscale: false,
         colorbar: {
           thickness: 5,
@@ -76,11 +78,13 @@ export class ChoroplethMap extends Component {
   computeState(props=this.props) {
     let locations = []
     let counts = []
+    let hoverInfo = []
     if(!props.view.isFetching && props.view.isFetched) {
       props.data[props.view.risk][props.view.date].forEach(entry => {
         if(props.countries[entry.country]) {
           locations.push(props.countries[entry.country].name)
           counts.push(entry.count)
+          hoverInfo.push(entry.count_amplified)
         }
       })
 
@@ -92,7 +96,8 @@ export class ChoroplethMap extends Component {
       return update(this.state, {
         data: [{
           locations: {$set: locations},
-          z: {$set: z}
+          z: {$set: z},
+          text: {$set: hoverInfo}
         }]
       })
     }
