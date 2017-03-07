@@ -35,15 +35,14 @@ export class ChoroplethMap extends Component {
         height: 600,
         title: 'Performance of the countries around the world',
         geo: {
+          showcountries: true,
           showframe: false,
           showcoastlines: false,
           projection:{
             type: 'equirectangular'
           }
         }
-      },
-      dateToShow: this.props.view.date,
-      riskToShow: this.props.view.risk
+      }
     }
 
     this.handleChangeRisk = this.handleChange.bind(this, 'riskToShow')
@@ -52,25 +51,22 @@ export class ChoroplethMap extends Component {
 
 
   handleChange(idx, object) {
-    this.setState({
-      [idx]: object.value
-    })
     if(idx === 'riskToShow') {
-      this.props.dispatch(riskAndDateAreSelected(
-        object.value,
-        this.state.dateToShow
-      ))
       this.props.dispatch(fetchDataIfNeeded(
         object.value,
-        this.state.dateToShow
+        this.props.view.date
+      ))
+      this.props.dispatch(riskAndDateAreSelected(
+        object.value,
+        this.props.view.date
       ))
     } else if (idx === 'dateToShow') {
-      this.props.dispatch(riskAndDateAreSelected(
-        this.state.riskToShow,
+      this.props.dispatch(fetchDataIfNeeded(
+        this.props.view.risk,
         object.value
       ))
-      this.props.dispatch(fetchDataIfNeeded(
-        this.state.riskToShow,
+      this.props.dispatch(riskAndDateAreSelected(
+        this.props.view.risk,
         object.value
       ))
     }
@@ -111,9 +107,7 @@ export class ChoroplethMap extends Component {
 
 
   componentWillReceiveProps(nextProps) {
-    if(this.props.data !== nextProps.data) {
-      this.setState(this.computeState(nextProps))
-    }
+    this.setState(this.computeState(nextProps))
   }
 
 
@@ -133,15 +127,15 @@ export class ChoroplethMap extends Component {
         <div className="row">
           <div className="col-sm-2 col-sm-offset-4" title="Select a date">
             <Select
-              value={this.state.dateToShow}
+              value={this.props.view.date}
               name='dateToShow'
               onChange={this.handleChangeDate}
               clearable={false}
-              options={[{value: this.state.dateToShow, label: this.state.dateToShow}]}/>
+              options={[{value: this.props.view.date, label: this.props.view.date}]}/>
           </div>
           <div className="col-sm-2" title="Select a risk">
             <Select
-              value={this.state.riskToShow}
+              value={this.props.view.risk}
               name='riskToShow'
               onChange={this.handleChangeRisk}
               clearable={false}

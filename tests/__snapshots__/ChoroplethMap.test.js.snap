@@ -50,6 +50,7 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
             "type": "equirectangular",
           },
           "showcoastlines": false,
+          "showcountries": true,
           "showframe": false,
         },
         "height": 600,

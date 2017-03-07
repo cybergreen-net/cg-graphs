@@ -62,10 +62,10 @@ describe('custom methods in ChoroplethMap component', () => {
   })
 
   it('checks how handleChange method works', () => {
-    const { enzymeWrapper } = setup()
-    expect(enzymeWrapper.state().riskToShow).toEqual(100)
+    const { props, enzymeWrapper } = setup()
     enzymeWrapper.instance().handleChange('riskToShow', {value: 1, label: 'DNS'})
-    expect(enzymeWrapper.state().riskToShow).toEqual(1)
+    expect(props.dispatch.mock.calls.length).toEqual(2)
+    expect(props.dispatch.mock.calls[1][0].type).toEqual("SELECT_RISK_AND_DATE")
   })
 
 })
