@@ -19,8 +19,8 @@ export class ChoroplethMap extends Component {
         z: [],
         autocolorscale: false,
         colorbar: {
-          thickness: 10,
-          x: 0.8
+          thickness: 5,
+          len: 0.5
         },
         zmin: 0,
         zmax: 8200000,
@@ -34,12 +34,13 @@ export class ChoroplethMap extends Component {
         ]
       }],
       layout: {
-        height: 500,
-        title: 'Choropleth Map',
+        height: 600,
+        title: 'Performance of the countries around the world',
         geo: {
-          showcountries: true,
-          projection: {
-              type: 'equirectangular'
+          showframe: false,
+          showcoastlines: false,
+          projection:{
+            type: 'equirectangular'
           }
         }
       },
@@ -49,7 +50,6 @@ export class ChoroplethMap extends Component {
 
     this.handleChangeRisk = this.handleChange.bind(this, 'riskToShow')
     this.handleChangeDate = this.handleChange.bind(this, 'dateToShow')
-    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
 
@@ -57,19 +57,25 @@ export class ChoroplethMap extends Component {
     this.setState({
       [idx]: object.value
     })
-  }
-
-
-  handleSubmit(event) {
-    event.preventDefault()
-    this.props.dispatch(fetchDataIfNeeded(
-      this.state.riskToShow,
-      this.state.dateToShow
-    ))
-    this.props.dispatch(riskAndDateAreSelected(
-      this.state.riskToShow,
-      this.state.dateToShow
-    ))
+    if(idx === 'riskToShow') {
+      this.props.dispatch(riskAndDateAreSelected(
+        object.value,
+        this.state.dateToShow
+      ))
+      this.props.dispatch(fetchDataIfNeeded(
+        object.value,
+        this.state.dateToShow
+      ))
+    } else if (idx === 'dateToShow') {
+      this.props.dispatch(riskAndDateAreSelected(
+        this.state.riskToShow,
+        object.value
+      ))
+      this.props.dispatch(fetchDataIfNeeded(
+        this.state.riskToShow,
+        object.value
+      ))
+    }
   }
 
 
@@ -102,7 +108,9 @@ export class ChoroplethMap extends Component {
 
 
   componentWillReceiveProps(nextProps) {
-    this.setState(this.computeState(nextProps))
+    if(this.props.data !== nextProps.data) {
+      this.setState(this.computeState(nextProps))
+    }
   }
 
 
@@ -119,29 +127,25 @@ export class ChoroplethMap extends Component {
           data={this.state.data}
           graphOptions={this.state.layout}
           graphID={this.state.graphID}/>
-        <form onSubmit={this.handleSubmit}>
-          <div className="row">
-            <div className="col-sm-2 col-sm-offset-4">
-              <Select
-                value={this.state.dateToShow}
-                name='dateToShow'
-                onChange={this.handleChangeDate}
-                clearable={false}
-                options={[{value: this.state.dateToShow, label: this.state.dateToShow}]}/>
-            </div>
-            <div className="col-sm-2">
-              <Select
-                value={this.state.riskToShow}
-                name='riskToShow'
-                onChange={this.handleChangeRisk}
-                clearable={false}
-                options={riskSelectOptions}/>
-            </div>
-            <div className="col-sm-1">
-              <input type="submit" value="Submit" className="btn btn-primary" />
-            </div>
+        <div className="row">
+          <div className="col-sm-2 col-sm-offset-4" title="Select a date">
+            <Select
+              value={this.state.dateToShow}
+              name='dateToShow'
+              onChange={this.handleChangeDate}
+              clearable={false}
+              options={[{value: this.state.dateToShow, label: this.state.dateToShow}]}/>
           </div>
-        </form>
+          <div className="col-sm-2" title="Select a risk">
+            <Select
+              value={this.state.riskToShow}
+              name='riskToShow'
+              onChange={this.handleChangeRisk}
+              clearable={false}
+              options={riskSelectOptions}/>
+          </div>
+        </div>
+
       </div>
     )
   }

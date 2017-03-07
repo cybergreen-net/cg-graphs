@@ -6,8 +6,8 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
         Object {
           "autocolorscale": false,
           "colorbar": Object {
-            "thickness": 10,
-            "x": 0.8,
+            "len": 0.5,
+            "thickness": 5,
           },
           "colorscale": Array [
             Array [
@@ -51,136 +51,129 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
           "projection": Object {
             "type": "equirectangular",
           },
-          "showcountries": true,
+          "showcoastlines": false,
+          "showframe": false,
         },
-        "height": 500,
-        "title": "Choropleth Map",
+        "height": 600,
+        "title": "Performance of the countries around the world",
       }
     } />
-  <form
-    onSubmit={[Function]}>
+  <div
+    className="row">
     <div
-      className="row">
-      <div
-        className="col-sm-2 col-sm-offset-4">
-        <Select
-          addLabelText="Add \"{label}\"?"
-          arrowRenderer={[Function]}
-          autosize={true}
-          backspaceRemoves={true}
-          backspaceToRemoveMessage="Press backspace to remove {label}"
-          clearAllText="Clear all"
-          clearRenderer={[Function]}
-          clearValueText="Clear value"
-          clearable={false}
-          deleteRemoves={true}
-          delimiter=","
-          disabled={false}
-          escapeClearsValue={true}
-          filterOptions={[Function]}
-          ignoreAccents={true}
-          ignoreCase={true}
-          inputProps={Object {}}
-          isLoading={false}
-          joinValues={false}
-          labelKey="label"
-          matchPos="any"
-          matchProp="any"
-          menuBuffer={0}
-          menuRenderer={[Function]}
-          multi={false}
-          name="dateToShow"
-          noResultsText="No results found"
-          onBlurResetsInput={true}
-          onChange={[Function]}
-          onCloseResetsInput={true}
-          openAfterFocus={false}
-          optionComponent={[Function]}
-          options={
-            Array [
-              Object {
-                "label": "2017-01-01",
-                "value": "2017-01-01",
-              },
-            ]
-          }
-          pageSize={5}
-          placeholder="Select..."
-          required={false}
-          scrollMenuIntoView={true}
-          searchable={true}
-          simpleValue={false}
-          tabSelectsValue={true}
-          value="2017-01-01"
-          valueComponent={[Function]}
-          valueKey="value" />
-      </div>
-      <div
-        className="col-sm-2">
-        <Select
-          addLabelText="Add \"{label}\"?"
-          arrowRenderer={[Function]}
-          autosize={true}
-          backspaceRemoves={true}
-          backspaceToRemoveMessage="Press backspace to remove {label}"
-          clearAllText="Clear all"
-          clearRenderer={[Function]}
-          clearValueText="Clear value"
-          clearable={false}
-          deleteRemoves={true}
-          delimiter=","
-          disabled={false}
-          escapeClearsValue={true}
-          filterOptions={[Function]}
-          ignoreAccents={true}
-          ignoreCase={true}
-          inputProps={Object {}}
-          isLoading={false}
-          joinValues={false}
-          labelKey="label"
-          matchPos="any"
-          matchProp="any"
-          menuBuffer={0}
-          menuRenderer={[Function]}
-          multi={false}
-          name="riskToShow"
-          noResultsText="No results found"
-          onBlurResetsInput={true}
-          onChange={[Function]}
-          onCloseResetsInput={true}
-          openAfterFocus={false}
-          optionComponent={[Function]}
-          options={
-            Array [
-              Object {
-                "label": "Open DNS",
-                "value": 1,
-              },
-              Object {
-                "label": "Open NTP",
-                "value": 2,
-              },
-            ]
-          }
-          pageSize={5}
-          placeholder="Select..."
-          required={false}
-          scrollMenuIntoView={true}
-          searchable={true}
-          simpleValue={false}
-          tabSelectsValue={true}
-          value={100}
-          valueComponent={[Function]}
-          valueKey="value" />
-      </div>
-      <div
-        className="col-sm-1">
-        <input
-          className="btn btn-primary"
-          type="submit"
-          value="Submit" />
-      </div>
+      className="col-sm-2 col-sm-offset-4"
+      title="Select a date">
+      <Select
+        addLabelText="Add \"{label}\"?"
+        arrowRenderer={[Function]}
+        autosize={true}
+        backspaceRemoves={true}
+        backspaceToRemoveMessage="Press backspace to remove {label}"
+        clearAllText="Clear all"
+        clearRenderer={[Function]}
+        clearValueText="Clear value"
+        clearable={false}
+        deleteRemoves={true}
+        delimiter=","
+        disabled={false}
+        escapeClearsValue={true}
+        filterOptions={[Function]}
+        ignoreAccents={true}
+        ignoreCase={true}
+        inputProps={Object {}}
+        isLoading={false}
+        joinValues={false}
+        labelKey="label"
+        matchPos="any"
+        matchProp="any"
+        menuBuffer={0}
+        menuRenderer={[Function]}
+        multi={false}
+        name="dateToShow"
+        noResultsText="No results found"
+        onBlurResetsInput={true}
+        onChange={[Function]}
+        onCloseResetsInput={true}
+        openAfterFocus={false}
+        optionComponent={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "2017-01-01",
+              "value": "2017-01-01",
+            },
+          ]
+        }
+        pageSize={5}
+        placeholder="Select..."
+        required={false}
+        scrollMenuIntoView={true}
+        searchable={true}
+        simpleValue={false}
+        tabSelectsValue={true}
+        value="2017-01-01"
+        valueComponent={[Function]}
+        valueKey="value" />
     </div>
-  </form>
+    <div
+      className="col-sm-2"
+      title="Select a risk">
+      <Select
+        addLabelText="Add \"{label}\"?"
+        arrowRenderer={[Function]}
+        autosize={true}
+        backspaceRemoves={true}
+        backspaceToRemoveMessage="Press backspace to remove {label}"
+        clearAllText="Clear all"
+        clearRenderer={[Function]}
+        clearValueText="Clear value"
+        clearable={false}
+        deleteRemoves={true}
+        delimiter=","
+        disabled={false}
+        escapeClearsValue={true}
+        filterOptions={[Function]}
+        ignoreAccents={true}
+        ignoreCase={true}
+        inputProps={Object {}}
+        isLoading={false}
+        joinValues={false}
+        labelKey="label"
+        matchPos="any"
+        matchProp="any"
+        menuBuffer={0}
+        menuRenderer={[Function]}
+        multi={false}
+        name="riskToShow"
+        noResultsText="No results found"
+        onBlurResetsInput={true}
+        onChange={[Function]}
+        onCloseResetsInput={true}
+        openAfterFocus={false}
+        optionComponent={[Function]}
+        options={
+          Array [
+            Object {
+              "label": "Open DNS",
+              "value": 1,
+            },
+            Object {
+              "label": "Open NTP",
+              "value": 2,
+            },
+          ]
+        }
+        pageSize={5}
+        placeholder="Select..."
+        required={false}
+        scrollMenuIntoView={true}
+        searchable={true}
+        simpleValue={false}
+        tabSelectsValue={true}
+        value={100}
+        valueComponent={[Function]}
+        valueKey="value" />
+    </div>
+  </div>
 </div>
 `;
