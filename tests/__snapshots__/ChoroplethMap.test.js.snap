@@ -39,8 +39,6 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
           "locations": Array [],
           "type": "choropleth",
           "z": Array [],
-          "zmax": 8200000,
-          "zmin": 0,
         },
       ]
     }

@@ -22,8 +22,6 @@ export class ChoroplethMap extends Component {
           thickness: 5,
           len: 0.5
         },
-        zmin: 0,
-        zmax: 8200000,
         colorscale: [
           [0, 'rgb(231, 251, 245)'],
           [0.2, 'rgb(162, 239, 218)'],
@@ -81,13 +79,18 @@ export class ChoroplethMap extends Component {
 
   computeState(props=this.props) {
     let locations = []
-    let z = []
+    let counts = []
     if(!props.view.isFetching && props.view.isFetched) {
       props.data[props.view.risk][props.view.date].forEach(entry => {
         if(props.countries[entry.country]) {
           locations.push(props.countries[entry.country].name)
-          z.push(entry.count)
+          counts.push(entry.count)
         }
+      })
+
+      let max = Math.max(...counts)
+      let z = counts.map(item => {
+        return ( 100 * ( Math.log(item) / Math.log(max) ) )
       })
 
       return update(this.state, {

@@ -58,10 +58,7 @@ describe('custom methods in ChoroplethMap component', () => {
       props.countries['GB'].name,
       props.countries['US'].name
     ])
-    expect(out.data[0].z).toEqual([
-      props.data[100]['2017-01-01'][0].count,
-      props.data[100]['2017-01-01'][1].count
-    ])
+    expect(out.data[0].z).toEqual([83.2450763855217,100])
   })
 
   it('checks how handleChange method works', () => {
