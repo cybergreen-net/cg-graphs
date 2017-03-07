@@ -1,6 +1,6 @@
 /* global Plotly */
 import React from 'react';
-import Plotly from 'plotly.js/lib/index-basic'
+import Plotly from 'plotly.js'
 
 class PlotlyGraph extends React.Component {
 
