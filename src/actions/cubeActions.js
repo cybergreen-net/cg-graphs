@@ -102,3 +102,13 @@ export function getCountryRanking(country, risk, graphId, test=false) {
       .catch(err => dispatch(receivetDataFailure(err.message, country, risk, graphId)))
   }
 }
+
+export const CHANGE_MEASURE = 'CHANGE_MEASURE'
+export function changeMeasure(measure, graphId, viewType='countryPerformanceOnRiskViews') {
+  return {
+    type: CHANGE_MEASURE,
+    measure,
+    graphId,
+    viewType
+  }
+}

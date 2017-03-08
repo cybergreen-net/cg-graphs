@@ -15,6 +15,7 @@ describe('buildCube reducer', () => {
         country: 'gb',
         risk: 1,
         type: 'country/performance',
+        mesure: 'count_amplified',
         isFetched: false,
         isFetching: false,
         didFailed: false,
@@ -288,6 +289,19 @@ describe('buildCube reducer', () => {
     });
     expect(newStore.ChoroplethMapViews.risk).toEqual(1)
     expect(newStore.ChoroplethMapViews.date).toEqual('2017-02-01')
+  })
+
+  it('When button selected measure is set aproproatelly', () => {
+    let newStore = buildCube(initialState, {
+      type: 'CHANGE_MEASURE',
+      country: 'gb',
+      risk: 1,
+      graphId: 'gb/1',
+      measure: 'count',
+      viewType: 'countryPerformanceOnRiskViews'
+    });
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].measure).toEqual('count')
+    expect(newStore.entities).toEqual(initialState.entities)
   })
 
   it('Checks store is not mutated', () => {
