@@ -163,6 +163,16 @@ describe('Components are working fine', () => {
     })
   })
 
+  it('When a measure button is selected, it updates state of the container', () => {
+     const { enzymeWrapper, props } = setup()
+     enzymeWrapper.setState(enzymeWrapper.instance().computeState())
+     expect(enzymeWrapper.find('input').at(0).props().checked).toEqual(false)
+     expect(enzymeWrapper.find('input').at(1).props().checked).toEqual(true)
+     enzymeWrapper.find('input').at(0).simulate('onChange')
+     enzymeWrapper.find('input').at(1).simulate('onChange')
+     expect(enzymeWrapper.find('input').at(0).props().checked).toEqual(false)
+     expect(enzymeWrapper.find('input').at(1).props().checked).toEqual(true)
+  })
 })
 
 describe('Country Select component', () => {

@@ -34,7 +34,7 @@ let reduxStore = {
         gridcolor: 'transparent',
       },
       yaxis: {
-        title: 'Normalized counts'
+        title: 'Count of infected devices'
       },
       font: {
         size: 9,
