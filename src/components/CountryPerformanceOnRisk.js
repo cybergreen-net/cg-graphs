@@ -2,9 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
+import update from 'react/lib/update'
 import Highlighter from 'react-highlight-words'
 import 'react-select/dist/react-select.css';
-import { countryIsSelected, fetchDataIfNeeded, getCountryRanking } from '../actions/cubeActions';
+import {
+  countryIsSelected, fetchDataIfNeeded,
+  getCountryRanking , changeMeasure
+} from '../actions/cubeActions';
 
 
 export class CountryPerformanceOnRisk extends Component {
@@ -12,7 +16,24 @@ export class CountryPerformanceOnRisk extends Component {
     super(props)
     this.state = {
       cubeByRiskByCountry: {},
-      graphOptions: {},
+      graphOptions: {
+        legend: {x:0, y:1},
+        height: 200,
+        margin: {
+          l: 40,r: 30,
+          b: 30,t: 0
+        },
+        xaxis: {
+          gridcolor: 'transparent',
+        },
+        yaxis: {
+          title: 'Count of infected devices'
+        },
+        font: {
+          size: 9,
+          color: '#7f7f7f'
+        }
+      },
       countries: {},
       selectorConfig: [],
       plotlyData: []
@@ -23,7 +44,6 @@ export class CountryPerformanceOnRisk extends Component {
   computeState(props=this.props) {
     let state = {
       cubeByRiskByCountry: props.cubeByRiskByCountry,
-      graphOptions: props.graphOptions,
       selectorConfig: props.view.selectorConfig
     }
 
@@ -106,9 +126,54 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
+  buttonChange(changeEvent) {
+    switch (changeEvent.target.value) {
+      case 'count_normalized':
+        var newState = update(this.state, {
+          graphOptions: {
+            yaxis: {
+              title: { $set: 'Trend' }
+            }
+          }
+        });
+        this.setState(newState);
+        break;
+      default:
+        var newState = update(this.state, {
+          graphOptions: {
+            yaxis: {
+              title: { $set: 'Count of infected devices' }
+            }
+          }
+        });
+        this.setState(newState);
+
+    }
+    this.props.dispatch(changeMeasure(
+      changeEvent.target.value,
+      this.props.viewId
+    ))
+  }
+
   render() {
     return (
       <div className="graph-div">
+        <form>
+           <label className="radio-inline">
+             <input type="radio" value="count"
+               checked={this.props.view.measure === 'count'}
+               onChange={this.buttonChange.bind(this)}
+             />
+             Simple counts
+           </label>
+           <label className="radio-inline">
+             <input type="radio" value="count_normalized"
+               checked={this.props.view.measure === 'count_normalized'}
+               onChange={this.buttonChange.bind(this)}
+             />
+             Trend
+           </label>
+        </form>
         <div className="row">
           <div className="col-sm-11">
             <h3>
@@ -122,7 +187,7 @@ export class CountryPerformanceOnRisk extends Component {
         </div>
         <PlotlyGraph
           data={this.state.plotlyData}
-          graphOptions={this.props.graphOptions}
+          graphOptions={this.state.graphOptions}
           graphID={this.props.viewId} />
         {this.state.selectorConfig.map((selectInfo, idx) => {
           return <CountrySelect
@@ -194,8 +259,7 @@ const mapStateToProps = (state) => {
   return {
     cubeByRiskByCountry: state.entities.cubeByRiskByCountry,
     countries: state.entities.countries,
-    risks: state.entities.risks,
-    graphOptions: state.entities.layouts
+    risks: state.entities.risks
   }
 }
 
