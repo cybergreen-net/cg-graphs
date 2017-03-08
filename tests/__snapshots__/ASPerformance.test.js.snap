@@ -12,7 +12,7 @@ exports[`ASPerformance component is working as expected renders expected DOM 1`]
           "color": "#7f7f7f",
           "size": 9,
         },
-        "height": 327,
+        "height": 300,
         "legend": Object {
           "x": 0,
           "y": 1,
