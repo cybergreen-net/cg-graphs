@@ -11,7 +11,7 @@ export class SourceOfInfection extends Component {
         barmode: 'stack',
         hovermode:'closest',
         showlegend: false,
-        height: 261,
+        height: 252,
         margin: {
           l: 30,r: 30,
           b: 30,t: 0

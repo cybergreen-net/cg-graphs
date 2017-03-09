@@ -158,22 +158,6 @@ export class CountryPerformanceOnRisk extends Component {
   render() {
     return (
       <div className="graph-div">
-        <form>
-           <label className="radio-inline">
-             <input type="radio" value="count"
-               checked={this.props.view.measure === 'count'}
-               onChange={this.buttonChange.bind(this)}
-             />
-             Simple counts
-           </label>
-           <label className="radio-inline">
-             <input type="radio" value="count_normalized"
-               checked={this.props.view.measure === 'count_normalized'}
-               onChange={this.buttonChange.bind(this)}
-             />
-             Trend
-           </label>
-        </form>
         <div className="row">
           <div className="col-sm-11">
             <h3>
@@ -198,6 +182,22 @@ export class CountryPerformanceOnRisk extends Component {
                     key={idx}
                     />
         })}
+        <form className="radio-form">
+           <label className="radio-inline">
+             <input type="radio" value="count"
+               checked={this.props.view.measure === 'count'}
+               onChange={this.buttonChange.bind(this)}
+             />
+             Simple counts
+           </label>
+           <label className="radio-inline">
+             <input type="radio" value="count_normalized"
+               checked={this.props.view.measure === 'count_normalized'}
+               onChange={this.buttonChange.bind(this)}
+             />
+             Trend
+           </label>
+        </form>
       </div>
     );
   }
