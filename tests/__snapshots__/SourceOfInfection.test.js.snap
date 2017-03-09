@@ -14,7 +14,7 @@ exports[`Component is working Renders expected DOM 1`] = `
           "color": "#7f7f7f",
           "size": 9,
         },
-        "height": 261,
+        "height": 252,
         "hovermode": "closest",
         "margin": Object {
           "b": 30,

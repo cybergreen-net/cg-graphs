@@ -15,6 +15,15 @@
   float: left;
 }
 
+.graph-div .radio-form {
+  font-size: 10px;
+  display: inline;
+  float: left;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  margin-left: 5px;
+}
+
 .graph-div .Select-input, .Select-control {
   height: 20px !important;
 }

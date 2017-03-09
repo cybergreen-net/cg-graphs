@@ -1,26 +1,6 @@
 exports[`Components are working fine Renders expected DOM 1`] = `
 <div
   className="graph-div">
-  <form>
-    <label
-      className="radio-inline">
-      <input
-        checked={false}
-        onChange={[Function]}
-        type="radio"
-        value="count" />
-      Simple counts
-    </label>
-    <label
-      className="radio-inline">
-      <input
-        checked={true}
-        onChange={[Function]}
-        type="radio"
-        value="count_normalized" />
-      Trend
-    </label>
-  </form>
   <div
     className="row">
     <div
@@ -61,6 +41,27 @@ exports[`Components are working fine Renders expected DOM 1`] = `
         },
       }
     } />
+  <form
+    className="radio-form">
+    <label
+      className="radio-inline">
+      <input
+        checked={false}
+        onChange={[Function]}
+        type="radio"
+        value="count" />
+      Simple counts
+    </label>
+    <label
+      className="radio-inline">
+      <input
+        checked={true}
+        onChange={[Function]}
+        type="radio"
+        value="count_normalized" />
+      Trend
+    </label>
+  </form>
 </div>
 `;
 
