@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import update from 'react/lib/update'
 import { connect } from 'react-redux';
 import PlotlyGraph from './Plot.js';
+import numeral from'numeral';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
 import { fetchDataIfNeeded, riskAndDateAreSelected } from '../actions/ChoroplethMapActions';
@@ -18,7 +19,7 @@ export class ChoroplethMap extends Component {
         locations: [],
         z: [],
         text: [],
-        hoverinfo: 'location+text',
+        hoverinfo: 'text',
         autocolorscale: false,
         colorbar: {
           thickness: 5,
@@ -26,16 +27,11 @@ export class ChoroplethMap extends Component {
         },
         colorscale: [
           [0, 'rgb(231, 251, 245)'],
-          [0.2, 'rgb(162, 239, 218)'],
-          [0.4, 'rgb(115, 231, 199)'],
-          [0.6, 'rgb(46, 219, 172)'],
-          [0.8, 'rgb(0, 212, 154)'],
-          [1, 'rgb(0, 174, 127)']
+          [1, 'rgb(255, 0, 0)']
         ]
       }],
       layout: {
         height: 600,
-        title: 'Performance of the countries around the world',
         geo: {
           showcountries: true,
           showframe: false,
@@ -43,7 +39,8 @@ export class ChoroplethMap extends Component {
           projection:{
             type: 'equirectangular'
           }
-        }
+        },
+        margin: { t: 0, l: 0, b: 0, r: 0 }
       }
     }
 
@@ -84,7 +81,7 @@ export class ChoroplethMap extends Component {
         if(props.countries[entry.country]) {
           locations.push(props.countries[entry.country].name)
           counts.push(entry.count)
-          hoverInfo.push(entry.count_amplified)
+          hoverInfo.push(numeral(entry.count_amplified).format('0,0') + ' ' +props.countries[entry.country].name + ' | ' +entry.country)
         }
       })
 
@@ -129,6 +126,11 @@ export class ChoroplethMap extends Component {
           data={this.state.data}
           graphOptions={this.state.layout}
           graphID={this.state.graphID}/>
+        <div>
+          Level of risk posed to others on selected risk on a scale from 0-100
+          (100=worst). For more on data sources, calculations and terms see
+          <a href="www.cybergreen.net/glossary/">Glossary and data page</a>.
+        </div>
         <div className="row">
           <div className="col-sm-2 col-sm-offset-4" title="Select a date">
             <Select
