@@ -10,13 +10,23 @@ export class DdosPerformance extends Component {
       graphOptions: {
         height: 600,
         xaxis: {
-         title: '*This chart assumes an average 1 mbit/sec Internet connection for every IP address.',
          gridcolor: 'transparent',
         },
         yaxis: {
          title: 'GBit/sec'
         },
-        barmode: 'stack'
+        barmode: 'stack',
+        annotations: [{
+          xref: 'paper',
+          yref: 'paper',
+          x: 1.056,
+          xanchor: 'left',
+          y: 0.99,
+          yanchor: 'bottom',
+          text: 'Risks',
+          legendtitle: true,
+          showarrow: false
+        }]
       },
       plotlyData: []
     }
@@ -27,8 +37,8 @@ export class DdosPerformance extends Component {
     let state = {}
     let plotlyData = []
     let barColors = [
-      'rgb(175, 12, 22)', 'rgb(255, 106, 0)',
-      'rgb(34, 148, 26)', 'rgb(22, 96, 167)'
+      'rgb(200, 2, 16)', 'rgb(0, 212, 154)',
+      'rgb(84, 114, 222)', 'rgb(96, 3, 212)'
     ]
 
     if (props.view.isFetched) {

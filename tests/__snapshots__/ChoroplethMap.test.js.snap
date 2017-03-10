@@ -15,27 +15,11 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
               "rgb(231, 251, 245)",
             ],
             Array [
-              0.2,
-              "rgb(162, 239, 218)",
-            ],
-            Array [
-              0.4,
-              "rgb(115, 231, 199)",
-            ],
-            Array [
-              0.6,
-              "rgb(46, 219, 172)",
-            ],
-            Array [
-              0.8,
-              "rgb(0, 212, 154)",
-            ],
-            Array [
               1,
-              "rgb(0, 174, 127)",
+              "rgb(255, 0, 0)",
             ],
           ],
-          "hoverinfo": "location+text",
+          "hoverinfo": "text",
           "locationmode": "country names",
           "locations": Array [],
           "text": Array [],
@@ -56,9 +40,22 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
           "showframe": false,
         },
         "height": 600,
-        "title": "Performance of the countries around the world",
+        "margin": Object {
+          "b": 0,
+          "l": 0,
+          "r": 0,
+          "t": 0,
+        },
       }
     } />
+  <div>
+    Level of risk posed to others on selected risk on a scale from 0-100 (100=worst). For more on data sources, calculations and terms see
+    <a
+      href="www.cybergreen.net/glossary/">
+      Glossary and data page
+    </a>
+    .
+  </div>
   <div
     className="row">
     <div
