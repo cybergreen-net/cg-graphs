@@ -5,11 +5,23 @@ exports[`Component is working Renders expected DOM 1`] = `
     graphID="global/ddos"
     graphOptions={
       Object {
+        "annotations": Array [
+          Object {
+            "legendtitle": true,
+            "showarrow": false,
+            "text": "Risks",
+            "x": 1.056,
+            "xanchor": "left",
+            "xref": "paper",
+            "y": 0.99,
+            "yanchor": "bottom",
+            "yref": "paper",
+          },
+        ],
         "barmode": "stack",
         "height": 600,
         "xaxis": Object {
           "gridcolor": "transparent",
-          "title": "*This chart assumes an average 1 mbit/sec Internet connection for every IP address.",
         },
         "yaxis": Object {
           "title": "GBit/sec",
