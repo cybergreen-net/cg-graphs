@@ -54,7 +54,6 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
       href="www.cybergreen.net/glossary/">
       Glossary and data page
     </a>
-    .
   </div>
   <div
     className="row">
