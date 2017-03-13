@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "axios": "^0.15.3",
+    "babel-polyfill": "^6.23.0",
     "gl": "^4.0.3",
     "halogen": "^0.2.0",
     "numeral": "^2.0.4",
