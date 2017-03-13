@@ -17,7 +17,7 @@ export default class FrontPageCountrySelector extends Component {
 
   onChange(country) {
     // purely for testing atm - we don't use state internally
-    if(country.constructor !== Array) {
+    if(country && country.constructor !== Array) {
       this.setState({
         selectedCountry: country
       });
@@ -25,6 +25,10 @@ export default class FrontPageCountrySelector extends Component {
         this.setState({spinner: '40px'})
         window.location = `/country/${country.slug}`
       }
+    } else if (country === null) {
+      this.setState({
+        selectedASN: country
+      });
     }
   }
 

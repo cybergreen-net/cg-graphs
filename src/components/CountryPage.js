@@ -15,21 +15,23 @@ export class CountryPage extends Component {
     super(props)
     this.state = {
       selectedASN: undefined,
-      inputValue: '',
-      spinner: '0px'
+      inputValue: ''
     }
   }
 
 
   onChange(asn) {
-    if(asn.constructor !== Array) {
+    if(asn && asn.constructor !== Array) {
       this.setState({
         selectedASN: asn
       });
       if (asn !== null && asn.value !== '') {
-        this.setState({spinner: '100px'})
-        window.location = `asn/${asn.value}`
+        window.open(`asn/${asn.value}`, '_blank')
       }
+    } else if (asn === null) {
+      this.setState({
+        selectedASN: asn
+      });
     }
   }
 
@@ -76,7 +78,6 @@ export class CountryPage extends Component {
     return (
       <div>
         { spinner ? <Loader size='100px' color='#00D49A' className='spinner'/> : '' }
-        <Loader size={this.state.spinner} color='#00D49A' className='spinner'/>
         <div className="row">
           <div className="col-md-6"></div>
           <div className="col-md-6">
