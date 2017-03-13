@@ -49,7 +49,7 @@ exports[`CountryPage components tests if rendered output is expected 1`] = `
         options={
           Array [
             Object {
-              "label": "Select an AS",
+              "label": "View any Autonomous System in this country",
               "value": "",
             },
             Object {
@@ -67,7 +67,7 @@ exports[`CountryPage components tests if rendered output is expected 1`] = `
         tabSelectsValue={true}
         value={
           Object {
-            "label": "Select an AS",
+            "label": "View any Autonomous System in this country",
             "value": "",
           }
         }
@@ -107,16 +107,18 @@ exports[`CountryPage components tests if rendered output is expected 1`] = `
     className="btn btn-primary-black btn-lg"
     onClick={[Function]}
     type="button">
-    Download
+    Download Data in CSV
   </button>
-  <a
-    href="/download"
+  <button
+    className="btn btn-primary-black btn-lg"
+    onClick={[Function]}
     style={
       Object {
         "float": "right",
       }
-    }>
+    }
+    type="button">
     Get AS data on the Download page
-  </a>
+  </button>
 </div>
 `;
