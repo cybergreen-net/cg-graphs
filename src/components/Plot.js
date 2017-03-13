@@ -40,7 +40,7 @@ class PlotlyGraph extends React.Component {
     if(this.props.clickable) {
       document.getElementById(this.props.graphID).on('plotly_click', function(data){
         if(data.points[0].data.name !== 'Rest') {
-          window.location = `asn/${data.points[0].data.name}`
+          window.open(`asn/${data.points[0].data.name}`, '_blank')
         }
       });
     }

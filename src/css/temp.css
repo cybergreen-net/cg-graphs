@@ -30,6 +30,10 @@
 .graph-div .Select-value {
   line-height: 20px !important;
 }
+.Select-input input {
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
 
 .graph-div {
   margin-bottom: 40px;
