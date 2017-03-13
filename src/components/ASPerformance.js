@@ -17,8 +17,11 @@ export class ASPerformance extends Component {
         legend: {x:0, y:1},
         height: 300,
         margin: {
-          l: 30,r: 30,
+          l: 40,r: 30,
           b: 30,t: 0
+        },
+        yaxis: {
+          title: this.props.view.yLabel
         },
         font: {
           size: 9,

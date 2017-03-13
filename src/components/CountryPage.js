@@ -52,9 +52,13 @@ export class CountryPage extends Component {
   }
 
 
-  download() {
-    let country = Object.values(this.props.views)[0].country
-    window.location = `/api/v1/count_by_country?limit=500&country=${country}&format=csv`
+  download(data) {
+    if (data === 'country'){
+      let country = Object.values(this.props.views)[0].country
+      window.location = `/api/v1/count_by_country?limit=500&country=${country}&format=csv`
+    } else {
+      window.location = `/download`
+    }
   }
 
 
@@ -65,7 +69,7 @@ export class CountryPage extends Component {
         label: asn.number + ' | ' + asn.title
       }
     })
-    selectOptions.unshift({value: '', label: 'Select an AS'})
+    selectOptions.unshift({value: '', label: 'View any Autonomous System in this country'})
     let spinner = Object.values(this.props.views).find(view => {
       return view.isFetching
     })
@@ -98,10 +102,12 @@ export class CountryPage extends Component {
             </div>
           )
         })}
-        <button type='button' className='btn btn-primary-black btn-lg' onClick={this.download.bind(this)}>
-          Download
+        <button type='button' className='btn btn-primary-black btn-lg' onClick={this.download.bind(this, 'country')}>
+          Download Data in CSV
         </button>
-        <a href='/download'  style={{float:'right'}}>Get AS data on the Download page</a>
+        <button type='button' className='btn btn-primary-black btn-lg' style={{float:'right'}} onClick={this.download.bind(this, 'as')}>
+          Get AS data on the Download page
+        </button>
       </div>
     );
   }

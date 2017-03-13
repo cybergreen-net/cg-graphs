@@ -27,7 +27,7 @@ export class CountryPerformanceOnRisk extends Component {
           gridcolor: 'transparent',
         },
         yaxis: {
-          title: 'Count of infected devices'
+          title: this.props.view.yLabel
         },
         font: {
           size: 9,
@@ -142,7 +142,7 @@ export class CountryPerformanceOnRisk extends Component {
         var newState = update(this.state, {
           graphOptions: {
             yaxis: {
-              title: { $set: 'Count of infected devices' }
+              title: { $set: this.props.view.yLabel }
             }
           }
         });

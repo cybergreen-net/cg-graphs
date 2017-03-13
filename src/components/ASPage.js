@@ -28,7 +28,7 @@ export class ASPage extends Component {
           )
         })}
         <button type='button' className='btn btn-primary-black btn-lg' onClick={this.download.bind(this)}>
-          Download
+          Download Data in CSV
         </button>
       </div>
     );

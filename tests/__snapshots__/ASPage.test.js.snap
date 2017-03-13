@@ -20,7 +20,7 @@ exports[`ASPage component renders expected DOM 1`] = `
     className="btn btn-primary-black btn-lg"
     onClick={[Function]}
     type="button">
-    Download
+    Download Data in CSV
   </button>
 </div>
 `;

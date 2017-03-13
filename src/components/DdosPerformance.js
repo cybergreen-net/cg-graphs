@@ -13,7 +13,7 @@ export class DdosPerformance extends Component {
          gridcolor: 'transparent',
         },
         yaxis: {
-         title: 'GBit/sec'
+         title: this.props.view.yLabel
         },
         barmode: 'stack',
         annotations: [{

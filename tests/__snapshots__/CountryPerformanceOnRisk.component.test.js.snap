@@ -37,7 +37,7 @@ exports[`Components are working fine Renders expected DOM 1`] = `
           "gridcolor": "transparent",
         },
         "yaxis": Object {
-          "title": "Count of infected devices",
+          "title": undefined,
         },
       }
     } />
