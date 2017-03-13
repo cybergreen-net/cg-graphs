@@ -18,7 +18,7 @@ exports[`Component is working Renders expected DOM 1`] = `
         "hovermode": "closest",
         "margin": Object {
           "b": 30,
-          "l": 30,
+          "l": 40,
           "r": 30,
           "t": 0,
         },
@@ -26,6 +26,9 @@ exports[`Component is working Renders expected DOM 1`] = `
         "xaxis": Object {
           "gridcolor": "transparent",
           "tickformat": "%Y-%m-%d",
+        },
+        "yaxis": Object {
+          "title": undefined,
         },
       }
     } />

@@ -13,12 +13,15 @@ export class SourceOfInfection extends Component {
         showlegend: false,
         height: 252,
         margin: {
-          l: 30,r: 30,
+          l: 40,r: 30,
           b: 30,t: 0
         },
         xaxis: {
           gridcolor: 'transparent',
           tickformat: '%Y-%m-%d'
+        },
+        yaxis: {
+          title: this.props.view.yLabel
         },
         font: {
           size: 9,

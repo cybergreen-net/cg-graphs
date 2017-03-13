@@ -24,7 +24,7 @@ exports[`Component is working Renders expected DOM 1`] = `
           "gridcolor": "transparent",
         },
         "yaxis": Object {
-          "title": "GBit/sec",
+          "title": undefined,
         },
       }
     } />
