@@ -159,15 +159,16 @@ export class ASSelect extends Component {
     const selectOptions = this.props.asn.map(asn => {
       return {
         value: asn.number,
-        label: asn.title
+        label: asn.number + ' | ' + asn.title
       }
     })
     selectOptions.unshift({value: '', label: 'Select an ASN'})
+    let selectedAS = parseInt(this.props.selectedAS)
     return (
       <div className="Select-div">
         <Select
           name="asn"
-          value={this.props.selectedAS || selectOptions[0]}
+          value={selectedAS || selectOptions[0]}
           options={selectOptions}
           onChange={this.props.onChange}
           onInputChange={this.setInputValue.bind(this)}
