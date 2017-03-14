@@ -3,6 +3,7 @@ import React from 'react';
 import {shallow} from 'enzyme';
 import toJson from 'enzyme-to-json';
 
+global.GLOSSARYPAGE = ''
 function setup() {
   let props = {
     dispatch: jest.fn(),

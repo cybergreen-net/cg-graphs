@@ -1,3 +1,4 @@
+/* global GLOSSARYPAGE */
 import React, { Component } from 'react';
 import update from 'react/lib/update'
 import { connect } from 'react-redux';
@@ -129,7 +130,7 @@ export class ChoroplethMap extends Component {
         <div>
           Level of risk posed to others on selected risk on a scale from 0-100
           (100=worst). For more on data sources, calculations and terms see
-          <a href="www.cybergreen.net/glossary/">Glossary and data page</a>
+          <a href={GLOSSARYPAGE}>Glossary and data page</a>
         </div>
         <div className="row">
           <div className="col-sm-2 col-sm-offset-4" title="Select a date">
