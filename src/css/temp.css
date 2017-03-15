@@ -4,7 +4,8 @@
 }
 
 #countryPerformance h3,
-#ASPerformance h3 {
+#ASPerformance h3,
+#riskPerformance h3 {
   color: #00D49A;
 }
 
@@ -49,4 +50,8 @@
   bottom: calc(50vh - 50px);
   left: calc(50vw - 50px);
   z-index: 10;
+}
+
+.graph-rank {
+  color: red !important;
 }
