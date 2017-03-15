@@ -2,7 +2,7 @@ exports[`Component is working Renders expected DOM 1`] = `
 <div>
   <h3>
     OPEN DNS
-      |   ASN SOURCE
+      |   AS SOURCE
   </h3>
   <PlotlyGraph
     clickable={true}

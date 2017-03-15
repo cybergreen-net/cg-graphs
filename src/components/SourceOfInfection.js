@@ -105,7 +105,7 @@ export class SourceOfInfection extends Component {
       <div>
         <h3>
           {this.props.risks[this.props.view.risk].title.toUpperCase()}
-          &nbsp; | &nbsp; ASN SOURCE
+          &nbsp; | &nbsp; AS SOURCE
         </h3>
         <PlotlyGraph
           data={this.state.plotlyData}
