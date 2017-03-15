@@ -50,12 +50,15 @@ export function buildCube(state=initialState, action) {
         }
       })
     case FETCH_DATA_SUCCESS:
+      let unit = getUnitAndDevider(action.data, action.risk)
       let newState = update(state, {
         [action.viewType]: {
           [action.graphId] :{
             isFetched: {$set: true},
             isFetching: {$set: state[action.viewType][action.graphId].isFetching + 1},
-            didFailed: {$set: false}
+            didFailed: {$set: false},
+            unit: {$set: unit.unit},
+            unitDevider: {$set: unit.unitDevider}
           }
         }
       })
@@ -205,5 +208,20 @@ export function buildCube(state=initialState, action) {
       })
     default:
       return state
+  }
+}
+
+function getUnitAndDevider(data, risk) {
+  if (risk !== 100) {
+    return {unitDevider: 1}
+  }
+  var max = Math.max.apply(Math,data.map(function(o){return o.count_amplified;}))
+
+  if (max < 1000) {
+    return {unit: 'MBit/sec', unitDevider: 1}
+  } else if (max >= 1000 && max < 1000000) {
+    return {unit: 'GBit/sec', unitDevider: 1000}
+  } else {
+    return {unit: 'TBit/sec', unitDevider: 1000000}
   }
 }

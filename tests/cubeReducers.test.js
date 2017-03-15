@@ -19,6 +19,16 @@ describe('buildCube reducer', () => {
         isFetched: false,
         isFetching: false,
         didFailed: false,
+      },
+      'gb/100': {
+        id: 'gb/100',
+        country: 'gb',
+        risk: 100,
+        type: 'country/performance',
+        mesure: 'count_amplified',
+        isFetched: false,
+        isFetching: false,
+        didFailed: false,
       }
     },
     ASPerformanceViews: {
@@ -74,7 +84,29 @@ describe('buildCube reducer', () => {
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetching).toEqual(1)
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].isFetched).toBeTruthy()
     expect(newStore.countryPerformanceOnRiskViews['gb/1'].didFailed).toBeFalsy()
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].unit).toEqual(undefined)
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].unitDevider).toEqual(1)
     expect(newStore.entities.cubeByRiskByCountry[1]['gb']).toEqual(data)
+  })
+
+  it('On success it unit is set aproproatelly if risk is DDOS', () => {
+    let data = [{
+      "risk": 100,"country": "GB","date": "2017-01-16",
+      "count": "11506","count_amplified": 4571746
+    }]
+    let newStore = buildCube(initialState, {
+      type: 'FETCH_DATA_SUCCESS',
+      data: data,
+      country: 'gb',
+      risk: 100,
+      graphId: 'gb/100',
+      viewType: 'countryPerformanceOnRiskViews'
+    });
+    expect(newStore.countryPerformanceOnRiskViews['gb/100'].isFetching).toEqual(1)
+    expect(newStore.countryPerformanceOnRiskViews['gb/100'].isFetched).toBeTruthy()
+    expect(newStore.countryPerformanceOnRiskViews['gb/100'].didFailed).toBeFalsy()
+    expect(newStore.countryPerformanceOnRiskViews['gb/100'].unit).toEqual('TBit/sec')
+    expect(newStore.countryPerformanceOnRiskViews['gb/100'].unitDevider).toEqual(1000000)
   })
 
   it('On failure - no data is fetched and error message is returned', () => {
