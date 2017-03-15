@@ -300,7 +300,7 @@ describe('buildCube reducer', () => {
       measure: 'count',
       viewType: 'countryPerformanceOnRiskViews'
     });
-    expect(newStore.countryPerformanceOnRiskViews['gb/1'].measure).toEqual('count')
+    expect(newStore.countryPerformanceOnRiskViews['gb/1'].normMeasure).toEqual('count')
     expect(newStore.entities).toEqual(initialState.entities)
   })
 
