@@ -46,16 +46,16 @@ exports[`Components are working fine Renders expected DOM 1`] = `
     <label
       className="radio-inline">
       <input
-        checked={false}
+        checked={true}
         onChange={[Function]}
         type="radio"
-        value="count" />
+        value="count_normalized" />
       Simple counts
     </label>
     <label
       className="radio-inline">
       <input
-        checked={true}
+        checked={false}
         onChange={[Function]}
         type="radio"
         value="count_normalized" />

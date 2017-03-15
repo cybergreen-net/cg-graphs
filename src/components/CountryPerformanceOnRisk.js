@@ -59,7 +59,8 @@ export class CountryPerformanceOnRisk extends Component {
             config.country,
             props.view.risk,
             props.cubeByRiskByCountry,
-            props.view.measure
+            props.view.measure,
+            props.view.normMeasure
           )
         }
         return {}
@@ -74,12 +75,12 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
-  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure) {
+  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure, normMeasure) {
     var dataTable = cubeByRiskByCountry[riskID][countryID];
     if(dataTable) {
       return {
         x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row[measure] || row.count),
+        y: dataTable.map(row => row[normMeasure] || row[measure]),
         name: this.props.countries[countryID].name,
         type: 'scatter',
       }
@@ -184,15 +185,15 @@ export class CountryPerformanceOnRisk extends Component {
         })}
         <form className="radio-form">
            <label className="radio-inline">
-             <input type="radio" value="count"
-               checked={this.props.view.measure === 'count'}
+             <input type="radio" value={this.props.view.measure}
+               checked={this.props.view.normMeasure !== 'count_normalized'}
                onChange={this.buttonChange.bind(this)}
              />
              Simple counts
            </label>
            <label className="radio-inline">
              <input type="radio" value="count_normalized"
-               checked={this.props.view.measure === 'count_normalized'}
+               checked={this.props.view.normMeasure === 'count_normalized'}
                onChange={this.buttonChange.bind(this)}
              />
              Trend

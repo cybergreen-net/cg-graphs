@@ -199,7 +199,7 @@ export function buildCube(state=initialState, action) {
       return update(state, {
         [action.viewType]: {
           [action.graphId] :{
-            measure: {$set: action.measure}
+            normMeasure: {$set: action.measure}
           }
         }
       })
