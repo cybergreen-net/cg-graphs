@@ -63,11 +63,13 @@ export class ASPerformance extends Component {
 
   convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
     var dataTable = dataFromCube[countryID+'/'+riskID+'/'+asID];
-    return {
-      x: dataTable.map(row => row.date),
-      y: dataTable.map(row => row.count),
-      name: this.props.asn[asID].title,
-      type: 'scatter',
+    if (dataTable.length) {
+      return {
+        x: dataTable.map(row => row.date),
+        y: dataTable.map(row => row.count),
+        name: this.props.asn[asID]? this.props.asn[asID].title : 'Unknown',
+        type: 'scatter',
+      }
     }
   }
 
