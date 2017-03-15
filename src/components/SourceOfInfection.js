@@ -42,9 +42,9 @@ export class SourceOfInfection extends Component {
         'rgb(96, 3, 212)', 'rgb(84, 114, 222)', 'rgb(169, 244, 252)',
         'rgb(7, 101, 240)', 'rgb(0, 212, 154)'
       ]
-      let countAllRest = parseInt(dataEntry[props.view.measure])
+      let countAllRest = parseInt(dataEntry[props.view.measure])/props.view.unitDevider
       dataEntry.as.forEach((asn, idx) => {
-        countAllRest -= parseInt(asn[props.view.measure])
+        countAllRest -= parseInt(asn[props.view.measure])/props.view.unitDevider
         let trace = this.plotlySeries(dataEntry, asn, props.view.measure, props.view.unitDevider)
         trace['marker'] = {
           color: colorPallet[idx]
