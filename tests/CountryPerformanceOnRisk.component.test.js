@@ -137,15 +137,15 @@ describe('Components are working fine', () => {
 
   it('convertToPlotlySeries method works', () => {
     const { enzymeWrapper, props } = setup()
-    let out = enzymeWrapper.instance().convertToPlotlySeries('t', 1, props.cubeByRiskByCountry, 'count')
+    let out = enzymeWrapper.instance().convertToPlotlySeries('t', 1, props.cubeByRiskByCountry, 'count', undefined, 1)
     expect(out.type).toEqual('scatter')
     expect(out.x).toEqual(["2017-01-16", "2017-01-09", "2017-01-02"])
-    expect(out.y).toEqual(["81548", "33172", "32558"])
+    expect(out.y).toEqual([81548, 33172, 32558])
     expect(out.name).toEqual('Global')
-    out = enzymeWrapper.instance().convertToPlotlySeries('t', 1, props.cubeByRiskByCountry, 'count_normalized')
+    out = enzymeWrapper.instance().convertToPlotlySeries('t', 1, props.cubeByRiskByCountry, 'count_normalized', undefined, 1)
     expect(out.y).toEqual([120, 30, 330])
-    out = enzymeWrapper.instance().convertToPlotlySeries('t', 1, props.cubeByRiskByCountry, 'count_amplified')
-    expect(out.y).toEqual([156434762, 157100602, 156849067])
+    out = enzymeWrapper.instance().convertToPlotlySeries('t', 1, props.cubeByRiskByCountry, 'count_amplified', undefined, 1000000)
+    expect(out.y).toEqual([156.434762, 157.100602, 156.849067])
   })
 
   it('When a country is selected, it updates state of the container', () => {

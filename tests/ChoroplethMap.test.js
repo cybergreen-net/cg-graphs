@@ -54,6 +54,8 @@ describe('custom methods in ChoroplethMap component', () => {
     let out = enzymeWrapper.instance().computeState(props)
     expect(out).toEqual({}) // because isFetched=false
     props.view.isFetched = true
+    props.view.unitDevider = 1
+    props.view.measure = 'count'
     out = enzymeWrapper.instance().computeState(props)
     expect(out.data[0].locations).toEqual([
       props.countries['GB'].name,

@@ -77,12 +77,18 @@ export class ChoroplethMap extends Component {
     let locations = []
     let counts = []
     let hoverInfo = []
+    let text;
+    if (props.view.risk === 100) {
+      text = props.view.unit + ' DDOS Potential'
+    } else {
+      text = 'Count of ' + props.risks[props.view.risk].taxonomy + ' devices'
+    }
     if(!props.view.isFetching && props.view.isFetched) {
       props.data[props.view.risk][props.view.date].forEach(entry => {
         if(props.countries[entry.country]) {
           locations.push(props.countries[entry.country].name)
-          counts.push(entry.count)
-          hoverInfo.push(numeral(entry.count_amplified).format('0,0') + ' ' +props.countries[entry.country].name + ' | ' +entry.country)
+          counts.push(entry[props.view.measure])
+          hoverInfo.push(numeral(entry[props.view.measure] / props.view.unitDevider).format('0,0') + ' | ' + text + ' in ' +entry.country)
         }
       })
 

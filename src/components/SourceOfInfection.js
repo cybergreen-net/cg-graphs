@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import PlotlyGraph from './Plot.js';
+import update from 'react/lib/update'
 
 
 export class SourceOfInfection extends Component {
@@ -44,7 +45,7 @@ export class SourceOfInfection extends Component {
       let countAllRest = parseInt(dataEntry[props.view.measure])
       dataEntry.as.forEach((asn, idx) => {
         countAllRest -= parseInt(asn[props.view.measure])
-        let trace = this.plotlySeries(dataEntry, asn, props.view.measure)
+        let trace = this.plotlySeries(dataEntry, asn, props.view.measure, props.view.unitDevider)
         trace['marker'] = {
           color: colorPallet[idx]
         }
@@ -61,15 +62,22 @@ export class SourceOfInfection extends Component {
       }
       plotlyData.unshift(traceAllRest)
     })
-
-    return {plotlyData: plotlyData}
+    let state = {plotlyData: plotlyData}
+    if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
+      state.graphOptions = update(this.state.graphOptions, {
+        yaxis: {
+          title: { $set: props.view.unit }
+        }
+      });
+    }
+    return state
   }
 
 
-  plotlySeries(data, asn, measure){
+  plotlySeries(data, asn, measure, unitDevider){
     return {
       x: [data.date],
-      y: [asn[measure]],
+      y: [asn[measure]/unitDevider],
       type: 'bar',
       name: asn.id,
       text: [asn.id],

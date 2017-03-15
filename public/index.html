@@ -19,12 +19,12 @@
         'US': {id: 'US', name: 'United States', slug: 'united-states'}
       }
       var risks = {
-        1: {title: 'Open DNS', id: 1},
-        2: {title: 'Open NTP', id: 2},
-        4: {title: 'Open SNMP', id: 4},
-        5: {title: 'Open SSDP', id: 5},
-        6: {title: 'Open Mirai', id:6},
-        100: {title: 'DDOS', id: 100}
+        1: {title: 'Open DNS', id: 1, taxonomy: 'Vulnerable'},
+        2: {title: 'Open NTP', id: 2, taxonomy: 'Vulnerable'},
+        4: {title: 'Open SNMP', id: 4, taxonomy: 'Vulnerable'},
+        5: {title: 'Open SSDP', id: 5, taxonomy: 'Vulnerable'},
+        6: {title: 'Open Mirai', id:6, taxonomy: 'Infected'},
+        100: {title: 'DDOS', id: 100, taxonomy: 'GBit/sec'}
       }
       var asn = {
         174: {number: 174, title: 'ASN 174'},
@@ -43,6 +43,24 @@
           didFailed: false,
           measure: "count",
           yLabel: 'Count of Vulnerable Devices',
+          selectorConfig: [
+            {disabled: true, country: 'GB'},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined}
+          ]
+        },
+        'GB/100': {
+          id: 'GB/100',
+          country: 'GB',
+          risk: 100,
+          type: 'country/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          measure: "count_amplified",
+          yLabel: 'GBit/sec',
           selectorConfig: [
             {disabled: true, country: 'GB'},
             {disabled: false, country: undefined},
@@ -120,10 +138,10 @@
       var GLOSSARYPAGE = 'https://www.cybergreen.net/data'
     </script>
     <!-- <div id="riskPerformance" class="container"></div> -->
-    <div id="countryPerformance" class="container"></div>
+    <!-- <div id="countryPerformance" class="container"></div> -->
     <!-- <div id="ASPerformance" class="container"></div> -->
     <!-- <div id="dropdown"></div> -->
     <!-- <div id="ddos"></div> -->
-    <!-- <div id="ChoroplethMap"></div> -->
+    <div id="ChoroplethMap"></div>
   </body>
 </html>

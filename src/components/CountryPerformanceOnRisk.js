@@ -55,12 +55,14 @@ export class CountryPerformanceOnRisk extends Component {
     if (props.view.isFetching === 0) {
         plotlyData = props.view.selectorConfig.map(config => {
         if (config.country){
+          // unit = this.getUnitAndDevider(props.cubeByRiskByCountry[props.view.risk][config.country], props.view.risk)
           return this.convertToPlotlySeries(
             config.country,
             props.view.risk,
             props.cubeByRiskByCountry,
             props.view.measure,
-            props.view.normMeasure
+            props.view.normMeasure,
+            props.view.unitDevider
           )
         }
         return {}
@@ -70,17 +72,23 @@ export class CountryPerformanceOnRisk extends Component {
       })
       state['plotlyData'] = plotlyData
     }
-
+    if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
+      state.graphOptions = update(this.state.graphOptions, {
+        yaxis: {
+          title: { $set: props.view.unit }
+        }
+      });
+    }
     return state
   }
 
 
-  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure, normMeasure) {
+  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure, normMeasure, devider) {
     var dataTable = cubeByRiskByCountry[riskID][countryID];
     if(dataTable) {
       return {
         x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row[normMeasure] || row[measure]),
+        y: dataTable.map(row => row[normMeasure]/devider || row[measure]/devider),
         name: this.props.countries[countryID].name,
         type: 'scatter',
       }
