@@ -12,11 +12,43 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
           "colorscale": Array [
             Array [
               0,
-              "rgb(231, 251, 245)",
+              "rgba(122, 184, 0, 0.7)",
+            ],
+            Array [
+              "0.111111111111",
+              "rgba(147, 189, 12, 0.7)",
+            ],
+            Array [
+              "0.222222222222",
+              "rgba(172, 194, 25, 0.7)",
+            ],
+            Array [
+              "0.333333333333",
+              "rgba(197, 199, 38, 0.7)",
+            ],
+            Array [
+              "0.444444444444",
+              "rgba(223, 204, 51, 0.7)",
+            ],
+            Array [
+              "0.555555555556",
+              "rgba(238, 186, 53, 0.7)",
+            ],
+            Array [
+              "0.666666666667",
+              "rgba(242, 140, 40, 0.7)",
+            ],
+            Array [
+              "0.777777777778",
+              "rgba(246, 95, 27, 0.7)",
+            ],
+            Array [
+              "0.888888888889",
+              "rgba(250, 49, 14, 0.7)",
             ],
             Array [
               1,
-              "rgb(255, 0, 0)",
+              "rgba(250, 0, 0, 0.7)",
             ],
           ],
           "hoverinfo": "text",
