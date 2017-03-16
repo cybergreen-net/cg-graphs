@@ -177,7 +177,7 @@ export function buildCube(state=initialState, action) {
           isFetched: {$set: true},
           isFetching: {$set: state.ChoroplethMapViews.isFetching + 1},
           didFailed: {$set: false},
-          unit: {$set: unit.unit},
+          unit: {$set: unit.unit ? unit.unit : state.ChoroplethMapViews.unit },
           unitDevider: {$set: unit.unitDevider},
           measure: {$set: action.risk === 100 ? 'count_amplified':'count'}
         }
