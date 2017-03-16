@@ -58,62 +58,7 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
   <div
     className="row">
     <div
-      className="col-sm-2 col-sm-offset-4"
-      title="Select a date">
-      <Select
-        addLabelText="Add \"{label}\"?"
-        arrowRenderer={[Function]}
-        autosize={true}
-        backspaceRemoves={true}
-        backspaceToRemoveMessage="Press backspace to remove {label}"
-        clearAllText="Clear all"
-        clearRenderer={[Function]}
-        clearValueText="Clear value"
-        clearable={false}
-        deleteRemoves={true}
-        delimiter=","
-        disabled={false}
-        escapeClearsValue={true}
-        filterOptions={[Function]}
-        ignoreAccents={true}
-        ignoreCase={true}
-        inputProps={Object {}}
-        isLoading={false}
-        joinValues={false}
-        labelKey="label"
-        matchPos="any"
-        matchProp="any"
-        menuBuffer={0}
-        menuRenderer={[Function]}
-        multi={false}
-        name="dateToShow"
-        noResultsText="No results found"
-        onBlurResetsInput={true}
-        onChange={[Function]}
-        onCloseResetsInput={true}
-        openAfterFocus={false}
-        optionComponent={[Function]}
-        options={
-          Array [
-            Object {
-              "label": "2017-01-01",
-              "value": "2017-01-01",
-            },
-          ]
-        }
-        pageSize={5}
-        placeholder="Select..."
-        required={false}
-        scrollMenuIntoView={true}
-        searchable={true}
-        simpleValue={false}
-        tabSelectsValue={true}
-        value="2017-01-01"
-        valueComponent={[Function]}
-        valueKey="value" />
-    </div>
-    <div
-      className="col-sm-2"
+      className="col-sm-2 col-sm-offset-5"
       title="Select a risk">
       <Select
         addLabelText="Add \"{label}\"?"

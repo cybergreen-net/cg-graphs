@@ -87,7 +87,7 @@ export class ChoroplethMap extends Component {
       props.data[props.view.risk][props.view.date].forEach(entry => {
         if(props.countries[entry.country]) {
           locations.push(props.countries[entry.country].name)
-          counts.push(entry[props.view.measure])
+          counts.push(entry[props.view.measure] / props.view.unitDevider)
           hoverInfo.push(numeral(entry[props.view.measure] / props.view.unitDevider).format('0,0') + ' | ' + text + ' in ' +entry.country)
         }
       })
@@ -139,15 +139,7 @@ export class ChoroplethMap extends Component {
           <a href={GLOSSARYPAGE}>Glossary and data page</a>
         </div>
         <div className="row">
-          <div className="col-sm-2 col-sm-offset-4" title="Select a date">
-            <Select
-              value={this.props.view.date}
-              name='dateToShow'
-              onChange={this.handleChangeDate}
-              clearable={false}
-              options={[{value: this.props.view.date, label: this.props.view.date}]}/>
-          </div>
-          <div className="col-sm-2" title="Select a risk">
+          <div className="col-sm-2 col-sm-offset-5" title="Select a risk">
             <Select
               value={this.props.view.risk}
               name='riskToShow'
