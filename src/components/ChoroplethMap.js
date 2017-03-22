@@ -6,7 +6,7 @@ import PlotlyGraph from './Plot.js';
 import numeral from'numeral';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import { fetchDataIfNeeded, riskAndDateAreSelected } from '../actions/ChoroplethMapActions';
+import { riskAndDateAreSelected, fetchData } from '../actions/ChoroplethMapActions';
 
 
 export class ChoroplethMap extends Component {
@@ -60,7 +60,7 @@ export class ChoroplethMap extends Component {
 
   handleChange(idx, object) {
     if(idx === 'riskToShow') {
-      this.props.dispatch(fetchDataIfNeeded(
+      this.props.dispatch(fetchData(
         object.value,
         this.props.view.date
       ))
@@ -69,7 +69,7 @@ export class ChoroplethMap extends Component {
         this.props.view.date
       ))
     } else if (idx === 'dateToShow') {
-      this.props.dispatch(fetchDataIfNeeded(
+      this.props.dispatch(fetchData(
         this.props.view.risk,
         object.value
       ))
@@ -102,7 +102,7 @@ export class ChoroplethMap extends Component {
 
       let max = Math.max(...counts)
       let z = counts.map(item => {
-        return ( 100 * ( Math.log(item) / Math.log(max) ) )
+        return ( 100 * ( Math.log(Math.ceil(item)) / Math.log(max) ) )
       })
 
       return update(this.state, {
@@ -119,7 +119,7 @@ export class ChoroplethMap extends Component {
 
 
   componentDidMount() {
-    this.props.dispatch(fetchDataIfNeeded(this.props.view.risk, this.props.view.date))
+    this.props.dispatch(fetchData(this.props.view.risk, this.props.view.date))
   }
 
 
