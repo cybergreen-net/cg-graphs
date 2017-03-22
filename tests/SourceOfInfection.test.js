@@ -7,6 +7,11 @@ describe('Component is working', () => {
   function setup() {
     let props = {
       risks: {1: {title: 'Open DNS'}},
+      asns: {
+        192: {id: 192, title: 'Test'},
+        254: {id: 254, title: 'Test'},
+        214: {id: 214, title: 'Test'}
+      },
       view: {
         id: 'GB/1',
         country: 'GB',
