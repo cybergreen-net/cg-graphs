@@ -75,12 +75,13 @@ export class SourceOfInfection extends Component {
 
 
   plotlySeries(data, asn, measure, unitDevider){
+    var title = this.props.asns[asn.id] ? this.props.asns[asn.id].title : 'Unknown'
     return {
       x: [data.date],
       y: [asn[measure]/unitDevider],
       type: 'bar',
       name: asn.id,
-      text: [asn.id],
+      text: [asn.id + ' | ' + title],
       hoverinfo: 'x+y+text'
     }
   }
@@ -120,7 +121,8 @@ export class SourceOfInfection extends Component {
 const mapStateToProps = (state) => {
   return {
     data: state.entities.cubeByRiskByCountry,
-    risks: state.entities.risks
+    risks: state.entities.risks,
+    asns: state.entities.asn
   }
 }
 
