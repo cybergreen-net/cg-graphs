@@ -65,7 +65,7 @@ exports[`ChoroplethMap component render PlotlyGraph component with expected prop
       Object {
         "geo": Object {
           "projection": Object {
-            "type": "equirectangular",
+            "type": "robinson",
           },
           "showcoastlines": false,
           "showcountries": true,

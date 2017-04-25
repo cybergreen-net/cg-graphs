@@ -46,7 +46,7 @@ export class ChoroplethMap extends Component {
           showframe: false,
           showcoastlines: false,
           projection:{
-            type: 'equirectangular'
+            type: 'robinson'
           }
         },
         margin: { t: 0, l: 0, b: 0, r: 0 }
