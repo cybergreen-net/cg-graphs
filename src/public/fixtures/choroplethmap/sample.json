@@ -1,0 +1,1671 @@
+{
+  "total": 238,
+  "results": [
+    {
+      "risk": 1,
+      "country": "AD",
+      "date": "2017-01-01",
+      "count": 181,
+      "count_amplified": 7421
+    },
+    {
+      "risk": 1,
+      "country": "AE",
+      "date": "2017-01-01",
+      "count": 20002,
+      "count_amplified": 820082
+    },
+    {
+      "risk": 1,
+      "country": "AF",
+      "date": "2017-01-01",
+      "count": 2824,
+      "count_amplified": 115784
+    },
+    {
+      "risk": 1,
+      "country": "AG",
+      "date": "2017-01-01",
+      "count": 659,
+      "count_amplified": 27019
+    },
+    {
+      "risk": 1,
+      "country": "AI",
+      "date": "2017-01-01",
+      "count": 137,
+      "count_amplified": 5617
+    },
+    {
+      "risk": 1,
+      "country": "AL",
+      "date": "2017-01-01",
+      "count": 7690,
+      "count_amplified": 315290
+    },
+    {
+      "risk": 1,
+      "country": "AM",
+      "date": "2017-01-01",
+      "count": 3491,
+      "count_amplified": 143131
+    },
+    {
+      "risk": 1,
+      "country": "AO",
+      "date": "2017-01-01",
+      "count": 4595,
+      "count_amplified": 188395
+    },
+    {
+      "risk": 1,
+      "country": "AR",
+      "date": "2017-01-01",
+      "count": 104742,
+      "count_amplified": 4294422
+    },
+    {
+      "risk": 1,
+      "country": "AS",
+      "date": "2017-01-01",
+      "count": 276,
+      "count_amplified": 11316
+    },
+    {
+      "risk": 1,
+      "country": "AT",
+      "date": "2017-01-01",
+      "count": 25919,
+      "count_amplified": 1062679
+    },
+    {
+      "risk": 1,
+      "country": "AU",
+      "date": "2017-01-01",
+      "count": 184343,
+      "count_amplified": 7558063
+    },
+    {
+      "risk": 1,
+      "country": "AW",
+      "date": "2017-01-01",
+      "count": 1763,
+      "count_amplified": 72283
+    },
+    {
+      "risk": 1,
+      "country": "AX",
+      "date": "2017-01-01",
+      "count": 500,
+      "count_amplified": 20500
+    },
+    {
+      "risk": 1,
+      "country": "AZ",
+      "date": "2017-01-01",
+      "count": 9181,
+      "count_amplified": 376421
+    },
+    {
+      "risk": 1,
+      "country": "BA",
+      "date": "2017-01-01",
+      "count": 8650,
+      "count_amplified": 354650
+    },
+    {
+      "risk": 1,
+      "country": "BB",
+      "date": "2017-01-01",
+      "count": 3420,
+      "count_amplified": 140220
+    },
+    {
+      "risk": 1,
+      "country": "BD",
+      "date": "2017-01-01",
+      "count": 21752,
+      "count_amplified": 891832
+    },
+    {
+      "risk": 1,
+      "country": "BE",
+      "date": "2017-01-01",
+      "count": 33540,
+      "count_amplified": 1375140
+    },
+    {
+      "risk": 1,
+      "country": "BF",
+      "date": "2017-01-01",
+      "count": 110,
+      "count_amplified": 4510
+    },
+    {
+      "risk": 1,
+      "country": "BG",
+      "date": "2017-01-01",
+      "count": 45081,
+      "count_amplified": 1848321
+    },
+    {
+      "risk": 1,
+      "country": "BH",
+      "date": "2017-01-01",
+      "count": 4693,
+      "count_amplified": 192413
+    },
+    {
+      "risk": 1,
+      "country": "BI",
+      "date": "2017-01-01",
+      "count": 161,
+      "count_amplified": 6601
+    },
+    {
+      "risk": 1,
+      "country": "BJ",
+      "date": "2017-01-01",
+      "count": 416,
+      "count_amplified": 17056
+    },
+    {
+      "risk": 1,
+      "country": "BL",
+      "date": "2017-01-01",
+      "count": 6,
+      "count_amplified": 246
+    },
+    {
+      "risk": 1,
+      "country": "BM",
+      "date": "2017-01-01",
+      "count": 5335,
+      "count_amplified": 218735
+    },
+    {
+      "risk": 1,
+      "country": "BN",
+      "date": "2017-01-01",
+      "count": 465,
+      "count_amplified": 19065
+    },
+    {
+      "risk": 1,
+      "country": "BO",
+      "date": "2017-01-01",
+      "count": 6124,
+      "count_amplified": 251084
+    },
+    {
+      "risk": 1,
+      "country": "BQ",
+      "date": "2017-01-01",
+      "count": 142,
+      "count_amplified": 5822
+    },
+    {
+      "risk": 1,
+      "country": "BR",
+      "date": "2017-01-01",
+      "count": 556039,
+      "count_amplified": 22797599
+    },
+    {
+      "risk": 1,
+      "country": "BS",
+      "date": "2017-01-01",
+      "count": 2172,
+      "count_amplified": 89052
+    },
+    {
+      "risk": 1,
+      "country": "BT",
+      "date": "2017-01-01",
+      "count": 1046,
+      "count_amplified": 42886
+    },
+    {
+      "risk": 1,
+      "country": "BW",
+      "date": "2017-01-01",
+      "count": 2737,
+      "count_amplified": 112217
+    },
+    {
+      "risk": 1,
+      "country": "BY",
+      "date": "2017-01-01",
+      "count": 7730,
+      "count_amplified": 316930
+    },
+    {
+      "risk": 1,
+      "country": "BZ",
+      "date": "2017-01-01",
+      "count": 1742,
+      "count_amplified": 71422
+    },
+    {
+      "risk": 1,
+      "country": "CA",
+      "date": "2017-01-01",
+      "count": 199442,
+      "count_amplified": 8177122
+    },
+    {
+      "risk": 1,
+      "country": "CD",
+      "date": "2017-01-01",
+      "count": 248,
+      "count_amplified": 10168
+    },
+    {
+      "risk": 1,
+      "country": "CF",
+      "date": "2017-01-01",
+      "count": 10,
+      "count_amplified": 410
+    },
+    {
+      "risk": 1,
+      "country": "CG",
+      "date": "2017-01-01",
+      "count": 223,
+      "count_amplified": 9143
+    },
+    {
+      "risk": 1,
+      "country": "CH",
+      "date": "2017-01-01",
+      "count": 91454,
+      "count_amplified": 3749614
+    },
+    {
+      "risk": 1,
+      "country": "CI",
+      "date": "2017-01-01",
+      "count": 689,
+      "count_amplified": 28249
+    },
+    {
+      "risk": 1,
+      "country": "CK",
+      "date": "2017-01-01",
+      "count": 97,
+      "count_amplified": 3977
+    },
+    {
+      "risk": 1,
+      "country": "CL",
+      "date": "2017-01-01",
+      "count": 38804,
+      "count_amplified": 1590964
+    },
+    {
+      "risk": 1,
+      "country": "CM",
+      "date": "2017-01-01",
+      "count": 1344,
+      "count_amplified": 55104
+    },
+    {
+      "risk": 1,
+      "country": "CN",
+      "date": "2017-01-01",
+      "count": 875793,
+      "count_amplified": 35907513
+    },
+    {
+      "risk": 1,
+      "country": "CO",
+      "date": "2017-01-01",
+      "count": 55911,
+      "count_amplified": 2292351
+    },
+    {
+      "risk": 1,
+      "country": "CR",
+      "date": "2017-01-01",
+      "count": 12216,
+      "count_amplified": 500856
+    },
+    {
+      "risk": 1,
+      "country": "CU",
+      "date": "2017-01-01",
+      "count": 644,
+      "count_amplified": 26404
+    },
+    {
+      "risk": 1,
+      "country": "CV",
+      "date": "2017-01-01",
+      "count": 413,
+      "count_amplified": 16933
+    },
+    {
+      "risk": 1,
+      "country": "CW",
+      "date": "2017-01-01",
+      "count": 4145,
+      "count_amplified": 169945
+    },
+    {
+      "risk": 1,
+      "country": "CY",
+      "date": "2017-01-01",
+      "count": 16788,
+      "count_amplified": 688308
+    },
+    {
+      "risk": 1,
+      "country": "CZ",
+      "date": "2017-01-01",
+      "count": 59474,
+      "count_amplified": 2438434
+    },
+    {
+      "risk": 1,
+      "country": "DE",
+      "date": "2017-01-01",
+      "count": 453401,
+      "count_amplified": 18589441
+    },
+    {
+      "risk": 1,
+      "country": "DJ",
+      "date": "2017-01-01",
+      "count": 226,
+      "count_amplified": 9266
+    },
+    {
+      "risk": 1,
+      "country": "DK",
+      "date": "2017-01-01",
+      "count": 61218,
+      "count_amplified": 2509938
+    },
+    {
+      "risk": 1,
+      "country": "DM",
+      "date": "2017-01-01",
+      "count": 63,
+      "count_amplified": 2583
+    },
+    {
+      "risk": 1,
+      "country": "DO",
+      "date": "2017-01-01",
+      "count": 8225,
+      "count_amplified": 337225
+    },
+    {
+      "risk": 1,
+      "country": "DZ",
+      "date": "2017-01-01",
+      "count": 4068,
+      "count_amplified": 166788
+    },
+    {
+      "risk": 1,
+      "country": "EC",
+      "date": "2017-01-01",
+      "count": 44042,
+      "count_amplified": 1805722
+    },
+    {
+      "risk": 1,
+      "country": "EE",
+      "date": "2017-01-01",
+      "count": 4998,
+      "count_amplified": 204918
+    },
+    {
+      "risk": 1,
+      "country": "EG",
+      "date": "2017-01-01",
+      "count": 12673,
+      "count_amplified": 519593
+    },
+    {
+      "risk": 1,
+      "country": "ER",
+      "date": "2017-01-01",
+      "count": 12,
+      "count_amplified": 492
+    },
+    {
+      "risk": 1,
+      "country": "ES",
+      "date": "2017-01-01",
+      "count": 90879,
+      "count_amplified": 3726039
+    },
+    {
+      "risk": 1,
+      "country": "ET",
+      "date": "2017-01-01",
+      "count": 284,
+      "count_amplified": 11644
+    },
+    {
+      "risk": 1,
+      "country": "FI",
+      "date": "2017-01-01",
+      "count": 34256,
+      "count_amplified": 1404496
+    },
+    {
+      "risk": 1,
+      "country": "FJ",
+      "date": "2017-01-01",
+      "count": 3997,
+      "count_amplified": 163877
+    },
+    {
+      "risk": 1,
+      "country": "FK",
+      "date": "2017-01-01",
+      "count": 60,
+      "count_amplified": 2460
+    },
+    {
+      "risk": 1,
+      "country": "FM",
+      "date": "2017-01-01",
+      "count": 173,
+      "count_amplified": 7093
+    },
+    {
+      "risk": 1,
+      "country": "FO",
+      "date": "2017-01-01",
+      "count": 1928,
+      "count_amplified": 79048
+    },
+    {
+      "risk": 1,
+      "country": "FR",
+      "date": "2017-01-01",
+      "count": 286704,
+      "count_amplified": 11754864
+    },
+    {
+      "risk": 1,
+      "country": "GA",
+      "date": "2017-01-01",
+      "count": 453,
+      "count_amplified": 18573
+    },
+    {
+      "risk": 1,
+      "country": "GB",
+      "date": "2017-01-01",
+      "count": 336307,
+      "count_amplified": 13788587
+    },
+    {
+      "risk": 1,
+      "country": "GD",
+      "date": "2017-01-01",
+      "count": 286,
+      "count_amplified": 11726
+    },
+    {
+      "risk": 1,
+      "country": "GE",
+      "date": "2017-01-01",
+      "count": 17934,
+      "count_amplified": 735294
+    },
+    {
+      "risk": 1,
+      "country": "GF",
+      "date": "2017-01-01",
+      "count": 390,
+      "count_amplified": 15990
+    },
+    {
+      "risk": 1,
+      "country": "GG",
+      "date": "2017-01-01",
+      "count": 1187,
+      "count_amplified": 48667
+    },
+    {
+      "risk": 1,
+      "country": "GH",
+      "date": "2017-01-01",
+      "count": 3159,
+      "count_amplified": 129519
+    },
+    {
+      "risk": 1,
+      "country": "GI",
+      "date": "2017-01-01",
+      "count": 338,
+      "count_amplified": 13858
+    },
+    {
+      "risk": 1,
+      "country": "GL",
+      "date": "2017-01-01",
+      "count": 939,
+      "count_amplified": 38499
+    },
+    {
+      "risk": 1,
+      "country": "GM",
+      "date": "2017-01-01",
+      "count": 878,
+      "count_amplified": 35998
+    },
+    {
+      "risk": 1,
+      "country": "GN",
+      "date": "2017-01-01",
+      "count": 154,
+      "count_amplified": 6314
+    },
+    {
+      "risk": 1,
+      "country": "GP",
+      "date": "2017-01-01",
+      "count": 587,
+      "count_amplified": 24067
+    },
+    {
+      "risk": 1,
+      "country": "GQ",
+      "date": "2017-01-01",
+      "count": 741,
+      "count_amplified": 30381
+    },
+    {
+      "risk": 1,
+      "country": "GR",
+      "date": "2017-01-01",
+      "count": 30728,
+      "count_amplified": 1259848
+    },
+    {
+      "risk": 1,
+      "country": "GS",
+      "date": "2017-01-01",
+      "count": 1,
+      "count_amplified": 41
+    },
+    {
+      "risk": 1,
+      "country": "GT",
+      "date": "2017-01-01",
+      "count": 8521,
+      "count_amplified": 349361
+    },
+    {
+      "risk": 1,
+      "country": "GU",
+      "date": "2017-01-01",
+      "count": 641,
+      "count_amplified": 26281
+    },
+    {
+      "risk": 1,
+      "country": "GW",
+      "date": "2017-01-01",
+      "count": 18,
+      "count_amplified": 738
+    },
+    {
+      "risk": 1,
+      "country": "GY",
+      "date": "2017-01-01",
+      "count": 618,
+      "count_amplified": 25338
+    },
+    {
+      "risk": 1,
+      "country": "HK",
+      "date": "2017-01-01",
+      "count": 105500,
+      "count_amplified": 4325500
+    },
+    {
+      "risk": 1,
+      "country": "HN",
+      "date": "2017-01-01",
+      "count": 11550,
+      "count_amplified": 473550
+    },
+    {
+      "risk": 1,
+      "country": "HR",
+      "date": "2017-01-01",
+      "count": 13740,
+      "count_amplified": 563340
+    },
+    {
+      "risk": 1,
+      "country": "HT",
+      "date": "2017-01-01",
+      "count": 2789,
+      "count_amplified": 114349
+    },
+    {
+      "risk": 1,
+      "country": "HU",
+      "date": "2017-01-01",
+      "count": 66221,
+      "count_amplified": 2715061
+    },
+    {
+      "risk": 1,
+      "country": "ID",
+      "date": "2017-01-01",
+      "count": 99390,
+      "count_amplified": 4074990
+    },
+    {
+      "risk": 1,
+      "country": "IE",
+      "date": "2017-01-01",
+      "count": 16743,
+      "count_amplified": 686463
+    },
+    {
+      "risk": 1,
+      "country": "IL",
+      "date": "2017-01-01",
+      "count": 21143,
+      "count_amplified": 866863
+    },
+    {
+      "risk": 1,
+      "country": "IM",
+      "date": "2017-01-01",
+      "count": 1332,
+      "count_amplified": 54612
+    },
+    {
+      "risk": 1,
+      "country": "IN",
+      "date": "2017-01-01",
+      "count": 339353,
+      "count_amplified": 13913473
+    },
+    {
+      "risk": 1,
+      "country": "IO",
+      "date": "2017-01-01",
+      "count": 110,
+      "count_amplified": 4510
+    },
+    {
+      "risk": 1,
+      "country": "IQ",
+      "date": "2017-01-01",
+      "count": 5790,
+      "count_amplified": 237390
+    },
+    {
+      "risk": 1,
+      "country": "IR",
+      "date": "2017-01-01",
+      "count": 35812,
+      "count_amplified": 1468292
+    },
+    {
+      "risk": 1,
+      "country": "IS",
+      "date": "2017-01-01",
+      "count": 13420,
+      "count_amplified": 550220
+    },
+    {
+      "risk": 1,
+      "country": "IT",
+      "date": "2017-01-01",
+      "count": 141189,
+      "count_amplified": 5788749
+    },
+    {
+      "risk": 1,
+      "country": "JE",
+      "date": "2017-01-01",
+      "count": 1378,
+      "count_amplified": 56498
+    },
+    {
+      "risk": 1,
+      "country": "JM",
+      "date": "2017-01-01",
+      "count": 6723,
+      "count_amplified": 275643
+    },
+    {
+      "risk": 1,
+      "country": "JO",
+      "date": "2017-01-01",
+      "count": 3138,
+      "count_amplified": 128658
+    },
+    {
+      "risk": 1,
+      "country": "JP",
+      "date": "2017-01-01",
+      "count": 550344,
+      "count_amplified": 22564104
+    },
+    {
+      "risk": 1,
+      "country": "KE",
+      "date": "2017-01-01",
+      "count": 31304,
+      "count_amplified": 1283464
+    },
+    {
+      "risk": 1,
+      "country": "KG",
+      "date": "2017-01-01",
+      "count": 2829,
+      "count_amplified": 115989
+    },
+    {
+      "risk": 1,
+      "country": "KH",
+      "date": "2017-01-01",
+      "count": 18817,
+      "count_amplified": 771497
+    },
+    {
+      "risk": 1,
+      "country": "KI",
+      "date": "2017-01-01",
+      "count": 12,
+      "count_amplified": 492
+    },
+    {
+      "risk": 1,
+      "country": "KM",
+      "date": "2017-01-01",
+      "count": 103,
+      "count_amplified": 4223
+    },
+    {
+      "risk": 1,
+      "country": "KN",
+      "date": "2017-01-01",
+      "count": 347,
+      "count_amplified": 14227
+    },
+    {
+      "risk": 1,
+      "country": "KP",
+      "date": "2017-01-01",
+      "count": 6,
+      "count_amplified": 246
+    },
+    {
+      "risk": 1,
+      "country": "KR",
+      "date": "2017-01-01",
+      "count": 675917,
+      "count_amplified": 27712597
+    },
+    {
+      "risk": 1,
+      "country": "KW",
+      "date": "2017-01-01",
+      "count": 7986,
+      "count_amplified": 327426
+    },
+    {
+      "risk": 1,
+      "country": "KY",
+      "date": "2017-01-01",
+      "count": 1715,
+      "count_amplified": 70315
+    },
+    {
+      "risk": 1,
+      "country": "KZ",
+      "date": "2017-01-01",
+      "count": 87062,
+      "count_amplified": 3569542
+    },
+    {
+      "risk": 1,
+      "country": "LA",
+      "date": "2017-01-01",
+      "count": 2625,
+      "count_amplified": 107625
+    },
+    {
+      "risk": 1,
+      "country": "LB",
+      "date": "2017-01-01",
+      "count": 2011,
+      "count_amplified": 82451
+    },
+    {
+      "risk": 1,
+      "country": "LC",
+      "date": "2017-01-01",
+      "count": 111,
+      "count_amplified": 4551
+    },
+    {
+      "risk": 1,
+      "country": "LI",
+      "date": "2017-01-01",
+      "count": 1071,
+      "count_amplified": 43911
+    },
+    {
+      "risk": 1,
+      "country": "LK",
+      "date": "2017-01-01",
+      "count": 8376,
+      "count_amplified": 343416
+    },
+    {
+      "risk": 1,
+      "country": "LR",
+      "date": "2017-01-01",
+      "count": 596,
+      "count_amplified": 24436
+    },
+    {
+      "risk": 1,
+      "country": "LS",
+      "date": "2017-01-01",
+      "count": 267,
+      "count_amplified": 10947
+    },
+    {
+      "risk": 1,
+      "country": "LT",
+      "date": "2017-01-01",
+      "count": 6852,
+      "count_amplified": 280932
+    },
+    {
+      "risk": 1,
+      "country": "LU",
+      "date": "2017-01-01",
+      "count": 4765,
+      "count_amplified": 195365
+    },
+    {
+      "risk": 1,
+      "country": "LV",
+      "date": "2017-01-01",
+      "count": 4871,
+      "count_amplified": 199711
+    },
+    {
+      "risk": 1,
+      "country": "LY",
+      "date": "2017-01-01",
+      "count": 1084,
+      "count_amplified": 44444
+    },
+    {
+      "risk": 1,
+      "country": "MA",
+      "date": "2017-01-01",
+      "count": 10338,
+      "count_amplified": 423858
+    },
+    {
+      "risk": 1,
+      "country": "MC",
+      "date": "2017-01-01",
+      "count": 438,
+      "count_amplified": 17958
+    },
+    {
+      "risk": 1,
+      "country": "MD",
+      "date": "2017-01-01",
+      "count": 19474,
+      "count_amplified": 798434
+    },
+    {
+      "risk": 1,
+      "country": "ME",
+      "date": "2017-01-01",
+      "count": 2970,
+      "count_amplified": 121770
+    },
+    {
+      "risk": 1,
+      "country": "MF",
+      "date": "2017-01-01",
+      "count": 348,
+      "count_amplified": 14268
+    },
+    {
+      "risk": 1,
+      "country": "MG",
+      "date": "2017-01-01",
+      "count": 1038,
+      "count_amplified": 42558
+    },
+    {
+      "risk": 1,
+      "country": "MH",
+      "date": "2017-01-01",
+      "count": 358,
+      "count_amplified": 14678
+    },
+    {
+      "risk": 1,
+      "country": "MK",
+      "date": "2017-01-01",
+      "count": 11673,
+      "count_amplified": 478593
+    },
+    {
+      "risk": 1,
+      "country": "ML",
+      "date": "2017-01-01",
+      "count": 731,
+      "count_amplified": 29971
+    },
+    {
+      "risk": 1,
+      "country": "MM",
+      "date": "2017-01-01",
+      "count": 2042,
+      "count_amplified": 83722
+    },
+    {
+      "risk": 1,
+      "country": "MN",
+      "date": "2017-01-01",
+      "count": 8477,
+      "count_amplified": 347557
+    },
+    {
+      "risk": 1,
+      "country": "MO",
+      "date": "2017-01-01",
+      "count": 10368,
+      "count_amplified": 425088
+    },
+    {
+      "risk": 1,
+      "country": "MP",
+      "date": "2017-01-01",
+      "count": 77,
+      "count_amplified": 3157
+    },
+    {
+      "risk": 1,
+      "country": "MQ",
+      "date": "2017-01-01",
+      "count": 1153,
+      "count_amplified": 47273
+    },
+    {
+      "risk": 1,
+      "country": "MR",
+      "date": "2017-01-01",
+      "count": 287,
+      "count_amplified": 11767
+    },
+    {
+      "risk": 1,
+      "country": "MS",
+      "date": "2017-01-01",
+      "count": 12,
+      "count_amplified": 492
+    },
+    {
+      "risk": 1,
+      "country": "MT",
+      "date": "2017-01-01",
+      "count": 4101,
+      "count_amplified": 168141
+    },
+    {
+      "risk": 1,
+      "country": "MU",
+      "date": "2017-01-01",
+      "count": 5021,
+      "count_amplified": 205861
+    },
+    {
+      "risk": 1,
+      "country": "MV",
+      "date": "2017-01-01",
+      "count": 1137,
+      "count_amplified": 46617
+    },
+    {
+      "risk": 1,
+      "country": "MW",
+      "date": "2017-01-01",
+      "count": 267,
+      "count_amplified": 10947
+    },
+    {
+      "risk": 1,
+      "country": "MX",
+      "date": "2017-01-01",
+      "count": 265371,
+      "count_amplified": 10880211
+    },
+    {
+      "risk": 1,
+      "country": "MY",
+      "date": "2017-01-01",
+      "count": 48872,
+      "count_amplified": 2003752
+    },
+    {
+      "risk": 1,
+      "country": "MZ",
+      "date": "2017-01-01",
+      "count": 2506,
+      "count_amplified": 102746
+    },
+    {
+      "risk": 1,
+      "country": "NA",
+      "date": "2017-01-01",
+      "count": 1538,
+      "count_amplified": 63058
+    },
+    {
+      "risk": 1,
+      "country": "NC",
+      "date": "2017-01-01",
+      "count": 723,
+      "count_amplified": 29643
+    },
+    {
+      "risk": 1,
+      "country": "NE",
+      "date": "2017-01-01",
+      "count": 83,
+      "count_amplified": 3403
+    },
+    {
+      "risk": 1,
+      "country": "NG",
+      "date": "2017-01-01",
+      "count": 12684,
+      "count_amplified": 520044
+    },
+    {
+      "risk": 1,
+      "country": "NI",
+      "date": "2017-01-01",
+      "count": 9450,
+      "count_amplified": 387450
+    },
+    {
+      "risk": 1,
+      "country": "NL",
+      "date": "2017-01-01",
+      "count": 90025,
+      "count_amplified": 3691025
+    },
+    {
+      "risk": 1,
+      "country": "NO",
+      "date": "2017-01-01",
+      "count": 51219,
+      "count_amplified": 2099979
+    },
+    {
+      "risk": 1,
+      "country": "NP",
+      "date": "2017-01-01",
+      "count": 2375,
+      "count_amplified": 97375
+    },
+    {
+      "risk": 1,
+      "country": "NR",
+      "date": "2017-01-01",
+      "count": 24,
+      "count_amplified": 984
+    },
+    {
+      "risk": 1,
+      "country": "NU",
+      "date": "2017-01-01",
+      "count": 3,
+      "count_amplified": 123
+    },
+    {
+      "risk": 1,
+      "country": "NZ",
+      "date": "2017-01-01",
+      "count": 15902,
+      "count_amplified": 651982
+    },
+    {
+      "risk": 1,
+      "country": "OM",
+      "date": "2017-01-01",
+      "count": 2426,
+      "count_amplified": 99466
+    },
+    {
+      "risk": 1,
+      "country": "PA",
+      "date": "2017-01-01",
+      "count": 10976,
+      "count_amplified": 450016
+    },
+    {
+      "risk": 1,
+      "country": "PE",
+      "date": "2017-01-01",
+      "count": 28630,
+      "count_amplified": 1173830
+    },
+    {
+      "risk": 1,
+      "country": "PF",
+      "date": "2017-01-01",
+      "count": 257,
+      "count_amplified": 10537
+    },
+    {
+      "risk": 1,
+      "country": "PG",
+      "date": "2017-01-01",
+      "count": 2916,
+      "count_amplified": 119556
+    },
+    {
+      "risk": 1,
+      "country": "PH",
+      "date": "2017-01-01",
+      "count": 45966,
+      "count_amplified": 1884606
+    },
+    {
+      "risk": 1,
+      "country": "PK",
+      "date": "2017-01-01",
+      "count": 48158,
+      "count_amplified": 1974478
+    },
+    {
+      "risk": 1,
+      "country": "PL",
+      "date": "2017-01-01",
+      "count": 90160,
+      "count_amplified": 3696560
+    },
+    {
+      "risk": 1,
+      "country": "PM",
+      "date": "2017-01-01",
+      "count": 26,
+      "count_amplified": 1066
+    },
+    {
+      "risk": 1,
+      "country": "PR",
+      "date": "2017-01-01",
+      "count": 16852,
+      "count_amplified": 690932
+    },
+    {
+      "risk": 1,
+      "country": "PS",
+      "date": "2017-01-01",
+      "count": 2835,
+      "count_amplified": 116235
+    },
+    {
+      "risk": 1,
+      "country": "PT",
+      "date": "2017-01-01",
+      "count": 52271,
+      "count_amplified": 2143111
+    },
+    {
+      "risk": 1,
+      "country": "PW",
+      "date": "2017-01-01",
+      "count": 25,
+      "count_amplified": 1025
+    },
+    {
+      "risk": 1,
+      "country": "PY",
+      "date": "2017-01-01",
+      "count": 25181,
+      "count_amplified": 1032421
+    },
+    {
+      "risk": 1,
+      "country": "QA",
+      "date": "2017-01-01",
+      "count": 11986,
+      "count_amplified": 491426
+    },
+    {
+      "risk": 1,
+      "country": "RE",
+      "date": "2017-01-01",
+      "count": 1647,
+      "count_amplified": 67527
+    },
+    {
+      "risk": 1,
+      "country": "RO",
+      "date": "2017-01-01",
+      "count": 111439,
+      "count_amplified": 4568999
+    },
+    {
+      "risk": 1,
+      "country": "RS",
+      "date": "2017-01-01",
+      "count": 22654,
+      "count_amplified": 928814
+    },
+    {
+      "risk": 1,
+      "country": "RU",
+      "date": "2017-01-01",
+      "count": 860820,
+      "count_amplified": 35293620
+    },
+    {
+      "risk": 1,
+      "country": "RW",
+      "date": "2017-01-01",
+      "count": 3276,
+      "count_amplified": 134316
+    },
+    {
+      "risk": 1,
+      "country": "SA",
+      "date": "2017-01-01",
+      "count": 17640,
+      "count_amplified": 723240
+    },
+    {
+      "risk": 1,
+      "country": "SB",
+      "date": "2017-01-01",
+      "count": 357,
+      "count_amplified": 14637
+    },
+    {
+      "risk": 1,
+      "country": "SC",
+      "date": "2017-01-01",
+      "count": 435,
+      "count_amplified": 17835
+    },
+    {
+      "risk": 1,
+      "country": "SD",
+      "date": "2017-01-01",
+      "count": 849,
+      "count_amplified": 34809
+    },
+    {
+      "risk": 1,
+      "country": "SE",
+      "date": "2017-01-01",
+      "count": 117477,
+      "count_amplified": 4816557
+    },
+    {
+      "risk": 1,
+      "country": "SG",
+      "date": "2017-01-01",
+      "count": 41843,
+      "count_amplified": 1715563
+    },
+    {
+      "risk": 1,
+      "country": "SI",
+      "date": "2017-01-01",
+      "count": 14099,
+      "count_amplified": 578059
+    },
+    {
+      "risk": 1,
+      "country": "SK",
+      "date": "2017-01-01",
+      "count": 23278,
+      "count_amplified": 954398
+    },
+    {
+      "risk": 1,
+      "country": "SL",
+      "date": "2017-01-01",
+      "count": 97,
+      "count_amplified": 3977
+    },
+    {
+      "risk": 1,
+      "country": "SM",
+      "date": "2017-01-01",
+      "count": 346,
+      "count_amplified": 14186
+    },
+    {
+      "risk": 1,
+      "country": "SN",
+      "date": "2017-01-01",
+      "count": 1646,
+      "count_amplified": 67486
+    },
+    {
+      "risk": 1,
+      "country": "SO",
+      "date": "2017-01-01",
+      "count": 242,
+      "count_amplified": 9922
+    },
+    {
+      "risk": 1,
+      "country": "SR",
+      "date": "2017-01-01",
+      "count": 443,
+      "count_amplified": 18163
+    },
+    {
+      "risk": 1,
+      "country": "SS",
+      "date": "2017-01-01",
+      "count": 163,
+      "count_amplified": 6683
+    },
+    {
+      "risk": 1,
+      "country": "ST",
+      "date": "2017-01-01",
+      "count": 52,
+      "count_amplified": 2132
+    },
+    {
+      "risk": 1,
+      "country": "SV",
+      "date": "2017-01-01",
+      "count": 9405,
+      "count_amplified": 385605
+    },
+    {
+      "risk": 1,
+      "country": "SX",
+      "date": "2017-01-01",
+      "count": 566,
+      "count_amplified": 23206
+    },
+    {
+      "risk": 1,
+      "country": "SY",
+      "date": "2017-01-01",
+      "count": 449,
+      "count_amplified": 18409
+    },
+    {
+      "risk": 1,
+      "country": "SZ",
+      "date": "2017-01-01",
+      "count": 195,
+      "count_amplified": 7995
+    },
+    {
+      "risk": 1,
+      "country": "T",
+      "date": "2017-01-01",
+      "count": 11472791,
+      "count_amplified": 470384431
+    },
+    {
+      "risk": 1,
+      "country": "TC",
+      "date": "2017-01-01",
+      "count": 48,
+      "count_amplified": 1968
+    },
+    {
+      "risk": 1,
+      "country": "TD",
+      "date": "2017-01-01",
+      "count": 133,
+      "count_amplified": 5453
+    },
+    {
+      "risk": 1,
+      "country": "TG",
+      "date": "2017-01-01",
+      "count": 474,
+      "count_amplified": 19434
+    },
+    {
+      "risk": 1,
+      "country": "TH",
+      "date": "2017-01-01",
+      "count": 159943,
+      "count_amplified": 6557663
+    },
+    {
+      "risk": 1,
+      "country": "TJ",
+      "date": "2017-01-01",
+      "count": 983,
+      "count_amplified": 40303
+    },
+    {
+      "risk": 1,
+      "country": "TL",
+      "date": "2017-01-01",
+      "count": 1386,
+      "count_amplified": 56826
+    },
+    {
+      "risk": 1,
+      "country": "TM",
+      "date": "2017-01-01",
+      "count": 1067,
+      "count_amplified": 43747
+    },
+    {
+      "risk": 1,
+      "country": "TN",
+      "date": "2017-01-01",
+      "count": 3107,
+      "count_amplified": 127387
+    },
+    {
+      "risk": 1,
+      "country": "TO",
+      "date": "2017-01-01",
+      "count": 74,
+      "count_amplified": 3034
+    },
+    {
+      "risk": 1,
+      "country": "TR",
+      "date": "2017-01-01",
+      "count": 67932,
+      "count_amplified": 2785212
+    },
+    {
+      "risk": 1,
+      "country": "TT",
+      "date": "2017-01-01",
+      "count": 3229,
+      "count_amplified": 132389
+    },
+    {
+      "risk": 1,
+      "country": "TV",
+      "date": "2017-01-01",
+      "count": 3,
+      "count_amplified": 123
+    },
+    {
+      "risk": 1,
+      "country": "TW",
+      "date": "2017-01-01",
+      "count": 67812,
+      "count_amplified": 2780292
+    },
+    {
+      "risk": 1,
+      "country": "TZ",
+      "date": "2017-01-01",
+      "count": 3674,
+      "count_amplified": 150634
+    },
+    {
+      "risk": 1,
+      "country": "UA",
+      "date": "2017-01-01",
+      "count": 77564,
+      "count_amplified": 3180124
+    },
+    {
+      "risk": 1,
+      "country": "UG",
+      "date": "2017-01-01",
+      "count": 1716,
+      "count_amplified": 70356
+    },
+    {
+      "risk": 1,
+      "country": "US",
+      "date": "2017-01-01",
+      "count": 2585757,
+      "count_amplified": 106016037
+    },
+    {
+      "risk": 1,
+      "country": "UY",
+      "date": "2017-01-01",
+      "count": 22151,
+      "count_amplified": 908191
+    },
+    {
+      "risk": 1,
+      "country": "UZ",
+      "date": "2017-01-01",
+      "count": 4381,
+      "count_amplified": 179621
+    },
+    {
+      "risk": 1,
+      "country": "VA",
+      "date": "2017-01-01",
+      "count": 3,
+      "count_amplified": 123
+    },
+    {
+      "risk": 1,
+      "country": "VC",
+      "date": "2017-01-01",
+      "count": 272,
+      "count_amplified": 11152
+    },
+    {
+      "risk": 1,
+      "country": "VE",
+      "date": "2017-01-01",
+      "count": 11409,
+      "count_amplified": 467769
+    },
+    {
+      "risk": 1,
+      "country": "VG",
+      "date": "2017-01-01",
+      "count": 624,
+      "count_amplified": 25584
+    },
+    {
+      "risk": 1,
+      "country": "VI",
+      "date": "2017-01-01",
+      "count": 1352,
+      "count_amplified": 55432
+    },
+    {
+      "risk": 1,
+      "country": "VN",
+      "date": "2017-01-01",
+      "count": 112876,
+      "count_amplified": 4627916
+    },
+    {
+      "risk": 1,
+      "country": "VU",
+      "date": "2017-01-01",
+      "count": 266,
+      "count_amplified": 10906
+    },
+    {
+      "risk": 1,
+      "country": "WF",
+      "date": "2017-01-01",
+      "count": 30,
+      "count_amplified": 1230
+    },
+    {
+      "risk": 1,
+      "country": "WS",
+      "date": "2017-01-01",
+      "count": 286,
+      "count_amplified": 11726
+    },
+    {
+      "risk": 1,
+      "country": "XY",
+      "date": "2017-01-01",
+      "count": 5241,
+      "count_amplified": 214881
+    },
+    {
+      "risk": 1,
+      "country": "YE",
+      "date": "2017-01-01",
+      "count": 81,
+      "count_amplified": 3321
+    },
+    {
+      "risk": 1,
+      "country": "YT",
+      "date": "2017-01-01",
+      "count": 120,
+      "count_amplified": 4920
+    },
+    {
+      "risk": 1,
+      "country": "ZA",
+      "date": "2017-01-01",
+      "count": 49289,
+      "count_amplified": 2020849
+    },
+    {
+      "risk": 1,
+      "country": "ZM",
+      "date": "2017-01-01",
+      "count": 5045,
+      "count_amplified": 206845
+    },
+    {
+      "risk": 1,
+      "country": "ZW",
+      "date": "2017-01-01",
+      "count": 4457,
+      "count_amplified": 182737
+    }
+  ]
+}
