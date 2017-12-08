@@ -1,0 +1,51 @@
+{
+    "data": [
+        {
+            "orientation": "h",
+            "marker": {
+                "color": "rgba(55, 128, 191, 0.6)",
+                "line": {
+                    "color": "rgba(55, 128, 191, 1.0)",
+                    "width": 1
+                }
+            },
+            "y": [
+                "giraffes",
+                "orangutans",
+                "monkeys"
+            ],
+            "x": [
+                20,
+                14,
+                23
+            ],
+            "type": "bar",
+            "name": "SF Zoo"
+        },
+        {
+            "orientation": "h",
+            "marker": {
+                "color": "rgba(255, 153, 51, 0.6)",
+                "line": {
+                    "color": "rgba(255, 153, 51, 1.0)",
+                    "width": 1
+                }
+            },
+            "y": [
+                "giraffes",
+                "orangutans",
+                "monkeys"
+            ],
+            "x": [
+                12,
+                18,
+                29
+            ],
+            "type": "bar",
+            "name": "LA Zoo"
+        }
+    ],
+    "layout": {
+        "barmode": "stack"
+    }
+}
