@@ -14,6 +14,31 @@ import {
 export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
+    fetch(`/static/scripts/publicAnnotation.json`)
+    .then( (response) => {
+        return response.json()
+    })
+    .then( (json) => {
+      console.log (json);
+        this.setState({
+            user: json
+        })
+    });
+    var annotations = [{
+      type: 'date',
+      x: '2017-04-21',
+      y: 0,
+      xref: 'x',
+      yref: 'y',
+      //text: 'Test Annotation',
+      yanchor: 'middle',
+      bordercolor: '#c7c7c7',
+      opacity: 0.8,
+      showarrow: true,
+      arrowhead: 7,
+      ax: 0,
+      ay: -200 // sets line height to graphs max
+    }];
     this.state = {
       cubeByRiskByCountry: {},
       graphOptions: {
@@ -32,7 +57,8 @@ export class CountryPerformanceOnRisk extends Component {
         font: {
           size: 9,
           color: '#7f7f7f'
-        }
+        },
+        annotations: annotations
       },
       countries: {},
       selectorConfig: [],

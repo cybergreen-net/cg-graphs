@@ -17,36 +17,38 @@ import ChoroplethMap from './components/ChoroplethMap';
 
 
 let reduxStore = {
-  entities: {
-    countries: countries,
-    risks: risks,
-    asn: asn,
-    cubeByRiskByCountry: {},
-    cubeByRiskByASN: {},
-    cubeByRiskByDate: {},
-    layouts: {
-      legend: {x:0, y:1},
-      height: 200,
-      margin: {
-        l: 40,r: 30,
-        b: 30,t: 0
-      },
-      xaxis: {
-        gridcolor: 'transparent',
-      },
-      yaxis: {
-        title: 'Count of infected devices'
-      },
-      font: {
-        size: 9,
-        color: '#7f7f7f'
-      }
-    }
-  },
-  countryPerformanceOnRiskViews: countryPerformanceOnRiskViews,
-  ASPerformanceViews: ASPerformanceViews,
-  DdosPerformanceViews: DdosPerformanceViews,
-  ChoroplethMapViews: ChoroplethMapViews
+    entities: {
+        countries: countries,
+        risks: risks,
+        asn: asn,
+        cubeByRiskByCountry: {},
+        cubeByRiskByASN: {},
+        cubeByRiskByDate: {},
+        layouts: {
+            legend: { x: 0, y: 1 },
+            height: 200,
+            margin: {
+                l: 40,
+                r: 30,
+                b: 30,
+                t: 0
+            },
+            xaxis: {
+                gridcolor: 'transparent',
+            },
+            yaxis: {
+                title: 'Count of infected devices'
+            },
+            font: {
+                size: 9,
+                color: '#7f7f7f'
+            },
+        }
+    },
+    countryPerformanceOnRiskViews: countryPerformanceOnRiskViews,
+    ASPerformanceViews: ASPerformanceViews,
+    DdosPerformanceViews: DdosPerformanceViews,
+    ChoroplethMapViews: ChoroplethMapViews
 }
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
