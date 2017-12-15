@@ -14,31 +14,66 @@ import {
 export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
+    let annotations = [];
+    let annotationsText = [];
     fetch(`/static/scripts/publicAnnotation.json`)
     .then( (response) => {
         return response.json()
     })
-    .then( (json) => {
-      console.log (json);
-        this.setState({
-            user: json
-        })
+    .then( (annData) => {
+      console.log (annData);
+        for (var ann_num in annData.notes){
+          console.log(props.view);
+          if (annData.notes[ann_num].risk_id == props.view.risk){
+              console.log(ann_num);
+              console.log(annData.notes[ann_num].annotation_date);
+
+              annotations.push ({
+                type: 'date',
+                x: annData.notes[ann_num].annotation_date,
+                y: 0,
+                xref: 'x',
+                yref: 'y',
+                text: '',//annData.notes[ann_num].annotation,
+                yanchor: 'middle',
+                hovermode:'closest',
+                bordercolor: '#0000FF',
+                borderpad: 0,
+                borderwidth: 0,
+                showarrow: true,
+                arrowhead: 7,
+                arrowsize: 1,
+                arrowwidth: 0.5,
+                ax: 0,
+                ay: -200 // sets line height to graphs max
+            });
+              //Needs Work won't display yet
+              annotations.push ({
+                type: 'date',
+                x: annData.notes[ann_num].annotation_date,
+                y: 80,
+                xref: 'x',
+                yref: 'y',
+                width: 165,
+                xshift: -90,
+                yshift: 80,
+                //height: 100,
+                align: 'left',
+                valign: 'top',
+                font: {size:8, color:'white'},
+                text: annData.notes[ann_num].annotation_date + '<br>' + annData.notes[ann_num].annotation,
+                bordercolor: '#0000FF',
+                bgcolor: '#0000FF',
+                borderpad: 5,
+                opacity: 0.8,
+                showarrow: false,
+                //ax: -75,
+                //axref: -10,
+                //ay: -100 // sets line height to graphs max
+              });
+            }
+        }
     });
-    var annotations = [{
-      type: 'date',
-      x: '2017-04-21',
-      y: 0,
-      xref: 'x',
-      yref: 'y',
-      //text: 'Test Annotation',
-      yanchor: 'middle',
-      bordercolor: '#c7c7c7',
-      opacity: 0.8,
-      showarrow: true,
-      arrowhead: 7,
-      ax: 0,
-      ay: -200 // sets line height to graphs max
-    }];
     this.state = {
       cubeByRiskByCountry: {},
       graphOptions: {
@@ -58,7 +93,7 @@ export class CountryPerformanceOnRisk extends Component {
           size: 9,
           color: '#7f7f7f'
         },
-        annotations: annotations
+        annotations: annotations,
       },
       countries: {},
       selectorConfig: [],
