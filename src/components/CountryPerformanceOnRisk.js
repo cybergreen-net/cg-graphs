@@ -15,7 +15,6 @@ export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
     let annotations = [];
-    let annotationsText = [];
     fetch(`/static/scripts/publicAnnotation.json`)
     .then( (response) => {
         return response.json()
@@ -37,43 +36,57 @@ export class CountryPerformanceOnRisk extends Component {
                 text: '',//annData.notes[ann_num].annotation,
                 yanchor: 'middle',
                 hovermode:'closest',
-                bordercolor: '#0000FF',
+                bordercolor: '#3FE99E',
                 borderpad: 0,
                 borderwidth: 0,
                 showarrow: true,
                 arrowhead: 7,
-                arrowsize: 1,
+                arrowsize: 3,
                 arrowwidth: 0.5,
                 ax: 0,
-                ay: -200 // sets line height to graphs max
+                ay: 0 // sets line height to graphs max
             });
               //Needs Work won't display yet
               annotations.push ({
                 type: 'date',
                 x: annData.notes[ann_num].annotation_date,
-                y: 80,
+                y:0,
+                yclick: 0,
                 xref: 'x',
                 yref: 'y',
-                width: 165,
-                xshift: -90,
-                yshift: 80,
-                //height: 100,
-                align: 'left',
-                valign: 'top',
-                font: {size:8, color:'white'},
-                text: annData.notes[ann_num].annotation_date + '<br>' + annData.notes[ann_num].annotation,
-                bordercolor: '#0000FF',
-                bgcolor: '#0000FF',
-                borderpad: 5,
+                width: 60,
+                height: 25,
+                xshift: 0,
+                yshift: 20,
+                align: 'middle',
+                valign: 'center',
+                font: {size:8, color:'grey'},
+                text: 'annotation text',//annData.notes[ann_num].annotation_date + '<br>' + annData.notes[ann_num].annotation,
+                bordercolor: '#3FE99E',
+                bgcolor: '#3FE99E',
+                borderpad: 0,
                 opacity: 0.8,
                 showarrow: false,
-                //ax: -75,
-                //axref: -10,
-                //ay: -100 // sets line height to graphs max
+                //testing hover modes 
+                name: 'note',
+                //visible: false,
+                //hovertext: 'text',
+                ax: 0,
+                ay:0,
               });
             }
         }
     });
+    // attempted to pull annotations from json with annotations.annData.notes[annotations.ann_num].annotation_date
+    // this.props.view.annotations = {
+    //   x: [5, 25, 45],
+    //   y: [0, 0, 0],
+    //   mode: 'markers+text',
+    //   name: 'Text',
+    //   text: ['Text G', 'Text H', 'Text I'],
+    //   textposition: 'top' 
+    //   }
+
     this.state = {
       cubeByRiskByCountry: {},
       graphOptions: {
@@ -93,7 +106,8 @@ export class CountryPerformanceOnRisk extends Component {
           size: 9,
           color: '#7f7f7f'
         },
-        annotations: annotations,
+        hovermode: 'note+y',
+        annotations: annotations
       },
       countries: {},
       selectorConfig: [],
@@ -123,7 +137,8 @@ export class CountryPerformanceOnRisk extends Component {
             props.cubeByRiskByCountry,
             props.view.measure,
             props.view.normMeasure,
-            props.view.unitDevider
+            props.view.unitDevider,
+            //props.view.annotations //added here to test if props loads inside map
           )
         }
         return {}
@@ -131,7 +146,12 @@ export class CountryPerformanceOnRisk extends Component {
       plotlyData.forEach((trace, idx) => {
         trace['line'] = {color: lineColors[idx]}
       })
-      state['plotlyData'] = plotlyData
+
+      /* Write up more console logs to pinpoint where data is created */
+      console.log('plotlyData view', props.view.annotations)
+      console.log('plotlyData', plotlyData)
+      state['plotlyData'] = plotlyData //.push(props.view.annotations) //push overrides the x values of the graph
+      console.log('state plotlyData', state['plotlyData'])
     }
     if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
       state.graphOptions = update(this.state.graphOptions, {
@@ -335,3 +355,4 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps)(CountryPerformanceOnRisk)
+
