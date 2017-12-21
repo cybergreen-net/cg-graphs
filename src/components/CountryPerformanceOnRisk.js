@@ -14,6 +14,8 @@ import {
 export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
     super(props)
+    let annotation_dates = [];
+    let annotation_notes = [];
     let annotations = [];
     fetch(`/static/scripts/publicAnnotation.json`)
     .then( (response) => {
@@ -26,7 +28,8 @@ export class CountryPerformanceOnRisk extends Component {
           if (annData.notes[ann_num].risk_id == props.view.risk){
               console.log(ann_num);
               console.log(annData.notes[ann_num].annotation_date);
-
+              annotation_dates.push(annData.notes[ann_num].annotation_date);
+              annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
               annotations.push ({
                 type: 'date',
                 x: annData.notes[ann_num].annotation_date,
@@ -47,7 +50,7 @@ export class CountryPerformanceOnRisk extends Component {
                 ay: 0 // sets line height to graphs max
             });
               //Needs Work won't display yet
-              annotations.push ({
+              /*annotations.push ({
                 type: 'date',
                 x: annData.notes[ann_num].annotation_date,
                 y:0,
@@ -61,7 +64,7 @@ export class CountryPerformanceOnRisk extends Component {
                 align: 'middle',
                 valign: 'center',
                 font: {size:8, color:'grey'},
-                text: 'annotation text',//annData.notes[ann_num].annotation_date + '<br>' + annData.notes[ann_num].annotation,
+                text: annData.notes[ann_num].annotation_date + '<br>' + annData.notes[ann_num].annotation,
                 bordercolor: '#3FE99E',
                 bgcolor: '#3FE99E',
                 borderpad: 0,
@@ -73,19 +76,10 @@ export class CountryPerformanceOnRisk extends Component {
                 //hovertext: 'text',
                 ax: 0,
                 ay:0,
-              });
+              });*/
             }
         }
     });
-    // attempted to pull annotations from json with annotations.annData.notes[annotations.ann_num].annotation_date
-    // this.props.view.annotations = {
-    //   x: [5, 25, 45],
-    //   y: [0, 0, 0],
-    //   mode: 'markers+text',
-    //   name: 'Text',
-    //   text: ['Text G', 'Text H', 'Text I'],
-    //   textposition: 'top' 
-    //   }
 
     this.state = {
       cubeByRiskByCountry: {},
@@ -109,6 +103,8 @@ export class CountryPerformanceOnRisk extends Component {
         hovermode: 'note+y',
         annotations: annotations
       },
+      annotation_dates: annotation_dates,
+      annotation_notes: annotation_notes,
       countries: {},
       selectorConfig: [],
       plotlyData: []
@@ -139,13 +135,25 @@ export class CountryPerformanceOnRisk extends Component {
             props.view.normMeasure,
             props.view.unitDevider,
             //props.view.annotations //added here to test if props loads inside map
-          )
+            )
         }
         return {}
       }).filter(value => {return value !== undefined})
       plotlyData.forEach((trace, idx) => {
         trace['line'] = {color: lineColors[idx]}
       })
+      plotlyData.splice(1, 0, {
+        //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+        x: this.state.annotation_dates,
+        y: this.state.annotation_dates.map(function (x){ return 0 }),
+        //y: [0, 0, 0],
+        mode: 'markers',
+        name: 'Annotation',
+        //text: ['Text G', 'Text H', 'Text I'],
+        text: this.state.annotation_notes,
+        textposition: 'bottom',
+        type: 'date'
+      });
 
       /* Write up more console logs to pinpoint where data is created */
       console.log('plotlyData view', props.view.annotations)
