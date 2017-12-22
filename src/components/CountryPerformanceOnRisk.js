@@ -16,6 +16,7 @@ export class CountryPerformanceOnRisk extends Component {
     super(props)
     let annotation_dates = [];
     let annotation_notes = [];
+    let annotations = [];
     fetch(`/static/scripts/publicAnnotation.json`)
     .then( (response) => {
         return response.json()
@@ -29,6 +30,25 @@ export class CountryPerformanceOnRisk extends Component {
               console.log(annData.notes[ann_num].annotation_date);
               annotation_dates.push(annData.notes[ann_num].annotation_date);
               annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
+              annotations.push ({
+                type: 'date',
+                x: annData.notes[ann_num].annotation_date,
+                y:0,
+                xref: 'x',
+                yref: 'y',
+                align: 'middle',
+                valign: 'center',
+                text: '',
+                borderwidth: 0,
+                showarrow: true,
+                arrowsize:0,
+                arrowwidth: 1,
+                arrowcolor: '#FC9F5B',
+                arrowhead: 6,
+                opacity: 0.8,
+                ax: 0,
+                ay:-200,
+              });
             }
         }
     });
@@ -53,6 +73,7 @@ export class CountryPerformanceOnRisk extends Component {
           color: '#7f7f7f'
         },
         showlegend: false,
+        annotations: annotations,
       },
       annotation_dates: annotation_dates,
       annotation_notes: annotation_notes,
@@ -100,19 +121,14 @@ export class CountryPerformanceOnRisk extends Component {
         //y: [0, 0, 0],
         mode: 'markers',
         marker: {
-          // format textbox inside here https://plot.ly/javascript/reference/#scatter-marker
-          textposition:'middle center',
-          outlinecolor : '#222222',
           color: 'rgba(252, 159, 91, .8)', size: 8,
         name: 'Annotation'},
+        hovermode:'y',
         hoverlabel:{
           bgcolor: '#FC9F5B',
           bordercolor: '#FBD1A2'},
         hoverinfo:'text',
-        //text: ['Text G', 'Text H', 'Text I'],
         text: this.state.annotation_notes,
-        //textposition: 'bottom',
-        //type: 'date'
       });
 
       /* Write up more console logs to pinpoint where data is created */
