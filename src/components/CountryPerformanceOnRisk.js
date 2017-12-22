@@ -33,50 +33,22 @@ export class CountryPerformanceOnRisk extends Component {
               annotations.push ({
                 type: 'date',
                 x: annData.notes[ann_num].annotation_date,
-                y: 0,
-                xref: 'x',
-                yref: 'y',
-                text: '',//annData.notes[ann_num].annotation,
-                yanchor: 'middle',
-                hovermode:'closest',
-                bordercolor: '#3FE99E',
-                borderpad: 0,
-                borderwidth: 0,
-                showarrow: true,
-                arrowhead: 7,
-                arrowsize: 3,
-                arrowwidth: 0.5,
-                ax: 0,
-                ay: 0 // sets line height to graphs max
-            });
-              //Needs Work won't display yet
-              /*annotations.push ({
-                type: 'date',
-                x: annData.notes[ann_num].annotation_date,
                 y:0,
-                yclick: 0,
                 xref: 'x',
                 yref: 'y',
-                width: 60,
-                height: 25,
-                xshift: 0,
-                yshift: 20,
                 align: 'middle',
                 valign: 'center',
-                font: {size:8, color:'grey'},
-                text: annData.notes[ann_num].annotation_date + '<br>' + annData.notes[ann_num].annotation,
-                bordercolor: '#3FE99E',
-                bgcolor: '#3FE99E',
-                borderpad: 0,
+                text: '',
+                borderwidth: 0,
+                showarrow: true,
+                arrowsize:0,
+                arrowwidth: 1,
+                arrowcolor: '#FC9F5B',
+                arrowhead: 6,
                 opacity: 0.8,
-                showarrow: false,
-                //testing hover modes 
-                name: 'note',
-                //visible: false,
-                //hovertext: 'text',
                 ax: 0,
-                ay:0,
-              });*/
+                ay:-200,
+              });
             }
         }
     });
@@ -100,8 +72,8 @@ export class CountryPerformanceOnRisk extends Component {
           size: 9,
           color: '#7f7f7f'
         },
-        hovermode: 'note+y',
-        annotations: annotations
+        showlegend: false,
+        annotations: annotations,
       },
       annotation_dates: annotation_dates,
       annotation_notes: annotation_notes,
@@ -135,7 +107,7 @@ export class CountryPerformanceOnRisk extends Component {
             props.view.normMeasure,
             props.view.unitDevider,
             //props.view.annotations //added here to test if props loads inside map
-            )
+          )
         }
         return {}
       }).filter(value => {return value !== undefined})
@@ -145,14 +117,20 @@ export class CountryPerformanceOnRisk extends Component {
       plotlyData.splice(1, 0, {
         //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
         x: this.state.annotation_dates,
-        y: this.state.annotation_dates.map(function (x){ return 0 }),
+        y: this.state.annotation_dates.map(function (x){ return 0}),
         //y: [0, 0, 0],
         mode: 'markers',
-        name: 'Annotation',
-        //text: ['Text G', 'Text H', 'Text I'],
+        marker: {
+          color: 'rgba(252, 159, 91, .8)', size: 8,
+          font:{color:'#FBD1A2'},
+          name: 'Annotation',
+        },
+        hoverlabel:{
+          bgcolor: '#FC9F5B',
+          bordercolor: '#FBD1A2'
+        },
+        hoverinfo:'text',
         text: this.state.annotation_notes,
-        textposition: 'bottom',
-        type: 'date'
       });
 
       /* Write up more console logs to pinpoint where data is created */
@@ -363,4 +341,3 @@ const mapStateToProps = (state) => {
 
 
 export default connect(mapStateToProps)(CountryPerformanceOnRisk)
-
