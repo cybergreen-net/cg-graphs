@@ -122,13 +122,11 @@ export class CountryPerformanceOnRisk extends Component {
         mode: 'markers',
         marker: {
           color: 'rgba(252, 159, 91, .8)', size: 8,
-          font:{color:'#FBD1A2'},
-          name: 'Annotation',
-        },
+        name: 'Annotation'},
+        hovermode:'y',
         hoverlabel:{
           bgcolor: '#FC9F5B',
-          bordercolor: '#FBD1A2'
-        },
+          bordercolor: '#FBD1A2'},
         hoverinfo:'text',
         text: this.state.annotation_notes,
       });
