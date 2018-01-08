@@ -126,7 +126,7 @@ export class CountryPerformanceOnRisk extends Component {
         hovermode:'y',
         hoverlabel:{
           bgcolor: '#FC9F5B',
-          bordercolor: '#FBD1A2'},
+          bordercolor: '#000000'},
         hoverinfo:'text',
         text: this.state.annotation_notes,
       });

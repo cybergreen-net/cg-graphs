@@ -11,6 +11,44 @@ import { fetchAsDataIfNeeded, AsIsSelected } from '../actions/ASactions';
 export class ASPerformance extends Component {
   constructor(props) {
     super(props)
+    let annotation_dates = [];
+    let annotation_notes = [];
+    let annotations = [];
+    fetch(`/static/scripts/publicAnnotation.json`)
+    .then( (response) => {
+        return response.json()
+    })
+    .then( (annData) => {
+      console.log (annData);
+        for (var ann_num in annData.notes){
+          console.log(props.view);
+          if (annData.notes[ann_num].risk_id == props.view.risk){
+              console.log(ann_num);
+              console.log(annData.notes[ann_num].annotation_date);
+              annotation_dates.push(annData.notes[ann_num].annotation_date);
+              annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
+              annotations.push ({
+                type: 'date',
+                x: annData.notes[ann_num].annotation_date,
+                y:0,
+                xref: 'x',
+                yref: 'y',
+                align: 'middle',
+                valign: 'center',
+                text: '',
+                borderwidth: 0,
+                showarrow: true,
+                arrowsize:0,
+                arrowwidth: 1,
+                arrowcolor: '#FC9F5B',
+                arrowhead: 6,
+                opacity: 0.8,
+                ax: 0,
+                ay:-200,
+              });
+            }
+        }
+    });
     this.state = {
       plotlyData: [],
       graphOptions: {
@@ -26,10 +64,14 @@ export class ASPerformance extends Component {
         font: {
           size: 9,
           color: '#7f7f7f'
-        }
+        },
+        annotations: annotations,
+        },
+        annotation_dates: annotation_dates,
+        annotation_notes: annotation_notes,
       }
     }
-  }
+
 
 
   computeState(props=this.props) {
