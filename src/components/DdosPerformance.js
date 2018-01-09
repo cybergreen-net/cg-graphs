@@ -1,39 +1,88 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {
+  Component
+} from 'react';
+import {
+  connect
+} from 'react-redux';
 import PlotlyGraph from './Plot.js';
-import { fetchDataIfNeeded } from '../actions/cubeActions';
+import {
+  fetchDataIfNeeded
+} from '../actions/cubeActions';
 //front page graph
 export class DdosPerformance extends Component {
   constructor(props) {
     super(props)
+
+    let annotation_dates = [];
+    let annotation_notes = [];
+    let annotations = [];
+    fetch(`/static/scripts/publicAnnotation.json`)
+      .then((response) => {
+        return response.json()
+      })
+      .then((annData) => {
+        console.log(annData);
+        for (var ann_num in annData.notes) {
+          console.log(props.view);
+          if (annData.notes[ann_num].risk_id == props.view.risk) {
+            console.log(ann_num);
+            console.log(annData.notes[ann_num].annotation_date);
+            annotation_dates.push(annData.notes[ann_num].annotation_date);
+            annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
+            annotations.push({
+              type: 'date',
+              x: annData.notes[ann_num].annotation_date,
+              y: 0,
+              xref: 'x',
+              yref: 'y',
+              align: 'middle',
+              valign: 'center',
+              text: '',
+              borderwidth: 0,
+              showarrow: true,
+              arrowsize: 0,
+              arrowwidth: 1,
+              arrowcolor: '#FC9F5B',
+              arrowhead: 6,
+              opacity: 0.8,
+              ax: 0,
+              ay: -200,
+            });
+          }
+        }
+      });
     this.state = {
       graphOptions: {
         height: 600,
         xaxis: {
-         gridcolor: 'transparent',
+          gridcolor: 'transparent',
         },
         yaxis: {
-         title: this.props.view.yLabel
+          title: this.props.view.yLabel
         },
         barmode: 'stack',
         annotations: [{
-          xref: 'paper',
-          yref: 'paper',
-          x: 1.056,
-          xanchor: 'left',
-          y: 0.99,
-          yanchor: 'bottom',
-          text: 'Risks',
-          legendtitle: true,
-          showarrow: false
-        }]
+            xref: 'paper',
+            yref: 'paper',
+            x: 1.056,
+            xanchor: 'left',
+            y: 0.99,
+            yanchor: 'bottom',
+            text: 'Risks',
+            legendtitle: true,
+            showarrow: false
+          },
+          annotations: annotations
+        ]
       },
+      annotation_dates: annotation_dates,
+      annotation_notes: annotation_notes,
       plotlyData: []
     }
   }
 
 
-  computeState(props=this.props) {
+  computeState(props = this.props) {
     let state = {}
     let plotlyData = []
     let barColors = [
@@ -50,8 +99,30 @@ export class DdosPerformance extends Component {
           props.view.measure,
           barColors[idx]
         )
-      }).filter(value => {return value !== undefined})
-
+      }).filter(value => {
+        return value !== undefined
+      })
+      plotlyData.splice(1, 0, {
+        //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+        x: this.state.annotation_dates,
+        y: this.state.annotation_dates.map(function(x) {
+          return 0
+        }),
+        //y: [0, 0, 0],
+        mode: 'markers',
+        marker: {
+          color: 'rgba(252, 159, 91, .8)',
+          size: 8,
+          name: 'Annotation'
+        },
+        hovermode: 'y',
+        hoverlabel: {
+          bgcolor: '#FC9F5B',
+          bordercolor: '#000000'
+        },
+        hoverinfo: 'text',
+        text: this.state.annotation_notes,
+      });
       state['plotlyData'] = plotlyData
     }
 
@@ -84,20 +155,22 @@ export class DdosPerformance extends Component {
 
   convertToPlotlySeries(countryID, risk, cubeByRiskByCountry, measure, color) {
     var dataTable = cubeByRiskByCountry[risk.id][countryID];
-    if(dataTable) {
+    if (dataTable) {
       return {
         x: dataTable.map(row => row.date),
-        y: dataTable.map(row => (row[measure] || row.count )/ 1000000),
+        y: dataTable.map(row => (row[measure] || row.count) / 1000000),
         name: risk.title,
         type: 'bar',
-        marker: {color: color}
+        marker: {
+          color: color
+        }
       }
     }
   }
 
 
   componentDidMount() {
-    this.props.view.risksToView.forEach(risk =>{
+    this.props.view.risksToView.forEach(risk => {
       this.props.dispatch(fetchDataIfNeeded(
         this.props.view.country,
         risk.id,
@@ -114,13 +187,20 @@ export class DdosPerformance extends Component {
 
 
   render() {
-    return (
-      <div>
-        <PlotlyGraph
-          data={this.state.plotlyData}
-          graphOptions={this.state.graphOptions}
-          graphID={this.props.view.id}/>
-      </div>
+    return ( <
+      div >
+      <
+      PlotlyGraph data = {
+        this.state.plotlyData
+      }
+      graphOptions = {
+        this.state.graphOptions
+      }
+      graphID = {
+        this.props.view.id
+      }
+      /> < /
+      div >
     );
   }
 }
