@@ -101,7 +101,23 @@ export class ASPerformance extends Component {
     }
     return {}
   }
-
+  // this code needs to go above somehow
+  // plotlyData.splice(1, 0, {
+  //       //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+  //       x: this.state.annotation_dates,
+  //       y: this.state.annotation_dates.map(function (x){ return 0}),
+  //       //y: [0, 0, 0],
+  //       mode: 'markers',
+  //       marker: {
+  //         color: 'rgba(252, 159, 91, .8)', size: 8,
+  //       name: 'Annotation'},
+  //       hovermode:'y',
+  //       hoverlabel:{
+  //         bgcolor: '#FC9F5B',
+  //         bordercolor: '#000000'},
+  //       hoverinfo:'text',
+  //       text: this.state.annotation_notes,
+  //     });
 
   convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
     var dataTable = dataFromCube[countryID+'/'+riskID+'/'+asID];

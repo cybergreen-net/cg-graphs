@@ -94,30 +94,24 @@ export class SourceOfInfection extends Component {
         }
         plotlyData.push(trace)
       })
-    // needs to be fixed does not work 
-    //   plotlyData.splice(1, 0, {
-    //     //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
-    //     x: this.state.annotation_dates,
-    //     y: this.state.annotation_dates.map(function (x){ return 0}),
-    //     //y: [0, 0, 0],
-    //     mode: 'markers',
-    //     marker: {
-    //       color: 'rgba(252, 159, 91, .8)', size: 8,
-    //     name: 'Annotation'},
-    //     hovermode:'y',
-    //     hoverlabel:{
-    //       bgcolor: '#FC9F5B',
-    //       bordercolor: '#000000'},
-    //     hoverinfo:'text',
-    //     text: this.state.annotation_notes,
-    //   });
-    //
-    //   /* Write up more console logs to pinpoint where data is created */
-    //   console.log('plotlyData view', props.view.annotations)
-    //   console.log('plotlyData', plotlyData)
-    //   state['plotlyData'] = plotlyData //.push(props.view.annotations) //push overrides the x values of the graph
-    //   console.log('state plotlyData', state['plotlyData'])
-    // }
+    // needs to be fixed does not work
+      plotlyData.push({
+        //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+        x: this.state.annotation_dates,
+        y: this.state.annotation_dates.map(function (x){ return 0}),
+        //y: [0, 0, 0],
+        mode: 'markers',
+        marker: {
+          color: 'rgba(252, 159, 91, .8)', size: 8,
+        name: 'Annotation'},
+        hovermode:'y',
+        hoverlabel:{
+          bgcolor: '#FC9F5B',
+          bordercolor: '#000000'},
+        hoverinfo:'text',
+        text: this.state.annotation_notes,
+      });
+
       let traceAllRest = {
         x: [dataEntry.date],
         y: [countAllRest],

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PlotlyGraph from './Plot.js';
 import { fetchDataIfNeeded } from '../actions/cubeActions';
-
+//front page graph
 export class DdosPerformance extends Component {
   constructor(props) {
     super(props)
@@ -57,7 +57,30 @@ export class DdosPerformance extends Component {
 
     return state
   }
-
+  // this code should be implimented somewhere above.
+  // plotlyData.splice(1, 0, {
+  //   //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+  //   x: this.state.annotation_dates,
+  //   y: this.state.annotation_dates.map(function (x){ return 0}),
+  //   //y: [0, 0, 0],
+  //   mode: 'markers',
+  //   marker: {
+  //     color: 'rgba(252, 159, 91, .8)', size: 8,
+  //   name: 'Annotation'},
+  //   hovermode:'y',
+  //   hoverlabel:{
+  //     bgcolor: '#FC9F5B',
+  //     bordercolor: '#000000'},
+  //   hoverinfo:'text',
+  //   text: this.state.annotation_notes,
+  // });
+  //
+  // /* Write up more console logs to pinpoint where data is created */
+  // console.log('plotlyData view', props.view.annotations)
+  // console.log('plotlyData', plotlyData)
+  // state['plotlyData'] = plotlyData //.push(props.view.annotations) //push overrides the x values of the graph
+  // console.log('state plotlyData', state['plotlyData'])
+  // }
 
   convertToPlotlySeries(countryID, risk, cubeByRiskByCountry, measure, color) {
     var dataTable = cubeByRiskByCountry[risk.id][countryID];
