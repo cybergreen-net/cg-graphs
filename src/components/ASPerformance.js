@@ -25,37 +25,59 @@ export class ASPerformance extends Component {
       .then((response) => {
         return response.json()
       })
-      .then((annData) => {
-        console.log(annData);
-        for (var ann_num in annData.notes) {
-          console.log(props.view);
-          if (annData.notes[ann_num].risk_id == props.view.risk) {
-            console.log(ann_num);
-            console.log(annData.notes[ann_num].annotation_date);
-            annotation_dates.push(annData.notes[ann_num].annotation_date);
-            annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
-            annotations.push({
-              type: 'date',
-              x: annData.notes[ann_num].annotation_date,
-              y: 0,
-              xref: 'x',
-              yref: 'y',
-              align: 'middle',
-              valign: 'center',
-              text: '',
-              borderwidth: 0,
-              showarrow: true,
-              arrowsize: 0,
-              arrowwidth: 1,
-              arrowcolor: '#FC9F5B',
-              arrowhead: 6,
-              opacity: 0.8,
-              ax: 0,
-              ay: -200,
-            });
+      .then((annFilterByCountry) => {
+          for (var ann_num in annFilterByCountry.notes) {
+            if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+              annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+              annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+              annotations.push({
+                type: 'date',
+                x: annFilterByCountry.notes[ann_num].annotation_date,
+                y: 0,
+                xref: 'x',
+                yref: 'y',
+                align: 'middle',
+                valign: 'center',
+                text: '',
+                borderwidth: 0,
+                showarrow: true,
+                arrowsize: 0,
+                arrowwidth: 1,
+                arrowcolor: '#FC9F5B',
+                arrowhead: 6,
+                opacity: 0.8,
+                ax: 0,
+                ay: -200,
+              });
+            }
+            if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+              annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+              annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+              annotations.push({
+                type: 'date',
+                x: annFilterByCountry.notes[ann_num].annotation_date,
+                y: 0,
+                xref: 'x',
+                yref: 'y',
+                align: 'middle',
+                valign: 'center',
+                text: '',
+                borderwidth: 0,
+                showarrow: true,
+                arrowsize: 0,
+                arrowwidth: 1,
+                arrowcolor: '#FC9F5B',
+                arrowhead: 6,
+                opacity: 0.8,
+                ax: 0,
+                ay: -200,
+              });
+            }
           }
         }
-      });
+      );
+
+
     this.state = {
       plotlyData: [],
       graphOptions: {
@@ -204,22 +226,22 @@ export class ASPerformance extends Component {
 
   render() {
     return ( <
-      div className = "graph-div" >
-      <
-      h3 > {
-        this.props.risks[this.props.view.risk].title.toUpperCase()
-      } <
-      /h3> <
-      PlotlyGraph data = {
-        this.state.plotlyData
-      }
-      graphOptions = {
-        this.state.graphOptions
-      }
-      graphID = {
-        this.props.viewId
-      }
-      /> {
+        div className = "graph-div" >
+        <
+        h3 > {
+          this.props.risks[this.props.view.risk].title.toUpperCase()
+        } <
+        /h3> <
+        PlotlyGraph data = {
+          this.state.plotlyData
+        }
+        graphOptions = {
+          this.state.graphOptions
+        }
+        graphID = {
+          this.props.viewId
+        }
+        /> {
         this.props.view.selectorConfig.map((selectInfo, idx) => {
           return <ASSelect
           asn = {
@@ -241,8 +263,8 @@ export class ASPerformance extends Component {
         })
       } <
       /div>
-    );
-  }
+  );
+}
 }
 
 export class ASSelect extends Component {
@@ -312,8 +334,8 @@ export class ASSelect extends Component {
       clearable = {
         false
       }
-      /> <
-      /div>
+      /> < /
+      div >
     );
   }
 }

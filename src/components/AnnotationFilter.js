@@ -18,84 +18,151 @@ import {
   changeMeasure
 } from '../actions/cubeActions';
 
+// Filter by country and risk
 let annotation_dates = [];
 let annotation_notes = [];
 let annotations = [];
-let annotationFormat = [{
-  type: 'date',
-  x: annData.notes[ann_num].annotation_date,
-  y: 0,
-  xref: 'x',
-  yref: 'y',
-  align: 'middle',
-  valign: 'center',
-  text: '',
-  borderwidth: 0,
-  showarrow: true,
-  arrowsize: 0,
-  arrowwidth: 1,
-  arrowcolor: '#FC9F5B',
-  arrowhead: 6,
-  opacity: 0.8,
-  ax: 0,
-  ay: -200,
-}];
+fetch(`/static/scripts/publicAnnotation.json`)
+  .then((response) => {
+    return response.json()
+  })
+  .then((annFilterByCountry) => {
+      for (var ann_num in annFilterByCountry.notes) {
+        if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+          annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+          annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+          annotations.push({
+            type: 'date',
+            x: annFilterByCountry.notes[ann_num].annotation_date,
+            y: 0,
+            xref: 'x',
+            yref: 'y',
+            align: 'middle',
+            valign: 'center',
+            text: '',
+            borderwidth: 0,
+            showarrow: true,
+            arrowsize: 0,
+            arrowwidth: 1,
+            arrowcolor: '#FC9F5B',
+            arrowhead: 6,
+            opacity: 0.8,
+            ax: 0,
+            ay: -200,
+          });
+        }
+        if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+          annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+          annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+          annotations.push({
+            type: 'date',
+            x: annFilterByCountry.notes[ann_num].annotation_date,
+            y: 0,
+            xref: 'x',
+            yref: 'y',
+            align: 'middle',
+            valign: 'center',
+            text: '',
+            borderwidth: 0,
+            showarrow: true,
+            arrowsize: 0,
+            arrowwidth: 1,
+            arrowcolor: '#FC9F5B',
+            arrowhead: 6,
+            opacity: 0.8,
+            ax: 0,
+            ay: -200,
+          });
+        }
+      }
+    }
+  );
 
-//filter annotation Country Comparison
-function annotationFetchAndFilter(risk_id, country_code, asn) {
-  return (
-      fetch(`/static/scripts/publicAnnotation.json`)
-      //change to /api/publicAnnotation.json for staging
-      .then((response) => {
-        return response.json()
-      })
 
-      .then((annData) => {
-          console.log(annData);
-          for (var ann_num in annData.notes) {
-            console.log(props.view);
-            if (annData.notes[ann_num].risk_id == props.view.risk) {
-              console.log(ann_num);
-              console.log(annData.notes[ann_num].annotation_date);
-              annotation_dates.push(annData.notes[ann_num].annotation_date);
-              annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
-              annotations.push({
-                return (props.view.annotationFormat)
-              })
-              if (annData.notes[ann_num].country_code && annotation.country_code == props.view.country) {
-                annotation_dates.push(annData.notes[ann_num].annotation_date);
-                annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
-                annotations.push({
-                  return (props.view.annotationFormat)
-                })
-              }
-              if (annData.notes[ann_num].asn && annotation.asn == props.view.asn) {
-                annotation_dates.push(annData.notes[ann_num].annotation_date);
-                annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
-                annotations.push({
-                  return (props.view.annotationFormat)
-                })
-              }
-              else if (annData.notes[ann_num].asn && annData.notes[ann_num].country_code != annData.notes[ann_num].asn && annData.notes[ann_num].country_code) {
-                annotation_dates.push(annData.notes[ann_num].annotation_date);
-                annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
-                annotations.push({
-                  return (props.view.annotationFormat)
-                })
-              }
-            }
-          }
-        };
-        /* if annotation.risk_id is risk_id {
-               if country_code and annotation.country_code is country_code {
-                      push annotation to list
-               }
-               if asn and annontation.asn is asn {
-                      push annotation to list
-               }
-               if not asn and not country_code {
-                      push annotation to list
-               }
-           }
-           ....
-        } */
+
+// Filter by ASN
+let annotation_dates = [];
+let annotation_notes = [];
+let annotations = [];
+fetch(`/static/scripts/publicAnnotation.json`)
+  .then((response) => {
+    return response.json()
+  })
+  .then((annFilterByAsn) => {
+
+    for (var ann_num in annFilterByAsn.notes) {
+      if (annFilterByCountry.notes[ann_num].asn == props.view.asn) {
+        annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
+        annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
+        annotations.push({
+          type: 'date',
+          x: annFilterByCountry.notes[ann_num].annotation_date,
+          y: 0,
+          xref: 'x',
+          yref: 'y',
+          align: 'middle',
+          valign: 'center',
+          text: '',
+          borderwidth: 0,
+          showarrow: true,
+          arrowsize: 0,
+          arrowwidth: 1,
+          arrowcolor: '#FC9F5B',
+          arrowhead: 6,
+          opacity: 0.8,
+          ax: 0,
+          ay: -200,
+        });
+      }
+    }
+  });
+
+// idea for a work around to turn on annotation when a marker is clicked
+//   var clickFunction = [{
+//     points: [
+//       curvernumber: 1, // index of the curve clicked on
+//       pointnumber: 1, // index of the point clicked on
+//       x: this.state.annotation_dates, // x coordinate clicked on
+//       y: this.state.annotation_dates.map(function(x) {
+//         return 0
+//       }), // y coordinate clicked on
+//       data: {}, // trace object of this curve
+//       fullData: {}, //  full trace object (that includes the defaults) of this curve
+//       xaxis: {}, // layout xaxis object corresponding to this curve
+//       yaxis: {} // '' yaxis ""
+//     ]
+//   }];
+//
+//   graphDiv.on('plotly_click', function(onClick) {
+//       /* callback goes here */
+//       plotlyData.splice(1, 0, {
+//         //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+//         x: this.state.annotation_dates,
+//         y: this.state.annotation_dates.map(function(x) {
+//           return 0
+//         }),
+//         //y: [0, 0, 0],
+//         mode: 'markers',
+//         marker: {
+//           color: 'rgba(252, 159, 91, .8)',
+//           size: 8,
+//           name: 'Annotation'
+//         },
+//         hovermode: 'closest',
+//         hoveron: 'points',
+//         hoverlabel: {
+//           bgcolor: '#FC9F5B',
+//           bordercolor: '#000000'
+//         },
+//         hoverinfo: 'text', //if `none` is set, click and hover events
+//         text: this.state.annotation_notes,
+//       });
+//
+//       state['plotlyData'] = plotlyData //.push(props.view.annotations) //push overrides the x values of the graph
+//
+//     }
+//   });
+//
+// function(onClick, getClick, getClickObj) {
+//   getClick.apply(getClickObj, [onClick])
+// });

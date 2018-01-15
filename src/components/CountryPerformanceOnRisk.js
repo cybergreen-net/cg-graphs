@@ -1,13 +1,19 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux'
+import React, {
+  Component
+} from 'react';
+import {
+  connect
+} from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import update from 'react/lib/update'
 import Highlighter from 'react-highlight-words'
 import 'react-select/dist/react-select.css';
 import {
-  countryIsSelected, fetchDataIfNeeded,
-  getCountryRanking , changeMeasure
+  countryIsSelected,
+  fetchDataIfNeeded,
+  getCountryRanking,
+  changeMeasure
 } from '../actions/cubeActions';
 
 
@@ -18,22 +24,18 @@ export class CountryPerformanceOnRisk extends Component {
     let annotation_notes = [];
     let annotations = [];
     fetch(`/static/scripts/publicAnnotation.json`)
-    .then( (response) => {
+      .then((response) => {
         return response.json()
-    })
-    .then( (annData) => {
-      console.log (annData);
-        for (var ann_num in annData.notes){
-          console.log(props.view);
-          if (annData.notes[ann_num].risk_id == props.view.risk){
-              console.log(ann_num);
-              console.log(annData.notes[ann_num].annotation_date);
-              annotation_dates.push(annData.notes[ann_num].annotation_date);
-              annotation_notes.push(annData.notes[ann_num].annotation_date + '\n' + annData.notes[ann_num].annotation);
-              annotations.push ({
+      })
+      .then((annFilterByCountry) => {
+          for (var ann_num in annFilterByCountry.notes) {
+            if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+              annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+              annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+              annotations.push({
                 type: 'date',
-                x: annData.notes[ann_num].annotation_date,
-                y:0,
+                x: annFilterByCountry.notes[ann_num].annotation_date,
+                y: 0,
                 xref: 'x',
                 yref: 'y',
                 align: 'middle',
@@ -41,26 +43,55 @@ export class CountryPerformanceOnRisk extends Component {
                 text: '',
                 borderwidth: 0,
                 showarrow: true,
-                arrowsize:0,
+                arrowsize: 0,
                 arrowwidth: 1,
                 arrowcolor: '#FC9F5B',
                 arrowhead: 6,
                 opacity: 0.8,
                 ax: 0,
-                ay:-200,
+                ay: -200,
               });
             }
+            if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+              annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+              annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+              annotations.push({
+                type: 'date',
+                x: annFilterByCountry.notes[ann_num].annotation_date,
+                y: 0,
+                xref: 'x',
+                yref: 'y',
+                align: 'middle',
+                valign: 'center',
+                text: '',
+                borderwidth: 0,
+                showarrow: true,
+                arrowsize: 0,
+                arrowwidth: 1,
+                arrowcolor: '#FC9F5B',
+                arrowhead: 6,
+                opacity: 0.8,
+                ax: 0,
+                ay: -200,
+              });
+            }
+          }
         }
-    });
+      );
 
     this.state = {
       cubeByRiskByCountry: {},
       graphOptions: {
-        legend: {x:0, y:1},
+        legend: {
+          x: 0,
+          y: 1
+        },
         height: 200,
         margin: {
-          l: 40,r: 30,
-          b: 30,t: 0
+          l: 40,
+          r: 30,
+          b: 30,
+          t: 0
         },
         xaxis: {
           gridcolor: 'transparent',
@@ -84,7 +115,7 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
-  computeState(props=this.props) {
+  computeState(props = this.props) {
     let state = {
       cubeByRiskByCountry: props.cubeByRiskByCountry,
       selectorConfig: props.view.selectorConfig
@@ -96,8 +127,8 @@ export class CountryPerformanceOnRisk extends Component {
       'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
     ]
     if (props.view.isFetching === 0) {
-        plotlyData = props.view.selectorConfig.map(config => {
-        if (config.country){
+      plotlyData = props.view.selectorConfig.map(config => {
+        if (config.country) {
           // unit = this.getUnitAndDevider(props.cubeByRiskByCountry[props.view.risk][config.country], props.view.risk)
           return this.convertToPlotlySeries(
             config.country,
@@ -110,37 +141,44 @@ export class CountryPerformanceOnRisk extends Component {
           )
         }
         return {}
-      }).filter(value => {return value !== undefined})
+      }).filter(value => {
+        return value !== undefined
+      })
       plotlyData.forEach((trace, idx) => {
-        trace['line'] = {color: lineColors[idx]}
+        trace['line'] = {
+          color: lineColors[idx]
+        }
       })
       plotlyData.splice(1, 0, {
         //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
         x: this.state.annotation_dates,
-        y: this.state.annotation_dates.map(function (x){ return 0}),
+        y: this.state.annotation_dates.map(function(x) {
+          return 0
+        }),
         //y: [0, 0, 0],
         mode: 'markers',
         marker: {
-          color: 'rgba(252, 159, 91, .8)', size: 8,
-        name: 'Annotation'},
-        hovermode:'y',
-        hoverlabel:{
+          color: 'rgba(252, 159, 91, .8)',
+          size: 8,
+          name: 'Annotation'
+        },
+        hovermode: 'y',
+        hoverlabel: {
           bgcolor: '#FC9F5B',
-          bordercolor: '#000000'},
-        hoverinfo:'text',
+          bordercolor: '#000000'
+        },
+        hoverinfo: 'text', //if `none` is set, click and hover events
         text: this.state.annotation_notes,
       });
 
-      /* Write up more console logs to pinpoint where data is created */
-      console.log('plotlyData view', props.view.annotations)
-      console.log('plotlyData', plotlyData)
-      state['plotlyData'] = plotlyData //.push(props.view.annotations) //push overrides the x values of the graph
-      console.log('state plotlyData', state['plotlyData'])
+      state['plotlyData'] = plotlyData
     }
     if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
       state.graphOptions = update(this.state.graphOptions, {
         yaxis: {
-          title: { $set: props.view.unit }
+          title: {
+            $set: props.view.unit
+          }
         }
       });
     }
@@ -150,10 +188,10 @@ export class CountryPerformanceOnRisk extends Component {
 
   convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure, normMeasure, devider) {
     var dataTable = cubeByRiskByCountry[riskID][countryID];
-    if(dataTable) {
+    if (dataTable) {
       return {
         x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row[normMeasure]/devider || row[measure]/devider),
+        y: dataTable.map(row => row[normMeasure] / devider || row[measure] / devider),
         name: this.props.countries[countryID].name,
         type: 'scatter',
       }
@@ -181,8 +219,8 @@ export class CountryPerformanceOnRisk extends Component {
 
 
   updateValue(idxOfSelector, selectedCountry) {
-    if(selectedCountry.constructor !== Array) {
-      if(!selectedCountry || selectedCountry.value === "") {
+    if (selectedCountry.constructor !== Array) {
+      if (!selectedCountry || selectedCountry.value === "") {
         this.props.dispatch(countryIsSelected(idxOfSelector, "", this.props.viewId))
       } else {
         this.props.dispatch(countryIsSelected(
@@ -206,7 +244,9 @@ export class CountryPerformanceOnRisk extends Component {
         var newState = update(this.state, {
           graphOptions: {
             yaxis: {
-              title: { $set: 'Trend' }
+              title: {
+                $set: 'Trend'
+              }
             }
           }
         });
@@ -216,7 +256,9 @@ export class CountryPerformanceOnRisk extends Component {
         var newState = update(this.state, {
           graphOptions: {
             yaxis: {
-              title: { $set: this.props.view.yLabel }
+              title: {
+                $set: this.props.view.yLabel
+              }
             }
           }
         });
@@ -230,68 +272,114 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
   render() {
-    return (
-      <div className="graph-div">
-        <div className="row">
-          <div className="col-sm-11">
-            <h3>
-              {this.props.risks[this.props.view.risk].title.toUpperCase()} &nbsp; | &nbsp;
-              {this.props.countries[this.props.view.country].name.toUpperCase()}
-            </h3>
-          </div>
-          <div className="col-sm-1">
-            { this.props.view.rank ? <a href="/country" title="Rank of country on this risk in last week with #1 = worst"><h3 className="pull-right graph-rank">#{this.props.view.rank}</h3></a> : '' }
-          </div>
-        </div>
-        <PlotlyGraph
-          data={this.state.plotlyData}
-          graphOptions={this.state.graphOptions}
-          graphID={this.props.viewId} />
-        {this.state.selectorConfig.map((selectInfo, idx) => {
+    return ( <
+        div className = "graph-div" >
+        <
+        div className = "row" >
+        <
+        div className = "col-sm-11" >
+        <
+        h3 > {
+          this.props.risks[this.props.view.risk].title.toUpperCase()
+        } & nbsp; | & nbsp; {
+          this.props.countries[this.props.view.country].name.toUpperCase()
+        } <
+        /h3> < /
+        div > <
+        div className = "col-sm-1" > {
+          this.props.view.rank ? < a href = "/country"
+          title = "Rank of country on this risk in last week with #1 = worst" > < h3 className = "pull-right graph-rank" > #{
+            this.props.view.rank
+          } < /h3></a > : ''
+        } <
+        /div> < /
+        div > <
+        PlotlyGraph data = {
+          this.state.plotlyData
+        }
+        graphOptions = {
+          this.state.graphOptions
+        }
+        graphID = {
+          this.props.viewId
+        }
+        /> {
+        this.state.selectorConfig.map((selectInfo, idx) => {
           return <CountrySelect
-                    countries={Object.values(this.props.countries)}
-                    disabled={selectInfo.disabled}
-                    onChange={this.updateValue.bind(this, idx)}
-                    selectedCountry={selectInfo.country}
-                    key={idx}
-                    />
-        })}
-        <form className="radio-form">
-           <label className="radio-inline">
-             <input type="radio" value={this.props.view.measure}
-               checked={this.props.view.normMeasure !== 'count_normalized'}
-               onChange={this.buttonChange.bind(this)}
-             />
-             Simple counts
-           </label>
-           <label className="radio-inline">
-             <input type="radio" value="count_normalized"
-               checked={this.props.view.normMeasure === 'count_normalized'}
-               onChange={this.buttonChange.bind(this)}
-             />
-             Trend
-           </label>
-        </form>
-      </div>
-    );
-  }
+          countries = {
+            Object.values(this.props.countries)
+          }
+          disabled = {
+            selectInfo.disabled
+          }
+          onChange = {
+            this.updateValue.bind(this, idx)
+          }
+          selectedCountry = {
+            selectInfo.country
+          }
+          key = {
+            idx
+          }
+          />
+        })
+      } <
+      form className = "radio-form" >
+      <
+      label className = "radio-inline" >
+      <
+      input type = "radio"
+    value = {
+      this.props.view.measure
+    }
+    checked = {
+      this.props.view.normMeasure !== 'count_normalized'
+    }
+    onChange = {
+      this.buttonChange.bind(this)
+    }
+    />
+    Simple counts <
+      /label> <
+    label className = "radio-inline" >
+      <
+      input type = "radio"
+    value = "count_normalized"
+    checked = {
+      this.props.view.normMeasure === 'count_normalized'
+    }
+    onChange = {
+      this.buttonChange.bind(this)
+    }
+    />
+    Trend <
+      /label> < /
+    form > <
+      /div>
+  );
+}
 }
 
 
 export class CountrySelect extends Component {
   constructor(props) {
     super(props)
-    this.state= {
+    this.state = {
       inputValue: ''
     }
   }
 
   optionRenderer(option) {
-    if(!option.label){ return }
-    return (
-      <Highlighter
-        searchWords={[this.state.inputValue]}
-        textToHighlight={option.label}
+    if (!option.label) {
+      return
+    }
+    return ( <
+      Highlighter searchWords = {
+        [this.state.inputValue]
+      }
+      textToHighlight = {
+        option.label
+      }
       />
     );
   }
@@ -310,20 +398,37 @@ export class CountrySelect extends Component {
         label: country.name
       }
     })
-    selectOptions.unshift({value: '', label: 'Select a country'})
-    return (
-      <div className="Select-div">
-        <Select
-          name="countries"
-          value={this.props.selectedCountry || selectOptions[0]}
-          options={selectOptions}
-          onChange={this.props.onChange}
-          onInputChange={this.setInputValue.bind(this)}
-          optionRenderer={this.optionRenderer.bind(this)}
-          disabled={this.props.disabled}
-          clearable={false}
-        />
-      </div>
+    selectOptions.unshift({
+      value: '',
+      label: 'Select a country'
+    })
+    return ( <
+      div className = "Select-div" >
+      <
+      Select name = "countries"
+      value = {
+        this.props.selectedCountry || selectOptions[0]
+      }
+      options = {
+        selectOptions
+      }
+      onChange = {
+        this.props.onChange
+      }
+      onInputChange = {
+        this.setInputValue.bind(this)
+      }
+      optionRenderer = {
+        this.optionRenderer.bind(this)
+      }
+      disabled = {
+        this.props.disabled
+      }
+      clearable = {
+        false
+      }
+      /> < /
+      div >
     );
   }
 }
