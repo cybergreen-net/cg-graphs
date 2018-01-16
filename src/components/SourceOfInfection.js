@@ -207,8 +207,7 @@ export class SourceOfInfection extends Component {
       <
       h3 > {
         this.props.risks[this.props.view.risk].title.toUpperCase()
-      } &
-      nbsp; | & nbsp; AS SOURCE <
+      } {` `} | {` `} AS SOURCE <
       /h3> <
       PlotlyGraph data = {
         this.state.plotlyData

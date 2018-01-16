@@ -281,7 +281,7 @@ export class CountryPerformanceOnRisk extends Component {
         <
         h3 > {
           this.props.risks[this.props.view.risk].title.toUpperCase()
-        } & nbsp; | & nbsp; {
+        } {` `} | {` `} {
           this.props.countries[this.props.view.country].name.toUpperCase()
         } <
         /h3> < /
