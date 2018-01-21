@@ -15,7 +15,7 @@ import {
   getCountryRanking,
   changeMeasure
 } from '../actions/cubeActions';
-
+import publicAnnotation.json from `/api/annotations/publicAnnotation.json`
 
 export class CountryPerformanceOnRisk extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ export class CountryPerformanceOnRisk extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
-    fetch(`/static/scripts/publicAnnotation.json`)
+    fetch(`/api/annotations/publicAnnotation.json`)
       .then((response) => {
         return response.json()
       })

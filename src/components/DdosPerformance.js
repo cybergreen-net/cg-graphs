@@ -8,6 +8,7 @@ import PlotlyGraph from './Plot.js';
 import {
   fetchDataIfNeeded
 } from '../actions/cubeActions';
+import publicAnnotation.json from `/api/annotations/publicAnnotation.json`
 //front page graph
 export class DdosPerformance extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ export class DdosPerformance extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
-    fetch(`/static/scripts/publicAnnotation.json`)
+    fetch(`/api/annotations/publicAnnotation.json`)
       .then((response) => {
         return response.json()
       })
@@ -129,7 +130,6 @@ export class DdosPerformance extends Component {
 
     return state
   }
-
 
   convertToPlotlySeries(countryID, risk, cubeByRiskByCountry, measure, color) {
     var dataTable = cubeByRiskByCountry[risk.id][countryID];
