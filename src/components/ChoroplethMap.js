@@ -1,12 +1,19 @@
 /* global GLOSSARYPAGE */
-import React, { Component } from 'react';
+import React, {
+  Component
+} from 'react';
 import update from 'react/lib/update'
-import { connect } from 'react-redux';
+import {
+  connect
+} from 'react-redux';
 import PlotlyGraph from './Plot.js';
-import numeral from'numeral';
+import numeral from 'numeral';
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
-import { riskAndDateAreSelected, fetchData } from '../actions/ChoroplethMapActions';
+import {
+  riskAndDateAreSelected,
+  fetchData
+} from '../actions/ChoroplethMapActions';
 
 
 export class ChoroplethMap extends Component {
@@ -45,11 +52,16 @@ export class ChoroplethMap extends Component {
           showcountries: true,
           showframe: false,
           showcoastlines: false,
-          projection:{
+          projection: {
             type: 'robinson'
           }
         },
-        margin: { t: 0, l: 0, b: 0, r: 0 }
+        margin: {
+          t: 0,
+          l: 0,
+          b: 0,
+          r: 0
+        }
       }
     }
 
@@ -59,7 +71,7 @@ export class ChoroplethMap extends Component {
 
 
   handleChange(idx, object) {
-    if(idx === 'riskToShow') {
+    if (idx === 'riskToShow') {
       this.props.dispatch(fetchData(
         object.value,
         this.props.view.date
@@ -81,7 +93,7 @@ export class ChoroplethMap extends Component {
   }
 
 
-  computeState(props=this.props) {
+  computeState(props = this.props) {
     let locations = []
     let counts = []
     let hoverInfo = []
@@ -91,25 +103,31 @@ export class ChoroplethMap extends Component {
     } else {
       text = 'Count of ' + props.risks[props.view.risk].taxonomy + ' devices'
     }
-    if(!props.view.isFetching && props.view.isFetched) {
+    if (!props.view.isFetching && props.view.isFetched) {
       props.data[props.view.risk][props.view.date].forEach(entry => {
-        if(props.countries[entry.country]) {
+        if (props.countries[entry.country]) {
           locations.push(props.countries[entry.country].name)
           counts.push(entry[props.view.measure] / props.view.unitDevider)
-          hoverInfo.push(numeral(entry[props.view.measure] / props.view.unitDevider).format('0,0') + ' | ' + text + ' in ' +entry.country)
+          hoverInfo.push(numeral(entry[props.view.measure] / props.view.unitDevider).format('0,0') + ' | ' + text + ' in ' + entry.country)
         }
       })
 
       let max = Math.max(...counts)
       let z = counts.map(item => {
-        return ( 100 * ( Math.log(Math.ceil(item)) / Math.log(max) ) )
+        return (100 * (Math.log(Math.ceil(item)) / Math.log(max)))
       })
 
       return update(this.state, {
         data: [{
-          locations: {$set: locations},
-          z: {$set: z},
-          text: {$set: hoverInfo}
+          locations: {
+            $set: locations
+          },
+          z: {
+            $set: z
+          },
+          text: {
+            $set: hoverInfo
+          }
         }]
       })
     }
@@ -135,29 +153,49 @@ export class ChoroplethMap extends Component {
         label: risk.title
       }
     })
-    return (
-      <div>
-        <PlotlyGraph
-          data={this.state.data}
-          graphOptions={this.state.layout}
-          graphID={this.state.graphID}/>
-        <div>
-          Level of risk posed to others on selected risk on a scale from 0-100
-          (100=worst). For more on data sources, calculations and terms see
-          <a href={GLOSSARYPAGE}>Glossary and data page</a>
-        </div>
-        <div className="row">
-          <div className="col-sm-2 col-sm-offset-5" title="Select a risk">
-            <Select
-              value={this.props.view.risk}
-              name='riskToShow'
-              onChange={this.handleChangeRisk}
-              clearable={false}
-              options={riskSelectOptions}/>
-          </div>
-        </div>
+    return ( <
+      div >
+      <
+      PlotlyGraph data = {
+        this.state.data
+      }
+      graphOptions = {
+        this.state.layout
+      }
+      graphID = {
+        this.state.graphID
+      }
+      /> <
+      div >
+      Level of risk posed to others on selected risk on a scale from 0 - 100(100 = worst).For more on data sources, calculations and terms see <
+      a href = {
+        GLOSSARYPAGE
+      } > Glossary and data page < /a> <
+      /div> <
+      div className = "row" >
+      <
+      div className = "col-sm-2 col-sm-offset-5"
+      title = "Select a risk" >
+      <
+      Select value = {
+        this.props.view.risk
+      }
+      name = 'riskToShow'
+      onChange = {
+        this.handleChangeRisk
+      }
+      clearable = {
+        false
+      }
+      options = {
+        riskSelectOptions
+      }
+      /> <
+      /div> <
+      /div>
 
-      </div>
+      <
+      /div>
     )
   }
 }

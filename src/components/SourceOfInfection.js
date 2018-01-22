@@ -14,61 +14,60 @@ export class SourceOfInfection extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
-    fetch(`../annotations/publicAnnotation.json`)
+    fetch(`/annotations/publicAnnotation.json`)
       .then((response) => {
         return response.json()
       })
       .then((annFilterByCountry) => {
-          for (var ann_num in annFilterByCountry.notes) {
-            if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
-              annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-              annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
-              annotations.push({
-                type: 'date',
-                x: annFilterByCountry.notes[ann_num].annotation_date,
-                y: 0,
-                xref: 'x',
-                yref: 'y',
-                align: 'middle',
-                valign: 'center',
-                text: '',
-                borderwidth: 0,
-                showarrow: true,
-                arrowsize: 0,
-                arrowwidth: 1,
-                arrowcolor: '#FC9F5B',
-                arrowhead: 6,
-                opacity: 0.8,
-                ax: 0,
-                ay: -200,
-              });
-            }
-            if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
-              annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-              annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
-              annotations.push({
-                type: 'date',
-                x: annFilterByCountry.notes[ann_num].annotation_date,
-                y: 0,
-                xref: 'x',
-                yref: 'y',
-                align: 'middle',
-                valign: 'center',
-                text: '',
-                borderwidth: 0,
-                showarrow: true,
-                arrowsize: 0,
-                arrowwidth: 1,
-                arrowcolor: '#FC9F5B',
-                arrowhead: 6,
-                opacity: 0.8,
-                ax: 0,
-                ay: -200,
-              });
-            }
+        for (var ann_num in annFilterByCountry.notes) {
+          if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+            annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+            annotations.push({
+              type: 'date',
+              x: annFilterByCountry.notes[ann_num].annotation_date,
+              y: 0,
+              xref: 'x',
+              yref: 'y',
+              align: 'middle',
+              valign: 'center',
+              text: '',
+              borderwidth: 0,
+              showarrow: true,
+              arrowsize: 0,
+              arrowwidth: 1,
+              arrowcolor: '#FC9F5B',
+              arrowhead: 6,
+              opacity: 0.8,
+              ax: 0,
+              ay: -200,
+            });
+          }
+          if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+            annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+            annotations.push({
+              type: 'date',
+              x: annFilterByCountry.notes[ann_num].annotation_date,
+              y: 0,
+              xref: 'x',
+              yref: 'y',
+              align: 'middle',
+              valign: 'center',
+              text: '',
+              borderwidth: 0,
+              showarrow: true,
+              arrowsize: 0,
+              arrowwidth: 1,
+              arrowcolor: '#FC9F5B',
+              arrowhead: 6,
+              opacity: 0.8,
+              ax: 0,
+              ay: -200,
+            });
           }
         }
-      );
+      });
 
 
 
@@ -207,7 +206,12 @@ export class SourceOfInfection extends Component {
       <
       h3 > {
         this.props.risks[this.props.view.risk].title.toUpperCase()
-      } {` `} | {` `} AS SOURCE <
+      } {
+        ` `
+      } | {
+        ` `
+      }
+      AS SOURCE <
       /h3> <
       PlotlyGraph data = {
         this.state.plotlyData
@@ -221,8 +225,8 @@ export class SourceOfInfection extends Component {
       clickable = {
         true
       }
-      /> <
-      /div>
+      /> < /
+      div >
     );
   }
 }

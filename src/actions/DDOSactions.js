@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const FETCH_RISK_REQUEST = 'FETCH_RISK_REQUEST'
+
 function requestRisk(risk) {
   return {
     type: FETCH_RISK_REQUEST,
@@ -9,6 +10,7 @@ function requestRisk(risk) {
 }
 
 export const FETCH_RISK_SUCCESS = 'FETCH_RISK_SUCCESS'
+
 function receivetRisk(data, risk) {
   return {
     type: FETCH_RISK_SUCCESS,
@@ -18,6 +20,7 @@ function receivetRisk(data, risk) {
 }
 
 export const FETCH_RISK_FAILURE = 'FETCH_RISK_FAILURE'
+
 function receivetRiskFailure(message, risk) {
   return {
     type: FETCH_RISK_FAILURE,

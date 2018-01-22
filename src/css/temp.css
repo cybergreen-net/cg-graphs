@@ -1,11 +1,8 @@
-#countryPerformance h1,
-#ASPerformance h1 {
+#countryPerformance h1, #ASPerformance h1 {
   color: #1eb9b4;
 }
 
-#countryPerformance h3,
-#ASPerformance h3,
-#riskPerformance h3 {
+#countryPerformance h3, #ASPerformance h3, #riskPerformance h3 {
   color: #00D49A;
 }
 
@@ -28,9 +25,11 @@
 .graph-div .Select-input, .Select-control {
   height: 20px !important;
 }
+
 .graph-div .Select-value {
   line-height: 20px !important;
 }
+
 .Select-input input {
   padding-top: 3px;
   padding-bottom: 3px;
