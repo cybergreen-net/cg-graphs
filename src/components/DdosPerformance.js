@@ -16,7 +16,7 @@ export class DdosPerformance extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
-    fetch(`/annotations/publicAnnotation.json`)
+    fetch(`/api/Annotations/publicAnnotation.json`)
       .then((response) => {
         return response.json()
       })
