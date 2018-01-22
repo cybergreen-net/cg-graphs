@@ -22,7 +22,7 @@ export class ASPerformance extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
-    fetch(`../stats-new/api/annotations/publicAnnotation.json`)
+    fetch(`../api/annotations/publicAnnotation.json`)
       .then((response) => {
         return response.json()
       })
