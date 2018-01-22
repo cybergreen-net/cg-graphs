@@ -8,7 +8,7 @@ import PlotlyGraph from './Plot.js';
 import {
   fetchDataIfNeeded
 } from '../actions/cubeActions';
-import publicAnnotation.json from `/api/annotations/publicAnnotation.json`
+// import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 //front page graph
 export class DdosPerformance extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ export class DdosPerformance extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
-    fetch(`/api/annotations/publicAnnotation.json`)
+    fetch(`../stats-new/api/annotations/publicAnnotation.json`)
       .then((response) => {
         return response.json()
       })

@@ -14,7 +14,7 @@ import {
   fetchAsDataIfNeeded,
   AsIsSelected
 } from '../actions/ASactions';
-import publicAnnotation.json from `/api/annotations/publicAnnotation.json`
+// import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
 export class ASPerformance extends Component {
   constructor(props) {
@@ -22,7 +22,7 @@ export class ASPerformance extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
-    fetch(`/api/annotations/publicAnnotation.json`)
+    fetch(`../stats-new/api/annotations/publicAnnotation.json`)
       .then((response) => {
         return response.json()
       })
