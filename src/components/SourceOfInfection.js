@@ -14,7 +14,7 @@ export class SourceOfInfection extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
-    fetch(`/api/Annotations/publicAnnotation.json`)
+    fetch(`/static/scripts/publicAnnotation.json`)
       .then((response) => {
         return response.json()
       })
