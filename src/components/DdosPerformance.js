@@ -76,9 +76,9 @@ export class DdosPerformance extends Component {
           annotations: annotations
         ]
       },
+      plotlyData: [],
       annotation_dates: annotation_dates,
-      annotation_notes: annotation_notes,
-      plotlyData: []
+      annotation_notes: annotation_notes
     }
   }
 
@@ -112,11 +112,12 @@ export class DdosPerformance extends Component {
         //y: [0, 0, 0],
         mode: 'markers',
         marker: {
-          symbol: 'circle-open-dot',
+          symbol: 'circle',
           color: 'rgba(252, 159, 91, .8)',
           size: 8,
         },
-        legendgroup: 'group2',
+        legendgroup: ['group1','group2','group3','group4','group5'],
+        traceorder: 'grouped',
         name: 'Annotations',
         hovermode: 'y',
         hoverlabel: {
@@ -140,8 +141,8 @@ export class DdosPerformance extends Component {
         y: dataTable.map(row => (row[measure] || row.count) / 1000000),
         name: risk.title,
         type: 'bar',
-        traceorder: 'reversed+grouped',
-        legendgroup: 'group1',
+        traceorder: 'grouped',
+        legendgroup: ['group1','group2','group3','group4','group5'],
         marker: {
           color: color
         }
