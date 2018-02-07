@@ -2,6 +2,7 @@
 import axios from 'axios'
 
 export const FETCH_MAP_DATA_REQUEST = 'FETCH_MAP_DATA_REQUEST'
+
 function requestData(risk, date) {
   return {
     type: FETCH_MAP_DATA_REQUEST,
@@ -11,6 +12,7 @@ function requestData(risk, date) {
 }
 
 export const FETCH_MAP_DATA_SUCCESS = 'FETCH_MAP_DATA_SUCCESS'
+
 function receiveData(data, risk, date) {
   return {
     type: FETCH_MAP_DATA_SUCCESS,
@@ -21,6 +23,7 @@ function receiveData(data, risk, date) {
 }
 
 export const FETCH_MAP_DATA_FAILURE = 'FETCH_MAP_DATA_FAILURE'
+
 function receiveDataFailure(message, risk, date) {
   return {
     type: FETCH_MAP_DATA_FAILURE,
@@ -39,11 +42,11 @@ export function riskAndDateAreSelected(selectedRisk, selectedDate) {
   }
 }
 
-export function fetchData(risk, date, test=false) {
+export function fetchData(risk, date, test = false) {
   return function(dispatch) {
     dispatch(requestData(risk, date))
     let ENDPOINT = `/api/v1/count_by_country?limit=500&risk=${risk}&start=${date}&end=${date}&granularity=week`
-    if(!test) {
+    if (!test) {
       ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }
     return axios.get(ENDPOINT)
@@ -61,7 +64,7 @@ export function shouldFetchData(state, risk, date) {
   }
 }
 
-export function fetchDataIfNeeded(risk, date, test=false) {
+export function fetchDataIfNeeded(risk, date, test = false) {
   return (dispatch, getState) => {
     if (shouldFetchData(getState(), risk, date)) {
       return dispatch(fetchData(risk, date, test))

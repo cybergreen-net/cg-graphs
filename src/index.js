@@ -2,10 +2,18 @@
 import "babel-polyfill";
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, compose } from 'redux';
+import {
+  createStore,
+  applyMiddleware,
+  compose
+} from 'redux';
 import thunk from 'redux-thunk';
-import { Provider } from 'react-redux';
-import { buildCube } from './reducers/cubeReducers';
+import {
+  Provider
+} from 'react-redux';
+import {
+  buildCube
+} from './reducers/cubeReducers';
 
 import CountryPage from './components/CountryPage';
 import ASPage from './components/ASPage';
@@ -25,11 +33,16 @@ let reduxStore = {
     cubeByRiskByASN: {},
     cubeByRiskByDate: {},
     layouts: {
-      legend: {x:0, y:1},
+      legend: {
+        x: 0,
+        y: 1
+      },
       height: 200,
       margin: {
-        l: 40,r: 30,
-        b: 30,t: 0
+        l: 40,
+        r: 30,
+        b: 30,
+        t: 0
       },
       xaxis: {
         gridcolor: 'transparent',
@@ -40,7 +53,7 @@ let reduxStore = {
       font: {
         size: 9,
         color: '#7f7f7f'
-      }
+      },
     }
   },
   countryPerformanceOnRiskViews: countryPerformanceOnRiskViews,
@@ -57,53 +70,76 @@ let store = createStore(
 )
 
 if (document.getElementById('dropdown')) {
-  ReactDOM.render(
-    <FrontPageCountrySelector countries={reduxStore.entities.countries}/>,
+  ReactDOM.render( <
+    FrontPageCountrySelector countries = {
+      reduxStore.entities.countries
+    }
+    />,
     document.getElementById('dropdown')
   );
 }
 
 if (document.getElementById('ChoroplethMap')) {
-  ReactDOM.render(
-    <Provider store={store}>
-      <ChoroplethMap />
-    </Provider>,
+  ReactDOM.render( <
+    Provider store = {
+      store
+    } >
+    <
+    ChoroplethMap / >
+    <
+    /Provider>,
     document.getElementById('ChoroplethMap')
   );
 }
 
-if (document.getElementById('ddos')){
-  ReactDOM.render(
-    <Provider store={store}>
-      <DdosPerformance />
-    </Provider>,
+if (document.getElementById('ddos')) {
+  ReactDOM.render( <
+    Provider store = {
+      store
+    } >
+    <
+    DdosPerformance / >
+    <
+    /Provider>,
     document.getElementById('ddos')
   );
 }
 
 if (document.getElementById('countryPerformance')) {
-  ReactDOM.render(
-    <Provider store={store}>
-      <CountryPage />
-    </Provider>,
+  ReactDOM.render( <
+    Provider store = {
+      store
+    } >
+    <
+    CountryPage / >
+    <
+    /Provider>,
     document.getElementById('countryPerformance')
   );
 }
 
 if (document.getElementById('ASPerformance')) {
-  ReactDOM.render(
-    <Provider store={store}>
-      <ASPage />
-    </Provider>,
+  ReactDOM.render( <
+    Provider store = {
+      store
+    } >
+    <
+    ASPage / >
+    <
+    /Provider>,
     document.getElementById('ASPerformance')
   );
 }
 
 if (document.getElementById('riskPerformance')) {
-  ReactDOM.render(
-    <Provider store={store}>
-      <RiskPage />
-    </Provider>,
+  ReactDOM.render( <
+    Provider store = {
+      store
+    } >
+    <
+    RiskPage / >
+    <
+    /Provider>,
     document.getElementById('riskPerformance')
   );
 }

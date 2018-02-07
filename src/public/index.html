@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>React App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  </head>
+  <body>
+    <script>
+      var CG_API_ENDPOINT = 'https://cybergreen-staging.herokuapp.com';
+    </script>
+    <script>
+      var countries = {
+        'T': {id: 'T', name: 'Global', slug: ''},
+        'GE': {id: 'GE', name: 'Georgia', slug: 'georgia'},
+        'KZ': {id: 'KZ', name: 'Kazakhstan', slug: 'Kazakhstan'},
+        'GB': {id: 'GB', name: 'United Kingdom', slug: 'united-kingdom'},
+        'US': {id: 'US', name: 'United States', slug: 'united-states'}
+      }
+      var risks = {
+        1: {title: 'Open DNS', id: 1, taxonomy: 'Vulnerable'},
+        2: {title: 'Open NTP', id: 2, taxonomy: 'Vulnerable'},
+        4: {title: 'Open SNMP', id: 4, taxonomy: 'Vulnerable'},
+        5: {title: 'Open SSDP', id: 5, taxonomy: 'Vulnerable'},
+        6: {title: 'Open Mirai', id:6, taxonomy: 'Infected'},
+        100: {title: 'DDOS', id: 100, taxonomy: 'GBit/sec'}
+      }
+      var asn = {
+        174: {number: 174, title: 'ASN 174'},
+        5413: {number: 5413, title: 'ASN 5413'},
+        42973: {number: 42973, title: 'ASN 42973'},
+        31655: {number: 31655, title: 'ASN 31655'}
+      }
+      var countryPerformanceOnRiskViews = {
+        'GB/1': {
+          id: 'GB/1',
+          country: 'GB',
+          risk: 1,
+          type: 'country/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          measure: "count",
+          yLabel: 'Count of Vulnerable Devices',
+          selectorConfig: [
+            {disabled: true, country: 'GB'},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined}
+          ]
+        },
+        'GB/100': {
+          id: 'GB/100',
+          country: 'GB',
+          risk: 100,
+          type: 'country/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          measure: "count_amplified",
+          yLabel: 'GBit/sec',
+          selectorConfig: [
+            {disabled: true, country: 'GB'},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined},
+            {disabled: false, country: undefined}
+          ]
+        }
+      }
+      var ASPerformanceViews = {
+        'GB/1/174': {
+          id: 'GB/1/174',
+          as: 174,
+          risk: 1,
+          country: 'GB',
+          type: 'as/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          measure: "count_normalized",
+          yLabel: 'Count of Vulnerable Devices',
+          selectorConfig: [
+            {disabled: true, as: 174},
+            {disabled: false, as: undefined},
+            {disabled: false, as: undefined},
+            {disabled: false, as: undefined},
+            {disabled: false, as: undefined}
+          ]
+        },
+        'GB/2/174': {
+          id: 'GB/2/174',
+          as: 174,
+          risk: 2,
+          country: 'GB',
+          type: 'as/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          measure: "count_normalized",
+          yLabel: 'Count of Vulnerable Devices',
+          selectorConfig: [
+            {disabled: true, as: "174"},
+            {disabled: false, as: undefined},
+            {disabled: false, as: undefined},
+            {disabled: false, as: undefined},
+            {disabled: false, as: undefined}
+          ]
+        }
+      }
+      var DdosPerformanceViews = {
+        'global/ddos': {
+          id: 'global/ddos',
+          country: 'T',
+          type: 'ddos/performance',
+          isFetched: false,
+          isFetching: false,
+          didFailed: false,
+          measure: "count_amplified",
+          yLabel: 'GBit/sec',
+          risksToView: [
+            {id: 4, slug: 'opensnmp', title: 'Open SNMP'},
+            {id: 5, slug: 'openssdp', title: 'Open SSDP'},
+            {id: 1, slug: 'opendns', title: 'Open Recursive DNS'},
+            {id: 2, slug: 'openntp', title: 'Open NTP'}
+          ]
+        }
+      }
+      var ChoroplethMapViews = {
+        isFetched: false,
+        isFetching: false,
+        didFailed: false,
+        risk: 100,
+        date: '2017-01-01'
+      }
+      var GLOSSARYPAGE = 'https://www.cybergreen.net/data'
+    </script>
+    <!-- <div id="riskPerformance" class="container"></div> -->
+    <div id="countryPerformance" class="container"></div>
+    <!-- <div id="ASPerformance" class="container"></div> -->
+    <!-- <div id="dropdown"></div> -->
+    <!-- <div id="ddos"></div> -->
+    <!-- <div id="ChoroplethMap"></div> -->
+  </body>
+</html>

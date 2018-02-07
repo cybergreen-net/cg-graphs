@@ -5,7 +5,7 @@ class Points {
     this.xPoints = [];
     this.yPoints = [];
     for (var i = 0; i < data.length; i++) {
-      this.xPoints.push(data[i].date );
+      this.xPoints.push(data[i].date);
       this.yPoints.push(data[i].count_amplified / 1000000);
     }
   }

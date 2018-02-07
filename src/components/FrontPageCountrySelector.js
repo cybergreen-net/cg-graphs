@@ -1,4 +1,6 @@
-import React, { Component } from 'react';
+import React, {
+  Component
+} from 'react';
 import Highlighter from 'react-highlight-words'
 import Select from 'react-select';
 import Loader from 'halogen/BounceLoader'
@@ -17,12 +19,14 @@ export default class FrontPageCountrySelector extends Component {
 
   onChange(country) {
     // purely for testing atm - we don't use state internally
-    if(country && country.constructor !== Array) {
+    if (country && country.constructor !== Array) {
       this.setState({
         selectedCountry: country
       });
       if (country !== null && country.value !== '') {
-        this.setState({spinner: '40px'})
+        this.setState({
+          spinner: '40px'
+        })
         window.location = `/country/${country.slug}`
       }
     } else if (country === null) {
@@ -34,11 +38,16 @@ export default class FrontPageCountrySelector extends Component {
 
 
   optionRenderer(option) {
-    if(!option.label){ return }
-    return (
-      <Highlighter
-        searchWords={[this.state.inputValue]}
-        textToHighlight={option.label}
+    if (!option.label) {
+      return
+    }
+    return ( <
+      Highlighter searchWords = {
+        [this.state.inputValue]
+      }
+      textToHighlight = {
+        option.label
+      }
       />
     );
   }
@@ -58,22 +67,46 @@ export default class FrontPageCountrySelector extends Component {
         slug: country.slug
       }
     })
-    let spinnerStyle = { padding:'20px', margin: 'auto', width:'10%'}
-    selectOptions.unshift({value: '', label: 'Select a country'})
-    return (
-      <div>
-        <Select
-          name="country-selector"
-          value={this.state.selectedCountry || selectOptions[0]}
-          options={selectOptions}
-          onChange={this.onChange.bind(this)}
-          onInputChange={this.setInputValue.bind(this)}
-          optionRenderer={this.optionRenderer.bind(this)}
-        />
-        <div style={spinnerStyle}>
-          <Loader size={this.state.spinner} color='#00D49A'/>
-        </div>
-      </div>
+    let spinnerStyle = {
+      padding: '20px',
+      margin: 'auto',
+      width: '10%'
+    }
+    selectOptions.unshift({
+      value: '',
+      label: 'Select a country'
+    })
+    return ( <
+      div >
+      <
+      Select name = "country-selector"
+      value = {
+        this.state.selectedCountry || selectOptions[0]
+      }
+      options = {
+        selectOptions
+      }
+      onChange = {
+        this.onChange.bind(this)
+      }
+      onInputChange = {
+        this.setInputValue.bind(this)
+      }
+      optionRenderer = {
+        this.optionRenderer.bind(this)
+      }
+      /> <
+      div style = {
+        spinnerStyle
+      } >
+      <
+      Loader size = {
+        this.state.spinner
+      }
+      color = '#00D49A' / >
+      <
+      /div> <
+      /div>
     );
   }
 }

@@ -1,0 +1,9 @@
+{
+  "total":"4",
+  "results":[
+    {"risk":4,"country":"T","date":"2017-01-01","count":"120","count_amplified":260},
+    {"risk":4,"country":"T","date":"2017-01-08","count":"700","count_amplified":2600},
+    {"risk":4,"country":"T","date":"2017-01-15","count":"20","count_amplified":200},
+    {"risk":4,"country":"T","date":"2017-01-22","count":"200","count_amplified":500}
+  ]
+}

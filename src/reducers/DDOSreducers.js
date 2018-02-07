@@ -1,8 +1,10 @@
 import {
-  FETCH_RISK_REQUEST, FETCH_RISK_SUCCESS, FETCH_RISK_FAILURE
+  FETCH_RISK_REQUEST,
+  FETCH_RISK_SUCCESS,
+  FETCH_RISK_FAILURE
 } from '../actions/DDOSactions';
 
-export function risks(state={
+export function risks(state = {
   isFetching: false,
   isFetched: false,
   didFailed: false,
