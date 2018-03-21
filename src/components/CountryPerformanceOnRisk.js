@@ -1,9 +1,11 @@
 import React, {
   Component
-} from 'react';
+}
+from 'react';
 import {
   connect
-} from 'react-redux'
+}
+from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import update from 'react/lib/update'
@@ -14,7 +16,8 @@ import {
   fetchDataIfNeeded,
   getCountryRanking,
   changeMeasure
-} from '../actions/cubeActions';
+}
+from '../actions/cubeActions';
 // import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
 export class CountryPerformanceOnRisk extends Component {
@@ -29,9 +32,11 @@ export class CountryPerformanceOnRisk extends Component {
       })
       .then((annFilterByCountry) => {
         for (var ann_num in annFilterByCountry.notes) {
-          if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+          if (annFilterByCountry.notes[ann_num].country_code == props.view.country &&
+            annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
             annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
+              '\n' + annFilterByCountry.notes[ann_num].annotation);
             annotations.push({
               type: 'date',
               x: annFilterByCountry.notes[ann_num].annotation_date,
@@ -52,9 +57,11 @@ export class CountryPerformanceOnRisk extends Component {
               ay: -200,
             });
           }
-          if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+          if (annFilterByCountry.notes[ann_num].country_code == 999 &&
+            annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
             annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
+              '\n' + annFilterByCountry.notes[ann_num].annotation);
             annotations.push({
               type: 'date',
               x: annFilterByCountry.notes[ann_num].annotation_date,
@@ -172,7 +179,8 @@ export class CountryPerformanceOnRisk extends Component {
 
       state['plotlyData'] = plotlyData
     }
-    if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
+    if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !==
+      'count_normalized') {
       state.graphOptions = update(this.state.graphOptions, {
         yaxis: {
           title: {
@@ -185,12 +193,14 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
 
-  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure, normMeasure, devider) {
+  convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure,
+    normMeasure, devider) {
     var dataTable = cubeByRiskByCountry[riskID][countryID];
     if (dataTable) {
       return {
         x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row[normMeasure] / devider || row[measure] / devider),
+        y: dataTable.map(row => row[normMeasure] / devider || row[measure] /
+          devider),
         name: this.props.countries[countryID].name,
         type: 'scatter',
       }
@@ -271,14 +281,10 @@ export class CountryPerformanceOnRisk extends Component {
   }
 
   render() {
-    return ( <
-        div className = "graph-div" >
-        <
-        div className = "row" >
-        <
-        div className = "col-sm-11" >
-        <
-        h3 > {
+    return ( < div className = "graph-div" >
+        < div className = "row" >
+        < div className = "col-sm-11" >
+        < h3 > {
           this.props.risks[this.props.view.risk].title.toUpperCase()
         } {
           ` `
@@ -291,9 +297,11 @@ export class CountryPerformanceOnRisk extends Component {
         div > <
         div className = "col-sm-1" > {
           this.props.view.rank ? < a href = "/country"
-          title = "Rank of country on this risk in last week with #1 = worst" > < h3 className = "pull-right graph-rank" > #{
-            this.props.view.rank
-          } < /h3></a > : ''
+          title = "Rank of country on this risk in last week with #1 = worst" >
+            <
+            h3 className = "pull-right graph-rank" > #{
+              this.props.view.rank
+            } < /h3></a > : ''
         } <
         /div> < /
         div > <
