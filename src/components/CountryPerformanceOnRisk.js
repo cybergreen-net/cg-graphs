@@ -246,6 +246,32 @@ export class CountryPerformanceOnRisk extends Component {
     }
   }
 
+  // ---------------------------------------IN DEVEL-ARCHIVE-----------------------------------------------------
+  // This script is supposed to update the graph by removing annotations, it's based on the trends function below
+  // ---------------------------------------IN DEVEL-ARCHIVE-----------------------------------------------------
+
+  // buttonCheckChange(changeEvent) {
+    //   switch (changeEvent.target.value) {
+    //       case 'annotations_off':
+    //         var newState = update(this.state, {
+    //         graphOptions: {
+    //           $set: 'annotations: ""'}
+    //       });
+    //       this.setState(newState);
+    //       break;
+    //     default:
+    //       var newState = update(this.state, {
+    //         graphOptions: {
+    //           $set: 'annotations: "annotations"'},
+    //       });
+    //       this.setState(newState);
+    //
+    //   }
+    //   this.props.dispatch((
+    //     changeEvent.target.value,
+    //     this.props.viewId
+    //   ))
+    // }
 
   buttonChange(changeEvent) {
     switch (changeEvent.target.value) {
@@ -336,6 +362,16 @@ export class CountryPerformanceOnRisk extends Component {
         })
       } <
       form className = "radio-form" >
+      // ---------------------------------------IN DEVEL-ARCHIVE-----------------------------------------------------
+      // Added checkboxes for annotations and archive just need to figure out how to make them work !!!!!
+      // ---------------------------------------IN DEVEL-ARCHIVE-----------------------------------------------------
+      // < label className = "checkbox-inline">
+      // < input type = "checkbox1"  / > Annotations On < /label>
+      //insert into checkbox 1 value = "annotations_off" checked = {this.props.view.annotations === 'annotations_off'} onChange = {this.buttonCheckChange.bind(this)}
+      // < label className = "checkbox-inline">
+      // < input type = "checkbox2" / > Include Archived Data < /label>
+      // insert into checkbox 2 value = "archive_on" checked = {this.props.view.annotations !== 'archived_on'} onChange = {this.buttonCheckArchiveChange.bind(this)}
+
       <
       label className = "radio-inline" >
       <

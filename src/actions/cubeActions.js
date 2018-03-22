@@ -52,20 +52,19 @@ export function countryIsSelected(idxOfSelector, selectedCountry, graphId) {
   }
 }
 
-export function fetchData(country, risk, graphId, viewType, test = false, start =
-  '2017-09-01') {
+export function fetchData(country, risk, graphId, viewType, test = false) {
   return function(dispatch) {
-    dispatch(requestData(country, risk, graphId, viewType, start))
+    dispatch(requestData(country, risk, graphId, viewType))
     let ENDPOINT =
-      `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}&start=${start}&drilldown=as&drilldown_limit=5`
+      `/api/v1/count_by_country?limit=500&country=${country}&risk=${risk}&drilldown=as&drilldown_limit=5`
     if (!test) {
       ENDPOINT = CG_API_ENDPOINT + ENDPOINT
     }
     return axios.get(ENDPOINT)
       .then(res => dispatch(receivetData(res.data.results, country, risk,
-        graphId, viewType, start)))
+        graphId, viewType)))
       .catch(err => dispatch(receivetDataFailure(err.message, country, risk,
-        graphId, viewType, start)))
+        graphId, viewType)))
   }
 }
 
@@ -79,10 +78,10 @@ export function shouldFetchData(state, country, risk) {
 }
 
 export function fetchDataIfNeeded(country, risk, graphId, viewType, test =
-  false, start = '2017-09-01') {
+  false) {
   return (dispatch, getState) => {
     if (shouldFetchData(getState(), country, risk)) {
-      return dispatch(fetchData(country, risk, graphId, viewType, start, test))
+      return dispatch(fetchData(country, risk, graphId, viewType, test))
     } else {
       return Promise.resolve()
     }
@@ -92,7 +91,7 @@ export function fetchDataIfNeeded(country, risk, graphId, viewType, test =
 export const GET_RANK_SUCCESS = 'GET_RANK_SUCCESS'
 
 function receiveRank(data, country, risk, graphId, viewType =
-  'countryPerformanceOnRiskViews', start) {
+  'countryPerformanceOnRiskViews') {
   return {
     type: GET_RANK_SUCCESS,
     data,
@@ -100,7 +99,6 @@ function receiveRank(data, country, risk, graphId, viewType =
     risk,
     graphId,
     viewType,
-    start
   }
 }
 
