@@ -110,7 +110,7 @@ export class ASPerformance extends Component {
   }
 
 
-
+// adjusts the colour  fix if needed
   computeState(props = this.props) {
     let lineColors = [
       '#00D499', '#116AD4', '#FF9C00',
