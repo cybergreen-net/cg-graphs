@@ -174,13 +174,13 @@ export class ASPerformance extends Component {
         type: 'scatter',
         mode: 'lines+markers',
         marker: {
-          line: {width: 1},
-          size: 5,
+          line: {width: 0.5},
+          size: 3,
           symbol: 'circle-dot'
         },
         line: {
           width: 1,
-          smoothing: 1.3,
+          smoothing: 1,
           simplify: true,
           shape: 'spline'},
         connectgaps: false
