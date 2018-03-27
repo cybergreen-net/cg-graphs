@@ -172,17 +172,16 @@ export class ASPerformance extends Component {
         y: dataTable.map(row => row.count),
         name: this.props.asn[asID] ? this.props.asn[asID].title : 'Unknown',
         type: 'scatter',
-        mode: 'markers',
+        mode: 'lines+markers',
         marker: {
           line: {width: 0.5},
           size: 3,
-          symbol: 'circle-dot'
+          symbol: 'cross'
         },
-        // line: {
-        //   width: 1,
-        //   smoothing: 1,
-        //   simplify: true,
-        //   shape: 'spline'},
+        line: {
+          width: 1,
+          smoothing: 0.75,
+          shape: 'spline'},
         connectgaps: false
 
       }
