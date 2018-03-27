@@ -129,8 +129,8 @@ export class CountryPerformanceOnRisk extends Component {
 
     let plotlyData = []
     let lineColors = [
-      'rgb(214, 39, 40)', 'rgb(31, 119, 180)', 'rgb(44, 160, 44)',
-      'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
+      '#00D499', '#116AD4', '#FF9C00',
+      '#FF5C00', '#F60030'
     ]
     if (props.view.isFetching === 0) {
       plotlyData = props.view.selectorConfig.map(config => {
@@ -151,7 +151,7 @@ export class CountryPerformanceOnRisk extends Component {
         return value !== undefined
       })
       plotlyData.forEach((trace, idx) => {
-        trace['line'] = {
+        trace['markers'] = {
           color: lineColors[idx]
         }
       })
@@ -203,6 +203,20 @@ export class CountryPerformanceOnRisk extends Component {
           devider),
         name: this.props.countries[countryID].name,
         type: 'scatter',
+        mode: 'lines+markers',
+        marker: {
+          line: {width: 1},
+          size: 5,
+          symbol: 'circle-dot'
+        },
+        line: {
+          width: 1,
+          smoothing: 1.3,
+          simplify: true,
+          shape: 'spline',
+          opacity: 0.5
+        },
+        connectgaps: false
       }
     }
   }

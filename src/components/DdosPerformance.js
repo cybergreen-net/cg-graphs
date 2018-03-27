@@ -116,9 +116,6 @@ export class DdosPerformance extends Component {
           color: 'rgba(252, 159, 91, .8)',
           size: 8,
         },
-        legendgroup: ['group1','group2','group3','group4','group5'],
-        traceorder: 'grouped',
-        name: 'Annotations',
         hovermode: 'y',
         hoverlabel: {
           bgcolor: '#FC9F5B',
@@ -141,8 +138,8 @@ export class DdosPerformance extends Component {
         y: dataTable.map(row => (row[measure] || row.count) / 1000000),
         name: risk.title,
         type: 'bar',
-        traceorder: 'grouped',
-        legendgroup: ['group1','group2','group3','group4','group5'],
+        traceorder: "grouped",
+        legendgroup: ['Annotations'],
         marker: {
           color: color
         }

@@ -113,8 +113,8 @@ export class ASPerformance extends Component {
 
   computeState(props = this.props) {
     let lineColors = [
-      'rgb(214, 39, 40)', 'rgb(31, 119, 180)', 'rgb(44, 160, 44)',
-      'rgb(255, 127, 14)', 'rgb(238, 130, 238)'
+      '#00D499', '#116AD4', '#FF9C00',
+      '#FF5C00', '#F60030'
     ]
     if (props.view.isFetched) {
       let plotlyData = props.view.selectorConfig.map(config => {
@@ -172,6 +172,19 @@ export class ASPerformance extends Component {
         y: dataTable.map(row => row.count),
         name: this.props.asn[asID] ? this.props.asn[asID].title : 'Unknown',
         type: 'scatter',
+        mode: 'lines+markers',
+        marker: {
+          line: {width: 1},
+          size: 5,
+          symbol: 'circle-dot'
+        },
+        line: {
+          width: 1,
+          smoothing: 1.3,
+          simplify: true,
+          shape: 'spline'},
+        connectgaps: false
+
       }
     }
   }
