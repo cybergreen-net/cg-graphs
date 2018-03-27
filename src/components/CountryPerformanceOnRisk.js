@@ -203,19 +203,19 @@ export class CountryPerformanceOnRisk extends Component {
           devider),
         name: this.props.countries[countryID].name,
         type: 'scatter',
-        mode: 'lines+markers',
+        mode: 'markers',
         marker: {
           line: {width: 0.5},
           size: 3,
           symbol: 'circle-dot'
         },
-        line: {
-          width: 1,
-          smoothing: 1,
-          simplify: true,
-          shape: 'spline',
-          opacity: 0.5
-        },
+        // line: {
+        //   width: 1,
+        //   smoothing: 1,
+        //   simplify: true,
+        //   shape: 'spline',
+        //   opacity: 0.5
+        // },
         connectgaps: false
       }
     }
