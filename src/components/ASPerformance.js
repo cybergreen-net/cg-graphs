@@ -22,63 +22,63 @@ from '../actions/ASactions';
 export class ASPerformance extends Component {
   constructor(props) {
     super(props)
-      // let annotation_dates = [];
-      // let annotation_notes = [];
-      // let annotations = [];
-      // fetch(`/static/scripts/publicAnnotation.json`)
-      //   .then((response) => {
-      //     return response.json()
-      //   })
-      //   .then((annFilterByAsn) => {
-      //     for (var ann_num in annFilterByAsn.notes) {
-      //       if (annFilterByAsn.notes[ann_num].asn == props.view.asn) {
-      //         annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
-      //         annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
-      //         annotations.push({
-      //           type: 'date',
-      //           x: annFilterByAsn.notes[ann_num].annotation_date,
-      //           y: 0,
-      //           xref: 'x',
-      //           yref: 'y',
-      //           align: 'middle',
-      //           valign: 'center',
-      //           text: '',
-      //           borderwidth: 0,
-      //           showarrow: true,
-      //           arrowsize: 0,
-      //           arrowwidth: 1,
-      //           arrowcolor: '#FC9F5B',
-      //           arrowhead: 6,
-      //           opacity: 0.8,
-      //           ax: 0,
-      //           ay: -200,
-      //         });
-      //       }
-      //       if (annFilterByAsn.notes[ann_num].country_code == 999 && annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
-      //         annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
-      //         annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
-      //         annotations.push({
-      //           type: 'date',
-      //           x: annFilterByAsn.notes[ann_num].annotation_date,
-      //           y: 0,
-      //           xref: 'x',
-      //           yref: 'y',
-      //           align: 'middle',
-      //           valign: 'center',
-      //           text: '',
-      //           borderwidth: 0,
-      //           showarrow: true,
-      //           arrowsize: 0,
-      //           arrowwidth: 1,
-      //           arrowcolor: '#FC9F5B',
-      //           arrowhead: 6,
-      //           opacity: 0.8,
-      //           ax: 0,
-      //           ay: -200,
-      //         });
-      //       }
-      //     }
-      // });
+      let annotation_dates = [];
+      let annotation_notes = [];
+      let annotations = [];
+      fetch(`/static/scripts/publicAnnotation.json`)
+        .then((response) => {
+          return response.json()
+        })
+        .then((annFilterByAsn) => {
+          for (var ann_num in annFilterByAsn.notes) {
+            if (annFilterByAsn.notes[ann_num].asn == props.view.asn) {
+              annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
+              annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
+              annotations.push({
+                type: 'date',
+                x: annFilterByAsn.notes[ann_num].annotation_date,
+                y: 0,
+                xref: 'x',
+                yref: 'y',
+                align: 'middle',
+                valign: 'center',
+                text: '',
+                borderwidth: 0,
+                showarrow: true,
+                arrowsize: 0,
+                arrowwidth: 1,
+                arrowcolor: '#FC9F5B',
+                arrowhead: 6,
+                opacity: 0.8,
+                ax: 0,
+                ay: -200,
+              });
+            }
+            if (annFilterByAsn.notes[ann_num].country_code == 999 && annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
+              annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
+              annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
+              annotations.push({
+                type: 'date',
+                x: annFilterByAsn.notes[ann_num].annotation_date,
+                y: 0,
+                xref: 'x',
+                yref: 'y',
+                align: 'middle',
+                valign: 'center',
+                text: '',
+                borderwidth: 0,
+                showarrow: true,
+                arrowsize: 0,
+                arrowwidth: 1,
+                arrowcolor: '#FC9F5B',
+                arrowhead: 6,
+                opacity: 0.8,
+                ax: 0,
+                ay: -200,
+              });
+            }
+          }
+      });
 
 
     this.state = {
@@ -102,10 +102,10 @@ export class ASPerformance extends Component {
           size: 9,
           color: '#7f7f7f'
         },
-        // annotations: annotations,
+        annotations: annotations,
       },
-      // annotation_dates: annotation_dates,
-      // annotation_notes: annotation_notes,
+      annotation_dates: annotation_dates,
+      annotation_notes: annotation_notes,
     }
   }
 
@@ -135,28 +135,28 @@ export class ASPerformance extends Component {
             color: lineColors[idx]
           }
         })
-        // plotlyData.splice(1, 0, {
-        //   //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
-        //   x: this.state.annotation_dates,
-        //   y: this.state.annotation_dates.map(function(x) {
-        //     return 0
-        //   }),
-        //   //y: [0, 0, 0],
-        //   mode: 'markers',
-        //   marker: {
-        //     color: 'rgba(252, 159, 91, .8)',
-        //     size: 8,
-        //     name: 'Annotation'
-        //   },
-        //   name: 'Annotations',
-        //   hovermode: 'y',
-        //   hoverlabel: {
-        //     bgcolor: '#FC9F5B',
-        //     bordercolor: '#000000'
-        //   },
-        //   hoverinfo: 'text',
-        //   text: this.state.annotation_notes,
-        // });
+        plotlyData.splice(1, 0, {
+          //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+          x: this.state.annotation_dates,
+          y: this.state.annotation_dates.map(function(x) {
+            return 0
+          }),
+          //y: [0, 0, 0],
+          mode: 'markers',
+          marker: {
+            color: 'rgba(252, 159, 91, .8)',
+            size: 8,
+            name: 'Annotation'
+          },
+          name: 'Annotations',
+          hovermode: 'y',
+          hoverlabel: {
+            bgcolor: '#FC9F5B',
+            bordercolor: '#000000'
+          },
+          hoverinfo: 'text',
+          text: this.state.annotation_notes,
+        });
       return {
         plotlyData: plotlyData
       }
@@ -164,12 +164,14 @@ export class ASPerformance extends Component {
     return {}
   }
 
-  convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
+  convertToPlotlySeries(asID, countryID, riskID, dataFromCube, measure,
+    normMeasure, devider) {
     var dataTable = dataFromCube[countryID + '/' + riskID + '/' + asID];
     if (dataTable.length) {
       return {
         x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row.count),
+        y: dataTable.map(row => row[normMeasure] / devider || row[measure] /
+          devider),
         name: this.props.asn[asID] ? this.props.asn[asID].title : 'Unknown',
         type: 'scatter',
         mode: 'lines+markers',
