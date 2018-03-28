@@ -196,27 +196,28 @@ export class CountryPerformanceOnRisk extends Component {
   convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure,
     normMeasure, devider) {
     var dataTable = cubeByRiskByCountry[riskID][countryID];
+    var graphDisplayData = {
+      x: dataTable.map(row => row.date),
+      y: dataTable.map(row => row[normMeasure] / devider || row[measure] /
+        devider),
+      name: this.props.countries[countryID].name,
+      type: 'scatter',
+      mode: 'lines+markers',
+      marker: {
+        line: {width: 0.5},
+        size: 3,
+        symbol: 'cross'
+      },
+      line: {
+        width: 1,
+        smoothing: 0.75,
+        shape: 'spline',
+        opacity: 0.5
+      },
+      connectgaps: false
+    };
     if (dataTable) {
-      return {
-        x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row[normMeasure] / devider || row[measure] /
-          devider),
-        name: this.props.countries[countryID].name,
-        type: 'scatter',
-        mode: 'lines+markers',
-        marker: {
-          line: {width: 0.5},
-          size: 3,
-          symbol: 'cross'
-        },
-        line: {
-          width: 1,
-          smoothing: 0.75,
-          shape: 'spline',
-          opacity: 0.5
-        },
-        connectgaps: false
-      }
+      return (graphDisplayData)
     }
   }
 
