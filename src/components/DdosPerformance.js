@@ -43,6 +43,7 @@ export class DdosPerformance extends Component {
               opacity: 0.8,
               ax: 0,
               ay: -200,
+                clicktoshow: 'onoff'
             });
           }
         }
