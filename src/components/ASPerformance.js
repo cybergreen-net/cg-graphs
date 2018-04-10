@@ -84,6 +84,7 @@ export class ASPerformance extends Component {
     this.state = {
       plotlyData: [],
       graphOptions: {
+
         legend: {
           x: 0,
           y: 1

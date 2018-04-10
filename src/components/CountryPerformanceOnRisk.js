@@ -55,6 +55,7 @@ export class CountryPerformanceOnRisk extends Component {
               opacity: 0.8,
               ax: 0,
               ay: -200,
+              clicktoshow: 'onout'
             });
           }
           if (annFilterByCountry.notes[ann_num].country_code == 999 &&
@@ -80,6 +81,7 @@ export class CountryPerformanceOnRisk extends Component {
               opacity: 0.8,
               ax: 0,
               ay: -200,
+              clicktoshow: 'onout'
             });
           }
         }
