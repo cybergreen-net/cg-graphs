@@ -22,12 +22,26 @@ class PlotlyGraph extends React.Component {
         'hoverCompareCartesian',
         'hoverClosestCartesian',
         'sendDataToCloud',
-        'autoScale2d',
+        // 'autoScale2d',
+        'zoomIn2d',
+        'zoomOut2d',
         'pan2d',
-        'zoom2d'
-      ]
+        // 'zoom2d',
+        'lasso2d',
+        'select2d',
+        'toggleHover'
+      ],
+      scrollZoom: true,
+      displaylogo: false,
+      showTips: true
     });
   }
+
+  //  - (2D): zoom2d, pan2d, select2d, lasso2d, zoomIn2d, zoomOut2d, autoScale2d, resetScale2d
+  //  - (Cartesian): hoverClosestCartesian, hoverCompareCartesian
+  //  - (3D): zoom3d, pan3d, orbitRotation, tableRotation, handleDrag3d, resetCameraDefault3d, resetCameraLastSave3d, hoverClosest3d
+  //  - (Geo): zoomInGeo, zoomOutGeo, resetGeo, hoverClosestGeo
+  //  - hoverClosestGl2d, hoverClosestPie, toggleHover, resetViews
 
   componentDidMount() {
     this.drawPlot(this.props.data, this.props.graphOptions);

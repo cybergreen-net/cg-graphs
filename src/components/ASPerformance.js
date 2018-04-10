@@ -52,6 +52,7 @@ export class ASPerformance extends Component {
                 opacity: 0.8,
                 ax: 0,
                 ay: -200,
+                clicktoshow: 'onoff'
               });
             }
             if (annFilterByAsn.notes[ann_num].country_code == 999 && annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
@@ -75,6 +76,7 @@ export class ASPerformance extends Component {
                 opacity: 0.8,
                 ax: 0,
                 ay: -200,
+                clicktoshow: 'onoff'
               });
             }
           }
