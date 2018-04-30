@@ -41,7 +41,8 @@ export class SourceOfInfection extends Component {
               opacity: 0.8,
               ax: 0,
               ay: -200,
-                clicktoshow: 'onoff'
+                clicktoshow: 'onoff',
+                legendgroup: 'annotations'
             });
           }
           if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
@@ -65,7 +66,8 @@ export class SourceOfInfection extends Component {
               opacity: 0.8,
               ax: 0,
               ay: -200,
-                clicktoshow: 'onoff'
+                clicktoshow: 'onoff',
+                legendgroup: 'annotations'
             });
           }
         }
@@ -143,6 +145,7 @@ export class SourceOfInfection extends Component {
           bordercolor: '#000000'
         },
         hoverinfo: 'text',
+        legendgroup: 'annotations',
         text: this.state.annotation_notes,
       });
 

@@ -43,19 +43,18 @@ export class CountryPerformanceOnRisk extends Component {
               y: 0,
               xref: 'x',
               yref: 'y',
-              align: 'middle',
-              valign: 'center',
+              // align: 'middle',
+              // valign: 'center',
               text: '',
               borderwidth: 0,
               showarrow: true,
               arrowsize: 0,
-              arrowwidth: 1,
+              arrowwidth: 0,
               arrowcolor: '#FC9F5B',
-              arrowhead: 6,
+              arrowhead: 0,
               opacity: 0.8,
               ax: 0,
-              ay: -200,
-              clicktoshow: 'onoff'
+              ay: 0,
             });
           }
           if (annFilterByCountry.notes[ann_num].country_code == 999 &&
@@ -69,19 +68,18 @@ export class CountryPerformanceOnRisk extends Component {
               y: 0,
               xref: 'x',
               yref: 'y',
-              align: 'middle',
-              valign: 'center',
+              // align: 'middle',
+              // valign: 'center',
               text: '',
               borderwidth: 0,
               showarrow: true,
               arrowsize: 0,
-              arrowwidth: 1,
+              arrowwidth: 0,
               arrowcolor: '#FC9F5B',
-              arrowhead: 6,
+              arrowhead: 0,
               opacity: 0.8,
               ax: 0,
-              ay: -200,
-              clicktoshow: 'onoff'
+              ay: 0,
             });
           }
         }
@@ -111,7 +109,7 @@ export class CountryPerformanceOnRisk extends Component {
           size: 9,
           color: '#7f7f7f'
         },
-        showlegend: false,
+        showlegend: true,
         annotations: annotations,
       },
       annotation_dates: annotation_dates,
@@ -165,11 +163,13 @@ export class CountryPerformanceOnRisk extends Component {
         }),
         //y: [0, 0, 0],
         mode: 'markers',
-        marker: {
-          color: 'rgba(252, 159, 91, .8)',
-          size: 8,
-          name: 'Annotation'
-        },
+        // marker: {
+        //   color: 'rgba(252, 159, 91, .8)',
+        //   size: 8,
+        //   name: 'Annotation'
+        // },
+        legendgroup: 'Annotations',
+        name: 'Annotations',
         hovermode: 'y',
         hoverlabel: {
           bgcolor: '#FC9F5B',
