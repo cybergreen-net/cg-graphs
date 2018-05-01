@@ -17,6 +17,7 @@
 .App-intro {
   font-size: large;
 }
+.js-plotly-plot .plotly .modebar{left: 40%}
 
 @keyframes App-logo-spin {
   from {

@@ -89,7 +89,7 @@ export class CountryPerformanceOnRisk extends Component {
       cubeByRiskByCountry: {},
       graphOptions: {
         legend: {
-          x: 0,
+          x: 100,
           y: 1
         },
         height: 200,
@@ -216,6 +216,7 @@ export class CountryPerformanceOnRisk extends Component {
         shape: 'spline',
         opacity: 0.5
       },
+      showlegend: false,
       connectgaps: false
     };
     if (dataTable) {
