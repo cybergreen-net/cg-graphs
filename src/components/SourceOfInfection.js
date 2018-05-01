@@ -29,20 +29,18 @@ export class SourceOfInfection extends Component {
               y: 0,
               xref: 'x',
               yref: 'y',
-              align: 'middle',
-              valign: 'center',
+              // align: 'middle',
+              // valign: 'center',
               text: '',
               borderwidth: 0,
               showarrow: true,
               arrowsize: 0,
-              arrowwidth: 1,
+              arrowwidth: 0,
               arrowcolor: '#FC9F5B',
-              arrowhead: 6,
+              arrowhead: 0,
               opacity: 0.8,
               ax: 0,
-              ay: -200,
-                clicktoshow: 'onoff',
-                legendgroup: 'annotations'
+              ay: 0,
             });
           }
           if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
@@ -54,20 +52,18 @@ export class SourceOfInfection extends Component {
               y: 0,
               xref: 'x',
               yref: 'y',
-              align: 'middle',
-              valign: 'center',
+              // align: 'middle',
+              // valign: 'center',
               text: '',
               borderwidth: 0,
               showarrow: true,
               arrowsize: 0,
-              arrowwidth: 1,
+              arrowwidth: 0,
               arrowcolor: '#FC9F5B',
-              arrowhead: 6,
+              arrowhead: 0,
               opacity: 0.8,
               ax: 0,
-              ay: -200,
-                clicktoshow: 'onoff',
-                legendgroup: 'annotations'
+              ay: 0,
             });
           }
         }
@@ -78,8 +74,7 @@ export class SourceOfInfection extends Component {
     this.state = {
       graphOptions: {
         barmode: 'stack',
-        hovermode: 'closest',
-        showlegend: false,
+        // hovermode: 'closest',
         height: 252,
         margin: {
           l: 40,
@@ -98,7 +93,7 @@ export class SourceOfInfection extends Component {
           size: 9,
           color: '#7f7f7f'
         },
-        showlegend: false,
+        showlegend: true,
         annotations: annotations,
       },
       annotation_dates: annotation_dates,
@@ -125,7 +120,7 @@ export class SourceOfInfection extends Component {
         }
         plotlyData.push(trace)
       })
-      // needs to be fixed does not work
+      
       plotlyData.push({
         //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
         x: this.state.annotation_dates,
@@ -134,18 +129,20 @@ export class SourceOfInfection extends Component {
         }),
         //y: [0, 0, 0],
         mode: 'markers',
-        marker: {
-          color: 'rgba(252, 159, 91, .8)',
-          size: 8,
-          name: 'Annotation'
-        },
+        // marker: {
+        //   color: 'rgba(252, 159, 91, .8)',
+        //   size: 8,
+        //   name: 'Annotation'
+        // },
+        legendgroup: 'Annotations',
+        name: 'Annotations',
         hovermode: 'y',
+        traceorder: 'grouped',
         hoverlabel: {
           bgcolor: '#FC9F5B',
           bordercolor: '#000000'
         },
-        hoverinfo: 'text',
-        legendgroup: 'annotations',
+        hoverinfo: 'text', //if `none` is set, click and hover events
         text: this.state.annotation_notes,
       });
 
@@ -154,6 +151,7 @@ export class SourceOfInfection extends Component {
         y: [countAllRest],
         type: 'bar',
         name: 'Rest',
+        showlegend: false,
         marker: {
           color: 'rgb(200, 2, 16)'
         },
@@ -185,7 +183,9 @@ export class SourceOfInfection extends Component {
       y: [asn[measure] / unitDevider],
       type: 'bar',
       name: asn.id,
+      legendgroup: 'AllTraces',
       text: [asn.id + ' | ' + title],
+      showlegend: false,
       hoverinfo: 'x+y+text'
     }
   }

@@ -40,19 +40,18 @@ export class ASPerformance extends Component {
                 y: 0,
                 xref: 'x',
                 yref: 'y',
-                align: 'middle',
-                valign: 'center',
+                // align: 'middle',
+                // valign: 'center',
                 text: '',
                 borderwidth: 0,
                 showarrow: true,
                 arrowsize: 0,
-                arrowwidth: 1,
+                arrowwidth: 0,
                 arrowcolor: '#FC9F5B',
-                arrowhead: 6,
+                arrowhead: 0,
                 opacity: 0.8,
                 ax: 0,
-                ay: -200,
-                clicktoshow: 'onoff'
+                ay: 0,
               });
             }
             if (annFilterByAsn.notes[ann_num].country_code == 999 && annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
@@ -64,19 +63,18 @@ export class ASPerformance extends Component {
                 y: 0,
                 xref: 'x',
                 yref: 'y',
-                align: 'middle',
-                valign: 'center',
+                // align: 'middle',
+                // valign: 'center',
                 text: '',
                 borderwidth: 0,
                 showarrow: true,
                 arrowsize: 0,
-                arrowwidth: 1,
+                arrowwidth: 0,
                 arrowcolor: '#FC9F5B',
-                arrowhead: 6,
+                arrowhead: 0,
                 opacity: 0.8,
                 ax: 0,
-                ay: -200,
-                clicktoshow: 'onoff'
+                ay: 0,
               });
             }
           }
@@ -88,7 +86,7 @@ export class ASPerformance extends Component {
       graphOptions: {
 
         legend: {
-          x: 0,
+          x: 100,
           y: 1
         },
         height: 300,
@@ -105,6 +103,7 @@ export class ASPerformance extends Component {
           size: 9,
           color: '#7f7f7f'
         },
+        showlegend: true,
         annotations: annotations,
       },
       annotation_dates: annotation_dates,
@@ -140,26 +139,27 @@ export class ASPerformance extends Component {
         })
         plotlyData.splice(1, 0, {
           //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
-          x: this.state.annotation_dates,
-          y: this.state.annotation_dates.map(function(x) {
-            return 0
-          }),
-          //y: [0, 0, 0],
-          mode: 'markers',
-          marker: {
-            color: 'rgba(252, 159, 91, .8)',
-            size: 8,
-            name: 'Annotation'
-          },
-          name: 'Annotations',
-          hovermode: 'y',
-          hoverlabel: {
-            bgcolor: '#FC9F5B',
-            bordercolor: '#000000'
-          },
-          hoverinfo: 'text',
-          text: this.state.annotation_notes,
-        });
+        x: this.state.annotation_dates,
+        y: this.state.annotation_dates.map(function(x) {
+          return 0
+        }),
+        //y: [0, 0, 0],
+        mode: 'markers',
+        // marker: {
+        //   color: 'rgba(252, 159, 91, .8)',
+        //   size: 8,
+        //   name: 'Annotation'
+        // },
+        legendgroup: 'Annotations',
+        name: 'Annotations',
+        hovermode: 'y',
+        hoverlabel: {
+          bgcolor: '#FC9F5B',
+          bordercolor: '#000000'
+        },
+        hoverinfo: 'text', //if `none` is set, click and hover events
+        text: this.state.annotation_notes,
+      });
       return {
         plotlyData: plotlyData
       }
