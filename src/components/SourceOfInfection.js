@@ -105,53 +105,35 @@ export class SourceOfInfection extends Component {
 
   computeState(props = this.props) {
     let plotlyData = []
+    console.log("props.data",props.data);  
 
     props.data[props.view.risk][props.view.country].forEach(dataEntry => {
       let colorPallet = [
         'rgb(96, 3, 212)', 'rgb(84, 114, 222)', 'rgb(169, 244, 252)',
         'rgb(7, 101, 240)', 'rgb(0, 212, 154)'
       ]
-      let countAllRest = parseInt(dataEntry[props.view.measure]) / props.view.unitDevider
+      let countAllRest = parseInt(dataEntry[props.view.measure]) / props.view.unitDevider;
+      console.log(dataEntry.as);
       dataEntry.as.forEach((asn, idx) => {
         countAllRest -= parseInt(asn[props.view.measure]) / props.view.unitDevider
         let trace = this.plotlySeries(dataEntry, asn, props.view.measure, props.view.unitDevider)
         trace['marker'] = {
-          color: colorPallet[idx]
+          color: colorPallet[idx],
+          legendgroup: ['traces']
         }
         plotlyData.push(trace)
       })
+      //console.log(plotlyData);
       
-      plotlyData.push({
-        //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
-        x: this.state.annotation_dates,
-        y: this.state.annotation_dates.map(function(x) {
-          return 0
-        }),
-        //y: [0, 0, 0],
-        mode: 'markers',
-        // marker: {
-        //   color: 'rgba(252, 159, 91, .8)',
-        //   size: 8,
-        //   name: 'Annotation'
-        // },
-        legendgroup: 'Annotations',
-        name: 'Annotations',
-        hovermode: 'y',
-        traceorder: 'grouped',
-        hoverlabel: {
-          bgcolor: '#FC9F5B',
-          bordercolor: '#000000'
-        },
-        hoverinfo: 'text', //if `none` is set, click and hover events
-        text: this.state.annotation_notes,
-      });
 
+      //I think here is whats causing the annotations to parse multiple times
       let traceAllRest = {
         x: [dataEntry.date],
         y: [countAllRest],
         type: 'bar',
         name: 'Rest',
         showlegend: false,
+        legendgroup: ['AtRest'],
         marker: {
           color: 'rgb(200, 2, 16)'
         },
@@ -163,6 +145,29 @@ export class SourceOfInfection extends Component {
     let state = {
       plotlyData: plotlyData
     }
+    plotlyData.splice(1, 0, {
+      //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+      x: this.state.annotation_dates,
+      y: this.state.annotation_dates.map(function(x) {
+        return 0
+      }),
+      //y: [0, 0, 0],
+      mode: 'markers',
+      marker: {
+        color: 'rgba(252, 159, 91, .8)',
+        size: 8,
+        name: 'Annotation'
+      },
+      legendgroup: 'Annotations',
+      name: 'Annotations',
+      hovermode: 'y',
+      hoverlabel: {
+        bgcolor: '#FC9F5B',
+        bordercolor: '#000000'
+      },
+      hoverinfo: 'text', //if `none` is set, click and hover events
+      text: this.state.annotation_notes,
+    });
     if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
       state.graphOptions = update(this.state.graphOptions, {
         yaxis: {
@@ -183,7 +188,7 @@ export class SourceOfInfection extends Component {
       y: [asn[measure] / unitDevider],
       type: 'bar',
       name: asn.id,
-      legendgroup: 'AllTraces',
+      // legendgroup: 'AllTraces',
       text: [asn.id + ' | ' + title],
       showlegend: false,
       hoverinfo: 'x+y+text'
