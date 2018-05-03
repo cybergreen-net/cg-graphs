@@ -53,11 +53,13 @@ export class DdosPerformance extends Component {
     this.state = {
       graphOptions: {
         height: 600,
+        legend:{
+          traceorder: 'grouped'},
         xaxis: {
           gridcolor: 'transparent',
         },
         yaxis: {
-          title: this.props.view.yLabel
+          title: this.props.view.yLabel,
         },
         barmode: 'stack',
         marker: {
@@ -117,6 +119,8 @@ export class DdosPerformance extends Component {
           color: 'rgba(252, 159, 91, .8)',
           size: 8,
         },
+        legendgroup: 'Annotations',
+        name: 'Annotations',
         hovermode: 'y',
         hoverlabel: {
           bgcolor: '#FC9F5B',
@@ -139,8 +143,7 @@ export class DdosPerformance extends Component {
         y: dataTable.map(row => (row[measure] || row.count) / 1000000),
         name: risk.title,
         type: 'bar',
-        traceorder: "grouped",
-        legendgroup: ['Annotations'],
+        legendgroup: ['Traces'],
         marker: {
           color: color
         }

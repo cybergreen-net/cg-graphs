@@ -29,8 +29,6 @@ export class SourceOfInfection extends Component {
               y: 0,
               xref: 'x',
               yref: 'y',
-              // align: 'middle',
-              // valign: 'center',
               text: '',
               borderwidth: 0,
               showarrow: true,
@@ -52,8 +50,6 @@ export class SourceOfInfection extends Component {
               y: 0,
               xref: 'x',
               yref: 'y',
-              // align: 'middle',
-              // valign: 'center',
               text: '',
               borderwidth: 0,
               showarrow: true,
@@ -73,8 +69,8 @@ export class SourceOfInfection extends Component {
 
     this.state = {
       graphOptions: {
-        barmode: 'stack',
-        // hovermode: 'closest',
+        barmode: 'relative',
+        hovermode: 'closest',
         height: 252,
         margin: {
           l: 40,
@@ -84,17 +80,20 @@ export class SourceOfInfection extends Component {
         },
         xaxis: {
           gridcolor: 'transparent',
-          tickformat: '%Y-%m-%d'
+          tickformat: '%d %b %Y'
         },
         yaxis: {
           title: this.props.view.yLabel
+        },
+        marker: {
+          symbol: 'square'
         },
         font: {
           size: 9,
           color: '#7f7f7f'
         },
         showlegend: true,
-        annotations: annotations,
+        annotations: annotations
       },
       annotation_dates: annotation_dates,
       annotation_notes: annotation_notes,
@@ -123,10 +122,7 @@ export class SourceOfInfection extends Component {
         }
         plotlyData.push(trace)
       })
-      //console.log(plotlyData);
-      
 
-      //I think here is whats causing the annotations to parse multiple times
       let traceAllRest = {
         x: [dataEntry.date],
         y: [countAllRest],
@@ -138,7 +134,7 @@ export class SourceOfInfection extends Component {
           color: 'rgb(200, 2, 16)'
         },
         text: ['Rest'],
-        hoverinfo: 'x+y+text'
+        hoverinfo: 'y+x+text'
       }
       plotlyData.unshift(traceAllRest)
     })
@@ -153,14 +149,17 @@ export class SourceOfInfection extends Component {
       }),
       //y: [0, 0, 0],
       mode: 'markers',
-      marker: {
-        color: 'rgba(252, 159, 91, .8)',
-        size: 8,
-        name: 'Annotation'
-      },
+      // marker: {
+      //   xref: 'paper',
+      //   yref: 'paper',
+      //   x: 1.056,
+      //   xanchor: 'left',
+      //   y: 0.99,
+      //   yanchor: 'bottom'
+      // },
       legendgroup: 'Annotations',
       name: 'Annotations',
-      hovermode: 'y',
+      hovermode: 'closest',
       hoverlabel: {
         bgcolor: '#FC9F5B',
         bordercolor: '#000000'
@@ -187,11 +186,14 @@ export class SourceOfInfection extends Component {
       x: [data.date],
       y: [asn[measure] / unitDevider],
       type: 'bar',
-      name: asn.id,
-      // legendgroup: 'AllTraces',
-      text: [asn.id + ' | ' + title],
+      name: asn.id + ' | ' + title,
+      //barmode: 'stacked',
+      legendgroup: 'AllTraces',
+      text: '' + 'k',
       showlegend: false,
-      hoverinfo: 'x+y+text'
+      // textposition: 'outside', // testing placement of asn and title outside the tooltip
+      mode: 'markers+text',
+      //hoverinfo: 'x+y'
     }
   }
 
