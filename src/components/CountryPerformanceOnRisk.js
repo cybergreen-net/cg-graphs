@@ -66,7 +66,6 @@ export class CountryPerformanceOnRisk extends Component {
                     x: 100,
                     y: 1
                 },
-                autosize: true,
                 height: 200,
                 margin: {
                     l: 40,
@@ -121,7 +120,7 @@ export class CountryPerformanceOnRisk extends Component {
         let plotlyData = []
         let lineColors = [
             '#F60030', '#00D499', '#116AD4', '#FF9C00',
-            '#FF5C00'
+            '#FF5C00', '#a5d400'
         ]
         if (props.view.isFetching === 0) {
             plotlyData = props.view.selectorConfig.map(config => {
@@ -146,7 +145,7 @@ export class CountryPerformanceOnRisk extends Component {
                     legendgroup: 'this.props.countries[countryID].name',
                 }
             })
-            plotlyData.splice(0, 0, {
+            plotlyData.splice(6, 0, {
                 type: 'scatter',
                 mode: 'markers',
                 x: this.state.annotation_dates,
@@ -154,12 +153,8 @@ export class CountryPerformanceOnRisk extends Component {
                     return -10
                 }),
                 marker: {
+                    size: 6,
                     symbol: 'square',
-                    font: {
-                        sizemin: 3,
-                        size: 9,
-                        sizemode: 'area'
-                    },
                 },
                 legendgroup: 'Annotations',
                 name: 'Annotations',
@@ -198,16 +193,11 @@ export class CountryPerformanceOnRisk extends Component {
             legendgroup: this.props.countries[countryID].name,
             marker: {
                 line: { width: 0.5 },
-                font: {
-                    sizemin: 3,
-                    size: 9,
-                    sizemode: 'area'
-                },
-                // symbol: 'cross'
+                size: 1
             },
             line: {
                 width: 1,
-                smoothing: 0.9,
+                smoothing: 0.8,
                 shape: 'spline',
                 opacity: 0.5
             },
