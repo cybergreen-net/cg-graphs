@@ -73,7 +73,6 @@ export class CountryPerformanceOnRisk extends Component {
                     b: 30,
                     t: 0
                 },
-                textposition: 'middle-left',
                 spikedistance: -1,
                 scene: {
                     xaxis: {
@@ -146,14 +145,13 @@ export class CountryPerformanceOnRisk extends Component {
                 }
             })
             plotlyData.splice(6, 0, {
-                type: 'scatter',
+                // type: 'scatter',
                 mode: 'markers',
                 x: this.state.annotation_dates,
                 y: this.state.annotation_dates.map(function(x) {
                     return -10
                 }),
                 marker: {
-                    size: 6,
                     symbol: 'square',
                 },
                 legendgroup: 'Annotations',
@@ -192,8 +190,7 @@ export class CountryPerformanceOnRisk extends Component {
             mode: 'lines+markers',
             legendgroup: this.props.countries[countryID].name,
             marker: {
-                line: { width: 0.5 },
-                size: 1
+                line: { width: 0.5 }
             },
             line: {
                 width: 1,
