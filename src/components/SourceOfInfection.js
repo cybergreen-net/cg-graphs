@@ -108,8 +108,8 @@ export class SourceOfInfection extends Component {
 
         props.data[props.view.risk][props.view.country].forEach(dataEntry => {
             let colorPallet = [
-                'rgb(96, 3, 212)', 'rgb(84, 114, 222)', 'rgb(169, 244, 252)',
-                'rgb(7, 101, 240)', 'rgb(0, 212, 154)'
+                '#00D499', '#116AD4', '#FF9C00',
+                '#FF5C00', '#9900d4'
             ]
             let countAllRest = parseInt(dataEntry[props.view.measure]) / props.view.unitDevider;
             console.log(dataEntry.as);
@@ -131,7 +131,7 @@ export class SourceOfInfection extends Component {
                 showlegend: false,
                 legendgroup: ['AtRest'],
                 marker: {
-                    color: 'rgb(200, 2, 16)'
+                    color: '#F60030'
                 },
                 text: ['Rest'],
                 hoverinfo: 'y+x+text'

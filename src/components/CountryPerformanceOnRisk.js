@@ -120,8 +120,8 @@ export class CountryPerformanceOnRisk extends Component {
 
         let plotlyData = []
         let lineColors = [
-            '#00D499', '#116AD4', '#FF9C00',
-            '#FF5C00', '#F60030'
+            '#F60030', '#00D499', '#116AD4', '#FF9C00',
+            '#FF5C00'
         ]
         if (props.view.isFetching === 0) {
             plotlyData = props.view.selectorConfig.map(config => {
@@ -151,7 +151,7 @@ export class CountryPerformanceOnRisk extends Component {
                 mode: 'markers',
                 x: this.state.annotation_dates,
                 y: this.state.annotation_dates.map(function(x) {
-                    return -20
+                    return 0
                 }),
                 marker: {
                     symbol: 'triangle-up-dot',
@@ -199,8 +199,8 @@ export class CountryPerformanceOnRisk extends Component {
             legendgroup: this.props.countries[countryID].name,
             marker: {
                 line: { width: 0.5 },
-                size: 3,
-                symbol: 'cross'
+                size: 1,
+                // symbol: 'cross'
             },
             line: {
                 width: 1,
