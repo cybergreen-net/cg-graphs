@@ -1,254 +1,254 @@
 import React, {
-  Component
+    Component
 } from 'react';
 import {
-  connect
+    connect
 } from 'react-redux'
 import PlotlyGraph from './Plot.js';
 import update from 'react/lib/update'
 // import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
 export class SourceOfInfection extends Component {
-  constructor(props) {
-    super(props)
-    let annotation_dates = [];
-    let annotation_notes = [];
-    let annotations = [];
-    fetch(`/static/scripts/publicAnnotation.json`)
-      .then((response) => {
-        return response.json()
-      })
-      .then((annFilterByCountry) => {
-        for (var ann_num in annFilterByCountry.notes) {
-          if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
-            annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
-            annotations.push({
-              type: 'date',
-              x: annFilterByCountry.notes[ann_num].annotation_date,
-              y: 0,
-              xref: 'x',
-              yref: 'y',
-              text: '',
-              borderwidth: 0,
-              showarrow: true,
-              arrowsize: 0,
-              arrowwidth: 0,
-              arrowcolor: '#FC9F5B',
-              arrowhead: 0,
-              opacity: 0.8,
-              ax: 0,
-              ay: 0,
+    constructor(props) {
+        super(props)
+        let annotation_dates = [];
+        let annotation_notes = [];
+        let annotations = [];
+        fetch(`/static/scripts/publicAnnotation.json`)
+            .then((response) => {
+                return response.json()
+            })
+            .then((annFilterByCountry) => {
+                for (var ann_num in annFilterByCountry.notes) {
+                    if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+                        annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+                        annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+                        annotations.push({
+                            type: 'date',
+                            x: annFilterByCountry.notes[ann_num].annotation_date,
+                            y: 0,
+                            xref: 'x',
+                            yref: 'y',
+                            text: '',
+                            borderwidth: 0,
+                            showarrow: true,
+                            arrowsize: 0,
+                            arrowwidth: 0,
+                            arrowcolor: '#FC9F5B',
+                            arrowhead: 0,
+                            opacity: 0.8,
+                            ax: 0,
+                            ay: 0,
+                        });
+                    }
+                    if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+                        annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+                        annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+                        annotations.push({
+                            type: 'date',
+                            x: annFilterByCountry.notes[ann_num].annotation_date,
+                            y: 0,
+                            xref: 'x',
+                            yref: 'y',
+                            text: '',
+                            borderwidth: 0,
+                            showarrow: true,
+                            arrowsize: 0,
+                            arrowwidth: 0,
+                            arrowcolor: '#FC9F5B',
+                            arrowhead: 0,
+                            opacity: 0.8,
+                            ax: 0,
+                            ay: 0,
+                        });
+                    }
+                }
             });
-          }
-          if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
-            annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
-            annotations.push({
-              type: 'date',
-              x: annFilterByCountry.notes[ann_num].annotation_date,
-              y: 0,
-              xref: 'x',
-              yref: 'y',
-              text: '',
-              borderwidth: 0,
-              showarrow: true,
-              arrowsize: 0,
-              arrowwidth: 0,
-              arrowcolor: '#FC9F5B',
-              arrowhead: 0,
-              opacity: 0.8,
-              ax: 0,
-              ay: 0,
+
+
+
+        this.state = {
+            graphOptions: {
+                barmode: 'relative',
+                hovermode: 'closest',
+                height: 252,
+                margin: {
+                    l: 40,
+                    r: 30,
+                    b: 30,
+                    t: 0
+                },
+                xaxis: {
+                    gridcolor: 'transparent',
+                    tickformat: '%d %b %Y'
+                },
+                yaxis: {
+                    title: this.props.view.yLabel
+                },
+                marker: {
+                    symbol: 'square'
+                },
+                font: {
+                    size: 9,
+                    color: '#7f7f7f'
+                },
+                showlegend: true,
+                annotations: annotations
+            },
+            annotation_dates: annotation_dates,
+            annotation_notes: annotation_notes,
+            plotlyData: []
+        }
+    }
+
+
+    computeState(props = this.props) {
+        let plotlyData = []
+        console.log("props.data", props.data);
+
+        props.data[props.view.risk][props.view.country].forEach(dataEntry => {
+            let colorPallet = [
+                'rgb(96, 3, 212)', 'rgb(84, 114, 222)', 'rgb(169, 244, 252)',
+                'rgb(7, 101, 240)', 'rgb(0, 212, 154)'
+            ]
+            let countAllRest = parseInt(dataEntry[props.view.measure]) / props.view.unitDevider;
+            console.log(dataEntry.as);
+            dataEntry.as.forEach((asn, idx) => {
+                countAllRest -= parseInt(asn[props.view.measure]) / props.view.unitDevider
+                let trace = this.plotlySeries(dataEntry, asn, props.view.measure, props.view.unitDevider)
+                trace['marker'] = {
+                    color: colorPallet[idx],
+                    legendgroup: ['traces']
+                }
+                plotlyData.push(trace)
+            })
+
+            let traceAllRest = {
+                x: [dataEntry.date],
+                y: [countAllRest],
+                type: 'bar',
+                name: 'Rest',
+                showlegend: false,
+                legendgroup: ['AtRest'],
+                marker: {
+                    color: 'rgb(200, 2, 16)'
+                },
+                text: ['Rest'],
+                hoverinfo: 'y+x+text'
+            }
+            plotlyData.unshift(traceAllRest)
+        })
+        let state = {
+            plotlyData: plotlyData
+        }
+        plotlyData.splice(1, 0, {
+            //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+            x: this.state.annotation_dates,
+            y: this.state.annotation_dates.map(function(x) {
+                return 0
+            }),
+            //y: [0, 0, 0],
+            mode: 'markers',
+            // marker: {
+            //   xref: 'paper',
+            //   yref: 'paper',
+            //   x: 1.056,
+            //   xanchor: 'left',
+            //   y: 0.99,
+            //   yanchor: 'bottom'
+            // },
+            legendgroup: 'Annotations',
+            name: 'Annotations',
+            hovermode: 'closest',
+            hoverlabel: {
+                bgcolor: '#FC9F5B',
+                bordercolor: '#000000'
+            },
+            hoverinfo: 'text', //if `none` is set, click and hover events
+            text: this.state.annotation_notes,
+        });
+        if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
+            state.graphOptions = update(this.state.graphOptions, {
+                yaxis: {
+                    title: {
+                        $set: props.view.unit
+                    }
+                }
             });
-          }
         }
-      });
-
-
-
-    this.state = {
-      graphOptions: {
-        barmode: 'relative',
-        hovermode: 'closest',
-        height: 252,
-        margin: {
-          l: 40,
-          r: 30,
-          b: 30,
-          t: 0
-        },
-        xaxis: {
-          gridcolor: 'transparent',
-          tickformat: '%d %b %Y'
-        },
-        yaxis: {
-          title: this.props.view.yLabel
-        },
-        marker: {
-          symbol: 'square'
-        },
-        font: {
-          size: 9,
-          color: '#7f7f7f'
-        },
-        showlegend: true,
-        annotations: annotations
-      },
-      annotation_dates: annotation_dates,
-      annotation_notes: annotation_notes,
-      plotlyData: []
+        return state
     }
-  }
 
 
-  computeState(props = this.props) {
-    let plotlyData = []
-    console.log("props.data",props.data);  
-
-    props.data[props.view.risk][props.view.country].forEach(dataEntry => {
-      let colorPallet = [
-        'rgb(96, 3, 212)', 'rgb(84, 114, 222)', 'rgb(169, 244, 252)',
-        'rgb(7, 101, 240)', 'rgb(0, 212, 154)'
-      ]
-      let countAllRest = parseInt(dataEntry[props.view.measure]) / props.view.unitDevider;
-      console.log(dataEntry.as);
-      dataEntry.as.forEach((asn, idx) => {
-        countAllRest -= parseInt(asn[props.view.measure]) / props.view.unitDevider
-        let trace = this.plotlySeries(dataEntry, asn, props.view.measure, props.view.unitDevider)
-        trace['marker'] = {
-          color: colorPallet[idx],
-          legendgroup: ['traces']
+    plotlySeries(data, asn, measure, unitDevider) {
+        var title = this.props.asns[asn.id] ? this.props.asns[asn.id].title : 'Unknown'
+        return {
+            x: [data.date],
+            y: [asn[measure] / unitDevider],
+            type: 'bar',
+            name: asn.id + ' | ' + title,
+            //barmode: 'stacked',
+            legendgroup: 'AllTraces',
+            text: '',
+            showlegend: false,
+            // textposition: 'outside', // testing placement of asn and title outside the tooltip
+            mode: 'markers+text',
+            //hoverinfo: 'x+y'
         }
-        plotlyData.push(trace)
-      })
-
-      let traceAllRest = {
-        x: [dataEntry.date],
-        y: [countAllRest],
-        type: 'bar',
-        name: 'Rest',
-        showlegend: false,
-        legendgroup: ['AtRest'],
-        marker: {
-          color: 'rgb(200, 2, 16)'
-        },
-        text: ['Rest'],
-        hoverinfo: 'y+x+text'
-      }
-      plotlyData.unshift(traceAllRest)
-    })
-    let state = {
-      plotlyData: plotlyData
     }
-    plotlyData.splice(1, 0, {
-      //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
-      x: this.state.annotation_dates,
-      y: this.state.annotation_dates.map(function(x) {
-        return 0
-      }),
-      //y: [0, 0, 0],
-      mode: 'markers',
-      // marker: {
-      //   xref: 'paper',
-      //   yref: 'paper',
-      //   x: 1.056,
-      //   xanchor: 'left',
-      //   y: 0.99,
-      //   yanchor: 'bottom'
-      // },
-      legendgroup: 'Annotations',
-      name: 'Annotations',
-      hovermode: 'closest',
-      hoverlabel: {
-        bgcolor: '#FC9F5B',
-        bordercolor: '#000000'
-      },
-      hoverinfo: 'text', //if `none` is set, click and hover events
-      text: this.state.annotation_notes,
-    });
-    if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
-      state.graphOptions = update(this.state.graphOptions, {
-        yaxis: {
-          title: {
-            $set: props.view.unit
-          }
+
+
+    componentDidMount() {
+        if (this.props.data[this.props.view.risk] && this.props.data[this.props.view.risk][this.props.view.country]) {
+            this.setState(this.computeState(this.props))
         }
-      });
+    };
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.data[this.props.view.risk] && nextProps.data[this.props.view.risk][this.props.view.country]) {
+            this.setState(this.computeState(nextProps))
+        }
     }
-    return state
-  }
 
 
-  plotlySeries(data, asn, measure, unitDevider) {
-    var title = this.props.asns[asn.id] ? this.props.asns[asn.id].title : 'Unknown'
-    return {
-      x: [data.date],
-      y: [asn[measure] / unitDevider],
-      type: 'bar',
-      name: asn.id + ' | ' + title,
-      //barmode: 'stacked',
-      legendgroup: 'AllTraces',
-      text: '' + 'k',
-      showlegend: false,
-      // textposition: 'outside', // testing placement of asn and title outside the tooltip
-      mode: 'markers+text',
-      //hoverinfo: 'x+y'
+    render() {
+        return ( <
+            div >
+            <
+            h3 > {
+                this.props.risks[this.props.view.risk].title.toUpperCase()
+            } {
+                ` `
+            } | {
+                ` `
+            }
+            AS SOURCE <
+            /h3> <
+            PlotlyGraph data = {
+                this.state.plotlyData
+            }
+            graphOptions = {
+                this.state.graphOptions
+            }
+            graphID = {
+                this.props.viewId
+            }
+            clickable = {
+                true
+            }
+            /> < /
+            div >
+        );
     }
-  }
-
-
-  componentDidMount() {
-    if (this.props.data[this.props.view.risk] && this.props.data[this.props.view.risk][this.props.view.country]) {
-      this.setState(this.computeState(this.props))
-    }
-  };
-
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.data[this.props.view.risk] && nextProps.data[this.props.view.risk][this.props.view.country]) {
-      this.setState(this.computeState(nextProps))
-    }
-  }
-
-
-  render() {
-    return ( <
-      div >
-      <
-      h3 > {
-        this.props.risks[this.props.view.risk].title.toUpperCase()
-      } {
-        ` `
-      } | {
-        ` `
-      }
-      AS SOURCE <
-      /h3> <
-      PlotlyGraph data = {
-        this.state.plotlyData
-      }
-      graphOptions = {
-        this.state.graphOptions
-      }
-      graphID = {
-        this.props.viewId
-      }
-      clickable = {
-        true
-      }
-      /> < /
-      div >
-    );
-  }
 }
 
 const mapStateToProps = (state) => {
-  return {
-    data: state.entities.cubeByRiskByCountry,
-    risks: state.entities.risks,
-    asns: state.entities.asn
-  }
+    return {
+        data: state.entities.cubeByRiskByCountry,
+        risks: state.entities.risks,
+        asns: state.entities.asn
+    }
 }
 
 export default connect(mapStateToProps)(SourceOfInfection)

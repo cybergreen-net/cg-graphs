@@ -74,6 +74,7 @@ export class CountryPerformanceOnRisk extends Component {
                     b: 30,
                     t: 0
                 },
+                textposition: 'middle-left',
                 spikedistance: -1,
                 scene: {
                     xaxis: {
@@ -85,7 +86,7 @@ export class CountryPerformanceOnRisk extends Component {
                 },
                 xaxis: {
                     gridcolor: 'transparent',
-                    tickformat: '%b %Y',
+                    tickformat: '%d %b %Y',
                     spikemode: 'across',
                     spikedash: 'dash',
                     spikesnap: 'data',
@@ -140,8 +141,9 @@ export class CountryPerformanceOnRisk extends Component {
                 return value !== undefined
             })
             plotlyData.forEach((trace, idx) => {
-                trace['markers'] = {
-                    color: lineColors[idx]
+                trace['marker'] = {
+                    color: lineColors[idx],
+                    legendgroup: 'this.props.countries[countryID].name',
                 }
             })
             plotlyData.splice(0, 0, {
@@ -149,11 +151,9 @@ export class CountryPerformanceOnRisk extends Component {
                 mode: 'markers',
                 x: this.state.annotation_dates,
                 y: this.state.annotation_dates.map(function(x) {
-                    return -10
+                    return -20
                 }),
                 marker: {
-                    xanchor: 'left',
-                    yanchor: 'bottom',
                     symbol: 'triangle-up-dot',
                     font: {
                         sizemin: 3,
@@ -163,9 +163,10 @@ export class CountryPerformanceOnRisk extends Component {
                 },
                 legendgroup: 'Annotations',
                 name: 'Annotations',
-                textposition: 'middle-left',
+                // textposition: 'middle-left',
                 hoveron: 'points',
-                hoverinfo: 'name+text',
+                hoverinfo: 'text',
+                hoverlabel: { textposition: 'middle-left', },
                 text: this.state.annotation_notes
             });
 
