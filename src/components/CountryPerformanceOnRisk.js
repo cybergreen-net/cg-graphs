@@ -151,10 +151,10 @@ export class CountryPerformanceOnRisk extends Component {
                 mode: 'markers',
                 x: this.state.annotation_dates,
                 y: this.state.annotation_dates.map(function(x) {
-                    return 0
+                    return -10
                 }),
                 marker: {
-                    symbol: 'triangle-up-dot',
+                    symbol: 'square',
                     font: {
                         sizemin: 3,
                         size: 9,
@@ -163,7 +163,6 @@ export class CountryPerformanceOnRisk extends Component {
                 },
                 legendgroup: 'Annotations',
                 name: 'Annotations',
-                // textposition: 'middle-left',
                 hoveron: 'points',
                 hoverinfo: 'text',
                 hoverlabel: { textposition: 'middle-left', },
@@ -199,12 +198,16 @@ export class CountryPerformanceOnRisk extends Component {
             legendgroup: this.props.countries[countryID].name,
             marker: {
                 line: { width: 0.5 },
-                size: 1,
+                font: {
+                    sizemin: 3,
+                    size: 9,
+                    sizemode: 'area'
+                },
                 // symbol: 'cross'
             },
             line: {
                 width: 1,
-                smoothing: 0.75,
+                smoothing: 0.9,
                 shape: 'spline',
                 opacity: 0.5
             },
