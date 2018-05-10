@@ -24,42 +24,14 @@ export class SourceOfInfection extends Component {
                         annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
                         annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
                         annotations.push({
-                            type: 'date',
-                            x: annFilterByCountry.notes[ann_num].annotation_date,
-                            y: 0,
-                            xref: 'x',
-                            yref: 'y',
-                            text: '',
-                            borderwidth: 0,
-                            showarrow: true,
-                            arrowsize: 0,
-                            arrowwidth: 0,
-                            arrowcolor: '#FC9F5B',
-                            arrowhead: 0,
-                            opacity: 0.8,
-                            ax: 0,
-                            ay: 0,
+                            type: 'date'
                         });
                     }
                     if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
                         annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
                         annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
                         annotations.push({
-                            type: 'date',
-                            x: annFilterByCountry.notes[ann_num].annotation_date,
-                            y: 0,
-                            xref: 'x',
-                            yref: 'y',
-                            text: '',
-                            borderwidth: 0,
-                            showarrow: true,
-                            arrowsize: 0,
-                            arrowwidth: 0,
-                            arrowcolor: '#FC9F5B',
-                            arrowhead: 0,
-                            opacity: 0.8,
-                            ax: 0,
-                            ay: 0,
+                            type: 'date'
                         });
                     }
                 }
@@ -70,7 +42,6 @@ export class SourceOfInfection extends Component {
         this.state = {
             graphOptions: {
                 barmode: 'relative',
-                hovermode: 'closest',
                 height: 252,
                 margin: {
                     l: 40,
@@ -78,22 +49,30 @@ export class SourceOfInfection extends Component {
                     b: 30,
                     t: 0
                 },
+                spikedistance: -1,
+                scene: {
+                    xaxis: {
+                        showspikes: true
+                    },
+                    yaxis: {
+                        showspikes: false,
+                    },
+                },
                 xaxis: {
                     gridcolor: 'transparent',
-                    tickformat: '%d %b %Y'
+                    tickformat: '%d %b %Y',
+
                 },
                 yaxis: {
                     title: this.props.view.yLabel
-                },
-                marker: {
-                    symbol: 'square'
                 },
                 font: {
                     size: 9,
                     color: '#7f7f7f'
                 },
+                hovermode: 'closest',
                 showlegend: true,
-                annotations: annotations
+                zeroline: true
             },
             annotation_dates: annotation_dates,
             annotation_notes: annotation_notes,
@@ -109,7 +88,7 @@ export class SourceOfInfection extends Component {
         props.data[props.view.risk][props.view.country].forEach(dataEntry => {
             let colorPallet = [
                 '#00D499', '#116AD4', '#FF9C00',
-                '#FF5C00', '#9900d4'
+                '#FF5C00', '#ff00a3'
             ]
             let countAllRest = parseInt(dataEntry[props.view.measure]) / props.view.unitDevider;
             console.log(dataEntry.as);
@@ -134,39 +113,41 @@ export class SourceOfInfection extends Component {
                     color: '#F60030'
                 },
                 text: ['Rest'],
-                hoverinfo: 'y+x+text'
+                hoverinfo: 'y+x+name'
             }
             plotlyData.unshift(traceAllRest)
         })
         let state = {
             plotlyData: plotlyData
         }
-        plotlyData.splice(1, 0, {
-            //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+        // Start of annotations are added
+        plotlyData.splice(6, 0, {
+            // type: 'scatter',
+            mode: 'markers',
             x: this.state.annotation_dates,
             y: this.state.annotation_dates.map(function(x) {
                 return 0
             }),
-            //y: [0, 0, 0],
-            mode: 'markers',
-            // marker: {
-            //   xref: 'paper',
-            //   yref: 'paper',
-            //   x: 1.056,
-            //   xanchor: 'left',
-            //   y: 0.99,
-            //   yanchor: 'bottom'
-            // },
+            marker: {
+                symbol: 'square',
+                color: '#a5d400',
+                xaxis: {
+                    gridcolor: 'transparent',
+                    tickformat: '%d %b %Y',
+                    spikemode: 'across',
+                    spikedash: 'dash',
+                    spikesnap: 'data',
+                    spikethickness: 1
+                },
+            },
             legendgroup: 'Annotations',
             name: 'Annotations',
-            hovermode: 'closest',
-            hoverlabel: {
-                bgcolor: '#FC9F5B',
-                bordercolor: '#000000'
-            },
-            hoverinfo: 'text', //if `none` is set, click and hover events
-            text: this.state.annotation_notes,
+            hoveron: 'points',
+            hoverinfo: 'text',
+            hoverlabel: { textposition: 'middle-left', },
+            text: this.state.annotation_notes
         });
+        // End of annotations are added
         if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
             state.graphOptions = update(this.state.graphOptions, {
                 yaxis: {

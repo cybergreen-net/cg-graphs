@@ -57,6 +57,7 @@ export class DdosPerformance extends Component {
           traceorder: 'grouped'},
         xaxis: {
           gridcolor: 'transparent',
+          tickformat: '%d %b %Y',
         },
         yaxis: {
           title: this.props.view.yLabel,
@@ -90,8 +91,8 @@ export class DdosPerformance extends Component {
     let state = {}
     let plotlyData = []
     let barColors = [
-      'rgb(200, 2, 16)', 'rgb(0, 212, 154)',
-      'rgb(84, 114, 222)', 'rgb(96, 3, 212)'
+      '#F60030', '#00D499', '#116AD4', '#FF9C00',
+      '#FF5C00', '#a5d400'
     ]
 
     if (props.view.isFetched) {
@@ -106,29 +107,26 @@ export class DdosPerformance extends Component {
       }).filter(value => {
         return value !== undefined
       })
-      plotlyData.splice(1, 0, {
-        //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+      // Start of annotations are added
+      plotlyData.splice(6, 0, {
+        // type: 'scatter',
+        mode: 'markers',
         x: this.state.annotation_dates,
         y: this.state.annotation_dates.map(function(x) {
-          return 0
+            return 0
         }),
-        //y: [0, 0, 0],
-        mode: 'markers',
         marker: {
-          symbol: 'circle',
-          color: 'rgba(252, 159, 91, .8)',
-          size: 8,
+            symbol: 'square',
+            color: '#a5d400'
         },
         legendgroup: 'Annotations',
         name: 'Annotations',
-        hovermode: 'y',
-        hoverlabel: {
-          bgcolor: '#FC9F5B',
-          bordercolor: '#000000'
-        },
+        hoveron: 'points',
         hoverinfo: 'text',
-        text: this.state.annotation_notes,
+        hoverlabel: { textposition: 'middle-left', },
+        text: this.state.annotation_notes
       });
+      // End of annotations are added
       state['plotlyData'] = plotlyData
     }
 

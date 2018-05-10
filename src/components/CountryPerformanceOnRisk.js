@@ -23,6 +23,7 @@ from '../actions/cubeActions';
 export class CountryPerformanceOnRisk extends Component {
     constructor(props) {
         super(props)
+        // Start of code for fetching and filtering annotations
         let annotation_dates = [];
         let annotation_notes = [];
         let annotations = [];
@@ -38,10 +39,7 @@ export class CountryPerformanceOnRisk extends Component {
                         annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
                             '\n' + annFilterByCountry.notes[ann_num].annotation);
                         annotations.push({
-                            type: 'date',
-                            // annotations: [{
-                            //     x: annFilterByCountry.notes[ann_num].annotation_date,
-                            // }],
+                            type: 'date'
                         });
                     }
                     if (annFilterByCountry.notes[ann_num].country_code == 999 &&
@@ -50,14 +48,12 @@ export class CountryPerformanceOnRisk extends Component {
                         annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
                             '\n' + annFilterByCountry.notes[ann_num].annotation);
                         annotations.push({
-                            type: 'date',
-                            // annotations: [{
-                            //     x: annFilterByCountry.notes[ann_num].annotation_date,
-                            // }],
+                            type: 'date'
                         });
                     }
                 }
             });
+            // End of code for fetching and filtering annotations
 
         this.state = {
             cubeByRiskByCountry: {},
@@ -139,20 +135,21 @@ export class CountryPerformanceOnRisk extends Component {
                 return value !== undefined
             })
             plotlyData.forEach((trace, idx) => {
-                trace['marker'] = {
-                    color: lineColors[idx],
-                    legendgroup: 'this.props.countries[countryID].name',
+                trace['line'] = {
+                    color: lineColors[idx]
                 }
             })
+            // Start of annotations are added
             plotlyData.splice(6, 0, {
                 // type: 'scatter',
                 mode: 'markers',
                 x: this.state.annotation_dates,
                 y: this.state.annotation_dates.map(function(x) {
-                    return -10
+                    return 0
                 }),
                 marker: {
                     symbol: 'square',
+                    color: '#a5d400'
                 },
                 legendgroup: 'Annotations',
                 name: 'Annotations',
@@ -161,7 +158,7 @@ export class CountryPerformanceOnRisk extends Component {
                 hoverlabel: { textposition: 'middle-left', },
                 text: this.state.annotation_notes
             });
-
+            // End of annotations are added
             state['plotlyData'] = plotlyData
         }
         if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !==
@@ -181,28 +178,28 @@ export class CountryPerformanceOnRisk extends Component {
     convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure,
         normMeasure, devider) {
         var dataTable = cubeByRiskByCountry[riskID][countryID];
-        var graphDisplayData = {
-            x: dataTable.map(row => row.date),
-            y: dataTable.map(row => row[normMeasure] / devider || row[measure] /
-                devider),
-            name: this.props.countries[countryID].name,
-            type: 'scatter',
-            mode: 'lines+markers',
-            legendgroup: this.props.countries[countryID].name,
-            marker: {
-                line: { width: 0.5 }
-            },
-            line: {
-                width: 1,
-                smoothing: 0.8,
-                shape: 'spline',
-                opacity: 0.5
-            },
-            showlegend: false,
-            connectgaps: false
-        };
         if (dataTable) {
-            return (graphDisplayData)
+            return {
+                // Traces are styled here
+                x: dataTable.map(row => row.date),
+                y: dataTable.map(row => row[normMeasure] / devider || row[measure] /
+                    devider),
+                name: this.props.countries[countryID].name,
+                type: 'scatter',
+                mode: 'lines+markers',
+                legendgroup: this.props.countries[countryID].name,
+                marker: {
+                    line: { width: 0.5 }
+                },
+                line: {
+                    width: 1,
+                    smoothing: 0.8,
+                    shape: 'spline',
+                    opacity: 0.5
+                },
+                showlegend: false,
+                connectgaps: false
+            }
         }
     }
 

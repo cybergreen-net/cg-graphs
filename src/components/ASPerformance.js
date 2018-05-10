@@ -35,46 +35,14 @@ export class ASPerformance extends Component {
               annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
               annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
               annotations.push({
-                type: 'date',
-                x: annFilterByAsn.notes[ann_num].annotation_date,
-                y: 0,
-                xref: 'x',
-                yref: 'y',
-                // align: 'middle',
-                // valign: 'center',
-                text: '',
-                borderwidth: 0,
-                showarrow: true,
-                arrowsize: 0,
-                arrowwidth: 0,
-                arrowcolor: '#FC9F5B',
-                arrowhead: 0,
-                opacity: 0.8,
-                ax: 0,
-                ay: 0,
+                type: 'date'
               });
             }
             if (annFilterByAsn.notes[ann_num].country_code == 999 && annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
               annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
               annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
               annotations.push({
-                type: 'date',
-                x: annFilterByAsn.notes[ann_num].annotation_date,
-                y: 0,
-                xref: 'x',
-                yref: 'y',
-                // align: 'middle',
-                // valign: 'center',
-                text: '',
-                borderwidth: 0,
-                showarrow: true,
-                arrowsize: 0,
-                arrowwidth: 0,
-                arrowcolor: '#FC9F5B',
-                arrowhead: 0,
-                opacity: 0.8,
-                ax: 0,
-                ay: 0,
+                type: 'date'
               });
             }
           }
@@ -96,6 +64,23 @@ export class ASPerformance extends Component {
           b: 30,
           t: 0
         },
+        spikedistance: -1,
+        scene: {
+            xaxis: {
+                showspikes: true
+            },
+            yaxis: {
+                showspikes: false,
+            },
+        },
+        xaxis: {
+            gridcolor: 'transparent',
+            tickformat: '%d %b %Y',
+            spikemode: 'across',
+            spikedash: 'dash',
+            spikesnap: 'data',
+            spikethickness: 1
+        },
         yaxis: {
           title: this.props.view.yLabel
         },
@@ -103,8 +88,9 @@ export class ASPerformance extends Component {
           size: 9,
           color: '#7f7f7f'
         },
+        hovermode: 'closest',
         showlegend: true,
-        annotations: annotations,
+        zeroline: true
       },
       annotation_dates: annotation_dates,
       annotation_notes: annotation_notes,
@@ -115,8 +101,8 @@ export class ASPerformance extends Component {
 // adjusts the colour  fix if needed
   computeState(props = this.props) {
     let lineColors = [
-      '#00D499', '#116AD4', '#FF9C00',
-      '#FF5C00', '#F60030'
+      '#F60030', '#00D499', '#116AD4', '#FF9C00',
+      '#FF5C00', '#a5d400'
     ]
     if (props.view.isFetched) {
       let plotlyData = props.view.selectorConfig.map(config => {
@@ -137,29 +123,26 @@ export class ASPerformance extends Component {
             color: lineColors[idx]
           }
         })
-        plotlyData.splice(1, 0, {
-          //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
-        x: this.state.annotation_dates,
-        y: this.state.annotation_dates.map(function(x) {
-          return 0
-        }),
-        //y: [0, 0, 0],
-        mode: 'markers',
-        // marker: {
-        //   color: 'rgba(252, 159, 91, .8)',
-        //   size: 8,
-        //   name: 'Annotation'
-        // },
-        legendgroup: 'Annotations',
-        name: 'Annotations',
-        hovermode: 'y',
-        hoverlabel: {
-          bgcolor: '#FC9F5B',
-          bordercolor: '#000000'
-        },
-        hoverinfo: 'text', //if `none` is set, click and hover events
-        text: this.state.annotation_notes,
+        // Start of annotations are added
+        plotlyData.splice(6, 0, {
+          // type: 'scatter',
+          mode: 'markers',
+          x: this.state.annotation_dates,
+          y: this.state.annotation_dates.map(function(x) {
+              return 0
+          }),
+          marker: {
+              symbol: 'square',
+              color: '#a5d400'
+          },
+          legendgroup: 'Annotations',
+          name: 'Annotations',
+          hoveron: 'points',
+          hoverinfo: 'text',
+          hoverlabel: { textposition: 'middle-left', },
+          text: this.state.annotation_notes
       });
+      // End of annotations are added
       return {
         plotlyData: plotlyData
       }
@@ -171,24 +154,26 @@ export class ASPerformance extends Component {
     normMeasure, devider) {
     var dataTable = dataFromCube[countryID + '/' + riskID + '/' + asID];
     if (dataTable.length) {
-      return {
+      return { 
+        // Traces are styled here
         x: dataTable.map(row => row.date),
         y: dataTable.map(row => row[normMeasure] / devider || row[measure] /
-          devider),
-        name: this.props.asn[asID] ? this.props.asn[asID].title : 'Unknown',
+            devider),
+        name: this.props.countries[countryID].name,
         type: 'scatter',
         mode: 'lines+markers',
+        legendgroup: this.props.countries[countryID].name,
         marker: {
-          line: {width: 0.5},
-          size: 3,
-          symbol: 'cross'
+            line: { width: 0.5 }
         },
         line: {
-          width: 1,
-          smoothing: 0.75,
-          shape: 'spline'},
+            width: 1,
+            smoothing: 0.8,
+            shape: 'spline',
+            opacity: 0.5
+        },
+        showlegend: false,
         connectgaps: false
-
       }
     }
   }
