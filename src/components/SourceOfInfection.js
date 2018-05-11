@@ -11,31 +11,31 @@ import update from 'react/lib/update'
 export class SourceOfInfection extends Component {
     constructor(props) {
         super(props)
-        let annotation_dates = [];
-        let annotation_notes = [];
-        let annotations = [];
-        fetch(`/static/scripts/publicAnnotation.json`)
-            .then((response) => {
-                return response.json()
-            })
-            .then((annFilterByCountry) => {
-                for (var ann_num in annFilterByCountry.notes) {
-                    if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
-                        annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-                        annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
-                        annotations.push({
-                            type: 'date'
-                        });
-                    }
-                    if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
-                        annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-                        annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
-                        annotations.push({
-                            type: 'date'
-                        });
-                    }
-                }
-            });
+        // let annotation_dates = [];
+        // let annotation_notes = [];
+        // let annotations = [];
+        // fetch(`/static/scripts/publicAnnotation.json`)
+        //     .then((response) => {
+        //         return response.json()
+        //     })
+        //     .then((annFilterByCountry) => {
+        //         for (var ann_num in annFilterByCountry.notes) {
+        //             if (annFilterByCountry.notes[ann_num].country_code == props.view.country && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+        //                 annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+        //                 annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+        //                 annotations.push({
+        //                     type: 'date'
+        //                 });
+        //             }
+        //             if (annFilterByCountry.notes[ann_num].country_code == 999 && annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
+        //                 annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
+        //                 annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+        //                 annotations.push({
+        //                     type: 'date'
+        //                 });
+        //             }
+        //         }
+        //     });
 
 
 
@@ -74,8 +74,8 @@ export class SourceOfInfection extends Component {
                 showlegend: true,
                 zeroline: true
             },
-            annotation_dates: annotation_dates,
-            annotation_notes: annotation_notes,
+            // annotation_dates: annotation_dates,
+            // annotation_notes: annotation_notes,
             plotlyData: []
         }
     }
@@ -120,34 +120,34 @@ export class SourceOfInfection extends Component {
         let state = {
             plotlyData: plotlyData
         }
-        // Start of annotations are added
-        plotlyData.splice(6, 0, {
-            // type: 'scatter',
-            mode: 'markers',
-            x: this.state.annotation_dates,
-            y: this.state.annotation_dates.map(function(x) {
-                return 0
-            }),
-            marker: {
-                symbol: 'square',
-                color: '#a5d400',
-                xaxis: {
-                    gridcolor: 'transparent',
-                    tickformat: '%d %b %Y',
-                    spikemode: 'across',
-                    spikedash: 'dash',
-                    spikesnap: 'data',
-                    spikethickness: 1
-                },
-            },
-            legendgroup: 'Annotations',
-            name: 'Annotations',
-            hoveron: 'points',
-            hoverinfo: 'text',
-            hoverlabel: { textposition: 'middle-left', },
-            text: this.state.annotation_notes
-        });
-        // End of annotations are added
+        // // Start of annotations are added
+        // plotlyData.splice(6, 0, {
+        //     // type: 'scatter',
+        //     mode: 'markers',
+        //     x: this.state.annotation_dates,
+        //     y: this.state.annotation_dates.map(function(x) {
+        //         return 0
+        //     }),
+        //     marker: {
+        //         symbol: 'square',
+        //         color: '#a5d400',
+        //         xaxis: {
+        //             gridcolor: 'transparent',
+        //             tickformat: '%d %b %Y',
+        //             spikemode: 'across',
+        //             spikedash: 'dash',
+        //             spikesnap: 'data',
+        //             spikethickness: 1
+        //         },
+        //     },
+        //     legendgroup: 'Annotations',
+        //     name: 'Annotations',
+        //     hoveron: 'points',
+        //     hoverinfo: 'text',
+        //     hoverlabel: { textposition: 'middle-left', },
+        //     text: this.state.annotation_notes
+        // });
+        // // End of annotations are added
         if (props.view.unit && props.view.risk === 100 && props.view.normMeasure !== 'count_normalized') {
             state.graphOptions = update(this.state.graphOptions, {
                 yaxis: {
@@ -172,7 +172,6 @@ export class SourceOfInfection extends Component {
             legendgroup: 'AllTraces',
             text: '',
             showlegend: false,
-            // textposition: 'outside', // testing placement of asn and title outside the tooltip
             mode: 'markers+text',
             //hoverinfo: 'x+y'
         }

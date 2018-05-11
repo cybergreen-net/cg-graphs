@@ -23,13 +23,13 @@ class PlotlyGraph extends React.Component {
                 'hoverClosestCartesian',
                 'sendDataToCloud',
                 // 'autoScale2d',
-                'zoomIn2d',
-                'zoomOut2d',
-                'pan2d',
+                // 'zoomIn2d',
+                // 'zoomOut2d',
+                // 'pan2d',
                 // 'zoom2d',
                 'lasso2d',
                 'select2d',
-                'toggleHover'
+                // 'toggleHover'
             ],
             scrollZoom: true,
             displaylogo: false,

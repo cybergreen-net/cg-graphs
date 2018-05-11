@@ -39,7 +39,24 @@ export class CountryPerformanceOnRisk extends Component {
                         annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
                             '\n' + annFilterByCountry.notes[ann_num].annotation);
                         annotations.push({
-                            type: 'date'
+                            type: 'date',
+                            x: annFilterByCountry.notes[ann_num].annotation_date,
+                            y: 0,
+                            // ay:0,
+                            xref: 'x',
+                            yref: 'y',
+                            hovertext: annFilterByCountry.notes[ann_num].annotation,
+                            hoverlabel:{
+                                bgcolor: '#a5d400',
+                            },
+                            text: '',
+                            borderwidth: 1,
+                            showarrow: true,
+                            arrowsize: 3,
+                            arrowwidth: 1,
+                            arrowcolor: '#a5d400',
+                            arrowhead: 6,
+                            opacity: 0.8,
                         });
                     }
                     if (annFilterByCountry.notes[ann_num].country_code == 999 &&
@@ -48,7 +65,24 @@ export class CountryPerformanceOnRisk extends Component {
                         annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
                             '\n' + annFilterByCountry.notes[ann_num].annotation);
                         annotations.push({
-                            type: 'date'
+                            type: 'date',
+                            x: annFilterByCountry.notes[ann_num].annotation_date,
+                            y: 0,
+                            // ay:0,
+                            xref: 'x',
+                            yref: 'y',
+                            hovertext: annFilterByCountry.notes[ann_num].annotation,
+                            hoverlabel:{
+                                bgcolor: '#a5d400',
+                            },
+                            text: '',
+                            borderwidth: 1,
+                            showarrow: true,
+                            arrowsize: 3,
+                            arrowwidth: 1,
+                            arrowcolor: '#a5d400',
+                            arrowhead: 6,
+                            opacity: 0.8,
                         });
                     }
                 }
@@ -83,7 +117,7 @@ export class CountryPerformanceOnRisk extends Component {
                     tickformat: '%d %b %Y',
                     spikemode: 'across',
                     spikedash: 'dash',
-                    spikesnap: 'data',
+                    spikesnap: 'cursor',
                     spikethickness: 1
                 },
                 yaxis: {
@@ -94,8 +128,21 @@ export class CountryPerformanceOnRisk extends Component {
                     color: '#7f7f7f'
                 },
                 hovermode: 'closest',
+                // hoveron: 'points',
                 showlegend: true,
-                zeroline: true
+                // zeroline: true,
+                annotations: [{
+                    xref: 'paper',
+                    yref: 'paper',
+                    x: 1.056,
+                    xanchor: 'left',
+                    y: 0.99,
+                    yanchor: 'bottom',
+                    text: 'Risks',
+                    legendtitle: true,
+                    showarrow: false,
+                  }],
+                annotations: annotations,
             },
             annotation_dates: annotation_dates,
             annotation_notes: annotation_notes,
@@ -140,24 +187,23 @@ export class CountryPerformanceOnRisk extends Component {
                 }
             })
             // Start of annotations are added
-            plotlyData.splice(6, 0, {
+            // plotlyData.splice(1, 0, {
                 // type: 'scatter',
-                mode: 'markers',
-                x: this.state.annotation_dates,
-                y: this.state.annotation_dates.map(function(x) {
-                    return 0
-                }),
-                marker: {
-                    symbol: 'square',
-                    color: '#a5d400'
-                },
-                legendgroup: 'Annotations',
-                name: 'Annotations',
-                hoveron: 'points',
-                hoverinfo: 'text',
-                hoverlabel: { textposition: 'middle-left', },
-                text: this.state.annotation_notes
-            });
+                // x: this.state.annotation_dates,
+                // y: this.state.annotation_dates.map(function(x) {
+                //     return 0
+                // }),
+                // marker: {
+                //     symbol: 'triangle-up',
+                //     color: '#a5d400'
+                // },
+                // legendgroup: 'Annotations',
+                // name: 'Annotations',
+                // hoveron: 'points',
+                // hoverinfo: 'text',
+                // hoverlabel: { textposition: 'middle-left', },
+                // text: this.state.annotation_notes
+            //  });
             // End of annotations are added
             state['plotlyData'] = plotlyData
         }
@@ -197,7 +243,7 @@ export class CountryPerformanceOnRisk extends Component {
                     shape: 'spline',
                     opacity: 0.5
                 },
-                showlegend: false,
+                showlegend: true,
                 connectgaps: false
             }
         }

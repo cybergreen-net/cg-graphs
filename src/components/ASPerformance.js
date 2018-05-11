@@ -22,31 +22,31 @@ from '../actions/ASactions';
 export class ASPerformance extends Component {
   constructor(props) {
     super(props)
-      let annotation_dates = [];
-      let annotation_notes = [];
-      let annotations = [];
-      fetch(`/static/scripts/publicAnnotation.json`)
-        .then((response) => {
-          return response.json()
-        })
-        .then((annFilterByAsn) => {
-          for (var ann_num in annFilterByAsn.notes) {
-            if (annFilterByAsn.notes[ann_num].asn == props.view.asn) {
-              annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
-              annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
-              annotations.push({
-                type: 'date'
-              });
-            }
-            if (annFilterByAsn.notes[ann_num].country_code == 999 && annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
-              annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
-              annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
-              annotations.push({
-                type: 'date'
-              });
-            }
-          }
-      });
+      // let annotation_dates = [];
+      // let annotation_notes = [];
+      // let annotations = [];
+      // fetch(`/static/scripts/publicAnnotation.json`)
+      //   .then((response) => {
+      //     return response.json()
+      //   })
+      //   .then((annFilterByAsn) => {
+      //     for (var ann_num in annFilterByAsn.notes) {
+      //       if (annFilterByAsn.notes[ann_num].asn == props.view.asn) {
+      //         annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
+      //         annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
+      //         annotations.push({
+      //           type: 'date'
+      //         });
+      //       }
+      //       if (annFilterByAsn.notes[ann_num].country_code == 999 && annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
+      //         annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
+      //         annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
+      //         annotations.push({
+      //           type: 'date'
+      //         });
+      //       }
+      //     }
+      // });
 
 
     this.state = {
@@ -92,8 +92,8 @@ export class ASPerformance extends Component {
         showlegend: true,
         zeroline: true
       },
-      annotation_dates: annotation_dates,
-      annotation_notes: annotation_notes,
+      // annotation_dates: annotation_dates,
+      // annotation_notes: annotation_notes,
     }
   }
 
@@ -123,26 +123,26 @@ export class ASPerformance extends Component {
             color: lineColors[idx]
           }
         })
-        // Start of annotations are added
-        plotlyData.splice(6, 0, {
-          // type: 'scatter',
-          mode: 'markers',
-          x: this.state.annotation_dates,
-          y: this.state.annotation_dates.map(function(x) {
-              return 0
-          }),
-          marker: {
-              symbol: 'square',
-              color: '#a5d400'
-          },
-          legendgroup: 'Annotations',
-          name: 'Annotations',
-          hoveron: 'points',
-          hoverinfo: 'text',
-          hoverlabel: { textposition: 'middle-left', },
-          text: this.state.annotation_notes
-      });
-      // End of annotations are added
+      //   // Start of annotations are added
+      //   plotlyData.splice(6, 0, {
+      //     // type: 'scatter',
+      //     mode: 'markers',
+      //     x: this.state.annotation_dates,
+      //     y: this.state.annotation_dates.map(function(x) {
+      //         return 0
+      //     }),
+      //     marker: {
+      //         symbol: 'square',
+      //         color: '#a5d400'
+      //     },
+      //     legendgroup: 'Annotations',
+      //     name: 'Annotations',
+      //     hoveron: 'points',
+      //     hoverinfo: 'text',
+      //     hoverlabel: { textposition: 'middle-left', },
+      //     text: this.state.annotation_notes
+      // });
+      // // End of annotations are added
       return {
         plotlyData: plotlyData
       }
