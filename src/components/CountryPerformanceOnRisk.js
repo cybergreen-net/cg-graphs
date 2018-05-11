@@ -42,21 +42,25 @@ export class CountryPerformanceOnRisk extends Component {
                             type: 'date',
                             x: annFilterByCountry.notes[ann_num].annotation_date,
                             y: 0,
-                            // ay:0,
+                            ay:0,
                             xref: 'x',
                             yref: 'y',
+                            name: 'Annotations',
+                            showlegend: true,
                             hovertext: annFilterByCountry.notes[ann_num].annotation,
                             hoverlabel:{
                                 bgcolor: '#a5d400',
                             },
-                            text: '',
+                            text: ' ',
                             borderwidth: 1,
                             showarrow: true,
-                            arrowsize: 3,
-                            arrowwidth: 1,
+                            showarrow: true,
+                            startarrowsize: 3,
                             arrowcolor: '#a5d400',
-                            arrowhead: 6,
+                            startarrowhead: 6,
+                            arrowwidth: 1,
                             opacity: 0.8,
+                            arrowside: 'start'
                         });
                     }
                     if (annFilterByCountry.notes[ann_num].country_code == 999 &&
@@ -68,21 +72,24 @@ export class CountryPerformanceOnRisk extends Component {
                             type: 'date',
                             x: annFilterByCountry.notes[ann_num].annotation_date,
                             y: 0,
-                            // ay:0,
+                            ay:0,
                             xref: 'x',
                             yref: 'y',
+                            name: 'Annotations',
+                            showlegend: true,
                             hovertext: annFilterByCountry.notes[ann_num].annotation,
                             hoverlabel:{
                                 bgcolor: '#a5d400',
                             },
-                            text: '',
+                            text: ' ',
                             borderwidth: 1,
                             showarrow: true,
-                            arrowsize: 3,
-                            arrowwidth: 1,
+                            startarrowsize: 3,
                             arrowcolor: '#a5d400',
-                            arrowhead: 6,
+                            startarrowhead: 6,
+                            arrowwidth: 1,
                             opacity: 0.8,
+                            arrowside: 'start'
                         });
                     }
                 }
@@ -94,7 +101,8 @@ export class CountryPerformanceOnRisk extends Component {
             graphOptions: {
                 legend: {
                     x: 100,
-                    y: 1
+                    y: 1,
+                    traceorder: 'grouped'
                 },
                 height: 200,
                 margin: {
@@ -131,17 +139,11 @@ export class CountryPerformanceOnRisk extends Component {
                 // hoveron: 'points',
                 showlegend: true,
                 // zeroline: true,
-                annotations: [{
-                    xref: 'paper',
-                    yref: 'paper',
-                    x: 1.056,
-                    xanchor: 'left',
-                    y: 0.99,
-                    yanchor: 'bottom',
-                    text: 'Risks',
-                    legendtitle: true,
-                    showarrow: false,
-                  }],
+                annotations:{
+                    legendgroup: 'Annotations',
+                    name: 'Annotations',
+                    mode: 'markers'
+                },
                 annotations: annotations,
             },
             annotation_dates: annotation_dates,
@@ -161,8 +163,8 @@ export class CountryPerformanceOnRisk extends Component {
 
         let plotlyData = []
         let lineColors = [
-            '#F60030', '#00D499', '#116AD4', '#FF9C00',
-            '#FF5C00', '#a5d400'
+            '#11d48b', '#115ad4', '#d4115a',
+            '#d48b11', '#8800d4'
         ]
         if (props.view.isFetching === 0) {
             plotlyData = props.view.selectorConfig.map(config => {

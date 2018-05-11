@@ -91,8 +91,8 @@ export class DdosPerformance extends Component {
     let state = {}
     let plotlyData = []
     let barColors = [
-      '#F60030', '#00D499', '#116AD4', '#FF9C00',
-      '#FF5C00', '#a5d400'
+      '#11d48b', '#115ad4', '#d4115a',
+      '#d48b11', '#8800d4'
     ]
 
     if (props.view.isFetched) {
