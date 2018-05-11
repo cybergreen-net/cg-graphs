@@ -22,28 +22,33 @@ export class DdosPerformance extends Component {
       })
       .then((annFilterByCountry) => {
         for (var ann_num in annFilterByCountry.notes) {
-          if (annFilterByCountry.notes[ann_num].country_code == 999) {
+          if (annFilterByCountry.notes[ann_num].country_code == 999 &&
+            annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
             annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
+                '\n' + annFilterByCountry.notes[ann_num].annotation);
             annotations.push({
-              type: 'date',
-              x: annFilterByCountry.notes[ann_num].annotation_date,
-              y: 0,
-              xref: 'x',
-              yref: 'y',
-              align: 'middle',
-              valign: 'center',
-              text: '',
-              borderwidth: 0,
-              showarrow: true,
-              arrowsize: 0,
-              arrowwidth: 1,
-              arrowcolor: '#FC9F5B',
-              arrowhead: 6,
-              opacity: 0.8,
-              ax: 0,
-              ay: -200,
-                clicktoshow: 'onoff'
+                type: 'date',
+                x: annFilterByCountry.notes[ann_num].annotation_date,
+                y: 0,
+                ay:0,
+                xref: 'x',
+                yref: 'y',
+                name: 'Annotations',
+                showlegend: true,
+                hovertext: annFilterByCountry.notes[ann_num].annotation,
+                hoverlabel:{
+                    bgcolor: '#a5d400',
+                },
+                text: ' ',
+                borderwidth: 1,
+                showarrow: true,
+                startarrowsize: 3,
+                arrowcolor: '#a5d400',
+                startarrowhead: 6,
+                arrowwidth: 1,
+                opacity: 0.8,
+                arrowside: 'start'
             });
           }
         }
@@ -108,24 +113,24 @@ export class DdosPerformance extends Component {
         return value !== undefined
       })
       // Start of annotations are added
-      plotlyData.splice(6, 0, {
-        // type: 'scatter',
-        mode: 'markers',
-        x: this.state.annotation_dates,
-        y: this.state.annotation_dates.map(function(x) {
-            return 0
-        }),
-        marker: {
-            symbol: 'square',
-            color: '#a5d400'
-        },
-        legendgroup: 'Annotations',
-        name: 'Annotations',
-        hoveron: 'points',
-        hoverinfo: 'text',
-        hoverlabel: { textposition: 'middle-left', },
-        text: this.state.annotation_notes
-      });
+      // plotlyData.splice(6, 0, {
+      //   // type: 'scatter',
+      //   mode: 'markers',
+      //   x: this.state.annotation_dates,
+      //   y: this.state.annotation_dates.map(function(x) {
+      //       return 0
+      //   }),
+      //   marker: {
+      //       symbol: 'square',
+      //       color: '#a5d400'
+      //   },
+      //   legendgroup: 'Annotations',
+      //   name: 'Annotations',
+      //   hoveron: 'points',
+      //   hoverinfo: 'text',
+      //   hoverlabel: { textposition: 'middle-left', },
+      //   text: this.state.annotation_notes
+      // });
       // End of annotations are added
       state['plotlyData'] = plotlyData
     }

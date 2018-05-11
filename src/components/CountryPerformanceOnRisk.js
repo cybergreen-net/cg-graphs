@@ -241,7 +241,7 @@ export class CountryPerformanceOnRisk extends Component {
                 },
                 line: {
                     width: 1,
-                    smoothing: 0.8,
+                    smoothing: 0.75,
                     shape: 'spline',
                     opacity: 0.5
                 },

@@ -22,31 +22,77 @@ from '../actions/ASactions';
 export class ASPerformance extends Component {
   constructor(props) {
     super(props)
-      // let annotation_dates = [];
-      // let annotation_notes = [];
-      // let annotations = [];
-      // fetch(`/static/scripts/publicAnnotation.json`)
-      //   .then((response) => {
-      //     return response.json()
-      //   })
-      //   .then((annFilterByAsn) => {
-      //     for (var ann_num in annFilterByAsn.notes) {
-      //       if (annFilterByAsn.notes[ann_num].asn == props.view.asn) {
-      //         annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
-      //         annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
-      //         annotations.push({
-      //           type: 'date'
-      //         });
-      //       }
-      //       if (annFilterByAsn.notes[ann_num].country_code == 999 && annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
-      //         annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
-      //         annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date + '\n' + annFilterByAsn.notes[ann_num].annotation);
-      //         annotations.push({
-      //           type: 'date'
-      //         });
-      //       }
-      //     }
-      // });
+     // Start of code for fetching and filtering annotations
+     let annotation_dates = [];
+     let annotation_notes = [];
+     let annotations = [];
+     fetch(`/static/scripts/publicAnnotation.json`)
+         .then((response) => {
+             return response.json()
+         })
+       .then((annFilterByAsn) => {
+        for (var ann_num in annFilterByAsn.notes) {
+          if (annFilterByAsn.notes[ann_num].asn == props.view.asn) {
+            annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
+            annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date +
+              '\n' + annFilterByAsn.notes[ann_num].annotation);
+            annotations.push({
+              type: 'date',
+              x: annFilterByAsn.notes[ann_num].annotation_date,
+              y: 0,
+              ay: 0,
+              xref: 'x',
+              yref: 'y',
+              name: 'Annotations',
+              showlegend: true,
+              hovertext: annFilterByAsn.notes[ann_num].annotation,
+              hoverlabel: {
+                bgcolor: '#a5d400',
+              },
+              text: ' ',
+              borderwidth: 1,
+              showarrow: true,
+              showarrow: true,
+              startarrowsize: 3,
+              arrowcolor: '#a5d400',
+              startarrowhead: 6,
+              arrowwidth: 1,
+              opacity: 0.8,
+              arrowside: 'start'
+             });
+           }
+           if (annFilterByAsn.notes[ann_num].country_code == 999 &&
+            annFilterByAsn.notes[ann_num].risk_id == props.view.risk) {
+            annotation_dates.push(annFilterByAsn.notes[ann_num].annotation_date);
+            annotation_notes.push(annFilterByAsn.notes[ann_num].annotation_date +
+              '\n' + annFilterByAsn.notes[ann_num].annotation);
+            annotations.push({
+                type: 'date',
+                x: annFilterByAsn.notes[ann_num].annotation_date,
+                y: 0,
+                ay: 0,
+                xref: 'x',
+                yref: 'y',
+                name: 'Annotations',
+                showlegend: true,
+                hovertext: annFilterByAsn.notes[ann_num].annotation,
+                hoverlabel: {
+                  bgcolor: '#a5d400',
+                },
+                text: ' ',
+                borderwidth: 1,
+                showarrow: true,
+                startarrowsize: 3,
+                arrowcolor: '#a5d400',
+                startarrowhead: 6,
+                arrowwidth: 1,
+                opacity: 0.8,
+                arrowside: 'start'
+              });
+            }
+          }
+        });
+         // End of code for fetching and filtering annotations
 
 
     this.state = {
@@ -55,7 +101,8 @@ export class ASPerformance extends Component {
 
         legend: {
           x: 100,
-          y: 1
+          y: 1,
+          traceorder: 'grouped'
         },
         height: 300,
         margin: {
@@ -66,20 +113,20 @@ export class ASPerformance extends Component {
         },
         spikedistance: -1,
         scene: {
-            xaxis: {
-                showspikes: true
-            },
-            yaxis: {
-                showspikes: false,
-            },
+          xaxis: {
+            showspikes: true
+          },
+          yaxis: {
+            showspikes: false,
+          },
         },
         xaxis: {
-            gridcolor: 'transparent',
-            tickformat: '%d %b %Y',
-            spikemode: 'across',
-            spikedash: 'dash',
-            spikesnap: 'data',
-            spikethickness: 1
+          gridcolor: 'transparent',
+          tickformat: '%d %b %Y',
+          spikemode: 'across',
+          spikedash: 'dash',
+          spikesnap: 'cursor',
+          spikethickness: 1
         },
         yaxis: {
           title: this.props.view.yLabel
@@ -89,11 +136,17 @@ export class ASPerformance extends Component {
           color: '#7f7f7f'
         },
         hovermode: 'closest',
+        // hoveron: 'points',
         showlegend: true,
-        zeroline: true
+        // zeroline: true,
+        annotations: {
+          legendgroup: 'Annotations',
+          name: 'Annotations',
+        },
+        annotations: annotations,
       },
-      // annotation_dates: annotation_dates,
-      // annotation_notes: annotation_notes,
+      annotation_dates: annotation_dates,
+      annotation_notes: annotation_notes,
     }
   }
 
@@ -101,8 +154,8 @@ export class ASPerformance extends Component {
 // adjusts the colour  fix if needed
   computeState(props = this.props) {
     let lineColors = [
-      '#F60030', '#00D499', '#116AD4', '#FF9C00',
-      '#FF5C00', '#a5d400'
+      '#11d48b', '#115ad4', '#d4115a',
+      '#d48b11', '#8800d4'
     ]
     if (props.view.isFetched) {
       let plotlyData = props.view.selectorConfig.map(config => {
@@ -172,7 +225,7 @@ export class ASPerformance extends Component {
             shape: 'spline',
             opacity: 0.5
         },
-        showlegend: false,
+        showlegend: true,
         connectgaps: false
       }
     }
