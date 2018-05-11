@@ -39,28 +39,7 @@ export class CountryPerformanceOnRisk extends Component {
                         annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
                             '\n' + annFilterByCountry.notes[ann_num].annotation);
                         annotations.push({
-                            type: 'date',
-                            x: annFilterByCountry.notes[ann_num].annotation_date,
-                            y: 0,
-                            ay:0,
-                            xref: 'x',
-                            yref: 'y',
-                            name: 'Annotations',
-                            showlegend: true,
-                            hovertext: annFilterByCountry.notes[ann_num].annotation,
-                            hoverlabel:{
-                                bgcolor: '#a5d400',
-                            },
-                            text: ' ',
-                            borderwidth: 1,
-                            showarrow: true,
-                            showarrow: true,
-                            startarrowsize: 3,
-                            arrowcolor: '#a5d400',
-                            startarrowhead: 6,
-                            arrowwidth: 1,
-                            opacity: 0.8,
-                            arrowside: 'start'
+                            type: 'date'
                         });
                     }
                     if (annFilterByCountry.notes[ann_num].country_code == 999 &&
@@ -69,27 +48,7 @@ export class CountryPerformanceOnRisk extends Component {
                         annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
                             '\n' + annFilterByCountry.notes[ann_num].annotation);
                         annotations.push({
-                            type: 'date',
-                            x: annFilterByCountry.notes[ann_num].annotation_date,
-                            y: 0,
-                            ay:0,
-                            xref: 'x',
-                            yref: 'y',
-                            name: 'Annotations',
-                            showlegend: true,
-                            hovertext: annFilterByCountry.notes[ann_num].annotation,
-                            hoverlabel:{
-                                bgcolor: '#a5d400',
-                            },
-                            text: ' ',
-                            borderwidth: 1,
-                            showarrow: true,
-                            startarrowsize: 3,
-                            arrowcolor: '#a5d400',
-                            startarrowhead: 6,
-                            arrowwidth: 1,
-                            opacity: 0.8,
-                            arrowside: 'start'
+                            type: 'date'
                         });
                     }
                 }
@@ -125,7 +84,7 @@ export class CountryPerformanceOnRisk extends Component {
                     tickformat: '%d %b %Y',
                     spikemode: 'across',
                     spikedash: 'dash',
-                    spikesnap: 'cursor',
+                    spikesnap: 'data',
                     spikethickness: 1
                 },
                 yaxis: {
@@ -136,15 +95,8 @@ export class CountryPerformanceOnRisk extends Component {
                     color: '#7f7f7f'
                 },
                 hovermode: 'closest',
-                // hoveron: 'points',
                 showlegend: true,
-                // zeroline: true,
-                annotations:{
-                    legendgroup: 'Annotations',
-                    name: 'Annotations',
-                    mode: 'markers'
-                },
-                annotations: annotations,
+                zeroline: true
             },
             annotation_dates: annotation_dates,
             annotation_notes: annotation_notes,
@@ -164,7 +116,7 @@ export class CountryPerformanceOnRisk extends Component {
         let plotlyData = []
         let lineColors = [
             '#11d48b', '#115ad4', '#d4115a',
-            '#d48b11', '#8800d4'
+            '#d48b11', '#8800d4', '#a5d400'
         ]
         if (props.view.isFetching === 0) {
             plotlyData = props.view.selectorConfig.map(config => {
@@ -189,23 +141,27 @@ export class CountryPerformanceOnRisk extends Component {
                 }
             })
             // Start of annotations are added
-            // plotlyData.splice(1, 0, {
+            plotlyData.splice(6, 0, {
                 // type: 'scatter',
-                // x: this.state.annotation_dates,
-                // y: this.state.annotation_dates.map(function(x) {
-                //     return 0
-                // }),
-                // marker: {
-                //     symbol: 'triangle-up',
-                //     color: '#a5d400'
-                // },
-                // legendgroup: 'Annotations',
-                // name: 'Annotations',
-                // hoveron: 'points',
-                // hoverinfo: 'text',
+                mode: 'markers',
+                x: this.state.annotation_dates,
+                y: this.state.annotation_dates.map(function(x) {
+                    return 0
+                }),
+                marker: {
+                    symbol: 'circle',
+                    color: '#a5d400',
+                    size: 12,
+                    opacity: 0.5
+
+                },
+                legendgroup: 'Annotations',
+                name: 'Annotations',
+                hoveron: 'points',
+                hoverinfo: 'text',
                 // hoverlabel: { textposition: 'middle-left', },
-                // text: this.state.annotation_notes
-            //  });
+                text: this.state.annotation_notes
+            });
             // End of annotations are added
             state['plotlyData'] = plotlyData
         }
@@ -235,13 +191,13 @@ export class CountryPerformanceOnRisk extends Component {
                 name: this.props.countries[countryID].name,
                 type: 'scatter',
                 mode: 'lines+markers',
-                legendgroup: this.props.countries[countryID].name,
+                legendgroup: 'Countries',
                 marker: {
                     line: { width: 0.5 }
                 },
                 line: {
                     width: 1,
-                    smoothing: 0.75,
+                    smoothing: 0.8,
                     shape: 'spline',
                     opacity: 0.5
                 },
