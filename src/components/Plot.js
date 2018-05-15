@@ -34,13 +34,7 @@ class PlotlyGraph extends React.Component {
             scrollZoom: true,
             displaylogo: false,
             showTips: true,
-            xaxis: {
-                rangemode: 'tozero',
-                autorange: true
-            },
-            yaxis: {
-                rangemode: 'nonnegative',
-                autorange: true}
+
 
         });
     }

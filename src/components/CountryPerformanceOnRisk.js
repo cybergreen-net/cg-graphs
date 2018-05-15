@@ -85,10 +85,14 @@ export class CountryPerformanceOnRisk extends Component {
                     spikemode: 'across',
                     spikedash: 'dash',
                     spikesnap: 'data',
-                    spikethickness: 1
+                    spikethickness: 1,
+                    rangemode: 'tozero',
+                    autorange: true
                 },
                 yaxis: {
-                    title: this.props.view.yLabel
+                    title: this.props.view.yLabel,
+                    rangemode: 'nonnegative',
+                    autorange: true
                 },
                 font: {
                     size: 9,
@@ -105,7 +109,7 @@ export class CountryPerformanceOnRisk extends Component {
             plotlyData: []
         }
     }
-
+    
 
     computeState(props = this.props) {
         let state = {
