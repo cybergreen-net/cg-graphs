@@ -122,7 +122,7 @@ export class CountryPerformanceOnRisk extends Component {
             '#11d48b', '#115ad4', '#d4115a',
             '#d48b11', '#8800d4', '#a5d400'
         ]
-        if (props.view.isFetching) {
+        if (props.view.isFetching === 0) {
             plotlyData = props.view.selectorConfig.map(config => {
                 if (config.country) {
                     // unit = this.getUnitAndDevider(props.cubeByRiskByCountry[props.view.risk][config.country], props.view.risk)
