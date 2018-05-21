@@ -43,9 +43,15 @@ export class DdosPerformance extends Component {
         xaxis: {
           gridcolor: 'transparent',
           tickformat: '%d %b %Y',
-        },
-        yaxis: {
+          rangemode: 'nonnegative',
+          rangemode: 'tozero',
+          autorange: true
+      },
+      yaxis: {
           title: this.props.view.yLabel,
+          rangemode: 'nonnegative',
+          rangemode: 'tozero',
+          autorange: true
         },
         barmode: 'stack',
         marker: {
@@ -101,7 +107,7 @@ export class DdosPerformance extends Component {
             return 0
         }),
         marker: {
-            symbol: 'circle',
+            symbol: 'triangle-up',
             color: '#a5d400',
             size: 12,
             opacity: 0.5

@@ -6,22 +6,19 @@ import {
   GET_RANK_SUCCESS,
   SELECT,
   CHANGE_MEASURE
-}
-from '../actions/cubeActions';
+} from '../actions/cubeActions';
 import {
   FETCH_AS_DATA_REQUEST,
   FETCH_AS_DATA_SUCCESS,
   FETCH_AS_DATA_FAILURE,
   SELECT_AS
-}
-from '../actions/ASactions';
+} from '../actions/ASactions';
 import {
   FETCH_MAP_DATA_REQUEST,
   FETCH_MAP_DATA_SUCCESS,
   FETCH_MAP_DATA_FAILURE,
   SELECT_RISK_AND_DATE
-}
-from '../actions/ChoroplethMapActions';
+} from '../actions/ChoroplethMapActions';
 
 const initialState = {
   entities: {
@@ -102,8 +99,7 @@ export function buildCube(state = initialState, action) {
       return Object.assign({}, newState, {
         entities: Object.assign({}, state.entities, {
           cubeByRiskByCountry: Object.assign({}, state.entities.cubeByRiskByCountry, {
-            [action.risk]: Object.assign({}, state.entities.cubeByRiskByCountry[
-              action.risk], {
+            [action.risk]: Object.assign({}, state.entities.cubeByRiskByCountry[action.risk], {
               [action.country]: action.data
             })
           })
@@ -197,8 +193,7 @@ export function buildCube(state = initialState, action) {
       return Object.assign({}, updateState, {
         entities: Object.assign({}, state.entities, {
           cubeByRiskByASN: Object.assign({}, state.entities.cubeByRiskByASN, {
-            [action.country + '/' + action.risk + '/' + action.AsId]:
-            action.data
+            [action.country + '/' + action.risk + '/' + action.AsId]: action.data
           })
         })
       })
@@ -276,8 +271,7 @@ export function buildCube(state = initialState, action) {
       return Object.assign({}, updateViews, {
         entities: Object.assign({}, state.entities, {
           cubeByRiskByDate: Object.assign({}, state.entities.cubeByRiskByDate, {
-            [action.risk]: Object.assign({}, state.entities.cubeByRiskByDate[
-              action.risk], {
+            [action.risk]: Object.assign({}, state.entities.cubeByRiskByDate[action.risk], {
               [action.date]: action.data
             })
           })

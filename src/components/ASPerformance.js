@@ -86,12 +86,14 @@ export class ASPerformance extends Component {
             spikedash: 'dash',
             spikesnap: 'data',
             spikethickness: 1,
+            rangemode: 'nonnegative',
             rangemode: 'tozero',
             autorange: true
         },
         yaxis: {
             title: this.props.view.yLabel,
             rangemode: 'nonnegative',
+            rangemode: 'tozero',
             autorange: true
         },
         font: {
@@ -110,8 +112,6 @@ export class ASPerformance extends Component {
 
 // adjusts the colour  fix if needed
   computeState(props = this.props) {
-    let state = {}
-    let plotlyData = []
     let lineColors = [
       '#11d48b', '#115ad4', '#d4115a',
       '#d48b11', '#8800d4'
@@ -144,7 +144,7 @@ export class ASPerformance extends Component {
             return 0
         }),
         marker: {
-            symbol: 'circle',
+            symbol: 'triangle-up',
             color: '#a5d400',
             size: 12,
             opacity: 0.5
@@ -158,21 +158,21 @@ export class ASPerformance extends Component {
         text: this.state.annotation_notes
       });
       // End of annotations are added
-      state['plotlyData'] = plotlyData
+      return {
+        plotlyData: plotlyData
+      }
     }
-      return state
+    return {}
   }
 
-  convertToPlotlySeries(asID, countryID, riskID, dataFromCube, measure,
-    normMeasure, devider) {
+  convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
     var dataTable = dataFromCube[countryID + '/' + riskID + '/' + asID];
     if (dataTable.length) {
       return { 
         // Traces are styled here
         x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row[normMeasure] / devider || row[measure] /
-            devider),
-        name: this.props.asn[asID].name,
+        y: dataTable.map(row => row.count),
+        name: this.props.asn[asID] ? this.props.asn[asID].title : 'Unknown',
         type: 'scatter',
         mode: 'lines+markers',
         legendgroup: this.props.asn[asID].name,

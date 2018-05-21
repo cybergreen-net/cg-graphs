@@ -61,10 +61,16 @@ export class SourceOfInfection extends Component {
                 xaxis: {
                     gridcolor: 'transparent',
                     tickformat: '%d %b %Y',
-
+                    rangemode: 'nonnegative',
+                    rangemode: 'tozero',
+                    autorange: true
                 },
                 yaxis: {
-                    title: this.props.view.yLabel
+                    title: this.props.view.yLabel,
+                    rangemode: 'nonnegative',
+                    rangemode: 'tozero',
+                    autorange: true
+
                 },
                 font: {
                     size: 9,
@@ -83,15 +89,14 @@ export class SourceOfInfection extends Component {
 
     computeState(props = this.props) {
         let plotlyData = []
-        console.log("props.data", props.data);
 
         props.data[props.view.risk][props.view.country].forEach(dataEntry => {
             let colorPallet = [
                '#11d48b', '#115ad4', '#d4115a',
                 '#d48b11', '#8800d4'
             ]
-            let countAllRest = parseInt(dataEntry[props.view.measure]) / props.view.unitDevider;
-            console.log(dataEntry.as);
+            let countAllRest = parseInt(dataEntry[props.view.measure]) / props.view.unitDevider
+
             dataEntry.as.forEach((asn, idx) => {
                 countAllRest -= parseInt(asn[props.view.measure]) / props.view.unitDevider
                 let trace = this.plotlySeries(dataEntry, asn, props.view.measure, props.view.unitDevider)
