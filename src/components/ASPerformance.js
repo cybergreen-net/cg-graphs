@@ -145,7 +145,7 @@ export class ASPerformance extends Component {
         }),
         marker: {
             symbol: 'triangle-up',
-            color: '#a5d400',
+            color: '#FFA500',
             size: 12,
             opacity: 0.5
 
