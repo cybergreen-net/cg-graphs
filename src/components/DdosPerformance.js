@@ -22,27 +22,13 @@ export class DdosPerformance extends Component {
       })
       .then((annFilterByCountry) => {
         for (var ann_num in annFilterByCountry.notes) {
-          if (annFilterByCountry.notes[ann_num].country_code == 999) {
+          if (annFilterByCountry.notes[ann_num].country_code == 999 &&
+            annFilterByCountry.notes[ann_num].risk_id == props.view.risk) {
             annotation_dates.push(annFilterByCountry.notes[ann_num].annotation_date);
-            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date + '\n' + annFilterByCountry.notes[ann_num].annotation);
+            annotation_notes.push(annFilterByCountry.notes[ann_num].annotation_date +
+                '\n' + annFilterByCountry.notes[ann_num].annotation);
             annotations.push({
-              type: 'date',
-              x: annFilterByCountry.notes[ann_num].annotation_date,
-              y: 0,
-              xref: 'x',
-              yref: 'y',
-              align: 'middle',
-              valign: 'center',
-              text: '',
-              borderwidth: 0,
-              showarrow: true,
-              arrowsize: 0,
-              arrowwidth: 1,
-              arrowcolor: '#FC9F5B',
-              arrowhead: 6,
-              opacity: 0.8,
-              ax: 0,
-              ay: -200,
+                type: 'date',
             });
           }
         }
@@ -52,11 +38,20 @@ export class DdosPerformance extends Component {
     this.state = {
       graphOptions: {
         height: 600,
+        legend:{
+          traceorder: 'grouped'},
         xaxis: {
           gridcolor: 'transparent',
-        },
-        yaxis: {
-          title: this.props.view.yLabel
+          tickformat: '%d %b %Y',
+          rangemode: 'nonnegative',
+          rangemode: 'tozero',
+          autorange: true
+      },
+      yaxis: {
+          title: this.props.view.yLabel,
+          rangemode: 'nonnegative',
+          rangemode: 'tozero',
+          autorange: true
         },
         barmode: 'stack',
         marker: {
@@ -87,8 +82,8 @@ export class DdosPerformance extends Component {
     let state = {}
     let plotlyData = []
     let barColors = [
-      'rgb(200, 2, 16)', 'rgb(0, 212, 154)',
-      'rgb(84, 114, 222)', 'rgb(96, 3, 212)'
+      '#11d48b', '#115ad4', '#d4115a',
+      '#d48b11', '#8800d4'
     ]
 
     if (props.view.isFetched) {
@@ -103,30 +98,29 @@ export class DdosPerformance extends Component {
       }).filter(value => {
         return value !== undefined
       })
-      plotlyData.splice(1, 0, {
-        //x: ['2016-01-01', '2016-05-30', '2017-05-05'],
+      // Start of annotations are added
+      plotlyData.splice(6, 0, {
+        // type: 'scatter',
+        mode: 'markers',
         x: this.state.annotation_dates,
         y: this.state.annotation_dates.map(function(x) {
-          return 0
+            return 0
         }),
-        //y: [0, 0, 0],
-        mode: 'markers',
         marker: {
-          symbol: 'circle',
-          color: 'rgba(252, 159, 91, .8)',
-          size: 8,
+            symbol: 'triangle-up',
+            color: '#FFA500',
+            size: 12,
+            opacity: 0.5
+
         },
-        legendgroup: ['group1','group2','group3','group4','group5'],
-        traceorder: 'grouped',
+        legendgroup: 'Annotations',
         name: 'Annotations',
-        hovermode: 'y',
-        hoverlabel: {
-          bgcolor: '#FC9F5B',
-          bordercolor: '#000000'
-        },
+        hoveron: 'points',
         hoverinfo: 'text',
-        text: this.state.annotation_notes,
+        // hoverlabel: { textposition: 'middle-left', },
+        text: this.state.annotation_notes
       });
+      // End of annotations are added
       state['plotlyData'] = plotlyData
     }
 
@@ -141,8 +135,7 @@ export class DdosPerformance extends Component {
         y: dataTable.map(row => (row[measure] || row.count) / 1000000),
         name: risk.title,
         type: 'bar',
-        traceorder: 'grouped',
-        legendgroup: ['group1','group2','group3','group4','group5'],
+        legendgroup: ['Traces'],
         marker: {
           color: color
         }

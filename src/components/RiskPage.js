@@ -5,7 +5,7 @@ import {
   connect
 } from 'react-redux';
 import CountryPerformanceOnRisk from './CountryPerformanceOnRisk';
-import '../css/temp.css' //this is temp import - needs to be removed for bundle
+// import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
 import Loader from 'halogen/BounceLoader'
 import 'react-select/dist/react-select.css';
