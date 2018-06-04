@@ -15,8 +15,8 @@ script:
 language: node_js
 
 node_js:
-  - "iojs"
-  - "7"
+  - "8.10.0"
+npm: "3.5.2"
 
 python:
   - "2.7"
