@@ -154,8 +154,8 @@ export class CountryPerformanceOnRisk extends Component {
                 marker: {
                     symbol: 'triangle-up',
                     color: '#FFA500',
-                    size: 12,
-                    opacity: 0.5
+                    size: 16,
+                    // opacity: 0.5
 
                 },
                 legendgroup: 'Annotations',
