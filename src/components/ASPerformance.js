@@ -23,10 +23,10 @@ export class ASPerformance extends Component {
   constructor(props) {
     super(props)
      // Start of code for fetching and filtering annotations
-     let annotation_dates = [];
-     let annotation_notes = [];
-     let annotations = [];
-     fetch(`/static/scripts/publicAnnotation.json`)
+    let annotation_dates = [];
+    let annotation_notes = [];
+    let annotations = [];
+    fetch(`/static/scripts/publicAnnotation.json`)
          .then((response) => {
              return response.json()
          })
