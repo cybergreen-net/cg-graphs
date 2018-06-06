@@ -246,27 +246,28 @@ export function buildCube(state = initialState, action) {
     case FETCH_MAP_DATA_SUCCESS:
       unit = getUnitAndDevider(action.data, action.risk)
       let updateViews = update(state, {
-        ChoroplethMapViews: {
-          isFetched: {
-            $set: true
-          },
-          isFetching: {
-            $set: state.ChoroplethMapViews.isFetching + 1
-          },
-          didFailed: {
-            $set: false
-          },
-          unit: {
-            $set: unit.unit ? unit.unit : state.ChoroplethMapViews.unit
-          },
-          unitDevider: {
-            $set: unit.unitDevider
-          },
-          measure: {
-            $set: action.risk === 100 ? 'count_amplified' : 'count'
+          ChoroplethMapViews: {
+            isFetched: {
+              $set: true
+            },
+            isFetching: {
+              $set: state.ChoroplethMapViews.isFetching + 1
+            },
+            didFailed: {
+              $set: false
+            },
+            unit: {
+              $set: unit.unit ? unit.unit : state.ChoroplethMapViews.unit
+            },
+            unitDevider: {
+              $set: unit.unitDevider
+            },
+            measure: {
+              $set: action.risk === 100 ? 'count_amplified' : 'count'
+            }
           }
-        }
-      })
+        })
+        // Date is assigned here
       return Object.assign({}, updateViews, {
         entities: Object.assign({}, state.entities, {
           cubeByRiskByDate: Object.assign({}, state.entities.cubeByRiskByDate, {

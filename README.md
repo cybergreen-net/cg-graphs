@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/cybergreen-net/cg-graphs.svg?branch=master)](https://travis-ci.org/cybergreen-net/cg-graphs)
+[![Build Status](https://travis-ci.org/cybergreen-net/cg-graphs.svg?branch=devel)](https://travis-ci.org/cybergreen-net/cg-graphs)
 
 # Cg-Graphs
 

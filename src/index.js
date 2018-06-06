@@ -6,14 +6,17 @@ import {
   createStore,
   applyMiddleware,
   compose
-} from 'redux';
+}
+from 'redux';
 import thunk from 'redux-thunk';
 import {
   Provider
-} from 'react-redux';
+}
+from 'react-redux';
 import {
   buildCube
-} from './reducers/cubeReducers';
+}
+from './reducers/cubeReducers';
 
 import CountryPage from './components/CountryPage';
 import ASPage from './components/ASPage';
@@ -22,6 +25,7 @@ import RiskPage from './components/RiskPage';
 import FrontPageCountrySelector from './components/FrontPageCountrySelector';
 import DdosPerformance from './components/DdosPerformance';
 import ChoroplethMap from './components/ChoroplethMap';
+
 
 
 let reduxStore = {
