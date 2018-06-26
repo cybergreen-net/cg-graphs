@@ -172,7 +172,7 @@ export class SourceOfInfection extends Component {
             x: [data.date],
             y: [asn[measure] / unitDevider],
             type: 'bar',
-            name: asn.id + ' | ' + title,
+            name: asn.id, //+ ' | ' + title,
             //barmode: 'stacked',
             legendgroup: 'AllTraces',
             text: '',
