@@ -3,7 +3,7 @@
 # Cg-Graphs
 
 This repository is responsible for graphs and charts for Cybergreen Project
-
+ 
 ## Setup
 
 To install all dependencies:
