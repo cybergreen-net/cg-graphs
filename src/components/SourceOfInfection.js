@@ -175,7 +175,7 @@ export class SourceOfInfection extends Component {
             name: asn.id, //+ ' | ' + title,
             //barmode: 'stacked',
             legendgroup: 'AllTraces',
-            text: '',
+            text: asn.id + ' | ' + title.substring(0, 20),
             showlegend: false,
             mode: 'markers+text',
             //hoverinfo: 'x+y'
