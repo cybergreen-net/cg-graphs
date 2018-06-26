@@ -77,7 +77,7 @@ export class CountryPage extends Component {
     const selectOptions = Object.values(this.props.asn).map(asn => {
       return {
         value: asn.number,
-        label: asn.number + ' | ' + asn.title
+        label: asn.number // + ' | ' + asn.title
       }
     })
     selectOptions.unshift({
