@@ -172,10 +172,10 @@ export class SourceOfInfection extends Component {
             x: [data.date],
             y: [asn[measure] / unitDevider],
             type: 'bar',
-            name: asn.id + ' | ' + title,
+            name: asn.id, //+ ' | ' + title,
             //barmode: 'stacked',
             legendgroup: 'AllTraces',
-            text: '',
+            text: asn.id + ' | ' + title.substring(0, 20),
             showlegend: false,
             mode: 'markers+text',
             //hoverinfo: 'x+y'

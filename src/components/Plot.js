@@ -31,7 +31,7 @@ class PlotlyGraph extends React.Component {
                 'select2d',
                 // 'toggleHover'
             ],
-            scrollZoom: true,
+            scrollZoom: false,
             displaylogo: false,
             showTips: true,
 
