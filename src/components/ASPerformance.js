@@ -167,7 +167,7 @@ export class ASPerformance extends Component {
 
   convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
     var dataTable = dataFromCube[countryID + '/' + riskID + '/' + asID];
-    console.log(dataTable);
+    console.log("original", dataTable);
 
     function getMonday(d) {
       d = new Date(d);
