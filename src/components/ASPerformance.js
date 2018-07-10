@@ -167,8 +167,46 @@ export class ASPerformance extends Component {
 
   convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
     var dataTable = dataFromCube[countryID + '/' + riskID + '/' + asID];
+    console.log(dataTable);
+
+    function getMonday(d) {
+      d = new Date(d);
+      var day = d.getDay(),
+          diff = d.getDate() - day + 1 + (day == 0 ? -6:1); // adjust when day is sunday
+      var round_date = new Date(d.setDate(diff));
+      return (round_date.getUTCFullYear() +"-"+ (round_date.getUTCMonth()+1) +"-"+ round_date.getUTCDate());
+    }
+
+    function alignDates(){
+      var alignedDataTable = [];
+
+      for (var i = 0; i < dataTable.length; i++){
+        console.log("orig", dataTable[i].date);
+        dataTable[i].date  = getMonday(dataTable[i].date);
+        console.log("round", dataTable[i].date)
+
+        if (alignedDataTable.length > 0){
+          if (dataTable[i].date == alignedDataTable[alignedDataTable.length - 1].date){
+            alignedDataTable[alignedDataTable.length - 1].count += dataTable[i].count;
+            alignedDataTable[alignedDataTable.length - 1].count_amplified += dataTable[i].count_amplified;
+          }
+          else{
+            alignedDataTable.push(dataTable[i]);
+          }
+        }
+        else{
+            alignedDataTable.push(dataTable[i]);
+        }
+        console.log("aligned", alignedDataTable);
+
+      }
+      return alignedDataTable;
+    }
+
+    dataTable = alignDates();
+
     if (dataTable.length) {
-      return { 
+      return {
         // Traces are styled here
         x: dataTable.map(row => row.date),
         y: dataTable.map(row => row.count),
