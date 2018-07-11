@@ -19,6 +19,70 @@ import {
 from '../actions/ASactions';
 // import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
+function roundDateStringToMonday(d) {
+  /*
+  Given a date string of form "yyyy-MM-dd", return another date string
+  in "yyyy-MM-dd" representing the Monday of that same week.
+
+  For example:
+  If "2018-07-09" is a Monday, this also returns "2017-07-09".
+  If "2018-07-10" is a Tuesday, this returns "2017-07-09".
+  If "2018-07-12" is a Thursday, again return "2017-07-09"
+  */
+  d = new Date(d);
+  let day = d.getDay(),
+      diff = d.getDate() - day + 1 + (day == 0 ? -6:1); // adjust when day is sunday
+  let round_date = new Date(d.setDate(diff));
+  return (round_date.getUTCFullYear() +"-"+ (round_date.getUTCMonth()+1) +"-"+ round_date.getUTCDate());
+}
+
+function alignDates(dt_in){
+  /*
+  Given a list of data points with form:
+
+  */
+  let dt = dt_in.concat();
+  let alignedDt = [];
+  if (dt[0].risk == 2){
+    console.log("orig", dt[0].risk, JSON.stringify(dt));
+  }
+
+  for (var i = 0; i < dt.length; i++){
+    if (dt[i].risk == 2){
+      console.log("Row: " + JSON.stringify(dt[i]));
+    }
+    //console.log("orig", dataTable[i].date);
+    dt[i].date  = roundDateStringToMonday(dt[i].date);
+    dt[i].count = Number(dt[i].count);
+    dt[i].count_amplified = Number(dt[i].count_amplified);
+    //console.log("round", dataTable[i].date)
+
+    if (alignedDt.length > 0){
+      if (dt[i].date == alignedDt[alignedDt.length - 1].date && dt[i].risk == alignedDt[alignedDt.length - 1].risk){
+        if (dt[i].risk == 2){
+          console.log("Adding alignedDataTable rows: ", alignedDt[alignedDt.length - 1], dt[i]);
+        }
+        alignedDt[alignedDt.length - 1].count += dt[i].count;
+        alignedDt[alignedDt.length - 1].count_amplified += dt[i].count_amplified;
+      }
+      else{
+        alignedDt.push(dt[i]);
+      }
+    }
+    else{
+        alignedDt.push(dt[i]);
+    }
+    if (dt[i].risk == 2){
+      console.log("In progress alignedDataTable: ", JSON.stringify(alignedDt))
+    }
+  }
+  if (dt[0].risk == 2){
+    console.log("aligned", alignedDt.risk, JSON.stringify(alignedDt));
+  }
+  return alignedDt;
+}
+
+
 export class ASPerformance extends Component {
   constructor(props) {
     super(props)
@@ -26,6 +90,7 @@ export class ASPerformance extends Component {
     let annotation_dates = [];
     let annotation_notes = [];
     let annotations = [];
+    let aligned_dataTable = [];
     fetch(`/static/scripts/publicAnnotation.json`)
          .then((response) => {
              return response.json()
@@ -119,6 +184,7 @@ export class ASPerformance extends Component {
     if (props.view.isFetched) {
       let plotlyData = props.view.selectorConfig.map(config => {
         if (config.as) {
+          console.log("props.data", props.data);
           return this.convertToPlotlySeries(
             config.as,
             props.view.country,
@@ -166,50 +232,27 @@ export class ASPerformance extends Component {
   }
 
   convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
-    var dataTable = dataFromCube[countryID + '/' + riskID + '/' + asID];
-    console.log("original", dataTable);
-
-    function getMonday(d) {
-      d = new Date(d);
-      var day = d.getDay(),
-          diff = d.getDate() - day + 1 + (day == 0 ? -6:1); // adjust when day is sunday
-      var round_date = new Date(d.setDate(diff));
-      return (round_date.getUTCFullYear() +"-"+ (round_date.getUTCMonth()+1) +"-"+ round_date.getUTCDate());
+    console.log(JSON.stringify(dataFromCube));
+    this.dataTable_aligned = {};
+    var label = countryID + '/' + riskID + '/' + asID;
+    let dataTable = JSON.parse(JSON.stringify(dataFromCube[label]));
+    if (dataTable[0].risk == 2){
+      console.log("original", JSON.stringify(dataTable));
     }
 
-    function alignDates(){
-      var alignedDataTable = [];
-
-      for (var i = 0; i < dataTable.length; i++){
-        console.log("orig", dataTable[i].date);
-        dataTable[i].date  = getMonday(dataTable[i].date);
-        console.log("round", dataTable[i].date)
-
-        if (alignedDataTable.length > 0){
-          if (dataTable[i].date == alignedDataTable[alignedDataTable.length - 1].date){
-            alignedDataTable[alignedDataTable.length - 1].count += dataTable[i].count;
-            alignedDataTable[alignedDataTable.length - 1].count_amplified += dataTable[i].count_amplified;
-          }
-          else{
-            alignedDataTable.push(dataTable[i]);
-          }
-        }
-        else{
-            alignedDataTable.push(dataTable[i]);
-        }
-        console.log("aligned", alignedDataTable);
-
-      }
-      return alignedDataTable;
+    if (dataTable[0].risk == 2){
+      console.log("Before alignment, orig", JSON.stringify(dataTable))
     }
+    this.dataTable_aligned[label] = alignDates(dataTable);
+    //let dataTable_aligned = dataTable.concat();
+    console.log("Finished aligning");
 
-    dataTable = alignDates();
-
-    if (dataTable.length) {
+    if (this.dataTable_aligned[label].length) {
+      console.log("plotting", JSON.stringify(this.dataTable_aligned));
       return {
         // Traces are styled here
-        x: dataTable.map(row => row.date),
-        y: dataTable.map(row => row.count),
+        x: this.dataTable_aligned[label].map(row => row.date),
+        y: this.dataTable_aligned[label].map(row => row.count),
         name: this.props.asn[asID] ? this.props.asn[asID].title : 'Unknown',
         type: 'scatter',
         mode: 'lines+markers',
