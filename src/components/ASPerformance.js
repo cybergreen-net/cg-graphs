@@ -40,28 +40,25 @@ function alignDates(dt_in){
   /*
   Given a list of data points with form:
 
+  [
+    {risk: 1, count: 2354, count_amplified: 124210, date: "2018-07-11"},
+    {risk: 1, count: 23, count_amplified: 342, date: "2018-07-12"},
+    {risk: 1, count: 2543, count_amplified: 145320, date: "2018-07-03"},
+    {risk: 1, count: 15, count_amplified: 231, date: "2018-07-04"},
+    ...
+  ]
+
   */
   let dt = dt_in.concat();
   let alignedDt = [];
-  if (dt[0].risk == 2){
-    console.log("orig", dt[0].risk, JSON.stringify(dt));
-  }
 
   for (var i = 0; i < dt.length; i++){
-    if (dt[i].risk == 2){
-      console.log("Row: " + JSON.stringify(dt[i]));
-    }
-    //console.log("orig", dataTable[i].date);
     dt[i].date  = roundDateStringToMonday(dt[i].date);
     dt[i].count = Number(dt[i].count);
     dt[i].count_amplified = Number(dt[i].count_amplified);
-    //console.log("round", dataTable[i].date)
 
     if (alignedDt.length > 0){
       if (dt[i].date == alignedDt[alignedDt.length - 1].date && dt[i].risk == alignedDt[alignedDt.length - 1].risk){
-        if (dt[i].risk == 2){
-          console.log("Adding alignedDataTable rows: ", alignedDt[alignedDt.length - 1], dt[i]);
-        }
         alignedDt[alignedDt.length - 1].count += dt[i].count;
         alignedDt[alignedDt.length - 1].count_amplified += dt[i].count_amplified;
       }
@@ -72,12 +69,6 @@ function alignDates(dt_in){
     else{
         alignedDt.push(dt[i]);
     }
-    if (dt[i].risk == 2){
-      console.log("In progress alignedDataTable: ", JSON.stringify(alignedDt))
-    }
-  }
-  if (dt[0].risk == 2){
-    console.log("aligned", alignedDt.risk, JSON.stringify(alignedDt));
   }
   return alignedDt;
 }
@@ -184,7 +175,6 @@ export class ASPerformance extends Component {
     if (props.view.isFetched) {
       let plotlyData = props.view.selectorConfig.map(config => {
         if (config.as) {
-          console.log("props.data", props.data);
           return this.convertToPlotlySeries(
             config.as,
             props.view.country,
@@ -232,23 +222,13 @@ export class ASPerformance extends Component {
   }
 
   convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
-    console.log(JSON.stringify(dataFromCube));
     this.dataTable_aligned = {};
     var label = countryID + '/' + riskID + '/' + asID;
     let dataTable = JSON.parse(JSON.stringify(dataFromCube[label]));
-    if (dataTable[0].risk == 2){
-      console.log("original", JSON.stringify(dataTable));
-    }
 
-    if (dataTable[0].risk == 2){
-      console.log("Before alignment, orig", JSON.stringify(dataTable))
-    }
     this.dataTable_aligned[label] = alignDates(dataTable);
-    //let dataTable_aligned = dataTable.concat();
-    console.log("Finished aligning");
 
     if (this.dataTable_aligned[label].length) {
-      console.log("plotting", JSON.stringify(this.dataTable_aligned));
       return {
         // Traces are styled here
         x: this.dataTable_aligned[label].map(row => row.date),
