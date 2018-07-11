@@ -167,7 +167,7 @@ export class SourceOfInfection extends Component {
 
 
     plotlySeries(data, asn, measure, unitDevider) {
-        var title = this.props.asns[asn.id] ? this.props.asns[asn.id].title : 'Unknown'
+        var title = this.props.asns[asn.id] && this.props.asns[asn.id].title ? this.props.asns[asn.id].title : 'Unknown'
         return {
             x: [data.date],
             y: [asn[measure] / unitDevider],
