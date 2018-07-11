@@ -38,16 +38,24 @@ function roundDateStringToMonday(d) {
 
 function alignDates(dt_in){
   /*
-  Given a list of data points with form:
+  Given a list of data points from the CG country API, round dates to the Monday of that week,
+  and merge counts for data points belonging to same week.
+
+  e.g. dt_in:
 
   [
-    {risk: 1, count: 2354, count_amplified: 124210, date: "2018-07-11"},
-    {risk: 1, count: 23, count_amplified: 342, date: "2018-07-12"},
-    {risk: 1, count: 2543, count_amplified: 145320, date: "2018-07-03"},
-    {risk: 1, count: 15, count_amplified: 231, date: "2018-07-04"},
+    {risk: 1, count: 2354, count_amplified: 124210, date: "2018-07-11",...},
+    {risk: 1, count: 23, count_amplified: 342, date: "2018-07-12",...},
+    {risk: 1, count: 2543, count_amplified: 145320, date: "2018-07-03",...},
+    {risk: 1, count: 15, count_amplified: 231, date: "2018-07-04",...},
     ...
   ]
 
+  returns:
+  [
+    {risk: 1, count: 2377, count_amplified: 124552, date: "2018-07-09",...},
+    {risk: 1, count: 2557, count_amplified: 145551, date: "2018-07-02",...},
+  ]
   */
   let dt = dt_in.concat();
   let alignedDt = [];
@@ -222,17 +230,17 @@ export class ASPerformance extends Component {
   }
 
   convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
-    this.dataTable_aligned = {};
     var label = countryID + '/' + riskID + '/' + asID;
-    let dataTable = JSON.parse(JSON.stringify(dataFromCube[label]));
+    // serialise and deserialise as ghetto deep copy
+    var dataTable = JSON.parse(JSON.stringify(dataFromCube[label]));
 
-    this.dataTable_aligned[label] = alignDates(dataTable);
+    var dataTable_aligned = alignDates(dataTable);
 
-    if (this.dataTable_aligned[label].length) {
+    if (dataTable_aligned.length) {
       return {
         // Traces are styled here
-        x: this.dataTable_aligned[label].map(row => row.date),
-        y: this.dataTable_aligned[label].map(row => row.count),
+        x: dataTable_aligned.map(row => row.date),
+        y: dataTable_aligned.map(row => row.count),
         name: this.props.asn[asID] ? this.props.asn[asID].title : 'Unknown',
         type: 'scatter',
         mode: 'lines+markers',
