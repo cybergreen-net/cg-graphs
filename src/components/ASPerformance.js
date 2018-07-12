@@ -379,7 +379,7 @@ export class ASSelect extends Component {
     })
     selectOptions.unshift({
       value: '',
-      label: 'Select an ASN'
+      label: 'Select an ASNa'
     })
     let selectedAS = parseInt(this.props.selectedAS)
     return ( <
