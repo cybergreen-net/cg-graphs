@@ -57,7 +57,7 @@ function alignDates(dt_in){
     {risk: 1, count: 2557, count_amplified: 145551, date: "2018-07-02",...},
   ]
   */
-  let dt = dt_in.concat();
+  let dt = JSON.parse(JSON.stringify(dt_in));
   let alignedDt = [];
 
   for (var i = 0; i < dt.length; i++){
