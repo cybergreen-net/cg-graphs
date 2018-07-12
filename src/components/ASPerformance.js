@@ -232,15 +232,17 @@ export class ASPerformance extends Component {
   convertToPlotlySeries(asID, countryID, riskID, dataFromCube) {
     var label = countryID + '/' + riskID + '/' + asID;
     // serialise and deserialise as ghetto deep copy
-    var dataTable = JSON.parse(JSON.stringify(dataFromCube[label]));
+    var dataTable = {};
+    dataTable[label] = JSON.parse(JSON.stringify(dataFromCube[label]));
+    var dataTable_aligned = {};
 
-    var dataTable_aligned = alignDates(dataTable);
+    dataTable_aligned[label] = alignDates(dataTable[label]);
 
-    if (dataTable_aligned.length) {
+    if (dataTable_aligned[label].length) {
       return {
         // Traces are styled here
-        x: dataTable_aligned.map(row => row.date),
-        y: dataTable_aligned.map(row => row.count),
+        x: dataTable_aligned[label].map(row => row.date),
+        y: dataTable_aligned[label].map(row => row.count),
         name: this.props.asn[asID] ? this.props.asn[asID].title : 'Unknown',
         type: 'scatter',
         mode: 'lines+markers',
