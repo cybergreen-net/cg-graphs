@@ -30,9 +30,9 @@ function roundDateStringToMonday(d) {
   If "2018-07-12" is a Thursday, again return "2017-07-09"
   */
   d = new Date(d);
-  let day = d.getDay(),
-      diff = d.getDate() - day + 1 + (day == 0 ? -6:1); // adjust when day is sunday
-  let round_date = new Date(d.setDate(diff));
+  let day = d.getUTCDay(),
+      diff = d.getUTCDate() - day + 1 + (day == 0 ? -6:1); // adjust when day is sunday
+  let round_date = new Date(d.setUTCDate(diff));
   return (round_date.getUTCFullYear() +"-"+ (round_date.getUTCMonth()+1) +"-"+ round_date.getUTCDate());
 }
 
