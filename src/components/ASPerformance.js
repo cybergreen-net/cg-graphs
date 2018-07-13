@@ -233,13 +233,13 @@ export class ASPerformance extends Component {
     var label = countryID + '/' + riskID + '/' + asID;
     // serialise and deserialise as ghetto deep copy
     var dataTable = {};
-    console.log("dataFromCube" + riskID, JSON.stringify(dataFromCube[label]))
+    console.log("dataFromCuberisk" + riskID, JSON.stringify(dataFromCube[label]))
     dataTable[label] = JSON.parse(JSON.stringify(dataFromCube[label]));
-    console.log("dataTable" + riskID, JSON.stringify(dataTable))
+    console.log("dataTablerisk" + riskID, JSON.stringify(dataTable))
     var dataTable_aligned = {};
 
     dataTable_aligned[label] = alignDates(dataTable[label]);
-    console.log("dataTable_aligned" + riskID, JSON.stringify(dataTable_aligned));
+    console.log("dataTable_alignedrisk" + riskID, JSON.stringify(dataTable_aligned));
 
     if (dataTable_aligned[label].length) {
       return {
