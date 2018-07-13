@@ -8,7 +8,7 @@ This repository is responsible for graphs and charts for Cybergreen Project
 
 To install all dependencies:
 ```
-$ npm install
+$ npm install   # this failed for me with unmet dependencies - try `yarn install` also
 ```
 
 To run local dev server:
