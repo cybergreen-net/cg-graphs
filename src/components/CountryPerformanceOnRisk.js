@@ -17,6 +17,68 @@ import {
 } from '../actions/cubeActions';
 // import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
+function roundDateStringToMonday(d) {
+    /*
+    Given a date string of form "yyyy-MM-dd", return another date string
+    in "yyyy-MM-dd" representing the Monday of that same week.
+
+    For example:
+    If "2018-07-09" is a Monday, this also returns "2017-07-09".
+    If "2018-07-10" is a Tuesday, this returns "2017-07-09".
+    If "2018-07-12" is a Thursday, again return "2017-07-09"
+    */
+    d = new Date(d);
+    let day = d.getUTCDay(),
+        diff = d.getUTCDate() - day + 1 + (day == 0 ? -6:1); // adjust when day is sunday
+    let round_date = new Date(d.setUTCDate(diff));
+    return (round_date.getUTCFullYear() +"-"+ (round_date.getUTCMonth()+1) +"-"+ round_date.getUTCDate());
+  }
+
+  function alignDates(dt_in){
+    /*
+    Given a list of data points from the CG country API, round dates to the Monday of that week,
+    and merge counts for data points belonging to same week.
+
+    e.g. dt_in:
+
+    [
+      {risk: 1, count: 2354, count_amplified: 124210, date: "2018-07-11",...},
+      {risk: 1, count: 23, count_amplified: 342, date: "2018-07-12",...},
+      {risk: 1, count: 2543, count_amplified: 145320, date: "2018-07-03",...},
+      {risk: 1, count: 15, count_amplified: 231, date: "2018-07-04",...},
+      ...
+    ]
+
+    returns:
+    [
+      {risk: 1, count: 2377, count_amplified: 124552, date: "2018-07-09",...},
+      {risk: 1, count: 2557, count_amplified: 145551, date: "2018-07-02",...},
+    ]
+    */
+    let dt = JSON.parse(JSON.stringify(dt_in));
+    let alignedDt = [];
+
+    for (var i = 0; i < dt.length; i++){
+      dt[i].date  = roundDateStringToMonday(dt[i].date);
+      dt[i].count = Number(dt[i].count);
+      dt[i].count_amplified = Number(dt[i].count_amplified);
+
+      if (alignedDt.length > 0){
+        if (dt[i].date == alignedDt[alignedDt.length - 1].date && dt[i].risk == alignedDt[alignedDt.length - 1].risk){
+          alignedDt[alignedDt.length - 1].count += dt[i].count;
+          alignedDt[alignedDt.length - 1].count_amplified += dt[i].count_amplified;
+        }
+        else{
+          alignedDt.push(dt[i]);
+        }
+      }
+      else{
+          alignedDt.push(dt[i]);
+      }
+    }
+    return alignedDt;
+  }
+
 export class CountryPerformanceOnRisk extends Component {
     constructor(props) {
         super(props)
@@ -182,12 +244,22 @@ export class CountryPerformanceOnRisk extends Component {
 
 
     convertToPlotlySeries(countryID, riskID, cubeByRiskByCountry, measure, normMeasure, devider) {
-        var dataTable = cubeByRiskByCountry[riskID][countryID];
-        if (dataTable) {
+
+        var label = riskID + '/' + countryID;
+        // serialise and deserialise as ghetto deep copy
+        var dataTable = {};
+        //console.log("dataFromCuberisk" + riskID, JSON.stringify(dataFromCube[label]))
+        dataTable[label] = JSON.parse(JSON.stringify(cubeByRiskByCountry[riskID][countryID]));
+        //console.log("dataTablerisk" + riskID, JSON.stringify(dataTable))
+        var dataTable_aligned = {};
+
+        dataTable_aligned[label] = alignDates(dataTable[label]);
+
+        if (dataTable_aligned[label]) {
             return {
                 // Traces are styled here
-                x: dataTable.map(row => row.date),
-                y: dataTable.map(row => row[normMeasure] / devider || row[measure] / devider),
+                x: dataTable_aligned[label].map(row => row.date),
+                y: dataTable_aligned[label].map(row => row[normMeasure] / devider || row[measure] / devider),
                 name: this.props.countries[countryID].name,
                 type: 'scatter',
                 mode: 'lines+markers',
