@@ -21,7 +21,7 @@ export class ASPage extends Component {
     })
     return ( <
       div > {
-        spinner ? < Loader size = '100px'
+        spinner ? < PulseLoader size = '100px'
         color = '#00D49A'
         className = 'spinner' / > : ''
       } {

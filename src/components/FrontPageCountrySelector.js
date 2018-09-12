@@ -4,7 +4,7 @@ import React, {
 import Highlighter from 'react-highlight-words'
 import Select from 'react-select';
 import { PulseLoader } from 'halogenium';
-import 'react-select/dist/react-select.css';
+
 
 export default class FrontPageCountrySelector extends Component {
   constructor(props) {
@@ -100,7 +100,7 @@ export default class FrontPageCountrySelector extends Component {
         spinnerStyle
       } >
       <
-      Loader size = {
+      PulseLoader size = {
         this.state.spinner
       }
       color = '#00D49A' / >

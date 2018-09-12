@@ -8,7 +8,7 @@ import CountryPerformanceOnRisk from './CountryPerformanceOnRisk';
 // import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
 import { PulseLoader } from 'halogenium';
-import 'react-select/dist/react-select.css';
+
 
 
 export class RiskPage extends Component {
@@ -26,11 +26,11 @@ export class RiskPage extends Component {
     })
     return ( <
       div > {
-        spinner ? < Loader size = '100px'
+        spinner ? < PulseLoader size = '100px'
         color = '#00D49A'
         className = 'spinner' / > : ''
       } <
-      Loader size = {
+      PulseLoader size = {
         this.state.spinner
       }
       color = '#00D49A'

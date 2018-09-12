@@ -11,7 +11,7 @@ import '../css/temp.css' //this is temp import - needs to be removed for bundle
 import Highlighter from 'react-highlight-words'
 import Select from 'react-select';
 import { PulseLoader } from 'halogenium';
-import 'react-select/dist/react-select.css';
+
 
 
 export class CountryPage extends Component {
@@ -89,7 +89,7 @@ export class CountryPage extends Component {
     })
     return ( <
       div > {
-        spinner ? < Loader size = '100px'
+        spinner ? < PulseLoader size = '100px'
         color = '#00D49A'
         className = 'spinner' / > : ''
       } <

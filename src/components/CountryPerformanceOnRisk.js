@@ -8,7 +8,7 @@ import PlotlyGraph from './Plot.js';
 import Select from 'react-select';
 import update from 'react/lib/update'
 import Highlighter from 'react-highlight-words'
-import 'react-select/dist/react-select.css';
+
 import {
     countryIsSelected,
     fetchDataIfNeeded,
