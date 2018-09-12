@@ -12,9 +12,10 @@
     "snyk": "^1.94.0"
   },
   "dependencies": {
+    "ajv": "^6.5.3",
     "axios": "^0.15.3",
     "babel-polyfill": "^6.23.0",
-    "halogen": "^0.2.0",
+    "halogenium": "^2.2.3",
     "numeral": "^2.0.4",
     "plotly.js-dist": "^1.40.1",
     "react": "^15.6.2",

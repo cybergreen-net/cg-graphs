@@ -7,7 +7,7 @@ import {
 import CountryPerformanceOnRisk from './CountryPerformanceOnRisk';
 // import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
-import Loader from 'halogen/BounceLoader'
+import { PulseLoader } from 'halogenium';
 import 'react-select/dist/react-select.css';
 
 

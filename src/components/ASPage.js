@@ -5,7 +5,7 @@ import {
   connect
 } from 'react-redux';
 import ASPerformance from './ASPerformance';
-import Loader from 'halogen/BounceLoader';
+import { PulseLoader } from 'halogenium';
 
 
 export class ASPage extends Component {

@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Highlighter from 'react-highlight-words'
 import Select from 'react-select';
-import Loader from 'halogen/BounceLoader'
+import { PulseLoader } from 'halogenium';
 import 'react-select/dist/react-select.css';
 
 export default class FrontPageCountrySelector extends Component {
