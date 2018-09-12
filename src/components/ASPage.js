@@ -5,7 +5,7 @@ import {
   connect
 } from 'react-redux';
 import ASPerformance from './ASPerformance';
-import { DotLoader } from 'halogenium';
+import { BounceLoader } from 'halogenium';
 
 
 export class ASPage extends Component {
@@ -21,7 +21,7 @@ export class ASPage extends Component {
     })
     return ( <
       div > {
-        spinner ? < DotLoader size = '100px'
+        spinner ? < BounceLoader size = '100px'
         color = '#00D49A'
         className = 'spinner' / > : ''
       } {

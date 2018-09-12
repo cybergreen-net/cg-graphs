@@ -7,7 +7,7 @@ import {
 import CountryPerformanceOnRisk from './CountryPerformanceOnRisk';
 // import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
-import { DotLoader } from 'halogenium';
+import { BounceLoader } from 'halogenium';
 
 
 
@@ -26,11 +26,11 @@ export class RiskPage extends Component {
     })
     return ( <
       div > {
-        spinner ? < DotLoader size = '100px'
+        spinner ? < BounceLoader size = '100px'
         color = '#00D49A'
         className = 'spinner' / > : ''
       } <
-      DotLoader size = {
+      BounceLoader size = {
         this.state.spinner
       }
       color = '#00D49A'

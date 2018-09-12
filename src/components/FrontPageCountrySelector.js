@@ -3,7 +3,7 @@ import React, {
 } from 'react';
 import Highlighter from 'react-highlight-words'
 import Select from 'react-select';
-import { DotLoader } from 'halogenium';
+import { BounceLoader } from 'halogenium';
 
 
 export default class FrontPageCountrySelector extends Component {
@@ -100,7 +100,7 @@ export default class FrontPageCountrySelector extends Component {
         spinnerStyle
       } >
       <
-      DotLoader size = {
+      BounceLoader size = {
         this.state.spinner
       }
       color = '#00D49A' / >

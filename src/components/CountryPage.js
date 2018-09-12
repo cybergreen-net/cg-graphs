@@ -10,7 +10,7 @@ import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
 import Highlighter from 'react-highlight-words'
 import Select from 'react-select';
-import { DotLoader } from 'halogenium';
+import { BounceLoader } from 'halogenium';
 
 
 
@@ -89,7 +89,7 @@ export class CountryPage extends Component {
     })
     return ( <
       div > {
-        spinner ? < DotLoader size = '100px'
+        spinner ? < BounceLoader size = '100px'
         color = '#00D49A'
         className = 'spinner' / > : ''
       } <
