@@ -392,7 +392,7 @@ export class CountryPerformanceOnRisk extends Component {
                 this.state.selectorConfig.map((selectInfo, idx) => {
                     return <CountrySelect
                     countries = {
-                        Object.values(this.props.countries)
+                        Object.values(this.props.country)
                     }
                     disabled = {
                         selectInfo.disabled
