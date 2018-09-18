@@ -492,7 +492,7 @@ export class CountrySelect extends Component {
             <
             Select name = "countries"
             value = {
-                this.props.selectedCountry || selectOptions[0]
+                selectOptions.find(option => option.value === (this.props.selectedCountry || selectOptions[0]))
             }
             options = {
                 selectOptions
