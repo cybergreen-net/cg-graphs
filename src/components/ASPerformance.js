@@ -390,7 +390,7 @@ export class ASSelect extends Component {
       <
       Select name = "asn"
       value = {
-        selectOptions.find(option => option.value === (this.props.selectedAS || selectOptions[0]))
+        selectedAS || selectOptions[0]
       }
       options = {
         selectOptions
