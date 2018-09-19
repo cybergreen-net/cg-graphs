@@ -384,7 +384,7 @@ export class ASSelect extends Component {
       value: '',
       label: 'Select an ASN'
     })
-    let selectedAS = parseInt(this.props.selectedAS)
+    let selectedAS = this.props.selectedAS
     return ( <
       div className = "Select-div" >
       <
