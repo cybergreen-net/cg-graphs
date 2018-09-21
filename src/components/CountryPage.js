@@ -9,7 +9,7 @@ import SourceOfInfection from './SourceOfInfection';
 import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
 import Highlighter from 'react-highlight-words'
-import Select from 'react-select';
+import Select from "react-virtualized-select";
 import { BounceLoader } from 'halogenium';
 
 

@@ -5,7 +5,7 @@ import {
     connect
 } from 'react-redux'
 import PlotlyGraph from './Plot.js';
-import Select from 'react-select';
+import Select from "react-virtualized-select";
 import update from 'react/lib/update'
 import Highlighter from 'react-highlight-words'
 

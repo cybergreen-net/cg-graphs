@@ -7,7 +7,7 @@ import {
 }
 from 'react-redux';
 import PlotlyGraph from './Plot.js';
-import Select from 'react-select';
+import Select from "react-virtualized-select";
 import Highlighter from 'react-highlight-words';
 
 import '../css/temp.css' //this is temp import - needs to be removed for bundle

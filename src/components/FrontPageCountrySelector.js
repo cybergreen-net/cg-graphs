@@ -2,7 +2,7 @@ import React, {
   Component
 } from 'react';
 import Highlighter from 'react-highlight-words'
-import Select from 'react-select';
+import Select from "react-virtualized-select";
 import { BounceLoader } from 'halogenium';
 
 
