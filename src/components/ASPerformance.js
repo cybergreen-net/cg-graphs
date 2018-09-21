@@ -282,20 +282,20 @@ export class ASPerformance extends Component {
 
 
   updateValue(idxOfSelector, selectedAS) {
-    if (!selectedAS || selectedAS.value === "") {
-      this.props.dispatch(AsIsSelected(idxOfSelector, "", this.props.viewId))
-    } else {
-      this.props.dispatch(AsIsSelected(
-        idxOfSelector,
-        selectedAS.value,
-        this.props.viewId
-      ))
-      this.props.dispatch(fetchAsDataIfNeeded(
-        this.props.view.country,
-        this.props.view.risk,
-        selectedAS.value,
-        this.props.viewId
-      ))
+      if (!selectedAS || selectedAS.value === "") {
+        this.props.dispatch(AsIsSelected(idxOfSelector, "", this.props.viewId))
+      } else {
+        this.props.dispatch(AsIsSelected(
+          idxOfSelector,
+          selectedAS.value,
+          this.props.viewId
+        ))
+        this.props.dispatch(fetchAsDataIfNeeded(
+          this.props.view.country,
+          this.props.view.risk,
+          selectedAS.value,
+          this.props.viewId
+        ))
     }
   }
 
@@ -324,7 +324,7 @@ export class ASPerformance extends Component {
             Object.values(this.props.asn)
           }
           disabled = {
-            selectInfo.disabled
+            selectInfo.isDisabled
           }
           onChange = {
             this.updateValue.bind(this, idx)
@@ -384,14 +384,14 @@ export class ASSelect extends Component {
       value: '',
       label: 'Select an ASN'
     })
-    let selectedAS = this.props.selectedAS
+    let selectedAS = parseInt(this.props.selectedAS)
     return ( <
       div className = "Select-div" >
       <
       Select name = "asn"
       value = {
-        // selectedAS || selectOptions[0]
-        selectOptions.find(option => option.value === (selectedAS || selectOptions[0]))
+        selectedAS || selectOptions[0]
+        // selectOptions.find(option => option.value === (parseInt(this.props.selectedAS) || selectOptions[0]))
       }
       options = {
         selectOptions
@@ -402,13 +402,13 @@ export class ASSelect extends Component {
       onInputChange = {
         this.setInputValue.bind(this)
       }
-      optionRenderer = {
-        this.optionRenderer.bind(this)
+      // optionRenderer = {
+      //   this.optionRenderer.bind(this)
+      // }
+      isDisabled = {
+        this.props.isDisabled
       }
-      disabled = {
-        this.props.disabled
-      }
-      clearable = {
+      isclearable = {
         false
       }
       /> < /

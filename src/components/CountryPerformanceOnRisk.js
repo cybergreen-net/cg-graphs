@@ -395,7 +395,7 @@ export class CountryPerformanceOnRisk extends Component {
                         Object.values(this.props.countries)
                     }
                     disabled = {
-                        selectInfo.disabled
+                        selectInfo.isDisabled
                     }
                     onChange = {
                         this.updateValue.bind(this, idx)
@@ -503,13 +503,13 @@ export class CountrySelect extends Component {
             onInputChange = {
                 this.setInputValue.bind(this)
             }
-            optionRenderer = {
-                this.optionRenderer.bind(this)
+            // optionRenderer = {
+            //     this.optionRenderer.bind(this)
+            // }
+            isDisabled = {
+                this.props.isDisabled
             }
-            disabled = {
-                this.props.disabled
-            }
-            clearable = {
+            isclearable = {
                 false
             }
             /> < /
