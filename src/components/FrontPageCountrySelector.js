@@ -1,10 +1,10 @@
 import React, {
   Component
 } from 'react';
-import Highlighter from 'react-highlight-words'
-import Select from "react-virtualized-select";
-import { BounceLoader } from 'halogenium';
 
+import { BounceLoader } from 'halogenium';
+import Highlighter from 'react-highlight-words'
+import Select from "react-select";
 
 export default class FrontPageCountrySelector extends Component {
   constructor(props) {

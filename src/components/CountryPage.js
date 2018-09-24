@@ -1,18 +1,17 @@
+import '../css/temp.css' //this is temp import - needs to be removed for bundle
+
 import React, {
   Component
 } from 'react';
+
+import { BounceLoader } from 'halogenium';
+import CountryPerformanceOnRisk from './CountryPerformanceOnRisk';
+import Highlighter from 'react-highlight-words'
+import Select from "react-select";
+import SourceOfInfection from './SourceOfInfection';
 import {
   connect
 } from 'react-redux';
-import CountryPerformanceOnRisk from './CountryPerformanceOnRisk';
-import SourceOfInfection from './SourceOfInfection';
-import '../css/temp.css' //this is temp import - needs to be removed for bundle
-
-import Highlighter from 'react-highlight-words'
-import Select from "react-virtualized-select";
-import { BounceLoader } from 'halogenium';
-
-
 
 export class CountryPage extends Component {
   constructor(props) {

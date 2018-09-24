@@ -2,19 +2,20 @@ import React, {
     Component
 } from 'react';
 import {
-    connect
-} from 'react-redux'
-import PlotlyGraph from './Plot.js';
-import Select from "react-virtualized-select";
-import update from 'react/lib/update'
-import Highlighter from 'react-highlight-words'
-
-import {
+    changeMeasure,
     countryIsSelected,
     fetchDataIfNeeded,
-    getCountryRanking,
-    changeMeasure
+    getCountryRanking
 } from '../actions/cubeActions';
+
+import Highlighter from 'react-highlight-words'
+import PlotlyGraph from './Plot.js';
+import Select from "react-select";
+import {
+    connect
+} from 'react-redux'
+import update from 'react/lib/update'
+
 // import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
 function roundDateStringToMonday(d) {

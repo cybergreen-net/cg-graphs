@@ -1,22 +1,23 @@
+import '../css/temp.css' //this is temp import - needs to be removed for bundle
+
+import {
+  AsIsSelected,
+  fetchAsDataIfNeeded
+}
+from '../actions/ASactions';
 import React, {
   Component
 }
 from 'react';
+
+import Highlighter from 'react-highlight-words';
+import PlotlyGraph from './Plot.js';
+import Select from "react-select";
 import {
   connect
 }
 from 'react-redux';
-import PlotlyGraph from './Plot.js';
-import Select from "react-virtualized-select";
-import Highlighter from 'react-highlight-words';
 
-import '../css/temp.css' //this is temp import - needs to be removed for bundle
-
-import {
-  fetchAsDataIfNeeded,
-  AsIsSelected
-}
-from '../actions/ASactions';
 // import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
 function roundDateStringToMonday(d) {
