@@ -2,6 +2,10 @@
   "name": "cg-graphs",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "10.9.0",
+    "npm": "6.4.1"
+  },
   "devDependencies": {
     "enzyme": "^2.7.0",
     "enzyme-to-json": "^1.4.5",
