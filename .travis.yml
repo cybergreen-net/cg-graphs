@@ -15,8 +15,8 @@ script:
 language: node_js
 
 node_js:
-  - "8.10.0"
-npm: "3.5.2"
+  - "10.9.0"
+npm: "6.4.1"
 
 python:
   - "2.7"

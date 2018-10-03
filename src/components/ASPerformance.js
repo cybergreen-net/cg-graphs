@@ -1,22 +1,23 @@
+import '../css/temp.css' //this is temp import - needs to be removed for bundle
+
+import {
+  AsIsSelected,
+  fetchAsDataIfNeeded
+}
+from '../actions/ASactions';
 import React, {
   Component
 }
 from 'react';
+
+import Highlighter from 'react-highlight-words';
+import PlotlyGraph from './Plot.js';
+import Select from "react-select";
 import {
   connect
 }
 from 'react-redux';
-import PlotlyGraph from './Plot.js';
-import Select from 'react-select';
-import Highlighter from 'react-highlight-words';
-import 'react-select/dist/react-select.css';
-import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
-import {
-  fetchAsDataIfNeeded,
-  AsIsSelected
-}
-from '../actions/ASactions';
 // import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
 function roundDateStringToMonday(d) {
@@ -282,20 +283,20 @@ export class ASPerformance extends Component {
 
 
   updateValue(idxOfSelector, selectedAS) {
-    if (!selectedAS || selectedAS.value === "") {
-      this.props.dispatch(AsIsSelected(idxOfSelector, "", this.props.viewId))
-    } else {
-      this.props.dispatch(AsIsSelected(
-        idxOfSelector,
-        selectedAS.value,
-        this.props.viewId
-      ))
-      this.props.dispatch(fetchAsDataIfNeeded(
-        this.props.view.country,
-        this.props.view.risk,
-        selectedAS.value,
-        this.props.viewId
-      ))
+      if (!selectedAS || selectedAS.value === "") {
+        this.props.dispatch(AsIsSelected(idxOfSelector, "", this.props.viewId))
+      } else {
+        this.props.dispatch(AsIsSelected(
+          idxOfSelector,
+          selectedAS.value,
+          this.props.viewId
+        ))
+        this.props.dispatch(fetchAsDataIfNeeded(
+          this.props.view.country,
+          this.props.view.risk,
+          selectedAS.value,
+          this.props.viewId
+        ))
     }
   }
 
@@ -324,7 +325,7 @@ export class ASPerformance extends Component {
             Object.values(this.props.asn)
           }
           disabled = {
-            selectInfo.disabled
+            selectInfo.isDisabled
           }
           onChange = {
             this.updateValue.bind(this, idx)
@@ -390,7 +391,8 @@ export class ASSelect extends Component {
       <
       Select name = "asn"
       value = {
-        selectedAS || selectOptions[0]
+        // selectedAS || selectOptions[0]
+        selectOptions.find(option => option.value === (selectedAS || selectOptions[0]))
       }
       options = {
         selectOptions
@@ -401,13 +403,13 @@ export class ASSelect extends Component {
       onInputChange = {
         this.setInputValue.bind(this)
       }
-      optionRenderer = {
-        this.optionRenderer.bind(this)
+      // optionRenderer = {
+      //   this.optionRenderer.bind(this)
+      // }
+      isDisabled = {
+        this.props.isDisabled
       }
-      disabled = {
-        this.props.disabled
-      }
-      clearable = {
+      isClearable = {
         false
       }
       /> < /
