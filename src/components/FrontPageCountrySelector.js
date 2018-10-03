@@ -1,10 +1,10 @@
 import React, {
   Component
 } from 'react';
+
+import { BounceLoader } from 'halogenium';
 import Highlighter from 'react-highlight-words'
-import Select from 'react-select';
-import Loader from 'halogen/BounceLoader'
-import 'react-select/dist/react-select.css';
+import Select from "react-select";
 
 export default class FrontPageCountrySelector extends Component {
   constructor(props) {
@@ -100,7 +100,7 @@ export default class FrontPageCountrySelector extends Component {
         spinnerStyle
       } >
       <
-      Loader size = {
+      BounceLoader size = {
         this.state.spinner
       }
       color = '#00D49A' / >

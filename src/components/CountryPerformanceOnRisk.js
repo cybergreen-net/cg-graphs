@@ -2,19 +2,20 @@ import React, {
     Component
 } from 'react';
 import {
-    connect
-} from 'react-redux'
-import PlotlyGraph from './Plot.js';
-import Select from 'react-select';
-import update from 'react/lib/update'
-import Highlighter from 'react-highlight-words'
-import 'react-select/dist/react-select.css';
-import {
+    changeMeasure,
     countryIsSelected,
     fetchDataIfNeeded,
-    getCountryRanking,
-    changeMeasure
+    getCountryRanking
 } from '../actions/cubeActions';
+
+import Highlighter from 'react-highlight-words'
+import PlotlyGraph from './Plot.js';
+import Select from "react-select";
+import {
+    connect
+} from 'react-redux'
+import update from 'react/lib/update'
+
 // import notes from `../stats-new/api/annotations/publicAnnotation.json`;
 
 function roundDateStringToMonday(d) {
@@ -395,7 +396,7 @@ export class CountryPerformanceOnRisk extends Component {
                         Object.values(this.props.countries)
                     }
                     disabled = {
-                        selectInfo.disabled
+                        selectInfo.isDisabled
                     }
                     onChange = {
                         this.updateValue.bind(this, idx)
@@ -492,7 +493,7 @@ export class CountrySelect extends Component {
             <
             Select name = "countries"
             value = {
-                this.props.selectedCountry || selectOptions[0]
+                selectOptions.find(option => option.value === (this.props.selectedCountry || selectOptions[0]))
             }
             options = {
                 selectOptions
@@ -503,13 +504,13 @@ export class CountrySelect extends Component {
             onInputChange = {
                 this.setInputValue.bind(this)
             }
-            optionRenderer = {
-                this.optionRenderer.bind(this)
+            // optionRenderer = {
+            //     this.optionRenderer.bind(this)
+            // }
+            isDisabled = {
+                this.props.isDisabled
             }
-            disabled = {
-                this.props.disabled
-            }
-            clearable = {
+            isclearable = {
                 false
             }
             /> < /

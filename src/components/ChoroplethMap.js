@@ -9,7 +9,7 @@ import {
 import PlotlyGraph from './Plot.js';
 import numeral from 'numeral';
 import Select from 'react-select';
-import 'react-select/dist/react-select.css';
+
 import {
   riskAndDateAreSelected,
   fetchData

@@ -7,8 +7,8 @@ import {
 import CountryPerformanceOnRisk from './CountryPerformanceOnRisk';
 // import '../css/temp.css' //this is temp import - needs to be removed for bundle
 
-import Loader from 'halogen/BounceLoader'
-import 'react-select/dist/react-select.css';
+import { BounceLoader } from 'halogenium';
+
 
 
 export class RiskPage extends Component {
@@ -26,11 +26,11 @@ export class RiskPage extends Component {
     })
     return ( <
       div > {
-        spinner ? < Loader size = '100px'
+        spinner ? < BounceLoader size = '100px'
         color = '#00D49A'
         className = 'spinner' / > : ''
       } <
-      Loader size = {
+      BounceLoader size = {
         this.state.spinner
       }
       color = '#00D49A'
