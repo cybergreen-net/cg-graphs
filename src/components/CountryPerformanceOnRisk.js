@@ -395,8 +395,8 @@ export class CountryPerformanceOnRisk extends Component {
                     countries = {
                         Object.values(this.props.countries)
                     }
-                    disabled = {
-                        selectInfo.isDisabled
+                    isDisabled = {
+                        idx == 0
                     }
                     onChange = {
                         this.updateValue.bind(this, idx)
