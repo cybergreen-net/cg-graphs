@@ -324,7 +324,7 @@ export class ASPerformance extends Component {
           asn = {
             Object.values(this.props.asn)
           }
-          disabled = {
+          isDisabled = {
             idx == 0
           }
           onChange = {
