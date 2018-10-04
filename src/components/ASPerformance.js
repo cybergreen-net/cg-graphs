@@ -325,7 +325,7 @@ export class ASPerformance extends Component {
             Object.values(this.props.asn)
           }
           disabled = {
-            selectInfo.isDisabled
+            idx == 0
           }
           onChange = {
             this.updateValue.bind(this, idx)
