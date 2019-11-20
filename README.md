@@ -1,6 +1,5 @@
-[![Build Status](https://travis-ci.org/cybergreen-net/cg-graphs.svg?branch=devel)](https://travis-ci.org/cybergreen-net/cg-graphs)[travis CI]
-
-[![Known Vulnerabilities](https://snyk.io/test/github/cybergreen-net/cg-graphs/badge.svg?targetFile=package.json)](https://snyk.io/test/github/cybergreen-net/cg-graphs?targetFile=package.json) [snyk]
+[![Build Status](https://travis-ci.org/cybergreen-net/cg-graphs.svg?branch=devel)](https://travis-ci.org/cybergreen-net/cg-graphs)
+[![Known Vulnerabilities](https://snyk.io/test/github/cybergreen-net/cg-graphs/badge.svg?targetFile=package.json)](https://snyk.io/test/github/cybergreen-net/cg-graphs?targetFile=package.json)
 
   
 
