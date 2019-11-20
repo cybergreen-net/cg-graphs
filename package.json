@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && cp -f build/static/js/*.js index.min.js",
-    "test": "snyk test && react-scripts test --env=jsdom",
+    "test": "snyk test",
     "eject": "react-scripts eject"
   }
 }
